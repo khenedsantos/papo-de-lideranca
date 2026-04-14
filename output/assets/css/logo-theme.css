@@ -1,0 +1,22 @@
+.logo {
+  display: block;
+  width: auto;
+  height: 36px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand .logo + .brand-name {
+  margin-left: 12px;
+}
+
+@media (max-width: 720px) {
+  .logo {
+    height: 34px;
+  }
+}

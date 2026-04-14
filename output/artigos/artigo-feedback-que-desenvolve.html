@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' type='image/png' sizes='16x16' href='../assets//logos//favicons/favicon-16.png'>
+    <link rel='icon' type='image/png' sizes='32x32' href='../assets//logos//favicons/favicon-32.png'>
+    <link rel='icon' type='image/png' sizes='48x48' href='../assets//logos//favicons/favicon-48.png'>
+    <link rel='icon' type='image/png' sizes='64x64' href='../assets//logos//favicons/favicon-64.png'>
+    <link rel='shortcut icon' href='../assets//logos//favicons/favicon.ico'><title>Feedback que desenvolve | Papo de Liderança</title><style>body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#F7F9FB 0%,#F7F9FB 100%);color:#0B1217}a{text-decoration:none;color:inherit}.wrap{max-width:980px;margin:0 auto;padding:40px 18px 60px}.hero,.card,.cta,.footer{border-radius:28px}.hero{background:radial-gradient(circle at top right,rgba(47,194,140,.16),transparent 28%),linear-gradient(135deg,#0F2A3D 0%,#1E4A66 50%,#22A06B 100%);color:#fff;padding:52px;box-shadow:0 18px 50px rgba(15,42,61,.10)}.badge{display:inline-flex;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.hero h1{margin:16px 0 14px;font-size:50px;line-height:1.04;letter-spacing:-.03em}.hero p{max-width:760px;font-size:20px;line-height:1.75;margin:0;color:#d9e9f5}.meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}.meta span{padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);font-size:14px}.card{background:rgba(255,255,255,.92);padding:34px;margin-top:22px;border:1px solid rgba(228,231,235,.92);box-shadow:0 12px 28px rgba(15,42,61,.05)}.card h2{margin:30px 0 14px;font-size:31px;color:#0F2A3D}.card p{font-size:16px;line-height:1.9;color:#5B6B75;margin:0 0 18px}.lead{font-size:19px;color:#5B6B75}.cta{margin-top:22px;padding:34px;background:radial-gradient(circle at top right,rgba(47,194,140,.16),transparent 26%),linear-gradient(135deg,#0F2A3D 0%,#1E4A66 100%);color:#fff}.cta h2{margin:0 0 10px;font-size:34px}.cta p{margin:0;max-width:720px;font-size:17px;line-height:1.8;color:rgba(255,255,255,.82)}.cta a{display:inline-flex;margin-top:18px;padding:16px 26px;border-radius:999px;background:radial-gradient(circle at top left,rgba(255,255,255,.26),transparent 40%),linear-gradient(135deg,#1B8A5F 0%,#169b6b 45%,#2FC28C 100%);color:#fff;font-weight:700;box-shadow:0 18px 34px rgba(34,160,107,.20)}.footer{margin-top:22px;background:linear-gradient(180deg,#0B1217 0%,#0F2A3D 100%);color:rgba(224,236,245,.88);padding:26px 28px;font-size:14px;line-height:1.8}.footer a{color:#fff}@media(max-width:640px){.hero{padding:34px 22px}.hero h1{font-size:38px}.hero p,.lead,.cta p{font-size:16px}.card,.cta,.footer{padding:22px}}</style><link rel="stylesheet" href="../assets/css/page-transition.css">
+<!-- Internal Header Override -->
+<style id="internal-header-refine">
+  .site-header {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 30 !important;
+    background: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+
+  .site-header::after {
+    display: none !important;
+  }
+
+  .site-header.is-scrolled {
+    background: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+
+  .nav-shell {
+    max-width: 1220px !important;
+    margin: 0 auto !important;
+    padding: 18px 24px 20px !important;
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    align-items: center !important;
+    gap: 22px !important;
+    position: relative !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .brand {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .brand-mark {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 14px !important;
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.22), transparent 48%), linear-gradient(135deg, #10314f 0%, #1E4A66 50%, #22A06B 100%) !important;
+    box-shadow: 0 14px 28px rgba(4, 18, 31, 0.22) !important;
+  }
+
+  .brand-name {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.03em !important;
+    color: rgba(248, 251, 253, 0.98) !important;
+    text-shadow: 0 1px 1px rgba(4, 18, 31, 0.22) !important;
+  }
+
+  .nav-right {
+    display: flex !important;
+    align-items: center !important;
+    justify-self: center !important;
+    gap: 24px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .nav-links {
+    display: flex !important;
+    align-items: center !important;
+    gap: 22px !important;
+  }
+
+  .nav-links a {
+    position: relative !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.01em !important;
+    color: rgba(233, 241, 247, 0.88) !important;
+    text-shadow: 0 1px 1px rgba(4, 18, 31, 0.22) !important;
+    transition: color .22s ease !important;
+  }
+
+  .nav-links a::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: -8px !important;
+    height: 2px !important;
+    border-radius: 999px !important;
+    background: linear-gradient(135deg, #169b6b 0%, #2FC28C 100%) !important;
+    transform: scaleX(0) !important;
+    transform-origin: center !important;
+    transition: transform .22s ease !important;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus-visible,
+  .nav-links .is-active {
+    color: rgba(248, 251, 253, 0.98) !important;
+  }
+
+  .nav-links a:hover::after,
+  .nav-links a:focus-visible::after,
+  .nav-links .is-active::after {
+    transform: scaleX(1) !important;
+  }
+
+  .nav-cta {
+    display: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 13px 22px !important;
+    border-radius: 999px !important;
+    background: linear-gradient(135deg, #169b6b 0%, #2FC28C 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    box-shadow: 0 12px 24px rgba(22, 155, 107, 0.16) !important;
+    transition: transform .22s ease, box-shadow .22s ease !important;
+  }
+
+  .nav-cta:hover,
+  .nav-cta:focus-visible {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 18px 32px rgba(22, 155, 107, 0.22) !important;
+  }
+
+  .nav-toggle-label {
+    display: none !important;
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+  }
+
+  .nav-toggle-label span,
+  .nav-toggle-label span:before,
+  .nav-toggle-label span:after {
+    width: 20px !important;
+    height: 2px !important;
+    background: #f3f8fc !important;
+    border-radius: 999px !important;
+    position: relative !important;
+    display: block !important;
+  }
+
+  .nav-toggle-label span:before,
+  .nav-toggle-label span:after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+  }
+
+  .nav-toggle-label span:before {
+    top: -6px !important;
+  }
+
+  .nav-toggle-label span:after {
+    top: 6px !important;
+  }
+
+  .hero-wrap {
+    margin-top: 0 !important;
+    padding-top: 108px !important;
+  }
+
+  @media screen and (max-width: 920px) {
+    .nav-shell {
+      display: flex !important;
+      justify-content: space-between !important;
+    }
+
+    .nav-toggle-label {
+      display: inline-flex !important;
+    }
+
+    .nav-right {
+      position: absolute !important;
+      left: 16px !important;
+      right: 16px !important;
+      margin-right: 0 !important;
+      top: calc(100% + 10px) !important;
+      display: none !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 16px !important;
+      padding: 18px !important;
+      border-radius: 24px !important;
+      background: rgba(9, 28, 45, 0.94) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 24px 60px rgba(1, 10, 18, 0.22) !important;
+      backdrop-filter: blur(14px) !important;
+    }
+
+    .nav-links {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 14px !important;
+    }
+
+    .nav-links a {
+      color: rgba(233, 241, 247, 0.88) !important;
+    }
+
+    .nav-toggle:checked ~ .nav-right {
+      display: flex !important;
+    }
+
+    .nav-toggle:checked + .nav-toggle-label span {
+      background: transparent !important;
+    }
+
+    .nav-toggle:checked + .nav-toggle-label span:before {
+      transform: translateY(6px) rotate(45deg) !important;
+    }
+
+    .nav-toggle:checked + .nav-toggle-label span:after {
+      transform: translateY(-6px) rotate(-45deg) !important;
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    .nav-shell {
+      padding: 14px 16px 16px !important;
+    }
+
+    .brand-name {
+      font-size: 1.34rem !important;
+    }
+
+    .nav-cta {
+      display: none !important;
+    }
+
+    .hero-wrap {
+      padding-top: 88px !important;
+    }
+  }
+</style>
+<!-- End Internal Header Override --><link rel="stylesheet" href="../assets/css/logo-theme.css">
+<link rel="stylesheet" href="../assets/css/logo-theme.css">
+</head><body class="theme-dark" data-scroll-logo="dark"><div class="wrap"><section class="hero"><div class="badge">Gestão de Equipes</div><h1>Feedback que desenvolve: o que dizer quando o time precisa evoluir</h1><p>Feedback eficiente não serve para descarregar frustração. Serve para gerar clareza, responsabilidade e movimento na direção certa.</p><div class="meta"><span>7 min de leitura</span><span>Por Khened Santos</span><span>Atualizado em 8 de abril de 2026</span></div></section><article class="card"><p class="lead">Líderes evitam feedback por medo de conflito. Outros exageram na dureza e pioram o ambiente. O melhor caminho é mais exigente: falar com clareza, respeito e objetividade suficiente para produzir evolução de verdade.</p><h2>O foco não é a pessoa, é o comportamento</h2><p>Feedback que desenvolve não rotula. Ele descreve fatos, mostra impacto e orienta o ajuste esperado. Isso reduz defensividade e aumenta a chance de ação concreta.</p><h2>Clareza é mais útil do que excesso de delicadeza</h2><p>Quando o líder tenta suavizar demais, a mensagem perde força. Quando endurece sem critério, a confiança se rompe. O equilíbrio está em ser direto sem perder respeito humano.</p><p>Se a conversa não deixa claro o que precisa mudar, ela foi confortável, mas não útil.</p></article><section class="cta"><h2>Receba mais conteúdos de liderança prática</h2><p>Entre na newsletter para continuar evoluindo sua comunicação, sua gestão e sua tomada de decisão.</p><a href="../pages/newsletter.html">Quero receber</a></section><div class="footer">Voltar para <a href="../pages/artigos.html">Artigos</a> ou para a <a href="../papo_de_lideranca_web_preview.html">Home</a>.</div></div><script src="../assets/js/page-transition.js"></script>
+<!-- Internal Header Scroll -->
+<script>
+  (function () {
+    var header = document.querySelector('.site-header[data-site-header="internal"]');
+    if (!header) return;
+
+    var syncState = function () {
+      header.classList.toggle('is-scrolled', window.scrollY > 24);
+    };
+
+    syncState();
+    window.addEventListener('scroll', syncState, { passive: true });
+  })();
+</script>
+<!-- End Internal Header Scroll -->
+<script src="../assets/js/logo-theme.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

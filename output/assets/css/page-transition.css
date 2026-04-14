@@ -1,0 +1,54 @@
+﻿/*
+  Shared page transition styles.
+  Apply this file to any HTML page in the site to get:
+  1. subtle fade-in on page load
+  2. smooth fade-out on internal navigation
+  3. progressive enhancement for modern cross-document View Transitions
+*/
+
+@view-transition {
+  navigation: auto;
+}
+
+body {
+  animation: page-enter 340ms ease-in-out both;
+  transition: opacity 320ms ease-in-out, transform 320ms ease-in-out, filter 320ms ease-in-out;
+  transform-origin: center top;
+}
+
+html.page-transition-leaving body {
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+    transition: none;
+  }
+
+  html.page-transition-leaving body {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+
+

@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local environment
+.venv/
+venv/
+env/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Legacy archives kept only for local reference
+_legacy/
+output/_legacy-output/

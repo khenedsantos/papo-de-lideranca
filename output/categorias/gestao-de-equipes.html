@@ -1,0 +1,366 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' type='image/png' sizes='16x16' href='../assets//logos//favicons/favicon-16.png'>
+    <link rel='icon' type='image/png' sizes='32x32' href='../assets//logos//favicons/favicon-32.png'>
+    <link rel='icon' type='image/png' sizes='48x48' href='../assets//logos//favicons/favicon-48.png'>
+    <link rel='icon' type='image/png' sizes='64x64' href='../assets//logos//favicons/favicon-64.png'>
+    <link rel='shortcut icon' href='../assets//logos//favicons/favicon.ico'>
+  <title>Gestão de Equipes | Papo de Liderança</title>
+  <link rel="stylesheet" href="../assets/css/categoria-pages.css">
+<link rel="stylesheet" href="../assets/css/page-transition.css">
+<style id="footer-brand-refine">
+  .footer{margin-top:32px!important;background:linear-gradient(180deg,#0B1217 0%,#0F2A3D 100%)!important;color:rgba(224,236,245,.88)!important}
+  .footer-shell{width:min(1220px,calc(100% - 48px))!important;max-width:none!important;margin:0 auto!important;padding:40px 0 22px!important;background:transparent!important;border-radius:0!important;box-shadow:none!important}
+  .footer-grid{display:grid!important;grid-template-columns:minmax(240px,1.15fr) minmax(140px,max-content) minmax(200px,max-content) minmax(220px,max-content)!important;justify-content:space-between!important;gap:30px!important;padding-bottom:28px!important;align-items:start!important}
+  .footer-grid>.footer-column:last-child{justify-self:end!important;width:min(100%,220px)!important}
+  .footer-brand{display:grid!important;grid-template-columns:38px minmax(0,1fr)!important;column-gap:14px!important;row-gap:12px!important;align-items:center!important}
+  .footer-brand-mark{display:block!important;width:38px!important;height:38px!important;margin:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;object-fit:contain!important;grid-column:1!important;grid-row:1!important}
+  .footer-brand h3{margin:0!important;color:#fff!important;font-size:18px!important;line-height:1.08!important;letter-spacing:-.02em!important;grid-column:2!important;grid-row:1!important}
+  .footer-brand p{grid-column:1 / -1!important;max-width:32ch!important;margin:0!important;font-size:14px!important;font-weight:400!important;color:rgba(224,236,245,.74)!important;line-height:1.78!important}
+  .footer-column h3{margin:0 0 14px!important;color:#fff!important;font-size:16px!important;font-weight:700!important;line-height:1.15!important;letter-spacing:-.01em!important}
+  .footer-column>p{margin:0 0 12px!important;font-size:14px!important;color:rgba(224,236,245,.74)!important;line-height:1.6!important}
+  .footer-nav{display:grid!important;gap:12px!important;align-content:start!important}
+  .footer-nav a,.footer-legal a{font-size:14px!important;font-weight:400!important;color:rgba(224,236,245,.82)!important;transition:color .2s ease,opacity .2s ease!important}
+  .footer-nav a:hover,.footer-legal a:hover{color:#fff!important}
+  .footer-contact{display:grid!important;gap:14px!important;align-content:start!important}
+  .footer-contact strong{display:block!important;margin-bottom:5px!important;color:#fff!important;font-size:14px!important;font-weight:700!important}
+  .footer-contact span{font-size:14px!important;font-weight:400!important;color:rgba(224,236,245,.82)!important}
+  .footer-socials{display:flex!important;align-items:center!important;flex-wrap:wrap!important;gap:12px!important;justify-content:center!important}
+  .footer-socials a{display:flex!important;align-items:center!important;justify-content:center!important;width:40px!important;height:40px!important;flex:0 0 40px!important;margin:0!important;padding:0!important;color:#fff!important;background:rgba(255,255,255,.05)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:999px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;transition:transform .22s ease,background .22s ease,border-color .22s ease!important}
+  .footer-socials a:hover{transform:translateY(-2px)!important;background:rgba(255,255,255,.1)!important;border-color:rgba(255,255,255,.2)!important}
+  .footer-socials svg{display:flex!important;align-items:center!important;justify-content:center!important;width:16px!important;height:16px!important;flex:0 0 16px!important;margin:0!important;padding:0!important;fill:currentColor!important;stroke:currentColor!important;backface-visibility:hidden!important;transform:translateZ(0)!important;transform-origin:center!important;overflow:visible!important}
+  .footer-socials svg path{fill:currentColor!important;stroke:none!important}
+  .footer-bottom{border-top:1px solid rgba(220,232,242,.1)!important;padding-top:18px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important;flex-wrap:wrap!important;font-size:13px!important;color:rgba(212,227,236,.64)!important}
+  .footer-legal{display:flex!important;gap:20px!important;flex-wrap:wrap!important}
+  @media screen and (max-width:640px){.footer-shell{width:min(1220px,calc(100% - 24px))!important;padding:30px 0 20px!important}.footer-grid{grid-template-columns:1fr!important;gap:24px!important}.footer-grid>.footer-column:last-child{justify-self:start!important;width:100%!important}.footer-brand{grid-template-columns:34px minmax(0,1fr)!important}.footer-brand-mark{width:34px!important;height:34px!important;object-fit:contain!important}.footer-socials{justify-content:flex-start!important}.footer-socials a{width:38px!important;height:38px!important;flex:0 0 38px!important}}
+</style>
+<!-- Internal Header Override -->
+<style id="internal-header-refine">
+  .site-header {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 30 !important;
+    background: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+
+  .site-header::after {
+    display: none !important;
+  }
+
+  .site-header.is-scrolled {
+    background: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+
+  .nav-shell {
+    max-width: 1220px !important;
+    margin: 0 auto !important;
+    padding: 18px 24px 20px !important;
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    align-items: center !important;
+    gap: 22px !important;
+    position: relative !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .brand {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .brand-mark {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 14px !important;
+    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.22), transparent 48%), linear-gradient(135deg, #10314f 0%, #1E4A66 50%, #22A06B 100%) !important;
+    box-shadow: 0 14px 28px rgba(4, 18, 31, 0.22) !important;
+  }
+
+  .brand-name {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.03em !important;
+    color: rgba(248, 251, 253, 0.98) !important;
+    text-shadow: 0 1px 1px rgba(4, 18, 31, 0.22) !important;
+  }
+
+  .nav-right {
+    display: flex !important;
+    align-items: center !important;
+    justify-self: center !important;
+    gap: 24px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .nav-links {
+    display: flex !important;
+    align-items: center !important;
+    gap: 22px !important;
+  }
+
+  .nav-links a {
+    position: relative !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.01em !important;
+    color: rgba(233, 241, 247, 0.88) !important;
+    text-shadow: 0 1px 1px rgba(4, 18, 31, 0.22) !important;
+    transition: color .22s ease !important;
+  }
+
+  .nav-links a::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: -8px !important;
+    height: 2px !important;
+    border-radius: 999px !important;
+    background: linear-gradient(135deg, #169b6b 0%, #2FC28C 100%) !important;
+    transform: scaleX(0) !important;
+    transform-origin: center !important;
+    transition: transform .22s ease !important;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus-visible,
+  .nav-links .is-active {
+    color: rgba(248, 251, 253, 0.98) !important;
+  }
+
+  .nav-links a:hover::after,
+  .nav-links a:focus-visible::after,
+  .nav-links .is-active::after {
+    transform: scaleX(1) !important;
+  }
+
+  .nav-cta {
+    display: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 13px 22px !important;
+    border-radius: 999px !important;
+    background: linear-gradient(135deg, #169b6b 0%, #2FC28C 100%) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    box-shadow: 0 12px 24px rgba(22, 155, 107, 0.16) !important;
+    transition: transform .22s ease, box-shadow .22s ease !important;
+  }
+
+  .nav-cta:hover,
+  .nav-cta:focus-visible {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 18px 32px rgba(22, 155, 107, 0.22) !important;
+  }
+
+  .nav-toggle-label {
+    display: none !important;
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+  }
+
+  .nav-toggle-label span,
+  .nav-toggle-label span:before,
+  .nav-toggle-label span:after {
+    width: 20px !important;
+    height: 2px !important;
+    background: #f3f8fc !important;
+    border-radius: 999px !important;
+    position: relative !important;
+    display: block !important;
+  }
+
+  .nav-toggle-label span:before,
+  .nav-toggle-label span:after {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+  }
+
+  .nav-toggle-label span:before {
+    top: -6px !important;
+  }
+
+  .nav-toggle-label span:after {
+    top: 6px !important;
+  }
+
+  .hero-wrap {
+    margin-top: 0 !important;
+    padding-top: 108px !important;
+  }
+
+  @media screen and (max-width: 920px) {
+    .nav-shell {
+      display: flex !important;
+      justify-content: space-between !important;
+    }
+
+    .nav-toggle-label {
+      display: inline-flex !important;
+    }
+
+    .nav-right {
+      position: absolute !important;
+      left: 16px !important;
+      right: 16px !important;
+      margin-right: 0 !important;
+      top: calc(100% + 10px) !important;
+      display: none !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 16px !important;
+      padding: 18px !important;
+      border-radius: 24px !important;
+      background: rgba(9, 28, 45, 0.94) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 24px 60px rgba(1, 10, 18, 0.22) !important;
+      backdrop-filter: blur(14px) !important;
+    }
+
+    .nav-links {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 14px !important;
+    }
+
+    .nav-links a {
+      color: rgba(233, 241, 247, 0.88) !important;
+    }
+
+    .nav-toggle:checked ~ .nav-right {
+      display: flex !important;
+    }
+
+    .nav-toggle:checked + .nav-toggle-label span {
+      background: transparent !important;
+    }
+
+    .nav-toggle:checked + .nav-toggle-label span:before {
+      transform: translateY(6px) rotate(45deg) !important;
+    }
+
+    .nav-toggle:checked + .nav-toggle-label span:after {
+      transform: translateY(-6px) rotate(-45deg) !important;
+    }
+  }
+
+  @media screen and (max-width: 720px) {
+    .nav-shell {
+      padding: 14px 16px 16px !important;
+    }
+
+    .brand-name {
+      font-size: 1.34rem !important;
+    }
+
+    .nav-cta {
+      display: none !important;
+    }
+
+    .hero-wrap {
+      padding-top: 88px !important;
+    }
+  }
+</style>
+<!-- End Internal Header Override --><link rel="stylesheet" href="../assets/css/logo-theme.css">
+<link rel="stylesheet" href="../assets/css/logo-theme.css">
+</head>
+<body class="theme-dark" data-scroll-logo="dark">
+  <header class="site-header" data-site-header="internal"><div class="nav-shell"><a class="brand" href="../papo_de_lideranca_web_preview.html"><img class="logo" src="../assets/logo-light.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de Liderança"><span class="brand-name">Papo de Liderança</span></a><nav class="nav-right" aria-label="Navegação principal"><div class="nav-links"><a href="../papo_de_lideranca_web_preview.html">Home</a><a href="../pages/sobre.html">Sobre</a><a class="is-active" href="../pages/artigos.html">Artigos</a><a href="../pages/newsletter.html">Newsletter</a><a href="../pages/contato.html">Contato</a></div><a class="nav-cta" href="../pages/newsletter.html">Inscrever-se</a></nav></div></header>
+  <div class="hero-wrap"><section class="hero-card"><div class="eyebrow">Categoria: Gestão de Equipes</div><h1>Gestão de equipes com método: delegação, acompanhamento e performance</h1><p class="hero-subtitle">Como construir um time mais responsável, claro e consistente sem cair em microgestão.</p><p class="hero-intro">Esta página é para líderes que querem parar de operar no improviso e começar a construir rotinas, rituais e conversas que elevam a maturidade do time.</p></section></div>
+  <main class="page-wrap">
+    <section class="section"><div class="section-badge">Visão aberta</div><h2>Time forte não nasce só de talento. Nasce de gestão previsível</h2><p>Equipes evoluem quando sabem o que se espera delas, como o trabalho será acompanhado e como o líder reage diante de erro, pressão e mudança de prioridade. Sem previsibilidade, até gente boa trabalha em defesa.</p><div class="grid-two"><article class="insight-card"><h3>Base de uma boa gestão</h3><ul><li>Expectativa explícita.</li><li>Checkpoints objetivos.</li><li>Feedback frequente e curto.</li></ul></article><article class="framework-card"><h3>Perguntas para alinhar o time</h3><ul><li>O que precisa sair desta semana?</li><li>O que pode travar essa entrega?</li><li>Quem decide o quê?</li><li>O que precisa ser comunicado cedo?</li></ul></article></div><p>Quando essa estrutura existe, o time para de depender da presença constante do líder e começa a operar com mais autonomia e responsabilidade.</p></section>
+    <section class="section"><div class="section-badge">Gestão prática</div><h2>Delegar bem é desenvolver, não apenas distribuir tarefa</h2><p>Delegação fraca sobrecarrega o líder e mantém o time infantilizado. Delegação forte transfere contexto, critério e espaço para decisão. Isso fortalece repertório, acelera amadurecimento e reduz dependência.</p><div class="grid-two"><article class="insight-card"><h3>Quando a delegação falha</h3><ul><li>Não há definição de sucesso.</li><li>O líder reaparece tarde demais.</li><li>O acompanhamento vira fiscalização.</li></ul></article><article class="framework-card"><h3>Delegação em 4 passos</h3><ul><li>Explicar objetivo.</li><li>Dar contexto.</li><li>Definir critério.</li><li>Combinar checkpoints.</li></ul></article></div></section>
+    <section class="gate-card gate-locked" data-gate-page="gestao"><div class="gate-intro"><div class="section-badge">Conteúdo premium</div><h2>Como aumentar performance sem sufocar o time</h2><p>O restante desta página aprofunda rotinas de acompanhamento, correção de rota e desenvolvimento de equipe em nível mais estratégico.</p></div><div class="unlock-banner">Você desbloqueou o conteúdo 🚀</div><div class="gate-content"><div class="gate-body"><p><strong>1. Acompanhamento precisa ter função clara.</strong> Check-in não é relatório. É momento de remover bloqueio, recalibrar prioridade e desenvolver julgamento. Se a conversa não faz isso, vira burocracia.</p><p><strong>2. Performance cresce com responsabilidade compartilhada.</strong> Times fortes não jogam toda decisão no líder. Eles sabem o que precisam resolver sozinhos e quando escalar algo com antecedência.</p><p><strong>3. Feedback bom protege relação e aumenta exigência.</strong> O erro mais comum é escolher entre ser duro ou ser omisso. Gestão madura combina clareza, respeito e consequência.</p><div class="grid-two" style="margin-top:18px"><article class="insight-card"><h3>Checklist de equipe saudável</h3><ul><li>O time sabe o que é prioridade?</li><li>As reuniões ajudam a decidir ou apenas atualizar?</li><li>As pessoas sabem quando pedir ajuda?</li><li>Existe espaço real para desenvolvimento?</li></ul></article><article class="framework-card"><h3>Ritual quinzenal recomendado</h3><ul><li>Revisar entregas e gargalos.</li><li>Mapear um risco de alinhamento.</li><li>Dar um feedback específico.</li><li>Definir um próximo passo de autonomia.</li></ul></article></div><p style="margin-top:18px">Gestão de equipes evolui quando o líder deixa de tentar controlar tudo e passa a construir sistema, cadência e responsabilidade distribuída.</p></div><div class="gate-overlay"><div class="gate-panel"><h3>Desbloqueie a parte estratégica</h3><p>Entre na newsletter para acessar o restante desta página e receber conteúdos de gestão de equipes com profundidade e aplicação real.</p><div class="gate-form"><div class="ml-embedded" data-form="MG5SsX"></div></div><div class="gate-note">Sem spam. Apenas conteúdo de valor.</div></div></div></div></section>
+    <section class="cta-panel"><div class="section-badge" style="background:rgba(255,255,255,.12);color:#dff7ed;border:1px solid rgba(255,255,255,.18)">Próxima leitura</div><h2>Construa uma equipe mais forte com clareza, ritmo e responsabilidade</h2><p>Boas equipes não surgem por acaso. Elas crescem quando a gestão deixa de ser improviso e passa a seguir critério.</p><a class="cta-button" href="../pages/artigos.html">Voltar para artigos</a></section>
+  </main>
+  <footer class="footer"><div class="footer-shell"><div class="footer-grid"><div class="footer-brand"><img class="footer-brand-mark" src="../assets/logo-light.png" alt="Papo de Liderança"><h3>Papo de Liderança</h3><p>leituras semanais para quem quer<br>pensar melhor,<br>decidir com mais critério<br>e evoluir com consistência.</p></div><div class="footer-column"><h3>Navegação</h3><div class="footer-nav"><a href="../papo_de_lideranca_web_preview.html">Home</a><a href="../pages/sobre.html">Sobre</a><a href="../pages/artigos.html">Artigos</a><a href="../pages/newsletter.html">Newsletter</a><a href="../pages/contato.html">Contato</a></div></div><div class="footer-column"><h3>Contato</h3><div class="footer-contact"><div><strong>Email</strong><span>contato@papodelideranca.com</span></div><div><strong>Telefone</strong><span>(48) 99963-9801</span></div></div></div><div class="footer-column"><h3>Redes sociais</h3><p style="margin-bottom:12px;">Acompanhe também nas redes</p><div class="footer-socials"><a href="#" aria-label="X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2H21l-6.53 7.462L22.154 22h-6.016l-4.71-6.17L6.03 22H3.27l6.985-7.983L2 2h6.17l4.258 5.632L18.244 2Zm-1.056 18h1.527L6.02 3.894H4.38L17.188 20Z"/></svg></a><a href="#" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.35 1.65a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2A2.8 2.8 0 1 0 12 14.8 2.8 2.8 0 0 0 12 9.2Z"/></svg></a><a href="#" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5a1.56 1.56 0 1 1 0-3.12 1.56 1.56 0 0 1 0 3.12ZM5.5 10h2.9v8.5H5.5V10Zm4.72 0h2.78v1.16h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.44v4.4h-2.9v-3.9c0-.93-.02-2.13-1.3-2.13s-1.5 1.01-1.5 2.06v3.97h-2.9V10Z"/></svg></a><a href="#" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.75l.41-3.2H13.5V8.56c0-.92.26-1.54 1.58-1.54h1.69V4.16c-.82-.09-1.64-.14-2.47-.13-2.44 0-4.11 1.49-4.11 4.23v2.34H7.92v3.2h2.27V22h3.31Z"/></svg></a></div></div></div><div class="footer-bottom"><div>© 2026 Papo de Liderança. Todos os direitos reservados.</div><div class="footer-legal"><a href="../legal/politica-de-privacidade.html">Política de Privacidade</a><a href="../legal/termos-de-uso.html">Termos de Uso</a></div></div></div></footer>
+  <script>(function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');ml('account','2252828');</script>
+  <script src="../assets/js/categoria-gate.js"></script>
+<script src="../assets/js/page-transition.js"></script>
+<!-- Internal Header Scroll -->
+<script>
+  (function () {
+    var header = document.querySelector('.site-header[data-site-header="internal"]');
+    if (!header) return;
+
+    var syncState = function () {
+      header.classList.toggle('is-scrolled', window.scrollY > 24);
+    };
+
+    syncState();
+    window.addEventListener('scroll', syncState, { passive: true });
+  })();
+</script>
+<!-- End Internal Header Scroll -->
+<script src="../assets/js/logo-theme.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

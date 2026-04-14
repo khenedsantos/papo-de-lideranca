@@ -1,0 +1,149 @@
+.site-header {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 30 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.site-header::after {
+  display: none !important;
+}
+
+.site-header.is-scrolled {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.nav-shell {
+  max-width: 1180px !important;
+  margin: 0 auto !important;
+  padding: 24px 24px 18px !important;
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+  align-items: center !important;
+  gap: 24px !important;
+  position: relative !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.brand {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.brand-mark {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 14px !important;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.22), transparent 48%), linear-gradient(135deg, #10314f 0%, #1e4a66 50%, #22a06b 100%) !important;
+  box-shadow: 0 14px 28px rgba(4, 18, 31, 0.22) !important;
+}
+
+.brand-name {
+  color: rgba(248, 251, 253, 0.98) !important;
+  text-shadow: none !important;
+}
+
+.nav-right {
+  display: flex !important;
+  align-items: center !important;
+  justify-self: center !important;
+  gap: 24px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.nav-links {
+  display: flex !important;
+  align-items: center !important;
+  gap: 26px !important;
+}
+
+.nav-links a {
+  color: rgba(233, 241, 247, 0.88) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.01em !important;
+  text-shadow: none !important;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.nav-links .is-active {
+  color: rgba(248, 251, 253, 0.98) !important;
+}
+
+.nav-links a::after {
+  background: linear-gradient(135deg, #22a06b 0%, #2fc28c 100%) !important;
+}
+
+.nav-cta {
+  display: none !important;
+}
+
+.nav-toggle-label {
+  display: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  background: rgba(248, 251, 253, 0.94) !important;
+}
+
+@media screen and (max-width: 980px) {
+  .nav-shell {
+    padding: 18px 16px 16px !important;
+    grid-template-columns: auto auto !important;
+    justify-content: space-between !important;
+  }
+
+  .nav-toggle-label {
+    display: inline-flex !important;
+  }
+
+  .nav-right {
+    position: absolute !important;
+    left: 16px !important;
+    right: 16px !important;
+    top: calc(100% + 10px) !important;
+    display: none !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+    padding: 18px !important;
+    border-radius: 24px !important;
+    background: rgba(15, 42, 61, 0.94) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 18px 42px rgba(4, 18, 31, 0.28) !important;
+    backdrop-filter: blur(14px) !important;
+  }
+
+  .nav-links {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+  }
+
+  .nav-links a {
+    color: rgba(248, 251, 253, 0.96) !important;
+  }
+
+  .nav-toggle:checked ~ .nav-right {
+    display: flex !important;
+  }
+}
