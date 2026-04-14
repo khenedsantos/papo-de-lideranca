@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets//logos//favicons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets//logos//favicons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="../assets//logos//favicons/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="../assets//logos//favicons/favicon-64.png">
+  <link rel="shortcut icon" href="../assets//logos//favicons/favicon.ico">
+  <title>Edições | Papo de Liderança</title>
+  <meta name="description" content="Veja como são as edições do Papo de Liderança e descubra por que essa newsletter entra na rotina de quem quer mais clareza, menos ruído e decisões melhores.">
+  <link rel="stylesheet" href="../landing-newsletter/style.css">
+  <link rel="stylesheet" href="../assets/css/page-transition.css">
+  <link rel="stylesheet" href="../assets/css/logo-theme.css">
+  <style>
+    .editions-page .main-nav a.is-current { color: var(--text); }
+    .editions-page .main-nav a.is-current::after { transform: scaleX(1); }
+    .editions-page .section-kicker,
+    .editions-page .eyebrow {
+      letter-spacing: 0.16em;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: rgba(34, 160, 107, 0.8);
+      background: rgba(227, 241, 235, 0.42);
+      border: 1px solid rgba(207, 228, 218, 0.46);
+      box-shadow: none;
+    }
+    .editions-main { padding: 34px 0 0; }
+    .editions-hero { padding: 18px 0 70px; }
+    .editions-hero-shell { max-width: 1080px; }
+    .editions-hero-copy { max-width: 760px; }
+    .editions-hero-copy h1 {
+      margin: 18px 0 0;
+      max-width: 11.2ch;
+      font-size: clamp(2.3rem, 3.9vw, 4.1rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      text-transform: lowercase;
+    }
+    .editions-hero-copy p {
+      max-width: 60ch;
+      margin: 24px 0 0;
+      color: rgba(91, 107, 117, 0.82);
+      font-size: 1.03rem;
+      line-height: 1.92;
+      text-transform: none;
+    }
+    .editions-hero-notes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+    .editions-note {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(228, 231, 235, 0.8);
+      color: rgba(91, 107, 117, 0.82);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-transform: none;
+    }
+    .editions-section { padding: 56px 0; }
+    .editions-section-head {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .editions-section-head h2 {
+      margin: 0;
+      max-width: 10.4ch;
+      font-size: clamp(1.76rem, 2.6vw, 2.72rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+      text-transform: lowercase;
+    }
+    .editions-section-head p {
+      max-width: 58ch;
+      margin: 0;
+      color: rgba(91, 107, 117, 0.8);
+      font-size: 1rem;
+      line-height: 1.86;
+      text-transform: none;
+    }
+    .editions-carousel-shell {
+      position: relative;
+      display: grid;
+      gap: 12px;
+      overflow: hidden;
+    }
+    .editions-carousel-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .editions-carousel-topbar p {
+      margin: 0;
+      color: rgba(91, 107, 117, 0.76);
+      font-size: 0.9rem;
+      line-height: 1.62;
+      text-transform: none;
+    }
+    .editions-carousel-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .editions-carousel-controls button {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(228, 231, 235, 0.82);
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--text);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition), background var(--transition);
+    }
+    .editions-carousel-controls button:hover,
+    .editions-carousel-controls button:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(34, 160, 107, 0.22);
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 14px 28px rgba(15, 42, 61, 0.06);
+    }
+    .editions-carousel {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding-right: 0;
+      border-radius: 34px;
+    }
+    .editions-track {
+      display: flex;
+      align-items: stretch;
+      gap: 20px;
+      width: max-content;
+      padding: 6px 0 8px;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+    }
+    .edition-card {
+      flex: 0 0 clamp(320px, 38vw, 460px);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 360px;
+      padding: 28px 28px 30px;
+      border-radius: 32px;
+      border: 1px solid rgba(228, 231, 235, 0.72);
+      background:
+        radial-gradient(circle at top right, rgba(34, 160, 107, 0.12), transparent 32%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 248, 250, 0.96) 100%);
+      box-shadow: 0 18px 40px rgba(15, 42, 61, 0.04);
+      cursor: pointer;
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+    .edition-card:hover,
+    .edition-card:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: 0 26px 46px rgba(15, 42, 61, 0.07);
+      border-color: rgba(34, 160, 107, 0.18);
+      outline: none;
+    }
+    .edition-card-header,
+    .edition-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex: 0 0 auto;
+    }
+    .edition-card-category,
+    .edition-card-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(227, 241, 235, 0.72);
+      color: rgba(34, 160, 107, 0.9);
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .edition-card-time {
+      color: rgba(91, 107, 117, 0.74);
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-transform: none;
+    }
+    .edition-card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 14px;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    .edition-card-body h3 {
+      margin: 0;
+      max-width: 11ch;
+      font-size: clamp(1.8rem, 2.2vw, 2.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      text-transform: lowercase;
+    }
+    .edition-card-body p {
+      margin: 0;
+      max-width: 32ch;
+      color: rgba(91, 107, 117, 0.82);
+      font-size: 0.98rem;
+      line-height: 1.82;
+      text-transform: none;
+    }
+    .edition-card-footer { align-self: end; }
+    .edition-card-footer strong {
+      color: rgba(15, 42, 61, 0.8);
+      font-size: 0.86rem;
+      letter-spacing: -0.01em;
+      text-transform: lowercase;
+    }
+    .editions-organizer {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 0;
+      align-items: start;
+      padding: 30px 32px 34px;
+      border-radius: 32px;
+      border: 1px solid rgba(228, 231, 235, 0.72);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 18px 40px rgba(15, 42, 61, 0.035);
+    }
+    .editions-feature {
+      padding-right: 28px;
+    }
+    .editions-feature-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .editions-feature-header strong {
+      font-size: 1.26rem;
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+      text-transform: lowercase;
+    }
+    .editions-feature p {
+      max-width: 44ch;
+      margin: 0 0 16px;
+      color: rgba(91, 107, 117, 0.82);
+      font-size: 0.98rem;
+      line-height: 1.86;
+      text-transform: none;
+    }
+    .editions-feature-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 20px 0 0;
+      list-style: none;
+    }
+    .editions-feature-list li {
+      position: relative;
+      padding-left: 18px;
+      color: rgba(91, 107, 117, 0.8);
+      font-size: 0.95rem;
+      line-height: 1.78;
+      text-transform: none;
+    }
+    .editions-feature-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.82em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(34, 160, 107, 0.82);
+      transform: translateY(-50%);
+    }
+    .editions-clusters {
+      padding: 0 0 0 28px;
+      display: grid;
+      gap: 8px;
+      border-left: 1px solid rgba(228, 231, 235, 0.72);
+    }
+    .editions-cluster {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(228, 231, 235, 0.66);
+    }
+    .editions-cluster:last-child { border-bottom: none; }
+    .editions-cluster span {
+      display: inline-flex;
+      margin-bottom: 8px;
+      color: rgba(34, 160, 107, 0.82);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .editions-cluster strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+      line-height: 1.36;
+      letter-spacing: -0.02em;
+      text-transform: lowercase;
+    }
+    .editions-cluster p {
+      margin: 0;
+      color: rgba(91, 107, 117, 0.78);
+      font-size: 0.92rem;
+      line-height: 1.72;
+      text-transform: none;
+    }
+    .editions-preview-modal[hidden] { display: none; }
+    .editions-preview-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(11, 18, 23, 0.54);
+      backdrop-filter: blur(12px);
+    }
+    .editions-preview-dialog {
+      width: min(760px, 100%);
+      max-height: min(88vh, 920px);
+      overflow: auto;
+      padding: 32px 32px 34px;
+      border-radius: 36px;
+      border: 1px solid rgba(228, 231, 235, 0.62);
+      background:
+        radial-gradient(circle at 85% 14%, rgba(34, 160, 107, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(244,248,250,0.99) 100%);
+      box-shadow: 0 34px 90px rgba(11, 18, 23, 0.22);
+    }
+    .editions-preview-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      margin-left: auto;
+      border-radius: 50%;
+      border: 1px solid rgba(228, 231, 235, 0.82);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--text);
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .editions-preview-close:hover,
+    .editions-preview-close:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(34, 160, 107, 0.22);
+      box-shadow: 0 12px 26px rgba(15, 42, 61, 0.08);
+      outline: none;
+    }
+    .editions-preview-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 22px 0 18px;
+    }
+    .editions-preview-meta span:last-child {
+      color: rgba(91, 107, 117, 0.72);
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-transform: none;
+    }
+    .editions-preview-dialog h3 {
+      margin: 0 0 14px;
+      max-width: 11ch;
+      font-size: clamp(2rem, 3vw, 3rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      text-transform: lowercase;
+    }
+    .editions-preview-intro {
+      max-width: 56ch;
+      margin: 0 0 18px;
+      color: rgba(91, 107, 117, 0.84);
+      font-size: 1rem;
+      line-height: 1.88;
+      text-transform: none;
+    }
+    .editions-preview-excerpt {
+      position: relative;
+      display: grid;
+      gap: 16px;
+      margin-top: 22px;
+      padding-top: 4px;
+    }
+    .editions-preview-excerpt p {
+      margin: 0;
+      color: rgba(91, 107, 117, 0.78);
+      font-size: 1rem;
+      line-height: 1.94;
+      text-transform: none;
+    }
+    .editions-preview-gate {
+      position: relative;
+      margin-top: -18px;
+      padding: 76px 0 0;
+      overflow: hidden;
+    }
+    .editions-preview-gate::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 140px;
+      background: linear-gradient(180deg, rgba(244,248,250,0) 0%, rgba(244,248,250,0.84) 52%, rgba(244,248,250,1) 100%);
+      backdrop-filter: blur(6px);
+      pointer-events: none;
+    }
+    .editions-preview-lock {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 14px;
+      justify-items: start;
+      padding: 28px 26px;
+      border-radius: 28px;
+      border: 1px solid rgba(228, 231, 235, 0.78);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 18px 34px rgba(15, 42, 61, 0.05);
+    }
+    .editions-preview-lock strong {
+      font-size: 1.24rem;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      text-transform: lowercase;
+    }
+    .editions-preview-lock p {
+      margin: 0;
+      color: rgba(91, 107, 117, 0.78);
+      font-size: 0.94rem;
+      line-height: 1.76;
+      text-transform: none;
+    }
+    .editions-preview-lock .newsletter-form {
+      width: 100%;
+      margin-top: 8px;
+    }
+    .editions-final-cta { padding: 18px 0 20px; }
+    .editions-final-cta-shell {
+      max-width: 840px;
+      padding: 38px 40px 42px;
+      border-radius: 34px;
+      border: 1px solid rgba(228, 231, 235, 0.66);
+      background:
+        radial-gradient(circle at 88% 16%, rgba(34, 160, 107, 0.14), transparent 30%),
+        linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(243,247,250,0.99) 100%);
+      box-shadow: 0 18px 38px rgba(15, 42, 61, 0.04);
+    }
+    .editions-final-cta-shell h2 {
+      max-width: 10.8ch;
+      margin: 12px 0 16px;
+      font-size: clamp(1.94rem, 2.8vw, 3rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      text-transform: lowercase;
+    }
+    .editions-final-cta-shell p {
+      max-width: 56ch;
+      margin: 0 0 14px;
+      color: rgba(91, 107, 117, 0.78);
+      font-size: 0.98rem;
+      line-height: 1.82;
+      text-transform: none;
+    }
+    .editions-final-cta-shell .newsletter-form { margin-top: 26px; }
+    .editions-final-cta-shell .hero-trustline,
+    .editions-final-cta-shell .form-feedback { max-width: 100%; }
+    .editions-cta-lower {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.9fr) minmax(320px, 1.1fr);
+      gap: 24px;
+      align-items: end;
+      margin-top: 26px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(228, 231, 235, 0.68);
+    }
+    .editions-coffee-ritual {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      min-height: 84px;
+    }
+    .editions-coffee-visual {
+      position: relative;
+      width: 82px;
+      height: 82px;
+      flex: 0 0 82px;
+    }
+    .editions-coffee-cup {
+      position: absolute;
+      left: 16px;
+      bottom: 10px;
+      width: 44px;
+      height: 28px;
+      border: 2px solid rgba(15, 42, 61, 0.72);
+      border-radius: 0 0 14px 14px;
+      border-top: none;
+      background: linear-gradient(180deg, rgba(255,255,255,0.78) 0%, rgba(245,249,251,0.98) 100%);
+      box-shadow: inset 0 -5px 12px rgba(15, 42, 61, 0.04);
+    }
+    .editions-coffee-cup::before {
+      content: "";
+      position: absolute;
+      inset: -6px -4px auto;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(15, 42, 61, 0.76);
+    }
+    .editions-coffee-handle {
+      position: absolute;
+      right: 12px;
+      bottom: 18px;
+      width: 14px;
+      height: 16px;
+      border: 2px solid rgba(15, 42, 61, 0.62);
+      border-left: none;
+      border-radius: 0 10px 10px 0;
+    }
+    .editions-coffee-saucer {
+      position: absolute;
+      left: 10px;
+      bottom: 4px;
+      width: 56px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(15, 42, 61, 0.12);
+    }
+    .editions-coffee-steam {
+      position: absolute;
+      bottom: 42px;
+      width: 14px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(34, 160, 107, 0.18);
+      border-color: rgba(34, 160, 107, 0.18) transparent transparent transparent;
+      opacity: 0;
+      filter: blur(0.2px);
+      animation: coffeeSteam 3.8s linear infinite;
+    }
+    .editions-coffee-steam.steam-a {
+      left: 24px;
+      animation-delay: 0s;
+    }
+    .editions-coffee-steam.steam-b {
+      left: 39px;
+      height: 34px;
+      animation-delay: 1.2s;
+    }
+    .editions-coffee-steam.steam-c {
+      left: 53px;
+      animation-delay: 2.2s;
+    }
+    .editions-coffee-copy {
+      display: grid;
+      gap: 6px;
+      align-content: center;
+    }
+    .editions-coffee-copy strong {
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      text-transform: lowercase;
+    }
+    .editions-coffee-copy span {
+      color: rgba(91, 107, 117, 0.72);
+      font-size: 0.9rem;
+      line-height: 1.64;
+      text-transform: none;
+    }
+    .editions-cta-form-wrap {
+      display: grid;
+      justify-items: stretch;
+      gap: 10px;
+    }
+    .editions-cta-form-wrap .newsletter-form {
+      margin-top: 0;
+    }
+    @keyframes coffeeSteam {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 8px, 0) scaleY(0.9);
+      }
+      20% {
+        opacity: 0.32;
+      }
+      100% {
+        opacity: 0;
+        transform: translate3d(6px, -24px, 0) scaleY(1.12);
+      }
+    }
+    @media (max-width: 1100px) {
+      .edition-card { flex-basis: clamp(300px, 64vw, 420px); }
+      .editions-organizer {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+      .editions-feature {
+        padding-right: 0;
+      }
+      .editions-clusters {
+        padding: 0;
+        border-left: none;
+        border-top: 1px solid rgba(228, 231, 235, 0.72);
+        padding-top: 22px;
+      }
+    }
+    @media (max-width: 820px) {
+      .editions-main { padding-top: 28px; }
+      .editions-hero { padding-bottom: 52px; }
+      .editions-section { padding: 40px 0; }
+      .editions-section-head {
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .editions-carousel { border-radius: 28px; }
+      .editions-organizer {
+        padding: 24px 22px 26px;
+        border-radius: 28px;
+      }
+      .editions-cta-lower {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        align-items: start;
+      }
+      .editions-coffee-ritual {
+        min-height: 0;
+      }
+      .edition-card {
+        flex-basis: min(82vw, 340px);
+        min-height: 320px;
+        padding: 24px 22px 26px;
+        border-radius: 28px;
+      }
+      .editions-preview-dialog,
+      .editions-final-cta-shell {
+        padding: 26px 22px 28px;
+        border-radius: 28px;
+      }
+    }
+    @media (max-width: 640px) {
+      .editions-hero-copy h1 { max-width: 12.4ch; }
+      .editions-carousel-topbar {
+        align-items: start;
+        flex-direction: column;
+      }
+      .editions-section-head h2 { max-width: 12ch; }
+      .editions-coffee-ritual {
+        gap: 14px;
+      }
+      .editions-coffee-visual {
+        width: 70px;
+        height: 70px;
+        flex-basis: 70px;
+      }
+    }
+  </style>
+</head>
+<body class="theme-light editions-page" data-scroll-logo="dark">
+  <header class="site-header" id="inicio" data-site-header>
+    <div class="container header-inner">
+      <a class="brand" href="../landing-newsletter/index.html#inicio" aria-label="Papo de Liderança"><img class="logo" src="../assets/logo-dark.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de Liderança"><span class="brand-name">Papo de Liderança</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-nav-toggle>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="main-nav" id="main-nav" aria-label="Navegação principal" data-nav-panel>
+        <a href="../landing-newsletter/index.html#inicio">início</a>
+        <a href="../pages/sobre.html">sobre</a>
+        <a class="is-current" href="../pages/edicoes.html">edições</a>
+        <a href="../landing-newsletter/index.html#beneficios">benefícios</a>
+        <a href="../pages/autoridade.html">autoridade</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-login" href="#login">login</a>
+        <a class="header-cta" href="#inscreva-se">inscreva-se</a>
+      </div>
+    </div>
+  </header>
+  <main class="editions-main">
+    <section class="editions-hero">
+      <div class="container editions-hero-shell">
+        <div class="editions-hero-copy">
+          <span class="eyebrow">edições</span>
+          <h1>leituras curtas para pensar melhor</h1>
+          <p>insights semanais, leitura em poucos minutos e ideias que ajudam a trazer clareza para decisões difíceis, conversas importantes e crescimento com mais consistência.</p>
+          <div class="editions-hero-notes" aria-label="Destaques da newsletter">
+            <span class="editions-note">leitura em 5 minutos</span>
+            <span class="editions-note">aplique isso hoje</span>
+            <span class="editions-note">clareza para decisões difíceis</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="editions-section" aria-labelledby="editions-carousel-title">
+      <div class="container">
+        <div class="editions-section-head">
+          <span class="section-kicker">edições em destaque</span>
+          <h2 id="editions-carousel-title">veja como o produto se apresenta na prática</h2>
+          <p>cada edição foi pensada para parecer uma leitura breve na forma, mas profunda no efeito. explore os cards, abra os previews e sinta o ritmo da newsletter antes de entrar na rotina.</p>
+        </div>
+
+        <div class="editions-carousel-shell">
+          <div class="editions-carousel-topbar">
+            <p>cards grandes, navegação suave e uma prévia real do tipo de conteúdo que merece continuar depois do clique.</p>
+            <div class="editions-carousel-controls" aria-label="Controles do carrossel">
+              <button type="button" data-editions-prev aria-label="Ver edição anterior">←</button>
+              <button type="button" data-editions-next aria-label="Ver próxima edição">→</button>
+            </div>
+          </div>
+
+          <div class="editions-carousel" data-editions-carousel>
+            <div class="editions-track" data-editions-track>
+              <article class="edition-card" tabindex="0" data-preview-category="liderança" data-preview-time="5 min" data-preview-title="clareza antes da reação" data-preview-summary="quando o time não sabe para onde vai, o problema raramente é esforço. quase sempre é direção." data-preview-excerpt="quando a pressão aumenta, a tentação é agir rápido demais. mas boa parte da liderança madura nasce do movimento oposto: segurar a pressa o suficiente para separar fato, hipótese e ruído antes de contaminar o time com ansiedade.&#10;&#10;o ponto não é parecer calmo o tempo todo. é oferecer direção suficiente para que as pessoas continuem avançando sem depender de certezas artificiais.">
+                <div class="edition-card-header">
+                  <span class="edition-card-category">liderança</span>
+                  <span class="edition-card-time">5 min</span>
+                </div>
+                <div class="edition-card-body">
+                  <h3>clareza antes da reação</h3>
+                  <p>quando o time não sabe para onde vai, o problema raramente é esforço. quase sempre é direção.</p>
+                </div>
+                <div class="edition-card-footer">
+                  <strong>aplique isso hoje</strong>
+                  <span class="edition-card-chip">edição da semana</span>
+                </div>
+              </article>
+
+              <article class="edition-card" tabindex="0" data-preview-category="carreira" data-preview-time="4 min" data-preview-title="crescimento sem virar urgência crônica" data-preview-summary="nem todo avanço exige aceleração constante. alguns pedem ritmo, repertório e decisão melhor." data-preview-excerpt="existe um tipo de crescimento que parece virtuoso por fora, mas desgasta por dentro. ele acontece quando tudo vira urgência, quando toda oportunidade parece decisiva e quando a carreira começa a ser guiada mais pelo medo de ficar para trás do que por direção real.&#10;&#10;a newsletter entra exatamente nesse ponto: para ajudar você a distinguir movimento de evolução e intensidade de consistência.">
+                <div class="edition-card-header">
+                  <span class="edition-card-category">carreira</span>
+                  <span class="edition-card-time">4 min</span>
+                </div>
+                <div class="edition-card-body">
+                  <h3>crescimento sem virar urgência crônica</h3>
+                  <p>nem todo avanço exige aceleração constante. alguns pedem ritmo, repertório e decisão melhor.</p>
+                </div>
+                <div class="edition-card-footer">
+                  <strong>menos ruído</strong>
+                  <span class="edition-card-chip">mais lida</span>
+                </div>
+              </article>
+
+              <article class="edition-card" tabindex="0" data-preview-category="gestão" data-preview-time="6 min" data-preview-title="o que sustenta um time quando o cenário oscila" data-preview-summary="estabilidade não vem de discurso inspirador. vem de contexto, critério e presença consistente." data-preview-excerpt="há momentos em que a equipe não precisa de uma fala brilhante. precisa de alguém capaz de organizar prioridades, dar contexto suficiente e segurar a conversa num nível de maturidade que evite ruído extra.&#10;&#10;liderar nessas horas não é dramatizar a dificuldade. é transformar incerteza em direção possível, mesmo quando nem tudo está resolvido.">
+                <div class="edition-card-header">
+                  <span class="edition-card-category">gestão</span>
+                  <span class="edition-card-time">6 min</span>
+                </div>
+                <div class="edition-card-body">
+                  <h3>o que sustenta um time quando o cenário oscila</h3>
+                  <p>estabilidade não vem de discurso inspirador. vem de contexto, critério e presença consistente.</p>
+                </div>
+                <div class="edition-card-footer">
+                  <strong>clareza para decisões difíceis</strong>
+                  <span class="edition-card-chip">última edição</span>
+                </div>
+              </article>
+
+              <article class="edition-card" tabindex="0" data-preview-category="mentalidade" data-preview-time="5 min" data-preview-title="repertório melhor, decisões melhores" data-preview-summary="bons julgamentos raramente nascem do improviso. eles se acumulam em leituras, conversas e critério." data-preview-excerpt="decisão boa nem sempre parece brilhante no instante em que é tomada. muitas vezes ela só parece mais silenciosa, mais estável e menos reativa. esse tipo de decisão costuma nascer de repertório.&#10;&#10;é por isso que a newsletter não tenta impressionar. tenta alimentar um tipo de pensamento que volta com você para o trabalho, para a conversa e para o próximo passo.">
+                <div class="edition-card-header">
+                  <span class="edition-card-category">mentalidade</span>
+                  <span class="edition-card-time">5 min</span>
+                </div>
+                <div class="edition-card-body">
+                  <h3>repertório melhor, decisões melhores</h3>
+                  <p>bons julgamentos raramente nascem do improviso. eles se acumulam em leituras, conversas e critério.</p>
+                </div>
+                <div class="edition-card-footer">
+                  <strong>leve isso para a semana</strong>
+                  <span class="edition-card-chip">curadoria</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="editions-section" aria-labelledby="editions-organization-title">
+      <div class="container editions-organizer">
+        <div class="editions-feature">
+          <div class="editions-feature-header">
+            <span class="section-kicker">edição da semana</span>
+            <strong>um formato curto, direto e aplicável</strong>
+          </div>
+          <p>cada edição é escrita para ser lida rápido e lembrada por mais tempo. a ideia é entrar na rotina sem exigir muito tempo, mas deixar um tipo de clareza que melhora a forma como você pensa, conversa e decide.</p>
+          <p>não é conteúdo para preencher caixa de entrada. é uma peça editorial curta, bem editada e construída para virar repertório.</p>
+          <ul class="editions-feature-list">
+            <li>leitura em 5 minutos</li>
+            <li>clareza para decisões difíceis</li>
+            <li>aplicação prática no mesmo dia</li>
+          </ul>
+        </div>
+
+        <div class="editions-clusters">
+          <article class="editions-cluster">
+            <span>mais lidas</span>
+            <strong>clareza antes da reação</strong>
+            <p>um recorte sobre como liderar sem contaminar o time com a sua própria pressa.</p>
+          </article>
+          <article class="editions-cluster">
+            <span>últimas edições</span>
+            <strong>o que sustenta um time quando o cenário oscila</strong>
+            <p>contexto, direção e estabilidade prática quando o ambiente muda rápido.</p>
+          </article>
+          <article class="editions-cluster">
+            <span>feito para ficar</span>
+            <strong>conteúdo que continua com você depois do clique</strong>
+            <p>mais clareza, menos ruído e um padrão melhor de decisão ao longo da semana.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="editions-final-cta" id="inscreva-se">
+      <div class="container">
+        <div class="editions-final-cta-shell">
+          <span class="section-kicker">convite</span>
+          <h2>entre para a rotina de quem prefere clareza a excesso</h2>
+          <p>insights semanais para quem quer mais consistência, menos ruído e um tipo de leitura que melhora a forma de pensar antes de agir.</p>
+          <div class="editions-cta-lower">
+            <div class="editions-coffee-ritual" aria-hidden="true">
+              <div class="editions-coffee-visual">
+                <span class="editions-coffee-steam steam-a"></span>
+                <span class="editions-coffee-steam steam-b"></span>
+                <span class="editions-coffee-steam steam-c"></span>
+                <span class="editions-coffee-cup"></span>
+                <span class="editions-coffee-handle"></span>
+                <span class="editions-coffee-saucer"></span>
+              </div>
+              <div class="editions-coffee-copy">
+                <strong>já pegou seu café?</strong>
+                <span>uma leitura curta costuma funcionar ainda melhor quando entra como ritual.</span>
+              </div>
+            </div>
+            <div class="editions-cta-form-wrap">
+              <form class="newsletter-form final-form" data-newsletter-form>
+                <label class="sr-only" for="editions-email">Digite seu e-mail</label>
+                <div class="email-pill">
+                  <span class="email-icon" aria-hidden="true">✉</span>
+                  <input id="editions-email" name="email" type="email" placeholder="coloque seu e-mail" required>
+                </div>
+                <button type="submit">quero receber</button>
+              </form>
+              <p class="hero-trustline">gratuita · 1 edição por semana · leitura em 5 min</p>
+              <div class="form-feedback" data-form-feedback aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div class="editions-preview-modal" data-editions-modal hidden>
+    <div class="editions-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="editions-preview-title">
+      <button class="editions-preview-close" type="button" data-editions-close aria-label="Fechar visualização">×</button>
+      <div class="editions-preview-meta">
+        <span class="edition-card-category" data-preview-category-label>liderança</span>
+        <span data-preview-time-label>5 min</span>
+      </div>
+      <h3 id="editions-preview-title" data-preview-title-label>clareza antes da reação</h3>
+      <p class="editions-preview-intro" data-preview-summary-label>quando o time não sabe para onde vai, o problema raramente é esforço. quase sempre é direção.</p>
+      <div class="editions-preview-excerpt">
+        <p data-preview-excerpt-top>quando a pressão aumenta, a tentação é agir rápido demais. mas boa parte da liderança madura nasce do movimento oposto: segurar a pressa o suficiente para separar fato, hipótese e ruído antes de contaminar o time com ansiedade.</p>
+        <p data-preview-excerpt-bottom>o ponto não é parecer calmo o tempo todo. é oferecer direção suficiente para que as pessoas continuem avançando sem depender de certezas artificiais.</p>
+      </div>
+      <div class="editions-preview-gate">
+        <div class="editions-preview-lock">
+          <strong>continue lendo ao se inscrever</strong>
+          <p>o acesso completo às edições fica liberado para quem entra na rotina da newsletter.</p>
+          <form class="newsletter-form" data-newsletter-form>
+            <label class="sr-only" for="preview-email">Digite seu e-mail</label>
+            <div class="email-pill">
+              <span class="email-icon" aria-hidden="true">✉</span>
+              <input id="preview-email" name="email" type="email" placeholder="coloque seu e-mail" required>
+            </div>
+            <button type="submit">quero receber</button>
+          </form>
+          <p class="hero-trustline">gratuita · 1 edição por semana · leitura em 5 min</p>
+          <div class="form-feedback" data-form-feedback aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer" id="contato">
+    <div class="footer-shell">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img class="footer-brand-mark" src="../assets/logo-light.png" alt="Papo de Liderança">
+          <h3>Papo de Liderança</h3>
+          <p>leituras semanais para quem quer pensar melhor,<br>decidir com mais critério<br>e evoluir com consistência.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Navegação</h3>
+          <div class="footer-nav">
+            <a href="../landing-newsletter/index.html#inicio">início</a>
+            <a href="../pages/sobre.html">sobre</a>
+            <a href="../pages/edicoes.html">edições</a>
+            <a href="../landing-newsletter/index.html#beneficios">benefícios</a>
+            <a href="../pages/autoridade.html">autoridade</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Contato</h3>
+          <div class="footer-contact">
+            <div><strong>Email</strong><span>contato@papodelideranca.com</span></div>
+            <div><strong>Telefone</strong><span>(48) 99963-9801</span></div>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Redes sociais</h3>
+          <p style="margin-bottom:12px;">Acompanhe também nas redes</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2H21l-6.53 7.462L22.154 22h-6.016l-4.71-6.17L6.03 22H3.27l6.985-7.983L2 2h6.17l4.258 5.632L18.244 2Zm-1.056 18h1.527L6.02 3.894H4.38L17.188 20Z"/></svg></a>
+            <a href="#" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.35 1.65a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2A2.8 2.8 0 1 0 12 14.8 2.8 2.8 0 0 0 12 9.2Z"/></svg></a>
+            <a href="#" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5a1.56 1.56 0 1 1 0-3.12 1.56 1.56 0 0 1 0 3.12ZM5.5 10h2.9v8.5H5.5V10Zm4.72 0h2.78v1.16h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.44v4.4h-2.9v-3.9c0-.93-.02-2.13-1.3-2.13s-1.5 1.01-1.5 2.06v3.97h-2.9V10Z"/></svg></a>
+            <a href="#" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.75l.41-3.2H13.5V8.56c0-.92.26-1.54 1.58-1.54h1.69V4.16c-.82-.09-1.64-.14-2.47-.13-2.44 0-4.11 1.49-4.11 4.23v2.34H7.92v3.2h2.27V22h3.31Z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Papo de Liderança. Todos os direitos reservados.</div>
+        <div class="footer-legal">
+          <a href="../legal/politica-de-privacidade.html">Política de Privacidade</a>
+          <a href="../legal/termos-de-uso.html">Termos de Uso</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../landing-newsletter/script.js"></script>
+  <script src="../assets/js/page-transition.js"></script>
+  <script src="../assets/js/logo-theme.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const carousel = document.querySelector("[data-editions-carousel]");
+      const track = document.querySelector("[data-editions-track]");
+      const prevButton = document.querySelector("[data-editions-prev]");
+      const nextButton = document.querySelector("[data-editions-next]");
+      const modal = document.querySelector("[data-editions-modal]");
+      const closeButton = document.querySelector("[data-editions-close]");
+      const previewCategory = document.querySelector("[data-preview-category-label]");
+      const previewTime = document.querySelector("[data-preview-time-label]");
+      const previewTitle = document.querySelector("[data-preview-title-label]");
+      const previewSummary = document.querySelector("[data-preview-summary-label]");
+      const previewExcerptTop = document.querySelector("[data-preview-excerpt-top]");
+      const previewExcerptBottom = document.querySelector("[data-preview-excerpt-bottom]");
+
+      if (!carousel || !track) return;
+
+      const originalCards = Array.from(track.querySelectorAll(".edition-card"));
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let allCards = [];
+      let cycleWidth = 0;
+      let position = 0;
+      let animationId = 0;
+      let lastTimestamp = 0;
+      let paused = false;
+      let resumeTimeout = 0;
+
+      originalCards.forEach((card) => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute("aria-hidden", "true");
+        track.appendChild(clone);
+      });
+
+      allCards = Array.from(track.querySelectorAll(".edition-card"));
+
+      const getGap = () => {
+        const styles = window.getComputedStyle(track);
+        return parseFloat(styles.columnGap || styles.gap || "0");
+      };
+
+      const getSpeed = () => (window.innerWidth <= 820 ? 18 : 24);
+
+      const normalizePosition = () => {
+        if (!cycleWidth) return;
+        position = ((position % cycleWidth) + cycleWidth) % cycleWidth;
+      };
+
+      const render = () => {
+        track.style.transform = `translate3d(${-position}px, 0, 0)`;
+      };
+
+      const measureCycle = () => {
+        const gap = getGap();
+        cycleWidth = originalCards.reduce((total, card) => {
+          return total + card.getBoundingClientRect().width;
+        }, 0) + gap * Math.max(0, originalCards.length - 1);
+        normalizePosition();
+        render();
+      };
+
+      const getStep = () => {
+        const firstCard = originalCards[0];
+        if (!firstCard) return 320;
+        return firstCard.getBoundingClientRect().width + getGap();
+      };
+
+      const openPreview = (card) => {
+        if (!modal || !card) return;
+        paused = true;
+        previewCategory.textContent = card.dataset.previewCategory || "";
+        previewTime.textContent = card.dataset.previewTime || "";
+        previewTitle.textContent = card.dataset.previewTitle || "";
+        previewSummary.textContent = card.dataset.previewSummary || "";
+        const excerpt = (card.dataset.previewExcerpt || "").split("\n\n");
+        previewExcerptTop.textContent = excerpt[0] || "";
+        previewExcerptBottom.textContent = excerpt[1] || "";
+        modal.hidden = false;
+        document.body.style.overflow = "hidden";
+        closeButton?.focus();
+      };
+
+      const closePreview = () => {
+        if (!modal) return;
+        modal.hidden = true;
+        document.body.style.overflow = "";
+        paused = false;
+      };
+
+      const queueResume = () => {
+        window.clearTimeout(resumeTimeout);
+        resumeTimeout = window.setTimeout(() => {
+          if (!modal || modal.hidden) paused = false;
+        }, 1400);
+      };
+
+      const stepCarousel = (direction) => {
+        position += direction * getStep();
+        normalizePosition();
+        render();
+      };
+
+      const animate = (timestamp) => {
+        if (!lastTimestamp) lastTimestamp = timestamp;
+        const delta = (timestamp - lastTimestamp) / 1000;
+        lastTimestamp = timestamp;
+
+        if (!paused && !prefersReducedMotion.matches && cycleWidth > 0) {
+          position += getSpeed() * delta;
+          if (position >= cycleWidth) position -= cycleWidth;
+          render();
+        }
+
+        animationId = window.requestAnimationFrame(animate);
+      };
+
+      allCards.forEach((card) => {
+        card.addEventListener("click", () => openPreview(card));
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openPreview(card);
+          }
+        });
+      });
+
+      prevButton?.addEventListener("click", () => {
+        paused = true;
+        stepCarousel(-1);
+        queueResume();
+      });
+
+      nextButton?.addEventListener("click", () => {
+        paused = true;
+        stepCarousel(1);
+        queueResume();
+      });
+
+      carousel.addEventListener("mouseenter", () => {
+        paused = true;
+      });
+
+      carousel.addEventListener("mouseleave", () => {
+        if (!modal || modal.hidden) paused = false;
+      });
+
+      carousel.addEventListener("focusin", () => {
+        paused = true;
+      });
+
+      carousel.addEventListener("focusout", () => {
+        if (!modal || modal.hidden) paused = false;
+      });
+
+      closeButton?.addEventListener("click", closePreview);
+      modal?.addEventListener("click", (event) => {
+        if (event.target === modal) closePreview();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && modal && !modal.hidden) closePreview();
+      });
+
+      window.addEventListener("resize", measureCycle, { passive: true });
+      prefersReducedMotion.addEventListener("change", measureCycle);
+
+      measureCycle();
+      render();
+      animationId = window.requestAnimationFrame(animate);
+
+      window.addEventListener("beforeunload", () => {
+        if (animationId) window.cancelAnimationFrame(animationId);
+        window.clearTimeout(resumeTimeout);
+      });
+    });
+  </script>
+</body>
+</html>
