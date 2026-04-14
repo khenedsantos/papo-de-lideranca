@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets//logos//favicons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets//logos//favicons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="../assets//logos//favicons/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="../assets//logos//favicons/favicon-64.png">
+  <link rel="shortcut icon" href="../assets//logos//favicons/favicon.ico">
+  <title>Autoridade | Papo de Liderança</title>
+  <meta name="description" content="Princípios, aprendizados e visão prática sobre liderança no Papo de Liderança.">
+  <link rel="stylesheet" href="../landing-newsletter/style.css">
+  <link rel="stylesheet" href="../assets/css/page-transition.css">
+  <link rel="stylesheet" href="../assets/css/logo-theme.css">
+  <style>
+    .authority-page .main-nav a.is-current {
+      color: var(--text);
+    }
+
+    .authority-page .main-nav a.is-current::after {
+      transform: scaleX(1);
+    }
+
+    .authority-page .section-kicker,
+    .authority-page .eyebrow {
+      letter-spacing: 0.18em;
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: rgba(34, 160, 107, 0.76);
+      background: rgba(227, 241, 235, 0.34);
+      border: 1px solid rgba(207, 228, 218, 0.34);
+      box-shadow: none;
+    }
+
+    .authority-main {
+      padding: 38px 0 0;
+    }
+
+    .authority-hero {
+      padding: 16px 0 78px;
+    }
+
+    .authority-hero-shell {
+      max-width: 1080px;
+    }
+
+    .authority-hero-copy {
+      max-width: 840px;
+    }
+
+    .authority-hero-copy h1 {
+      margin: 18px 0 0;
+      max-width: 11.6ch;
+      font-size: clamp(2.28rem, 3.62vw, 3.58rem);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+      text-transform: lowercase;
+    }
+
+    .authority-hero-intro {
+      max-width: 60ch;
+      margin: 34px 0 0;
+      display: grid;
+      gap: 22px;
+    }
+
+    .authority-hero-intro p {
+      margin: 0;
+      color: rgba(91, 107, 117, 0.82);
+      font-size: 1.03rem;
+      line-height: 2.04;
+      text-transform: none;
+    }
+
+    .authority-section {
+      padding: 52px 0;
+    }
+
+    .authority-shell {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.24fr) minmax(0, 0.96fr);
+      gap: clamp(28px, 4vw, 64px);
+      align-items: start;
+    }
+
+    .authority-heading {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+      padding-top: 10px;
+    }
+
+    .authority-heading h2 {
+      margin: 0;
+      font-size: clamp(1.38rem, 1.82vw, 1.76rem);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      text-transform: lowercase;
+    }
+
+    .authority-copy {
+      max-width: 72ch;
+    }
+
+    .authority-copy p {
+      margin: 0 0 24px;
+      color: rgba(91, 107, 117, 0.8);
+      font-size: 1.01rem;
+      line-height: 2.08;
+      text-transform: none;
+    }
+
+    .authority-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .authority-thinking {
+      display: grid;
+      gap: 26px;
+    }
+
+    .authority-thought-group {
+      display: grid;
+      gap: 10px;
+      padding: 0 0 8px;
+    }
+
+    .authority-thought-group p {
+      margin: 0;
+    }
+
+    .authority-thought-group p:first-child {
+      color: var(--text);
+      font-size: 1.2rem;
+      line-height: 1.72;
+      letter-spacing: -0.022em;
+    }
+
+    .authority-thinking .authority-copy {
+      max-width: 62ch;
+      margin-top: 4px;
+    }
+
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 30px 36px;
+      align-items: start;
+    }
+
+    .principle-item {
+      min-height: 100%;
+      padding-top: 10px;
+    }
+
+    .principle-item h3 {
+      margin: 0 0 12px;
+      font-size: 1.12rem;
+      line-height: 1.2;
+      letter-spacing: -0.022em;
+      text-transform: lowercase;
+    }
+
+    .principle-item p {
+      margin: 0;
+      color: rgba(91, 107, 117, 0.8);
+      font-size: 0.97rem;
+      line-height: 1.9;
+      text-transform: none;
+    }
+
+    .authority-learnings {
+      display: grid;
+      gap: 18px;
+      max-width: 64ch;
+    }
+
+    .authority-learning-line {
+      margin: 0;
+      padding-bottom: 0;
+      color: rgba(91, 107, 117, 0.8);
+      font-size: 1rem;
+      line-height: 1.96;
+      text-transform: none;
+    }
+
+    .authority-learning-line.emphasis {
+      color: var(--text);
+      font-size: 1.16rem;
+      line-height: 1.78;
+      letter-spacing: -0.022em;
+      padding-top: 10px;
+    }
+
+    .authority-application {
+      display: grid;
+      gap: 20px;
+    }
+
+    .authority-application p {
+      margin: 0;
+    }
+
+    .authority-application-list {
+      display: grid;
+      gap: 14px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .authority-application-list li {
+      position: relative;
+      padding-left: 18px;
+      color: rgba(91, 107, 117, 0.8);
+      font-size: 0.99rem;
+      line-height: 1.84;
+      text-transform: none;
+    }
+
+    .authority-application-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.78em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(34, 160, 107, 0.78);
+      transform: translateY(-50%);
+    }
+
+    .authority-importance {
+      padding: 24px 0 12px;
+    }
+
+    .authority-importance-shell {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .authority-importance-shell .authority-heading {
+      margin-bottom: 24px;
+      padding-top: 0;
+    }
+
+    .authority-importance-shell .authority-copy {
+      max-width: 58ch;
+    }
+
+    .authority-importance-shell .authority-copy p {
+      margin-bottom: 20px;
+    }
+
+    .authority-cta {
+      padding: 22px 0 20px;
+    }
+
+    .authority-cta-shell {
+      max-width: 760px;
+      padding: 36px 38px 40px;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at 88% 16%, rgba(34, 160, 107, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(243,247,250,0.99) 100%);
+      border: 1px solid rgba(228, 231, 235, 0.62);
+      box-shadow: 0 18px 38px rgba(15, 42, 61, 0.04);
+      transition: box-shadow 220ms ease, border-color 220ms ease, transform 220ms ease;
+    }
+
+    .authority-cta-shell:hover {
+      border-color: rgba(34, 160, 107, 0.16);
+      box-shadow: 0 16px 34px rgba(15, 42, 61, 0.036);
+      transform: translateY(-1px);
+    }
+
+    .authority-cta-shell h2 {
+      max-width: 12.4ch;
+      margin: 12px 0 16px;
+      font-size: clamp(1.82rem, 2.56vw, 2.62rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      text-transform: lowercase;
+    }
+
+    .authority-cta-shell p {
+      max-width: 56ch;
+      margin: 0 0 12px;
+      color: rgba(91, 107, 117, 0.72);
+      font-size: 0.94rem;
+      line-height: 1.76;
+      text-transform: none;
+    }
+
+    .authority-cta-shell p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .authority-cta-shell .newsletter-form {
+      margin-top: 24px;
+      max-width: 100%;
+    }
+
+    .authority-cta-shell .hero-trustline,
+    .authority-cta-shell .form-feedback {
+      max-width: 100%;
+    }
+
+    @media (max-width: 1080px) {
+      .authority-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .principles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .authority-heading {
+        padding-top: 0;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .authority-main {
+        padding-top: 28px;
+      }
+
+      .authority-hero {
+        padding-bottom: 46px;
+      }
+
+      .authority-section {
+        padding: 34px 0;
+      }
+
+      .authority-copy p,
+      .authority-cta-shell p,
+      .authority-application-list li {
+        font-size: 0.98rem;
+        line-height: 1.9;
+      }
+
+      .authority-cta-shell {
+        padding: 26px 22px 28px;
+        border-radius: 28px;
+      }
+
+      .authority-learnings {
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body class="theme-light authority-page" data-scroll-logo="dark">
+  <header class="site-header" id="inicio" data-site-header>
+    <div class="container header-inner">
+      <a class="brand" href="../landing-newsletter/index.html#inicio" aria-label="Papo de Liderança"><img class="logo" src="../assets/logo-dark.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de Liderança"><span class="brand-name">Papo de Liderança</span></a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-nav-toggle>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Navegação principal" data-nav-panel>
+        <a href="../landing-newsletter/index.html#inicio">início</a>
+        <a href="../pages/sobre.html">sobre</a>
+        <a href="../landing-newsletter/index.html#edicoes">edições</a>
+        <a href="../landing-newsletter/index.html#beneficios">benefícios</a>
+        <a class="is-current" href="../pages/autoridade.html">autoridade</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-login" href="#login">login</a>
+        <a class="header-cta" href="../landing-newsletter/index.html#inscreva-se">inscreva-se</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="authority-main">
+    <section class="authority-hero">
+      <div class="container authority-hero-shell">
+        <div class="authority-hero-copy">
+          <span class="eyebrow">autoridade</span>
+          <h1>liderança não se sustenta no discurso.</h1>
+          <div class="authority-hero-intro">
+            <p>se sustenta na forma como você pensa, decide e se posiciona todos os dias.</p>
+            <p>é fácil falar sobre liderança quando tudo está funcionando.<br>o difícil é manter clareza quando o cenário pressiona, quando o time oscila e quando as decisões ficam mais complexas.</p>
+            <p>é nesse ponto que a diferença aparece.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-section">
+      <div class="container authority-shell">
+        <div class="authority-heading">
+          <span class="section-kicker">capítulo</span>
+          <h2>como eu penso sobre liderança</h2>
+        </div>
+        <div class="authority-thinking">
+          <div class="authority-thought-group">
+            <p>liderança não é sobre controle.</p>
+            <p>é sobre direção.</p>
+          </div>
+          <div class="authority-thought-group">
+            <p>não é sobre falar mais.</p>
+            <p>é sobre fazer o time entender melhor.</p>
+          </div>
+          <div class="authority-thought-group">
+            <p>não é sobre acelerar.</p>
+            <p>é sobre saber para onde ir.</p>
+          </div>
+          <div class="authority-copy">
+            <p>na prática, a maior parte dos problemas que parecem ser de execução são, na verdade, problemas de clareza.</p>
+            <p>quando o time não sabe para onde vai, o problema raramente é esforço.<br>quase sempre é direção.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-section">
+      <div class="container authority-shell">
+        <div class="authority-heading">
+          <span class="section-kicker">capítulo</span>
+          <h2>princípios que guiam minhas decisões</h2>
+        </div>
+        <div class="principles-grid">
+          <article class="principle-item">
+            <h3>clareza antes de velocidade</h3>
+            <p>decidir rápido sem entender o cenário costuma custar mais caro</p>
+          </article>
+          <article class="principle-item">
+            <h3>contexto antes de cobrança</h3>
+            <p>quando as pessoas entendem o porquê, a execução muda</p>
+          </article>
+          <article class="principle-item">
+            <h3>consistência antes de intensidade</h3>
+            <p>resultado sustentável não vem de picos, vem de padrão</p>
+          </article>
+          <article class="principle-item">
+            <h3>responsabilidade antes de justificativa</h3>
+            <p>crescimento começa quando você assume o que precisa ser melhorado</p>
+          </article>
+          <article class="principle-item">
+            <h3>direção antes de pressão</h3>
+            <p>pressionar sem clareza só aumenta o ruído</p>
+          </article>
+          <article class="principle-item">
+            <h3>maturidade antes de ego</h3>
+            <p>liderar é, muitas vezes, abrir mão de estar certo para fazer o melhor</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-section">
+      <div class="container authority-shell">
+        <div class="authority-heading">
+          <span class="section-kicker">capítulo</span>
+          <h2>o que eu aprendi liderando na prática</h2>
+        </div>
+        <div class="authority-learnings">
+          <p class="authority-learning-line">já confundi cobrança com liderança.</p>
+          <p class="authority-learning-line">já acreditei que trabalhar mais resolveria problemas que, na verdade, eram de direção.</p>
+          <p class="authority-learning-line">já vi times bons performarem abaixo do esperado por falta de clareza.</p>
+          <p class="authority-learning-line">já tomei decisões rápidas demais sem entender o contexto completo.</p>
+          <p class="authority-learning-line">e foi exatamente nesses momentos que ficou mais claro:</p>
+          <p class="authority-learning-line emphasis">liderança não é sobre fazer mais.<br>é sobre pensar melhor.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-section">
+      <div class="container authority-shell">
+        <div class="authority-heading">
+          <span class="section-kicker">capítulo</span>
+          <h2>onde essa visão se aplica</h2>
+        </div>
+        <div class="authority-application authority-copy">
+          <p>essa forma de pensar não fica só na teoria.</p>
+          <p>ela impacta diretamente:</p>
+          <ul class="authority-application-list">
+            <li>na forma como decisões são tomadas</li>
+            <li>na forma como equipes são conduzidas</li>
+            <li>na forma como problemas são analisados</li>
+            <li>na forma como resultados são construídos</li>
+            <li>na forma como profissionais evoluem</li>
+          </ul>
+          <p>liderança, no fim, é um jogo de clareza aplicada na prática.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-importance">
+      <div class="container authority-importance-shell">
+        <div class="authority-heading">
+          <span class="section-kicker">capítulo</span>
+          <h2>por que isso importa</h2>
+        </div>
+        <div class="authority-copy">
+          <p>porque crescer sem clareza custa caro.</p>
+          <p>custa tempo.<br>custa energia.<br>custa resultado.</p>
+          <p>e, muitas vezes, custa a confiança do time.</p>
+          <p>quando existe clareza, a execução melhora.<br>as decisões ficam mais consistentes.<br>o ambiente se torna mais estável.</p>
+          <p>e a liderança deixa de ser reativa.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="authority-cta">
+      <div class="container">
+        <div class="authority-cta-shell">
+          <span class="section-kicker">convite</span>
+          <h2>se essa forma de pensar faz sentido para você, então essa newsletter foi feita para entrar na sua rotina.</h2>
+          <p>insights semanais para quem quer mais clareza, menos ruído e decisões melhores.</p>
+          <p>coloque seu e-mail e comece.</p>
+          <form class="newsletter-form final-form" data-newsletter-form>
+            <label class="sr-only" for="authority-email">Digite seu e-mail</label>
+            <div class="email-pill">
+              <span class="email-icon" aria-hidden="true">✉</span>
+              <input id="authority-email" name="email" type="email" placeholder="coloque seu e-mail" required>
+            </div>
+            <button type="submit">começar minha rotina</button>
+          </form>
+          <div class="form-feedback" data-form-feedback aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="contato">
+    <div class="footer-shell">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img class="footer-brand-mark" src="../assets/logo-light.png" alt="Papo de Liderança">
+          <h3>Papo de Liderança</h3>
+          <p>leituras semanais para quem quer pensar melhor,<br>decidir com mais critério<br>e evoluir com consistência.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Navegação</h3>
+          <div class="footer-nav">
+            <a href="../landing-newsletter/index.html#inicio">início</a>
+            <a href="../pages/sobre.html">sobre</a>
+            <a href="../pages/autoridade.html">autoridade</a>
+            <a href="../landing-newsletter/index.html#edicoes">edições</a>
+            <a href="../landing-newsletter/index.html#beneficios">benefícios</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Contato</h3>
+          <div class="footer-contact">
+            <div><strong>Email</strong><span>contato@papodelideranca.com</span></div>
+            <div><strong>Telefone</strong><span>(48) 99963-9801</span></div>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Redes sociais</h3>
+          <p style="margin-bottom:12px;">Acompanhe também nas redes</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2H21l-6.53 7.462L22.154 22h-6.016l-4.71-6.17L6.03 22H3.27l6.985-7.983L2 2h6.17l4.258 5.632L18.244 2Zm-1.056 18h1.527L6.02 3.894H4.38L17.188 20Z"/></svg></a>
+            <a href="#" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.35 1.65a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2A2.8 2.8 0 1 0 12 14.8 2.8 2.8 0 0 0 12 9.2Z"/></svg></a>
+            <a href="#" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5a1.56 1.56 0 1 1 0-3.12 1.56 1.56 0 0 1 0 3.12ZM5.5 10h2.9v8.5H5.5V10Zm4.72 0h2.78v1.16h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.44v4.4h-2.9v-3.9c0-.93-.02-2.13-1.3-2.13s-1.5 1.01-1.5 2.06v3.97h-2.9V10Z"/></svg></a>
+            <a href="#" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.75l.41-3.2H13.5V8.56c0-.92.26-1.54 1.58-1.54h1.69V4.16c-.82-.09-1.64-.14-2.47-.13-2.44 0-4.11 1.49-4.11 4.23v2.34H7.92v3.2h2.27V22h3.31Z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Papo de Liderança. Todos os direitos reservados.</div>
+        <div class="footer-legal">
+          <a href="../legal/politica-de-privacidade.html">Política de Privacidade</a>
+          <a href="../legal/termos-de-uso.html">Termos de Uso</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../landing-newsletter/script.js"></script>
+  <script src="../assets/js/page-transition.js"></script>
+  <script src="../assets/js/logo-theme.js"></script>
+</body>
+</html>
