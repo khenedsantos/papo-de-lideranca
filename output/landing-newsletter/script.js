@@ -35,11 +35,27 @@ function setupAccordion() {
   items.forEach((item) => {
     const button = item.querySelector(".faq-question");
     if (!button) return;
+    button.setAttribute(
+      "aria-expanded",
+      String(item.classList.contains("is-open"))
+    );
+  });
+
+  items.forEach((item) => {
+    const button = item.querySelector(".faq-question");
+    if (!button) return;
 
     button.addEventListener("click", () => {
       const isOpen = item.classList.contains("is-open");
-      items.forEach((entry) => entry.classList.remove("is-open"));
-      if (!isOpen) item.classList.add("is-open");
+      items.forEach((entry) => {
+        entry.classList.remove("is-open");
+        const entryButton = entry.querySelector(".faq-question");
+        if (entryButton) entryButton.setAttribute("aria-expanded", "false");
+      });
+      if (!isOpen) {
+        item.classList.add("is-open");
+        button.setAttribute("aria-expanded", "true");
+      }
     });
   });
 }

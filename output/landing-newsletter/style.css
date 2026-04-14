@@ -1480,16 +1480,16 @@ button, input { font: inherit; }
 }
 
 .faq-shell {
-  max-width: 1120px;
+  max-width: 100%;
 }
 
 .faq-list {
-  margin-top: 12px;
-  border-top: 1px solid var(--line);
+  margin-top: 8px;
+  border-top: 1px solid rgba(228, 231, 235, 0.7);
 }
 
 .faq-item {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(228, 231, 235, 0.7);
 }
 
 .faq-question {
@@ -1498,27 +1498,38 @@ button, input { font: inherit; }
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  padding: 22px 8px;
+  padding: 24px 6px;
   border: none;
   background: transparent;
   text-align: left;
-  font-size: clamp(1rem, 1.6vw, 1.35rem);
-  line-height: 1.2;
+  color: var(--text);
+  font-size: clamp(1.05rem, 1.7vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -0.035em;
   text-transform: lowercase;
   cursor: pointer;
+  transition: color var(--transition);
 }
 
 .faq-icon {
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: rgba(15, 42, 68, 0.05);
+  background: rgba(15, 42, 68, 0.04);
   color: var(--text-soft);
-  transition: transform var(--transition), background var(--transition);
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform var(--transition), background var(--transition), color var(--transition);
+}
+
+.faq-question:hover,
+.faq-question:focus-visible {
+  color: var(--accent-a);
 }
 
 .faq-answer {
@@ -1530,11 +1541,11 @@ button, input { font: inherit; }
 .faq-answer p {
   overflow: hidden;
   margin: 0;
-  padding: 0 8px 0;
-  max-width: 62ch;
-  color: var(--text-soft);
-  line-height: 1.68;
-  font-size: 0.94rem;
+  padding: 0 6px 0;
+  max-width: 58ch;
+  color: rgba(91, 107, 117, 0.95);
+  line-height: 1.78;
+  font-size: 0.98rem;
 }
 
 .faq-item.is-open .faq-answer {
@@ -1542,18 +1553,18 @@ button, input { font: inherit; }
 }
 
 .faq-item.is-open .faq-answer p {
-  padding-bottom: 22px;
+  padding-bottom: 24px;
 }
 
 .faq-item.is-open .faq-icon {
   transform: rotate(45deg);
-  background: rgba(34, 160, 107, 0.12);
+  background: rgba(34, 160, 107, 0.1);
   color: var(--accent-a);
 }
 
 .final-section {
-  padding: 52px 0 76px;
-  margin-bottom: 24px;
+  padding: 52px 0 22px;
+  margin-bottom: 0;
 }
 
 .final-panel {
@@ -2512,7 +2523,8 @@ button, input { font: inherit; }
   }
 
   .final-section {
-    margin-bottom: 18px;
+    padding-bottom: 18px;
+    margin-bottom: 0;
   }
 
   .hero-preview,
