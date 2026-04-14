@@ -153,6 +153,31 @@ button, input { font: inherit; }
   text-transform: lowercase;
 }
 
+.footer-nav a,
+.footer-legal a,
+.footer-column h3,
+.footer-cta-inline {
+  text-transform: lowercase;
+}
+
+.hero-description,
+.hero-trustline,
+.hero-note,
+.form-feedback,
+.hero-preview-body p,
+.hero-preview-note p,
+.preview-copy p,
+.preview-panel p,
+.benefit-editorial p,
+.authority-card p,
+.final-description,
+.footer-brand p,
+.footer-column > p,
+.footer-contact span,
+.faq-answer p {
+  text-transform: none;
+}
+
 .main-nav a:hover,
 .main-nav a:focus-visible {
   color: var(--text-soft);
@@ -2368,6 +2393,11 @@ button, input { font: inherit; }
 .authority-section,
 .final-section {
   padding: 74px 0 94px;
+}
+
+.final-section {
+  padding-bottom: 18px;
+  margin-bottom: 0;
 }
 
 .section-head {
