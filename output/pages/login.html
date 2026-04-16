@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logos/favicons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/logos/favicons/favicon-32.png">
+  <link rel="shortcut icon" href="../assets/logos/favicons/favicon.ico">
+  <title>Login | Papo de Liderança</title>
+  <meta name="description" content="Entre na sua área no Papo de Liderança e retome sua rotina de leitura com clareza e consistência.">
+  <link rel="stylesheet" href="../landing-newsletter/style.css">
+  <link rel="stylesheet" href="../assets/css/page-transition.css">
+  <link rel="stylesheet" href="../assets/css/logo-theme.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
+</head>
+<body class="auth-page auth-page--login">
+  <header class="site-header auth-header">
+    <div class="container header-inner">
+      <a class="brand" href="../landing-newsletter/index.html#inicio" aria-label="Papo de Liderança">
+        <img class="logo" src="../assets/logo-dark.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de Liderança">
+        <span class="brand-name">Papo de Liderança</span>
+      </a>
+      <div class="header-actions">
+        <a class="header-login" href="../landing-newsletter/index.html#inicio">voltar ao início</a>
+        <a class="header-cta" href="../landing-newsletter/index.html#inscreva-se">inscreva-se</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="container auth-shell">
+      <section class="auth-editorial" aria-labelledby="login-editorial-title">
+        <div class="auth-editorial-copy">
+          <span class="section-kicker">acesso editorial</span>
+          <h2 id="login-editorial-title">sua leitura já tem um lugar.</h2>
+          <p>um acesso pensado para continuar a rotina com a mesma clareza, o mesmo acabamento e o mesmo ritmo da newsletter.</p>
+        </div>
+        <div class="auth-editorial-notes" aria-label="Destaques da experiência">
+          <div class="auth-note">
+            <strong>retome do ponto certo</strong>
+            <span>suas edições ficam organizadas para a leitura continuar sem ruído.</span>
+          </div>
+          <div class="auth-note">
+            <strong>menos interface, mais conteúdo</strong>
+            <span>uma área limpa, discreta e feita para valorizar o texto.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="auth-panel" aria-labelledby="login-title">
+        <div class="auth-card">
+          <div class="auth-card-header">
+            <span class="section-kicker">login</span>
+            <h1 id="login-title">entre na sua área</h1>
+            <p>acesse suas edições, continue de onde parou e mantenha sua rotina de leitura.</p>
+          </div>
+
+          <form class="auth-form" data-auth-form data-success-message="A interface está pronta. Falta apenas conectar com sua autenticação.">
+            <div class="auth-field">
+              <label for="login-email">e-mail</label>
+              <div class="auth-input-shell">
+                <input id="login-email" name="email" type="email" placeholder="seu e-mail" required>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label for="login-password">senha</label>
+              <div class="auth-input-shell">
+                <input id="login-password" name="password" type="password" placeholder="sua senha" required>
+                <button class="password-toggle" type="button" data-toggle-password aria-controls="login-password" aria-label="Mostrar senha">mostrar</button>
+              </div>
+            </div>
+
+            <div class="auth-inline-row">
+              <a class="auth-link" href="./recuperar-senha.html">esqueceu sua senha?</a>
+            </div>
+
+            <button class="header-cta auth-primary" type="submit">entrar</button>
+            <div class="auth-feedback" data-auth-feedback aria-live="polite"></div>
+          </form>
+
+          <div class="auth-divider" aria-hidden="true"><span>ou</span></div>
+
+          <div class="auth-secondary">
+            <h2>ainda não recebe a newsletter?</h2>
+            <p>inscreva-se gratuitamente para começar a semana pensando melhor.</p>
+            <a class="header-cta" href="../landing-newsletter/index.html#inscreva-se">inscreva-se</a>
+          </div>
+
+          <p class="auth-trust"><a class="auth-backlink" href="../landing-newsletter/index.html#inicio">voltar ao início</a></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="auth-footer">
+    <div class="container auth-footer-copy">
+      <span>feito para continuar sua rotina com o mesmo cuidado editorial da landing.</span>
+      <a href="../landing-newsletter/index.html#inscreva-se">inscreva-se gratuitamente</a>
+    </div>
+  </footer>
+
+  <script src="../landing-newsletter/script.js"></script>
+  <script src="../assets/js/page-transition.js"></script>
+  <script src="../assets/js/logo-theme.js"></script>
+  <script src="../assets/js/auth.js"></script>
+</body>
+</html>

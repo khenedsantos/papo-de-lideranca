@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logos/favicons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/logos/favicons/favicon-32.png">
+  <link rel="shortcut icon" href="../assets/logos/favicons/favicon.ico">
+  <title>Recuperar Acesso | Papo de Liderança</title>
+  <meta name="description" content="Recupere seu acesso ao Papo de Liderança e receba um link para redefinir sua senha.">
+  <link rel="stylesheet" href="../landing-newsletter/style.css">
+  <link rel="stylesheet" href="../assets/css/page-transition.css">
+  <link rel="stylesheet" href="../assets/css/logo-theme.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
+</head>
+<body class="auth-page auth-page--compact">
+  <header class="site-header auth-header">
+    <div class="container header-inner">
+      <a class="brand" href="../landing-newsletter/index.html#inicio" aria-label="Papo de Liderança">
+        <img class="logo" src="../assets/logo-dark.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de Liderança">
+        <span class="brand-name">Papo de Liderança</span>
+      </a>
+      <div class="header-actions">
+        <a class="header-login" href="./login.html">voltar ao login</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="container auth-shell">
+      <section class="auth-editorial" aria-labelledby="recover-editorial-title">
+        <div class="auth-editorial-copy">
+          <span class="section-kicker">recuperação</span>
+          <h2 id="recover-editorial-title">o caminho de volta também pode ser simples.</h2>
+          <p>uma tela pensada para resolver rápido, sem dramatizar o processo e sem perder o acabamento do produto.</p>
+        </div>
+        <div class="auth-editorial-notes" aria-label="Confiança da recuperação">
+          <div class="auth-note">
+            <strong>clareza imediata</strong>
+            <span>você sabe o que fazer, quanto tempo leva e onde volta depois.</span>
+          </div>
+          <div class="auth-note">
+            <strong>fluxo pronto</strong>
+            <span>o front-end já está preparado para receber a lógica real do envio.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="auth-panel" aria-labelledby="recover-title">
+        <div class="auth-card">
+          <div class="auth-card-header">
+            <span class="section-kicker">acesso</span>
+            <h1 id="recover-title">recuperar acesso</h1>
+            <p>insira seu e-mail e enviaremos um link para redefinir sua senha.</p>
+          </div>
+
+          <form class="auth-form" data-auth-form data-success-message="Link preparado. Agora basta conectar esse envio ao seu serviço de autenticação.">
+            <div class="auth-field">
+              <label for="recover-email">e-mail</label>
+              <div class="auth-input-shell">
+                <input id="recover-email" name="email" type="email" placeholder="seu e-mail" required>
+              </div>
+            </div>
+
+            <button class="header-cta auth-primary" type="submit">enviar link</button>
+            <div class="auth-feedback" data-auth-feedback aria-live="polite"></div>
+          </form>
+
+          <p class="auth-trust"><a class="auth-backlink" href="./login.html">voltar ao login</a></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="auth-footer">
+    <div class="container auth-footer-copy">
+      <span>clareza, confiança e uma transição curta de volta para a sua área.</span>
+      <a href="../landing-newsletter/index.html#inicio">voltar ao início</a>
+    </div>
+  </footer>
+
+  <script src="../landing-newsletter/script.js"></script>
+  <script src="../assets/js/page-transition.js"></script>
+  <script src="../assets/js/logo-theme.js"></script>
+  <script src="../assets/js/auth.js"></script>
+</body>
+</html>
