@@ -51,8 +51,47 @@
       max-width: 67ch;
       margin: 26px 0 0;
       font-size: 1.01rem;
-      line-height: 2.06;
+      line-height: 1.92;
       color: rgba(91, 107, 117, 0.8);
+    }
+
+    .about-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .about-link-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(208, 218, 224, 0.84);
+      background: rgba(255, 255, 255, 0.88);
+      color: rgba(15, 42, 61, 0.82);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .about-link-pill:hover,
+    .about-link-pill:focus-visible {
+      border-color: rgba(34, 160, 107, 0.22);
+      background: rgba(255, 255, 255, 0.98);
+      color: var(--text);
+      box-shadow: 0 10px 24px rgba(15, 42, 61, 0.04);
+      outline: none;
+    }
+
+    .about-link-pill--primary {
+      border-color: rgba(34, 160, 107, 0.18);
+      background: rgba(227, 241, 235, 0.54);
+      color: rgba(20, 90, 61, 0.94);
     }
 
     .about-section {
@@ -123,6 +162,10 @@
       margin-bottom: 0;
     }
 
+    .chapter-copy p + p {
+      max-width: 64ch;
+    }
+
     .about-origin .chapter-copy {
       max-width: 70ch;
     }
@@ -135,6 +178,36 @@
       max-width: 43ch;
     }
 
+    .about-editorial-notes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .about-editorial-note {
+      padding-top: 16px;
+      border-top: 1px solid rgba(228, 231, 235, 0.78);
+    }
+
+    .about-editorial-note strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.34;
+      letter-spacing: -0.015em;
+      text-transform: lowercase;
+    }
+
+    .about-editorial-note p {
+      margin: 0;
+      color: rgba(91, 107, 117, 0.76);
+      font-size: 0.92rem;
+      line-height: 1.74;
+      text-transform: none;
+    }
+
     .about-pain {
       padding: 42px 0 36px;
     }
@@ -143,16 +216,10 @@
       padding: 44px 46px 46px;
       border-radius: 36px;
       background:
-        radial-gradient(circle at 88% 16%, rgba(34, 160, 107, 0.14), transparent 26%),
+        radial-gradient(circle at 88% 16%, rgba(34, 160, 107, 0.09), transparent 24%),
         linear-gradient(135deg, rgba(15, 42, 61, 0.98) 0%, rgba(28, 67, 94, 0.96) 58%, rgba(34, 160, 107, 0.82) 100%);
       color: #fff;
-      box-shadow: 0 18px 40px rgba(11, 18, 23, 0.075);
-      transition: transform 220ms ease, box-shadow 220ms ease;
-    }
-
-    .pain-shell:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 20px 44px rgba(11, 18, 23, 0.082);
+      box-shadow: 0 16px 36px rgba(11, 18, 23, 0.065);
     }
 
     .pain-shell .chapter-heading h2 {
@@ -238,34 +305,22 @@
       margin-bottom: 0;
     }
 
-    .about-closing {
-      padding: 8px 0 4px;
+    .about-pull-quote {
+      padding: 10px 0 2px;
     }
 
-    .closing-shell {
-      max-width: 700px;
-      padding: 16px 22px 16px;
-      border-radius: 32px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.82) 0%, rgba(245,249,251,0.9) 100%);
-      border: 1px solid rgba(228, 231, 235, 0.34);
-      box-shadow: 0 8px 14px rgba(15, 42, 61, 0.014);
-    }
-
-    .closing-shell p {
-      max-width: 54ch;
-      margin: 0 0 8px;
-      color: rgba(91, 107, 117, 0.68);
-      font-size: 0.91rem;
-      line-height: 1.72;
-      text-transform: none;
-    }
-
-    .closing-shell p:last-child {
-      margin-bottom: 0;
+    .about-pull-quote blockquote {
+      max-width: 16ch;
+      margin: 0;
+      color: rgba(15, 42, 61, 0.92);
+      font-size: clamp(1.72rem, 2.4vw, 2.52rem);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      text-transform: lowercase;
     }
 
     .about-cta {
-      padding: 10px 0 18px;
+      padding: 18px 0 18px;
     }
 
     .about-cta-shell {
@@ -276,22 +331,24 @@
       padding: 32px 36px 36px;
       border-radius: 36px;
       background:
-        radial-gradient(circle at 90% 14%, rgba(34, 160, 107, 0.1), transparent 28%),
+        radial-gradient(circle at 90% 14%, rgba(34, 160, 107, 0.07), transparent 26%),
         linear-gradient(180deg, rgba(255,255,255,0.94) 0%, rgba(243,247,250,0.98) 100%);
       border: 1px solid rgba(228, 231, 235, 0.68);
       box-shadow: 0 12px 24px rgba(15, 42, 61, 0.028);
-      transition: box-shadow 220ms ease, border-color 220ms ease, transform 220ms ease;
-    }
-
-    .about-cta-shell:hover {
-      border-color: rgba(34, 160, 107, 0.18);
-      box-shadow: 0 24px 54px rgba(15, 42, 61, 0.06);
-      transform: translateY(-1px);
     }
 
     .about-cta-action {
       max-width: 620px;
       padding-top: 0;
+    }
+
+    .about-cta-intro {
+      max-width: 54ch;
+      margin: 0 0 14px;
+      color: rgba(91, 107, 117, 0.74);
+      font-size: 0.96rem;
+      line-height: 1.82;
+      text-transform: none;
     }
 
     .about-cta-action h2 {
@@ -323,6 +380,10 @@
         grid-template-columns: 1fr;
       }
 
+      .about-editorial-notes {
+        grid-template-columns: 1fr;
+      }
+
       .chapter-heading {
         padding-top: 0;
       }
@@ -347,14 +408,12 @@
 
       .chapter-copy p,
       .mission-shell p,
-      .closing-shell p,
       .about-cta-copy p {
         font-size: 0.98rem;
         line-height: 1.92;
       }
 
       .pain-shell,
-      .closing-shell,
       .about-cta-shell {
         padding: 24px 22px 26px;
         border-radius: 28px;
@@ -370,6 +429,15 @@
       .leadership-line {
         font-size: 1.08rem;
         padding: 16px 0;
+      }
+
+      .about-hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .about-link-pill {
+        width: 100%;
       }
     }
   </style>
@@ -405,6 +473,9 @@
           <span class="eyebrow">sobre</span>
           <h1><span class="brand-proper">Papo de Liderança</span> nasceu de uma inquietação real.</h1>
           <p>Ele surgiu da vontade de transformar vivências, dores, aprendizados e reflexões de liderança em algo útil para outras pessoas que também carregam responsabilidades, pressão, metas, equipe, inseguranças e o desejo genuíno de crescer.</p>
+          <div class="about-hero-actions">
+            <a class="about-link-pill about-link-pill--primary" href="./edicoes.html">ver uma edição na prática</a>
+          </div>
         </div>
       </div>
     </section>
@@ -421,6 +492,20 @@
           <p>Liderar também é sustentar o time em meio à pressão, desenvolver pessoas, manter clareza em cenários difíceis e continuar evoluindo por dentro enquanto muita gente espera firmeza por fora.</p>
           <p>Com o tempo, percebi que muitas das dores da liderança não são faladas com profundidade.</p>
           <p>Existe muito conteúdo raso, muita fórmula pronta e pouca conversa honesta sobre o peso real de liderar pessoas, bater metas, lidar com frustrações, tomar decisões difíceis e continuar sendo referência mesmo nos dias ruins.</p>
+          <div class="about-editorial-notes" aria-label="o que você encontra aqui">
+            <article class="about-editorial-note">
+              <strong>clareza para o que pesa</strong>
+              <p>leituras curtas para organizar decisão, contexto e postura quando o cenário aperta.</p>
+            </article>
+            <article class="about-editorial-note">
+              <strong>repertório sem excesso</strong>
+              <p>menos fórmula pronta, mais ideia bem editada para voltar com você para o trabalho.</p>
+            </article>
+            <article class="about-editorial-note">
+              <strong>aplicação no mesmo ritmo</strong>
+              <p>texto breve, útil e construído para entrar na rotina sem virar mais uma camada de ruído.</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -470,12 +555,9 @@
       </div>
     </section>
 
-    <section class="about-closing">
+    <section class="about-pull-quote" aria-label="tese central">
       <div class="container">
-        <div class="closing-shell">
-          <p>O Papo de Liderança é, antes de tudo, uma extensão daquilo em que eu acredito:</p>
-          <p>que liderança pode transformar realidades quando existe consciência, intenção, responsabilidade e coragem para evoluir.</p>
-        </div>
+        <blockquote>liderança pode transformar realidades quando existe consciência, intenção e coragem para evoluir.</blockquote>
       </div>
     </section>
 
@@ -484,6 +566,7 @@
         <div class="about-cta-shell">
           <div class="about-cta-action">
             <span class="section-kicker">convite</span>
+            <p class="about-cta-intro">O <span class="brand-proper">Papo de Liderança</span> é, antes de tudo, uma extensão daquilo em que eu acredito: uma leitura curta pode abrir espaço para mais consciência, responsabilidade e direção na rotina de quem lidera.</p>
             <h2>Se essa visão também faz sentido para você, então essa newsletter foi feita para entrar na sua rotina.</h2>
             <form class="newsletter-form final-form" data-newsletter-form>
               <label class="sr-only" for="final-email">Digite seu e-mail</label>

@@ -91,8 +91,7 @@
     .editions-carousel-shell {
       position: relative;
       display: grid;
-      gap: 12px;
-      overflow: hidden;
+      gap: 14px;
     }
     .editions-carousel-topbar {
       display: flex;
@@ -104,7 +103,7 @@
       margin: 0;
       color: rgba(91, 107, 117, 0.76);
       font-size: 0.9rem;
-      line-height: 1.62;
+      line-height: 1.7;
       text-transform: none;
     }
     .editions-carousel-controls {
@@ -125,27 +124,42 @@
     }
     .editions-carousel-controls button:hover,
     .editions-carousel-controls button:focus-visible {
-      transform: translateY(-1px);
       border-color: rgba(34, 160, 107, 0.22);
       background: rgba(255, 255, 255, 0.96);
-      box-shadow: 0 14px 28px rgba(15, 42, 61, 0.06);
+      box-shadow: 0 10px 22px rgba(15, 42, 61, 0.05);
     }
     .editions-carousel {
       position: relative;
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: hidden;
       width: 100%;
       padding-right: 0;
       border-radius: 34px;
+      scroll-snap-type: x proximity;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(30, 74, 102, 0.22) rgba(228, 231, 235, 0.34);
+    }
+
+    .editions-carousel::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    .editions-carousel::-webkit-scrollbar-track {
+      background: rgba(228, 231, 235, 0.4);
+      border-radius: 999px;
+    }
+
+    .editions-carousel::-webkit-scrollbar-thumb {
+      background: rgba(30, 74, 102, 0.22);
+      border-radius: 999px;
     }
     .editions-track {
       display: flex;
       align-items: stretch;
       gap: 20px;
       width: max-content;
-      padding: 6px 0 8px;
-      will-change: transform;
-      transform: translate3d(0, 0, 0);
-      backface-visibility: hidden;
+      min-width: 100%;
+      padding: 6px 0 12px;
     }
     .edition-card {
       flex: 0 0 clamp(320px, 38vw, 460px);
@@ -163,12 +177,13 @@
         linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 248, 250, 0.96) 100%);
       box-shadow: 0 18px 40px rgba(15, 42, 61, 0.04);
       cursor: pointer;
+      scroll-snap-align: start;
       transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
     }
     .edition-card:hover,
     .edition-card:focus-visible {
-      transform: translateY(-3px);
-      box-shadow: 0 26px 46px rgba(15, 42, 61, 0.07);
+      transform: translateY(-1px);
+      box-shadow: 0 22px 40px rgba(15, 42, 61, 0.055);
       border-color: rgba(34, 160, 107, 0.18);
       outline: none;
     }
@@ -327,6 +342,80 @@
       line-height: 1.72;
       text-transform: none;
     }
+    .editions-archive {
+      padding: 10px 0 18px;
+    }
+    .editions-archive-shell {
+      display: grid;
+      gap: 18px;
+    }
+    .editions-archive-head {
+      display: grid;
+      gap: 8px;
+      max-width: 44ch;
+    }
+    .editions-archive-head h2 {
+      margin: 0;
+      font-size: clamp(1.42rem, 2vw, 1.9rem);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      text-transform: lowercase;
+    }
+    .editions-archive-head p {
+      margin: 0;
+      color: rgba(91, 107, 117, 0.78);
+      font-size: 0.95rem;
+      line-height: 1.76;
+      text-transform: none;
+    }
+    .editions-archive-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid rgba(228, 231, 235, 0.78);
+    }
+    .editions-archive-list li {
+      border-bottom: 1px solid rgba(228, 231, 235, 0.78);
+    }
+    .editions-archive-list a {
+      display: grid;
+      grid-template-columns: minmax(124px, 0.24fr) minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+      padding: 16px 0;
+      text-decoration: none;
+    }
+    .editions-archive-date {
+      color: rgba(91, 107, 117, 0.62);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: none;
+    }
+    .editions-archive-copy strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--text);
+      font-size: 1rem;
+      line-height: 1.32;
+      letter-spacing: -0.02em;
+      text-transform: lowercase;
+    }
+    .editions-archive-copy span {
+      color: rgba(91, 107, 117, 0.76);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      text-transform: none;
+    }
+    .editions-archive-list a:hover .editions-archive-copy strong,
+    .editions-archive-list a:focus-visible .editions-archive-copy strong {
+      color: rgba(20, 90, 61, 0.95);
+    }
+    .editions-archive-list a:focus-visible {
+      outline: none;
+    }
     .editions-preview-modal[hidden] { display: none; }
     .editions-preview-modal {
       position: fixed;
@@ -335,8 +424,7 @@
       display: grid;
       place-items: center;
       padding: 24px;
-      background: rgba(11, 18, 23, 0.54);
-      backdrop-filter: blur(12px);
+      background: rgba(11, 18, 23, 0.36);
     }
     .editions-preview-dialog {
       width: min(760px, 100%);
@@ -345,10 +433,8 @@
       padding: 32px 32px 34px;
       border-radius: 36px;
       border: 1px solid rgba(228, 231, 235, 0.62);
-      background:
-        radial-gradient(circle at 85% 14%, rgba(34, 160, 107, 0.12), transparent 28%),
-        linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(244,248,250,0.99) 100%);
-      box-shadow: 0 34px 90px rgba(11, 18, 23, 0.22);
+      background: linear-gradient(180deg, rgba(255,255,255,0.985) 0%, rgba(244,248,250,0.99) 100%);
+      box-shadow: 0 28px 64px rgba(11, 18, 23, 0.14);
     }
     .editions-preview-close {
       display: inline-flex;
@@ -366,9 +452,8 @@
     }
     .editions-preview-close:hover,
     .editions-preview-close:focus-visible {
-      transform: translateY(-1px);
       border-color: rgba(34, 160, 107, 0.22);
-      box-shadow: 0 12px 26px rgba(15, 42, 61, 0.08);
+      box-shadow: 0 10px 20px rgba(15, 42, 61, 0.05);
       outline: none;
     }
     .editions-preview-meta {
@@ -426,7 +511,6 @@
       inset: 0 0 auto;
       height: 140px;
       background: linear-gradient(180deg, rgba(244,248,250,0) 0%, rgba(244,248,250,0.84) 52%, rgba(244,248,250,1) 100%);
-      backdrop-filter: blur(6px);
       pointer-events: none;
     }
     .editions-preview-lock {
@@ -439,7 +523,7 @@
       border-radius: 28px;
       border: 1px solid rgba(228, 231, 235, 0.78);
       background: rgba(255, 255, 255, 0.92);
-      box-shadow: 0 18px 34px rgba(15, 42, 61, 0.05);
+      box-shadow: 0 12px 24px rgba(15, 42, 61, 0.04);
     }
     .editions-preview-lock strong {
       font-size: 1.24rem;
@@ -492,10 +576,22 @@
     .editions-coffee-visual::before {
       content: "";
       position: absolute;
-      inset: 34px 30px 24px;
+      inset: 42px 48px 40px;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at center, rgba(255, 255, 255, 0.96) 0%, rgba(233, 241, 245, 0.62) 42%, rgba(233, 241, 245, 0.12) 72%, transparent 100%);
+      opacity: 0.92;
+    }
+    .editions-coffee-visual::after {
+      content: "";
+      position: absolute;
+      left: 88px;
+      right: 86px;
+      bottom: 42px;
+      height: 28px;
       border-radius: 999px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.82) 0%, rgba(240, 245, 248, 0.14) 68%, transparent 100%);
-      filter: blur(10px);
+      background: radial-gradient(ellipse at center, rgba(15, 42, 61, 0.1) 0%, rgba(15, 42, 61, 0.03) 58%, transparent 100%);
+      opacity: 0.88;
     }
     .editions-coffee-illustration {
       position: absolute;
@@ -505,70 +601,83 @@
       overflow: visible;
     }
     .editions-coffee-base-shadow {
-      fill: rgba(15, 42, 61, 0.11);
-      filter: blur(10px);
+      fill: rgba(15, 42, 61, 0.08);
+      filter: blur(8px);
     }
     .editions-coffee-saucer-top {
       fill: url(#coffeeSaucerFill);
-      stroke: rgba(15, 42, 61, 0.08);
-      stroke-width: 1.15;
+      stroke: rgba(15, 42, 61, 0.085);
+      stroke-width: 1.05;
     }
     .editions-coffee-saucer-bottom {
-      fill: rgba(15, 42, 61, 0.08);
-      opacity: 0.4;
+      fill: rgba(15, 42, 61, 0.06);
+      opacity: 0.34;
     }
     .editions-coffee-cup-body {
       fill: url(#coffeeCupFill);
-      stroke: rgba(15, 42, 61, 0.12);
-      stroke-width: 1.15;
+      stroke: rgba(15, 42, 61, 0.115);
+      stroke-width: 1.05;
     }
     .editions-coffee-cup-highlight {
       fill: url(#coffeeCupHighlight);
-      opacity: 0.92;
+      opacity: 0.86;
     }
     .editions-coffee-rim {
-      fill: rgba(250, 252, 253, 0.99);
-      stroke: rgba(15, 42, 61, 0.11);
-      stroke-width: 1.2;
+      fill: rgba(251, 253, 254, 0.99);
+      stroke: rgba(15, 42, 61, 0.1);
+      stroke-width: 1.05;
     }
     .editions-coffee-surface {
       fill: url(#coffeeSurfaceFill);
     }
     .editions-coffee-inner-shadow {
-      fill: rgba(15, 42, 61, 0.06);
+      fill: rgba(15, 42, 61, 0.045);
+    }
+    .editions-coffee-surface-glow {
+      fill: rgba(255, 255, 255, 0.18);
     }
     .editions-coffee-handle-shape {
       fill: none;
-      stroke: rgba(15, 42, 61, 0.18);
-      stroke-width: 10;
+      stroke: rgba(15, 42, 61, 0.15);
+      stroke-width: 8.5;
       stroke-linecap: round;
     }
     .editions-coffee-handle-core {
       fill: none;
-      stroke: rgba(255,255,255,0.88);
-      stroke-width: 6;
+      stroke: rgba(255,255,255,0.92);
+      stroke-width: 4.8;
       stroke-linecap: round;
     }
     .editions-coffee-steam {
       fill: none;
-      stroke: rgba(168, 146, 122, 0.72);
-      stroke-width: 5.8;
+      stroke: rgba(122, 142, 153, 0.28);
+      stroke-width: 2.35;
       stroke-linecap: round;
-      filter: blur(3.8px);
       opacity: 0;
-      animation: coffeeSteam 7.6s cubic-bezier(0.25, 0.1, 0.2, 1) infinite;
       transform-origin: center bottom;
+      animation: coffeeSteamRise 13s ease-in-out infinite;
     }
-    .editions-coffee-steam.steam-a { animation-delay: 0s; }
-    .editions-coffee-steam.steam-b { animation-delay: 1.7s; }
-    .editions-coffee-steam.steam-c { animation-delay: 3.2s; }
-    .editions-coffee-ritual:hover .editions-coffee-illustration {
-      transform: scale(1.014);
+    .editions-coffee-steam.steam-a {
+      animation-delay: 0s;
+    }
+    .editions-coffee-steam.steam-b {
+      animation-delay: 2.8s;
+      stroke-width: 1.95;
+      opacity: 0;
+    }
+    .editions-coffee-steam.steam-c {
+      animation-delay: 5.1s;
+      stroke-width: 2.1;
+    }
+    .editions-coffee-steam.steam-d {
+      animation-delay: 7.4s;
+      stroke-width: 1.8;
+      stroke: rgba(122, 142, 153, 0.22);
     }
     .editions-coffee-illustration,
     .editions-cta-form-wrap .newsletter-form button,
     .editions-cta-form-wrap .email-pill {
-      transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease, background-color 240ms ease;
+      transition: box-shadow 240ms ease, border-color 240ms ease, background-color 240ms ease;
     }
     .editions-cta-form-wrap {
       display: grid;
@@ -638,25 +747,33 @@
       box-shadow: 0 12px 24px rgba(34, 160, 107, 0.14);
     }
     .editions-cta-form-wrap .newsletter-form button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 28px rgba(34, 160, 107, 0.16);
+      box-shadow: 0 14px 24px rgba(34, 160, 107, 0.15);
     }
     .editions-cta-form-wrap .hero-trustline,
     .editions-cta-form-wrap .form-feedback {
       margin: 0;
       max-width: 100%;
     }
-    @keyframes coffeeSteam {
+    @keyframes coffeeSteamRise {
       0% {
         opacity: 0;
-        transform: translate3d(0, 10px, 0) scale(0.98);
+        transform: translate3d(0, 6px, 0) scale(0.985);
       }
-      28% {
+      18% {
         opacity: 0.18;
+      }
+      52% {
+        opacity: 0.26;
       }
       100% {
         opacity: 0;
-        transform: translate3d(4px, -62px, 0) scale(1.04);
+        transform: translate3d(4px, -40px, 0) scale(1.03);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .editions-coffee-steam {
+        animation: none;
+        opacity: 0.18;
       }
     }
     @media (max-width: 1100px) {
@@ -674,6 +791,10 @@
         border-top: 1px solid rgba(228, 231, 235, 0.72);
         padding-top: 22px;
       }
+      .editions-archive-list a {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
     }
     @media (max-width: 820px) {
       .editions-main { padding-top: 28px; }
@@ -687,6 +808,9 @@
       .editions-organizer {
         padding: 24px 22px 26px;
         border-radius: 28px;
+      }
+      .editions-archive {
+        padding: 0 0 16px;
       }
       .editions-cta-lower {
         grid-template-columns: 1fr;
@@ -721,6 +845,7 @@
         flex-direction: column;
       }
       .editions-section-head h2 { max-width: 12ch; }
+      .editions-archive-head h2 { max-width: 10ch; }
       .editions-coffee-ritual {
         min-height: 0;
         justify-items: center;
@@ -734,8 +859,13 @@
       .editions-coffee-visual::before {
         inset: 18px 18px 10px;
       }
+      .editions-coffee-visual::after {
+        left: 48px;
+        right: 48px;
+        bottom: 20px;
+      }
       .editions-coffee-steam {
-        stroke-width: 4.2;
+        stroke-width: 1.9;
       }
       .editions-cta-form-wrap {
         max-width: 100%;
@@ -918,35 +1048,40 @@
                 <svg class="editions-coffee-illustration" viewBox="0 0 244 244" role="presentation" focusable="false">
                   <defs>
                     <linearGradient id="coffeeCupFill" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="rgba(255,255,255,0.99)" />
-                      <stop offset="100%" stop-color="rgba(240,246,249,0.98)" />
+                      <stop offset="0%" stop-color="rgba(255,255,255,0.995)" />
+                      <stop offset="58%" stop-color="rgba(244,248,250,0.99)" />
+                      <stop offset="100%" stop-color="rgba(228,236,241,0.98)" />
                     </linearGradient>
                     <linearGradient id="coffeeCupHighlight" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="rgba(255,255,255,0.95)" />
+                      <stop offset="0%" stop-color="rgba(255,255,255,0.98)" />
+                      <stop offset="55%" stop-color="rgba(255,255,255,0.24)" />
                       <stop offset="100%" stop-color="rgba(255,255,255,0)" />
                     </linearGradient>
                     <linearGradient id="coffeeSaucerFill" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="rgba(255,255,255,0.92)" />
-                      <stop offset="100%" stop-color="rgba(226,233,238,0.96)" />
+                      <stop offset="0%" stop-color="rgba(255,255,255,0.96)" />
+                      <stop offset="100%" stop-color="rgba(228,235,240,0.98)" />
                     </linearGradient>
                     <linearGradient id="coffeeSurfaceFill" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="rgba(86,62,47,0.96)" />
-                      <stop offset="100%" stop-color="rgba(52,37,28,0.94)" />
+                      <stop offset="0%" stop-color="rgba(88,62,48,0.97)" />
+                      <stop offset="56%" stop-color="rgba(59,42,33,0.96)" />
+                      <stop offset="100%" stop-color="rgba(40,29,24,0.95)" />
                     </linearGradient>
                   </defs>
-                  <ellipse class="editions-coffee-base-shadow" cx="122" cy="210" rx="88" ry="17"></ellipse>
-                  <ellipse class="editions-coffee-saucer-bottom" cx="122" cy="198" rx="78" ry="11"></ellipse>
-                  <ellipse class="editions-coffee-saucer-top" cx="122" cy="192" rx="84" ry="15"></ellipse>
-                  <path class="editions-coffee-cup-body" d="M72 108C72 95.8 81.8 86 94 86H150C162.2 86 172 95.8 172 108V154C172 174.4 155.4 191 135 191H109C88.6 191 72 174.4 72 154V108Z"></path>
-                  <path class="editions-coffee-cup-highlight" d="M87 98C87 92.5 91.5 88 97 88H111C100.2 104.8 96.5 126.7 100.8 152.5C103.2 166.7 108.1 179.6 114.6 190H109C96 190 84.6 178.6 84.6 165.6V98Z"></path>
-                  <ellipse class="editions-coffee-rim" cx="122" cy="92" rx="56" ry="12.5"></ellipse>
-                  <ellipse class="editions-coffee-surface" cx="122" cy="93.5" rx="46.5" ry="8.6"></ellipse>
-                  <ellipse class="editions-coffee-inner-shadow" cx="122" cy="99" rx="40" ry="7" opacity="0.26"></ellipse>
-                  <path class="editions-coffee-handle-shape" d="M175 106C194 106 203 118 203 133C203 148 194 160 178 160"></path>
-                  <path class="editions-coffee-handle-core" d="M177 114C189 114 195 122 195 133C195 144 189 152 179 152"></path>
-                  <path class="editions-coffee-steam steam-a" d="M96 96C88 87 87 75 95 63C102 51 103 37 99 24"></path>
-                  <path class="editions-coffee-steam steam-b" d="M123 94C116 84 117 72 127 58C135 46 136 31 131 17"></path>
-                  <path class="editions-coffee-steam steam-c" d="M149 96C142 87 143 75 153 61C160 49 161 34 156 21"></path>
+                  <ellipse class="editions-coffee-base-shadow" cx="122" cy="206" rx="76" ry="13"></ellipse>
+                  <ellipse class="editions-coffee-saucer-bottom" cx="122" cy="191" rx="70" ry="9"></ellipse>
+                  <ellipse class="editions-coffee-saucer-top" cx="122" cy="186" rx="78" ry="13"></ellipse>
+                  <path class="editions-coffee-cup-body" d="M76 96C76 87.2 83.2 80 92 80H152C160.8 80 168 87.2 168 96V152C168 173.4 150.6 190.8 129.2 190.8H114.8C93.4 190.8 76 173.4 76 152V96Z"></path>
+                  <path class="editions-coffee-cup-highlight" d="M90 89C90 84.6 93.6 81 98 81H112.5C101.8 95.2 98.8 116.1 102.6 141.2C105.1 157.9 110.1 173 117.4 185H111.8C99.7 185 90 175.3 90 163.2V89Z"></path>
+                  <ellipse class="editions-coffee-rim" cx="122" cy="83" rx="52" ry="11"></ellipse>
+                  <ellipse class="editions-coffee-surface" cx="122" cy="84.2" rx="43.4" ry="7.7"></ellipse>
+                  <ellipse class="editions-coffee-surface-glow" cx="110" cy="81.6" rx="14" ry="3.2" opacity="0.42"></ellipse>
+                  <ellipse class="editions-coffee-inner-shadow" cx="122" cy="89" rx="36" ry="5.8" opacity="0.22"></ellipse>
+                  <path class="editions-coffee-handle-shape" d="M169 101C186 101 194 112 194 127C194 142 186 153 172 157"></path>
+                  <path class="editions-coffee-handle-core" d="M171 108C181 108 186 116 186 126.8C186 137.6 181 145 173 148.6"></path>
+                  <path class="editions-coffee-steam steam-a" d="M99 72C95 64 95 54 101 46C106 39 107 29 103 20"></path>
+                  <path class="editions-coffee-steam steam-b" d="M118 70C114 62 115 53 122 44C128 36 129 25 124 16"></path>
+                  <path class="editions-coffee-steam steam-c" d="M136 72C132 65 133 56 140 48C145 41 146 31 142 22"></path>
+                  <path class="editions-coffee-steam steam-d" d="M152 75C149 69 150 60 156 52C161 45 162 36 159 28"></path>
                 </svg>
               </div>
             </div>
@@ -1067,61 +1202,220 @@
       const previewSummary = document.querySelector("[data-preview-summary-label]");
       const previewExcerptTop = document.querySelector("[data-preview-excerpt-top]");
       const previewExcerptBottom = document.querySelector("[data-preview-excerpt-bottom]");
+      let lastTrigger = null;
 
       if (!carousel || !track) return;
 
-      const originalCards = Array.from(track.querySelectorAll(".edition-card"));
-      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      let allCards = [];
-      let cycleWidth = 0;
-      let position = 0;
-      let animationId = 0;
-      let lastTimestamp = 0;
-      let paused = false;
-      let resumeTimeout = 0;
+      document.title = "Edições | Papo de Liderança";
 
-      originalCards.forEach((card) => {
-        const clone = card.cloneNode(true);
-        clone.setAttribute("aria-hidden", "true");
-        track.appendChild(clone);
+      const brand = document.querySelector(".brand");
+      const brandName = document.querySelector(".brand-name");
+      const brandLogo = document.querySelector(".brand .logo");
+      const navPanel = document.querySelector("#main-nav");
+      const navLinks = navPanel ? Array.from(navPanel.querySelectorAll("a")) : [];
+      const heroEyebrow = document.querySelector(".editions-hero .eyebrow");
+      const heroIntro = document.querySelector(".editions-hero-copy p");
+      const heroNotes = Array.from(document.querySelectorAll(".editions-note"));
+      const sectionKicker = document.querySelector(".editions-section-head .section-kicker");
+      const sectionTitle = document.querySelector(".editions-section-head h2");
+      const sectionBody = document.querySelector(".editions-section-head p");
+      const topbarCopy = document.querySelector(".editions-carousel-topbar p");
+      const organizerKicker = document.querySelector(".editions-feature-header .section-kicker");
+      const organizerTitle = document.querySelector(".editions-feature-header strong");
+      const organizerParagraphs = document.querySelectorAll(".editions-feature p");
+      const organizerBullets = document.querySelectorAll(".editions-feature-list li");
+      const clusterArticles = document.querySelectorAll(".editions-cluster");
+      const ctaTitle = document.querySelector(".editions-cta-copy h2");
+      const ctaBody = document.querySelector(".editions-cta-copy p");
+      const closeLabel = document.querySelector("[data-editions-close]");
+      const footerBrandMark = document.querySelector(".footer-brand-mark");
+      const footerBrandTitle = document.querySelector(".footer-brand h3");
+      const footerBrandBody = document.querySelector(".footer-brand p");
+      const footerNavTitle = document.querySelector(".footer-column h3");
+      const footerNavLinks = document.querySelectorAll(".footer-nav a");
+      const footerSocialText = document.querySelector(".footer-column p[style]");
+      const footerCopyright = document.querySelector(".footer-bottom > div:first-child");
+      const footerLegalLinks = document.querySelectorAll(".footer-legal a");
+      const archiveTarget = document.querySelector(".editions-final-cta");
+
+      if (brand) brand.setAttribute("aria-label", "Papo de Liderança");
+      if (brandLogo) brandLogo.setAttribute("alt", "Papo de Liderança");
+      if (brandName) brandName.textContent = "Papo de Liderança";
+      if (navPanel) navPanel.setAttribute("aria-label", "Navegação principal");
+      if (navLinks[0]) navLinks[0].textContent = "início";
+      if (navLinks[2]) navLinks[2].textContent = "edições";
+      if (heroEyebrow) heroEyebrow.textContent = "edições";
+      if (heroIntro) heroIntro.textContent = "insights semanais, leitura em poucos minutos e ideias que ajudam a trazer clareza para decisões difíceis, conversas importantes e crescimento com mais consistência.";
+      if (heroNotes[2]) heroNotes[2].textContent = "clareza para decisões difíceis";
+      if (sectionKicker) sectionKicker.textContent = "edições em destaque";
+      if (sectionTitle) sectionTitle.textContent = "veja como a leitura se apresenta na prática";
+      if (sectionBody) sectionBody.textContent = "cada edição foi pensada para ser breve na forma e consistente no efeito. abra as prévias, leia com calma e sinta o tipo de repertório que entra na rotina sem pesar.";
+      if (topbarCopy) topbarCopy.textContent = "uma amostra real do produto, com espaço para navegar no seu ritmo e entender como cada edição conduz a leitura.";
+      if (prevButton) {
+        prevButton.innerHTML = "&larr;";
+        prevButton.setAttribute("aria-label", "Ver edição anterior");
+      }
+      if (nextButton) {
+        nextButton.innerHTML = "&rarr;";
+        nextButton.setAttribute("aria-label", "Ver próxima edição");
+      }
+      if (organizerKicker) organizerKicker.textContent = "edição da semana";
+      if (organizerTitle) organizerTitle.textContent = "um formato curto, direto e aplicável";
+      if (organizerParagraphs[0]) organizerParagraphs[0].textContent = "cada edição é escrita para ser lida rápido e lembrada por mais tempo. a ideia é entrar na rotina sem exigir muito tempo, mas deixar um tipo de clareza que melhora a forma como você pensa, conversa e decide.";
+      if (organizerParagraphs[1]) organizerParagraphs[1].textContent = "não é conteúdo para preencher caixa de entrada. é uma peça editorial curta, bem editada e construída para virar repertório.";
+      if (organizerBullets[1]) organizerBullets[1].textContent = "clareza para decisões difíceis";
+      if (organizerBullets[2]) organizerBullets[2].textContent = "aplicação prática no mesmo dia";
+      if (clusterArticles[0]) {
+        clusterArticles[0].querySelector("strong").textContent = "como líderes fazem escolhas melhores";
+        clusterArticles[0].querySelector("p").textContent = "um recorte sobre calma, leitura de contexto e o tipo de critério que impede boa decisão de parecer só rapidez.";
+      }
+      if (clusterArticles[1]) {
+        clusterArticles[1].querySelector("span").textContent = "últimas edições";
+        clusterArticles[1].querySelector("strong").textContent = "o que sustenta um time quando o cenário oscila";
+        clusterArticles[1].querySelector("p").textContent = "contexto, direção e estabilidade prática quando o ambiente muda rápido.";
+      }
+      if (clusterArticles[2]) {
+        clusterArticles[2].querySelector("strong").textContent = "repertório melhor, decisões melhores";
+        clusterArticles[2].querySelector("p").textContent = "mais clareza, menos ruído e um tipo de pensamento que continua com você depois do clique.";
+      }
+      if (ctaTitle) ctaTitle.textContent = "decisões melhores começam antes da ação.";
+      if (ctaBody) ctaBody.innerHTML = "uma leitura curta, direta e bem construída para trazer clareza quando mais importa.<br>sem excesso. sem distração. só o que importa.";
+      document.querySelectorAll(".email-icon").forEach((icon) => {
+        icon.innerHTML = "&#9993;";
+      });
+      document.querySelectorAll(".hero-trustline").forEach((line) => {
+        line.innerHTML = "gratuita &middot; 1 edição por semana &middot; leitura em 5 min";
+      });
+      if (closeLabel) {
+        closeLabel.setAttribute("aria-label", "Fechar visualização");
+        closeLabel.innerHTML = "&times;";
+      }
+      if (footerBrandMark) footerBrandMark.setAttribute("alt", "Papo de Liderança");
+      if (footerBrandTitle) footerBrandTitle.textContent = "Papo de Liderança";
+      if (footerBrandBody) footerBrandBody.innerHTML = "leituras semanais para quem quer pensar melhor,<br>decidir com mais critério<br>e evoluir com consistência.";
+      if (footerNavTitle) footerNavTitle.textContent = "Navegação";
+      if (footerNavLinks[0]) footerNavLinks[0].textContent = "início";
+      if (footerNavLinks[2]) footerNavLinks[2].textContent = "edições";
+      if (footerSocialText) footerSocialText.textContent = "Acompanhe também nas redes";
+      if (footerCopyright) footerCopyright.innerHTML = "&copy; 2026 Papo de Liderança. Todos os direitos reservados.";
+      if (footerLegalLinks[0]) footerLegalLinks[0].textContent = "Política de Privacidade";
+
+      const cardContent = [
+        {
+          category: "liderança",
+          title: "clareza antes da reação",
+          summary: "quando o time não sabe para onde vai, o problema raramente é esforço. quase sempre é direção.",
+          footer: "ver prévia",
+          chip: "edição da semana",
+        },
+        {
+          category: "carreira",
+          title: "crescimento sem virar urgência crônica",
+          summary: "nem todo avanço exige aceleração constante. alguns pedem ritmo, repertório e decisão melhor.",
+          footer: "ver prévia",
+          chip: "mais lida",
+        },
+        {
+          category: "gestão",
+          title: "o que sustenta um time quando o cenário oscila",
+          summary: "estabilidade não vem de discurso inspirador. vem de contexto, critério e presença consistente.",
+          footer: "ver prévia",
+          chip: "última edição",
+        },
+        {
+          category: "mentalidade",
+          title: "repertório melhor, decisões melhores",
+          summary: "bons julgamentos raramente nascem do improviso. eles se acumulam em leituras, conversas e critério.",
+          footer: "ver prévia",
+          chip: "curadoria",
+        },
+      ];
+
+      Array.from(track.querySelectorAll(".edition-card")).forEach((card, index) => {
+        const data = cardContent[index];
+        if (!data) return;
+        const categoryLabel = card.querySelector(".edition-card-category");
+        const titleLabel = card.querySelector(".edition-card-body h3");
+        const summaryLabel = card.querySelector(".edition-card-body p");
+        const footerLabel = card.querySelector(".edition-card-footer strong");
+        const chipLabel = card.querySelector(".edition-card-chip");
+        card.dataset.previewCategory = data.category;
+        card.dataset.previewTitle = data.title;
+        card.dataset.previewSummary = data.summary;
+        if (categoryLabel) categoryLabel.textContent = data.category;
+        if (titleLabel) titleLabel.textContent = data.title;
+        if (summaryLabel) summaryLabel.textContent = data.summary;
+        if (footerLabel) footerLabel.textContent = data.footer;
+        if (chipLabel) chipLabel.textContent = data.chip;
       });
 
-      allCards = Array.from(track.querySelectorAll(".edition-card"));
+      if (archiveTarget && !document.querySelector(".editions-archive")) {
+        archiveTarget.insertAdjacentHTML(
+          "beforebegin",
+          `
+    <section class="editions-archive" aria-labelledby="editions-archive-title">
+      <div class="container editions-archive-shell">
+        <div class="editions-archive-head">
+          <span class="section-kicker">arquivo recente</span>
+          <h2 id="editions-archive-title">um repertório que continua abrindo conversa</h2>
+          <p>algumas edições recentes para orientar a leitura e mostrar como o produto acumula clareza ao longo das semanas.</p>
+        </div>
+        <ul class="editions-archive-list">
+          <li>
+            <a href="./edicoes.html#clareza-antes-da-reacao">
+              <span class="editions-archive-date">14 abr 2026</span>
+              <span class="editions-archive-copy">
+                <strong>clareza antes da reação</strong>
+                <span>o ponto em que segurar a pressa evita contaminar o time com ansiedade.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="./edicoes.html#o-que-sustenta-um-time-quando-o-cenario-oscila">
+              <span class="editions-archive-date">07 abr 2026</span>
+              <span class="editions-archive-copy">
+                <strong>o que sustenta um time quando o cenário oscila</strong>
+                <span>contexto suficiente para preservar direção quando o ambiente muda.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="./edicoes.html#repertorio-melhor-decisoes-melhores">
+              <span class="editions-archive-date">31 mar 2026</span>
+              <span class="editions-archive-copy">
+                <strong>repertório melhor, decisões melhores</strong>
+                <span>leituras, conversas e critério como base para julgamento mais estável.</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="./edicoes.html#como-lideres-fazem-escolhas-melhores">
+              <span class="editions-archive-date">24 mar 2026</span>
+              <span class="editions-archive-copy">
+                <strong>como líderes fazem escolhas melhores</strong>
+                <span>um recorte sobre calma, contexto e a maturidade de decidir sem teatro.</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>`
+        );
+      }
 
-      const getGap = () => {
-        const styles = window.getComputedStyle(track);
-        return parseFloat(styles.columnGap || styles.gap || "0");
-      };
-
-      const getSpeed = () => (window.innerWidth <= 820 ? 18 : 24);
-
-      const normalizePosition = () => {
-        if (!cycleWidth) return;
-        position = ((position % cycleWidth) + cycleWidth) % cycleWidth;
-      };
-
-      const render = () => {
-        track.style.transform = `translate3d(${-position}px, 0, 0)`;
-      };
-
-      const measureCycle = () => {
-        const gap = getGap();
-        cycleWidth = originalCards.reduce((total, card) => {
-          return total + card.getBoundingClientRect().width;
-        }, 0) + gap * Math.max(0, originalCards.length - 1);
-        normalizePosition();
-        render();
-      };
+      const cards = Array.from(track.querySelectorAll(".edition-card"));
 
       const getStep = () => {
-        const firstCard = originalCards[0];
+        const firstCard = cards[0];
         if (!firstCard) return 320;
-        return firstCard.getBoundingClientRect().width + getGap();
+        const styles = window.getComputedStyle(track);
+        const gap = parseFloat(styles.columnGap || styles.gap || "0");
+        return firstCard.getBoundingClientRect().width + gap;
       };
 
       const openPreview = (card) => {
         if (!modal || !card) return;
-        paused = true;
+        lastTrigger = card;
         previewCategory.textContent = card.dataset.previewCategory || "";
         previewTime.textContent = card.dataset.previewTime || "";
         previewTitle.textContent = card.dataset.previewTitle || "";
@@ -1138,37 +1432,17 @@
         if (!modal) return;
         modal.hidden = true;
         document.body.style.overflow = "";
-        paused = false;
-      };
-
-      const queueResume = () => {
-        window.clearTimeout(resumeTimeout);
-        resumeTimeout = window.setTimeout(() => {
-          if (!modal || modal.hidden) paused = false;
-        }, 1400);
+        lastTrigger?.focus();
       };
 
       const stepCarousel = (direction) => {
-        position += direction * getStep();
-        normalizePosition();
-        render();
+        carousel.scrollBy({
+          left: direction * getStep(),
+          behavior: "smooth",
+        });
       };
 
-      const animate = (timestamp) => {
-        if (!lastTimestamp) lastTimestamp = timestamp;
-        const delta = (timestamp - lastTimestamp) / 1000;
-        lastTimestamp = timestamp;
-
-        if (!paused && !prefersReducedMotion.matches && cycleWidth > 0) {
-          position += getSpeed() * delta;
-          if (position >= cycleWidth) position -= cycleWidth;
-          render();
-        }
-
-        animationId = window.requestAnimationFrame(animate);
-      };
-
-      allCards.forEach((card) => {
+      cards.forEach((card) => {
         card.addEventListener("click", () => openPreview(card));
         card.addEventListener("keydown", (event) => {
           if (event.key === "Enter" || event.key === " ") {
@@ -1179,31 +1453,11 @@
       });
 
       prevButton?.addEventListener("click", () => {
-        paused = true;
         stepCarousel(-1);
-        queueResume();
       });
 
       nextButton?.addEventListener("click", () => {
-        paused = true;
         stepCarousel(1);
-        queueResume();
-      });
-
-      carousel.addEventListener("mouseenter", () => {
-        paused = true;
-      });
-
-      carousel.addEventListener("mouseleave", () => {
-        if (!modal || modal.hidden) paused = false;
-      });
-
-      carousel.addEventListener("focusin", () => {
-        paused = true;
-      });
-
-      carousel.addEventListener("focusout", () => {
-        if (!modal || modal.hidden) paused = false;
       });
 
       closeButton?.addEventListener("click", closePreview);
@@ -1213,18 +1467,6 @@
 
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape" && modal && !modal.hidden) closePreview();
-      });
-
-      window.addEventListener("resize", measureCycle, { passive: true });
-      prefersReducedMotion.addEventListener("change", measureCycle);
-
-      measureCycle();
-      render();
-      animationId = window.requestAnimationFrame(animate);
-
-      window.addEventListener("beforeunload", () => {
-        if (animationId) window.cancelAnimationFrame(animationId);
-        window.clearTimeout(resumeTimeout);
       });
     });
   </script>
