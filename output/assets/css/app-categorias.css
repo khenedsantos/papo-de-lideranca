@@ -1,0 +1,206 @@
+:root {
+  --app-cat-bg: #f7f9fb;
+  --app-cat-surface: #ffffff;
+  --app-cat-surface-soft: #f3f7f9;
+  --app-cat-text: #0b1217;
+  --app-cat-muted: #5b6b75;
+  --app-cat-line: #e4e7eb;
+  --app-cat-navy: #0f2a3d;
+  --app-cat-blue: #1e4a66;
+  --app-cat-green: #22a06b;
+  --app-cat-green-soft: #2fc28c;
+  --app-cat-shadow: 0 16px 32px rgba(15, 42, 61, 0.05);
+  --app-cat-radius-xl: 30px;
+  --app-cat-radius-lg: 24px;
+  --app-cat-radius-md: 18px;
+}
+
+body.app-category-page {
+  margin: 0;
+  background: var(--app-cat-bg);
+  color: var(--app-cat-text);
+}
+
+.app-category-main {
+  padding: 28px 0 60px;
+}
+
+.app-category-stack {
+  display: grid;
+  gap: 28px;
+}
+
+.app-category-hero {
+  display: grid;
+  gap: 18px;
+  padding: 34px;
+  border-radius: var(--app-cat-radius-xl);
+  background:
+    radial-gradient(circle at top right, rgba(47, 194, 140, 0.12), transparent 30%),
+    linear-gradient(180deg, #ffffff 0%, #f3f7f9 100%);
+  border: 1px solid rgba(228, 231, 235, 0.92);
+  box-shadow: var(--app-cat-shadow);
+}
+
+.app-category-kicker,
+.app-category-tag {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  background: rgba(34, 160, 107, 0.08);
+  color: #1b7a55;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+
+.app-category-hero h1,
+.app-category-section h2,
+.app-category-card h3 {
+  margin: 0;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+}
+
+.app-category-hero h1 {
+  max-width: 12ch;
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  line-height: 0.94;
+}
+
+.app-category-hero p,
+.app-category-section-head p,
+.app-category-card p,
+.app-category-list li,
+.app-category-rail p,
+.app-category-footer {
+  margin: 0;
+  color: var(--app-cat-muted);
+  line-height: 1.82;
+}
+
+.app-category-hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.app-category-link,
+.app-category-link--solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  width: fit-content;
+  padding: 0 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-transform: lowercase;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+
+.app-category-link {
+  background: #fff;
+  border: 1px solid rgba(228, 231, 235, 0.92);
+  color: var(--app-cat-navy);
+}
+
+.app-category-link--solid {
+  background: linear-gradient(135deg, var(--app-cat-green) 0%, var(--app-cat-green-soft) 100%);
+  color: #fff;
+  box-shadow: 0 12px 24px rgba(34, 160, 107, 0.16);
+}
+
+.app-category-link:hover,
+.app-category-link--solid:hover {
+  transform: translateY(-1px);
+}
+
+.app-category-layout,
+.app-category-grid,
+.app-category-rail {
+  display: grid;
+  gap: 18px;
+}
+
+.app-category-layout {
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+}
+
+.app-category-section {
+  display: grid;
+  gap: 16px;
+}
+
+.app-category-section-head {
+  display: grid;
+  gap: 8px;
+}
+
+.app-category-card,
+.app-category-panel {
+  padding: 24px;
+  border-radius: var(--app-cat-radius-lg);
+  background: var(--app-cat-surface);
+  border: 1px solid rgba(228, 231, 235, 0.92);
+  box-shadow: var(--app-cat-shadow);
+}
+
+.app-category-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.app-category-card {
+  display: grid;
+  gap: 14px;
+}
+
+.app-category-list {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.app-category-rail {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.app-category-footer {
+  padding-top: 6px;
+}
+
+@media (max-width: 980px) {
+  .app-category-layout,
+  .app-category-grid,
+  .app-category-rail {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .app-category-main {
+    padding: 20px 0 44px;
+  }
+
+  .app-category-stack {
+    gap: 22px;
+  }
+
+  .app-category-hero,
+  .app-category-card,
+  .app-category-panel {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .app-category-hero h1 {
+    max-width: none;
+  }
+}

@@ -176,16 +176,14 @@
         radial-gradient(circle at top right, rgba(34, 160, 107, 0.12), transparent 32%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 248, 250, 0.96) 100%);
       box-shadow: 0 18px 40px rgba(15, 42, 61, 0.04);
-      cursor: pointer;
       scroll-snap-align: start;
       transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
     }
     .edition-card:hover,
-    .edition-card:focus-visible {
+    .edition-card:focus-within {
       transform: translateY(-1px);
       box-shadow: 0 22px 40px rgba(15, 42, 61, 0.055);
       border-color: rgba(34, 160, 107, 0.18);
-      outline: none;
     }
     .edition-card-header,
     .edition-card-footer {
@@ -239,12 +237,40 @@
       line-height: 1.82;
       text-transform: none;
     }
-    .edition-card-footer { align-self: end; }
-    .edition-card-footer strong {
-      color: rgba(15, 42, 61, 0.8);
-      font-size: 0.86rem;
+    .edition-card-footer {
+      align-self: end;
+      width: 100%;
+    }
+    .edition-card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      width: 100%;
+    }
+    .edition-card-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 32px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: rgba(15, 42, 61, 0.88);
+      font: inherit;
+      font-size: 0.84rem;
+      font-weight: 600;
       letter-spacing: -0.01em;
       text-transform: lowercase;
+      cursor: pointer;
+      transition: color 220ms ease, transform 220ms ease;
+    }
+    .edition-card-trigger:hover,
+    .edition-card-trigger:focus-visible {
+      outline: none;
+      transform: translateY(-1px);
+      color: rgba(20, 90, 61, 0.95);
     }
     .editions-organizer {
       display: grid;
@@ -421,20 +447,47 @@
       position: fixed;
       inset: 0;
       z-index: 90;
-      display: grid;
-      place-items: center;
-      padding: 24px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 100dvh;
+      padding: max(12px, env(safe-area-inset-top)) clamp(12px, 2vw, 20px) max(12px, env(safe-area-inset-bottom));
+      overflow-y: auto;
+      overscroll-behavior: contain;
       background: rgba(11, 18, 23, 0.36);
     }
+    html.editions-modal-open,
+    body.editions-modal-open {
+      overflow: hidden;
+    }
+    body.editions-modal-open {
+      transform: none !important;
+      filter: none !important;
+    }
     .editions-preview-dialog {
-      width: min(760px, 100%);
-      max-height: min(88vh, 920px);
-      overflow: auto;
-      padding: 32px 32px 34px;
+      width: min(720px, calc(100vw - 24px));
+      max-height: calc(100dvh - 24px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      margin: 0 auto;
       border-radius: 36px;
       border: 1px solid rgba(228, 231, 235, 0.62);
       background: linear-gradient(180deg, rgba(255,255,255,0.985) 0%, rgba(244,248,250,0.99) 100%);
       box-shadow: 0 28px 64px rgba(11, 18, 23, 0.14);
+    }
+    .editions-preview-topbar {
+      display: flex;
+      justify-content: flex-end;
+      flex: 0 0 auto;
+      padding: 22px 24px 0;
+    }
+    .editions-preview-scroll {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding: 0 28px 26px;
     }
     .editions-preview-close {
       display: inline-flex;
@@ -442,7 +495,6 @@
       justify-content: center;
       width: 42px;
       height: 42px;
-      margin-left: auto;
       border-radius: 50%;
       border: 1px solid rgba(228, 231, 235, 0.82);
       background: rgba(255, 255, 255, 0.9);
@@ -461,7 +513,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      margin: 22px 0 18px;
+      margin: 10px 0 16px;
     }
     .editions-preview-meta span:last-child {
       color: rgba(91, 107, 117, 0.72);
@@ -470,7 +522,7 @@
       text-transform: none;
     }
     .editions-preview-dialog h3 {
-      margin: 0 0 14px;
+      margin: 0 0 12px;
       max-width: 11ch;
       font-size: clamp(2rem, 3vw, 3rem);
       line-height: 0.98;
@@ -479,38 +531,38 @@
     }
     .editions-preview-intro {
       max-width: 56ch;
-      margin: 0 0 18px;
+      margin: 0 0 14px;
       color: rgba(91, 107, 117, 0.84);
-      font-size: 1rem;
-      line-height: 1.88;
+      font-size: 0.98rem;
+      line-height: 1.78;
       text-transform: none;
     }
     .editions-preview-excerpt {
       position: relative;
       display: grid;
-      gap: 16px;
-      margin-top: 22px;
-      padding-top: 4px;
+      gap: 14px;
+      margin-top: 14px;
+      padding-top: 0;
     }
     .editions-preview-excerpt p {
       margin: 0;
       color: rgba(91, 107, 117, 0.78);
-      font-size: 1rem;
-      line-height: 1.94;
+      font-size: 0.97rem;
+      line-height: 1.82;
       text-transform: none;
     }
     .editions-preview-gate {
       position: relative;
-      margin-top: -18px;
-      padding: 76px 0 0;
+      margin-top: 8px;
+      padding: 44px 0 0;
       overflow: hidden;
     }
     .editions-preview-gate::before {
       content: "";
       position: absolute;
       inset: 0 0 auto;
-      height: 140px;
-      background: linear-gradient(180deg, rgba(244,248,250,0) 0%, rgba(244,248,250,0.84) 52%, rgba(244,248,250,1) 100%);
+      height: 84px;
+      background: linear-gradient(180deg, rgba(244,248,250,0) 0%, rgba(244,248,250,0.88) 58%, rgba(244,248,250,1) 100%);
       pointer-events: none;
     }
     .editions-preview-lock {
@@ -519,7 +571,7 @@
       display: grid;
       gap: 14px;
       justify-items: start;
-      padding: 28px 26px;
+      padding: 22px 22px 20px;
       border-radius: 28px;
       border: 1px solid rgba(228, 231, 235, 0.78);
       background: rgba(255, 255, 255, 0.92);
@@ -832,10 +884,23 @@
         padding: 24px 22px 26px;
         border-radius: 28px;
       }
-      .editions-preview-dialog,
       .editions-final-cta-shell {
         padding: 26px 22px 28px;
         border-radius: 28px;
+      }
+      .editions-preview-modal {
+        padding: max(10px, env(safe-area-inset-top)) 10px max(10px, env(safe-area-inset-bottom));
+      }
+      .editions-preview-dialog {
+        width: calc(100vw - 20px);
+        max-height: calc(100dvh - 20px);
+        border-radius: 28px;
+      }
+      .editions-preview-topbar {
+        padding: 12px 12px 0;
+      }
+      .editions-preview-scroll {
+        padding: 0 18px 18px;
       }
     }
     @media (max-width: 640px) {
@@ -896,10 +961,28 @@
         <a href="../pages/sobre.html">sobre</a>
         <a class="is-current" href="../pages/edicoes.html">edições</a>
         <a href="../pages/autoridade.html">autoridade</a>
+        <details class="nav-legal-mobile">
+          <summary>legal</summary>
+          <div class="nav-legal-mobile-panel">
+            <a href="../legal/politica-de-privacidade.html">política de privacidade</a>
+            <a href="../legal/termos-de-uso.html">termos de uso</a>
+          </div>
+        </details>
       </nav>
       <div class="header-actions">
         <a class="header-login" href="./login.html">login</a>
         <a class="header-cta" href="#inscreva-se">inscreva-se</a>
+        <details class="legal-menu legal-menu--icon">
+          <summary class="header-legal-trigger header-legal-trigger--icon" aria-label="abrir links legais">
+            <span></span>
+            <span></span>
+            <span></span>
+          </summary>
+          <div class="legal-menu-panel" role="list">
+            <a href="../legal/politica-de-privacidade.html">política de privacidade</a>
+            <a href="../legal/termos-de-uso.html">termos de uso</a>
+          </div>
+        </details>
       </div>
     </div>
   </header>
@@ -938,7 +1021,7 @@
 
           <div class="editions-carousel" data-editions-carousel>
             <div class="editions-track" data-editions-track>
-              <article id="clareza-antes-da-reacao" class="edition-card" tabindex="0" data-preview-category="liderança" data-preview-time="5 min" data-preview-title="clareza antes da reação" data-preview-summary="quando o time não sabe para onde vai, o problema raramente é esforço. quase sempre é direção." data-preview-excerpt="quando a pressão aumenta, a tentação é agir rápido demais. mas boa parte da liderança madura nasce do movimento oposto: segurar a pressa o suficiente para separar fato, hipótese e ruído antes de contaminar o time com ansiedade.&#10;&#10;o ponto não é parecer calmo o tempo todo. é oferecer direção suficiente para que as pessoas continuem avançando sem depender de certezas artificiais.">
+              <article id="clareza-antes-da-reacao" class="edition-card" data-preview-category="liderança" data-preview-time="5 min" data-preview-title="clareza antes da reação" data-preview-summary="quando o time não sabe para onde vai, o problema raramente é esforço. quase sempre é direção." data-preview-excerpt="quando a pressão aumenta, a tentação é agir rápido demais. mas boa parte da liderança madura nasce do movimento oposto: segurar a pressa o suficiente para separar fato, hipótese e ruído antes de contaminar o time com ansiedade.&#10;&#10;o ponto não é parecer calmo o tempo todo. é oferecer direção suficiente para que as pessoas continuem avançando sem depender de certezas artificiais.">
                 <div class="edition-card-header">
                   <span class="edition-card-category">liderança</span>
                   <span class="edition-card-time">5 min</span>
@@ -948,12 +1031,14 @@
                   <p>quando o time não sabe para onde vai, o problema raramente é esforço. quase sempre é direção.</p>
                 </div>
                 <div class="edition-card-footer">
-                  <strong>aplique isso hoje</strong>
-                  <span class="edition-card-chip">edição da semana</span>
+                  <div class="edition-card-actions">
+                    <button class="edition-card-trigger" type="button" data-preview-trigger>ver prévia</button>
+                    <span class="edition-card-chip">edição da semana</span>
+                  </div>
                 </div>
               </article>
 
-              <article id="crescimento-sem-virar-urgencia-cronica" class="edition-card" tabindex="0" data-preview-category="carreira" data-preview-time="4 min" data-preview-title="crescimento sem virar urgência crônica" data-preview-summary="nem todo avanço exige aceleração constante. alguns pedem ritmo, repertório e decisão melhor." data-preview-excerpt="existe um tipo de crescimento que parece virtuoso por fora, mas desgasta por dentro. ele acontece quando tudo vira urgência, quando toda oportunidade parece decisiva e quando a carreira começa a ser guiada mais pelo medo de ficar para trás do que por direção real.&#10;&#10;a newsletter entra exatamente nesse ponto: para ajudar você a distinguir movimento de evolução e intensidade de consistência.">
+              <article id="crescimento-sem-virar-urgencia-cronica" class="edition-card" data-preview-category="carreira" data-preview-time="4 min" data-preview-title="crescimento sem virar urgência crônica" data-preview-summary="nem todo avanço exige aceleração constante. alguns pedem ritmo, repertório e decisão melhor." data-preview-excerpt="existe um tipo de crescimento que parece virtuoso por fora, mas desgasta por dentro. ele acontece quando tudo vira urgência, quando toda oportunidade parece decisiva e quando a carreira começa a ser guiada mais pelo medo de ficar para trás do que por direção real.&#10;&#10;a newsletter entra exatamente nesse ponto: para ajudar você a distinguir movimento de evolução e intensidade de consistência.">
                 <div class="edition-card-header">
                   <span class="edition-card-category">carreira</span>
                   <span class="edition-card-time">4 min</span>
@@ -963,12 +1048,14 @@
                   <p>nem todo avanço exige aceleração constante. alguns pedem ritmo, repertório e decisão melhor.</p>
                 </div>
                 <div class="edition-card-footer">
-                  <strong>menos ruído</strong>
-                  <span class="edition-card-chip">mais lida</span>
+                  <div class="edition-card-actions">
+                    <button class="edition-card-trigger" type="button" data-preview-trigger>ver prévia</button>
+                    <span class="edition-card-chip">mais lida</span>
+                  </div>
                 </div>
               </article>
 
-              <article id="o-que-sustenta-um-time-quando-o-cenario-oscila" class="edition-card" tabindex="0" data-preview-category="gestão" data-preview-time="6 min" data-preview-title="o que sustenta um time quando o cenário oscila" data-preview-summary="estabilidade não vem de discurso inspirador. vem de contexto, critério e presença consistente." data-preview-excerpt="há momentos em que a equipe não precisa de uma fala brilhante. precisa de alguém capaz de organizar prioridades, dar contexto suficiente e segurar a conversa num nível de maturidade que evite ruído extra.&#10;&#10;liderar nessas horas não é dramatizar a dificuldade. é transformar incerteza em direção possível, mesmo quando nem tudo está resolvido.">
+              <article id="o-que-sustenta-um-time-quando-o-cenario-oscila" class="edition-card" data-preview-category="gestão" data-preview-time="6 min" data-preview-title="o que sustenta um time quando o cenário oscila" data-preview-summary="estabilidade não vem de discurso inspirador. vem de contexto, critério e presença consistente." data-preview-excerpt="há momentos em que a equipe não precisa de uma fala brilhante. precisa de alguém capaz de organizar prioridades, dar contexto suficiente e segurar a conversa num nível de maturidade que evite ruído extra.&#10;&#10;liderar nessas horas não é dramatizar a dificuldade. é transformar incerteza em direção possível, mesmo quando nem tudo está resolvido.">
                 <div class="edition-card-header">
                   <span class="edition-card-category">gestão</span>
                   <span class="edition-card-time">6 min</span>
@@ -978,12 +1065,14 @@
                   <p>estabilidade não vem de discurso inspirador. vem de contexto, critério e presença consistente.</p>
                 </div>
                 <div class="edition-card-footer">
-                  <strong>clareza para decisões difíceis</strong>
-                  <span class="edition-card-chip">última edição</span>
+                  <div class="edition-card-actions">
+                    <button class="edition-card-trigger" type="button" data-preview-trigger>ver prévia</button>
+                    <span class="edition-card-chip">última edição</span>
+                  </div>
                 </div>
               </article>
 
-              <article id="repertorio-melhor-decisoes-melhores" class="edition-card" tabindex="0" data-preview-category="mentalidade" data-preview-time="5 min" data-preview-title="repertório melhor, decisões melhores" data-preview-summary="bons julgamentos raramente nascem do improviso. eles se acumulam em leituras, conversas e critério." data-preview-excerpt="decisão boa nem sempre parece brilhante no instante em que é tomada. muitas vezes ela só parece mais silenciosa, mais estável e menos reativa. esse tipo de decisão costuma nascer de repertório.&#10;&#10;é por isso que a newsletter não tenta impressionar. tenta alimentar um tipo de pensamento que volta com você para o trabalho, para a conversa e para o próximo passo.">
+              <article id="repertorio-melhor-decisoes-melhores" class="edition-card" data-preview-category="mentalidade" data-preview-time="5 min" data-preview-title="repertório melhor, decisões melhores" data-preview-summary="bons julgamentos raramente nascem do improviso. eles se acumulam em leituras, conversas e critério." data-preview-excerpt="decisão boa nem sempre parece brilhante no instante em que é tomada. muitas vezes ela só parece mais silenciosa, mais estável e menos reativa. esse tipo de decisão costuma nascer de repertório.&#10;&#10;é por isso que a newsletter não tenta impressionar. tenta alimentar um tipo de pensamento que volta com você para o trabalho, para a conversa e para o próximo passo.">
                 <div class="edition-card-header">
                   <span class="edition-card-category">mentalidade</span>
                   <span class="edition-card-time">5 min</span>
@@ -993,8 +1082,10 @@
                   <p>bons julgamentos raramente nascem do improviso. eles se acumulam em leituras, conversas e critério.</p>
                 </div>
                 <div class="edition-card-footer">
-                  <strong>leve isso para a semana</strong>
-                  <span class="edition-card-chip">curadoria</span>
+                  <div class="edition-card-actions">
+                    <button class="edition-card-trigger" type="button" data-preview-trigger>ver prévia</button>
+                    <span class="edition-card-chip">curadoria</span>
+                  </div>
                 </div>
               </article>
             </div>
@@ -1108,32 +1199,36 @@
     </section>
   </main>
   <div class="editions-preview-modal" data-editions-modal hidden>
-    <div class="editions-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="editions-preview-title">
-      <button class="editions-preview-close" type="button" data-editions-close aria-label="Fechar visualização">×</button>
-      <div class="editions-preview-meta">
-        <span class="edition-card-category" data-preview-category-label>liderança</span>
-        <span data-preview-time-label>5 min</span>
+    <div class="editions-preview-dialog" role="dialog" aria-modal="true" aria-labelledby="editions-preview-title" tabindex="-1">
+      <div class="editions-preview-topbar">
+        <button class="editions-preview-close" type="button" data-editions-close aria-label="Fechar visualização">×</button>
       </div>
-      <h3 id="editions-preview-title" data-preview-title-label>clareza antes da reação</h3>
-      <p class="editions-preview-intro" data-preview-summary-label>quando o time não sabe para onde vai, o problema raramente é esforço. quase sempre é direção.</p>
-      <div class="editions-preview-excerpt">
-        <p data-preview-excerpt-top>quando a pressão aumenta, a tentação é agir rápido demais. mas boa parte da liderança madura nasce do movimento oposto: segurar a pressa o suficiente para separar fato, hipótese e ruído antes de contaminar o time com ansiedade.</p>
-        <p data-preview-excerpt-bottom>o ponto não é parecer calmo o tempo todo. é oferecer direção suficiente para que as pessoas continuem avançando sem depender de certezas artificiais.</p>
-      </div>
-      <div class="editions-preview-gate">
-        <div class="editions-preview-lock">
-          <strong>continue lendo ao se inscrever</strong>
-          <p>o acesso completo às edições fica liberado para quem entra na rotina da newsletter.</p>
-          <form class="newsletter-form" data-newsletter-form>
-            <label class="sr-only" for="preview-email">Digite seu e-mail</label>
-            <div class="email-pill">
-              <span class="email-icon" aria-hidden="true">✉</span>
-              <input id="preview-email" name="email" type="email" placeholder="coloque seu e-mail" required>
-            </div>
-            <button type="submit">quero receber</button>
-          </form>
-          <p class="hero-trustline">gratuita · 1 edição por semana · leitura em 5 min</p>
-          <div class="form-feedback" data-form-feedback aria-live="polite"></div>
+      <div class="editions-preview-scroll" data-editions-scroll>
+        <div class="editions-preview-meta">
+          <span class="edition-card-category" data-preview-category-label>liderança</span>
+          <span data-preview-time-label>5 min</span>
+        </div>
+        <h3 id="editions-preview-title" data-preview-title-label>clareza antes da reação</h3>
+        <p class="editions-preview-intro" data-preview-summary-label>quando o time não sabe para onde vai, o problema raramente é esforço. quase sempre é direção.</p>
+        <div class="editions-preview-excerpt">
+          <p data-preview-excerpt-top>quando a pressão aumenta, a tentação é agir rápido demais. mas boa parte da liderança madura nasce do movimento oposto: segurar a pressa o suficiente para separar fato, hipótese e ruído antes de contaminar o time com ansiedade.</p>
+          <p data-preview-excerpt-bottom>o ponto não é parecer calmo o tempo todo. é oferecer direção suficiente para que as pessoas continuem avançando sem depender de certezas artificiais.</p>
+        </div>
+        <div class="editions-preview-gate">
+          <div class="editions-preview-lock">
+            <strong>continue lendo ao se inscrever</strong>
+            <p>o acesso completo às edições fica liberado para quem entra na rotina da newsletter.</p>
+            <form class="newsletter-form" data-newsletter-form>
+              <label class="sr-only" for="preview-email">Digite seu e-mail</label>
+              <div class="email-pill">
+                <span class="email-icon" aria-hidden="true">✉</span>
+                <input id="preview-email" name="email" type="email" placeholder="coloque seu e-mail" required>
+              </div>
+              <button type="submit">quero receber</button>
+            </form>
+            <p class="hero-trustline">gratuita · 1 edição por semana · leitura em 5 min</p>
+            <div class="form-feedback" data-form-feedback aria-live="polite"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -1195,6 +1290,8 @@
       const prevButton = document.querySelector("[data-editions-prev]");
       const nextButton = document.querySelector("[data-editions-next]");
       const modal = document.querySelector("[data-editions-modal]");
+      const modalDialog = modal?.querySelector(".editions-preview-dialog");
+      const previewScroll = modal?.querySelector("[data-editions-scroll]");
       const closeButton = document.querySelector("[data-editions-close]");
       const previewCategory = document.querySelector("[data-preview-category-label]");
       const previewTime = document.querySelector("[data-preview-time-label]");
@@ -1202,6 +1299,8 @@
       const previewSummary = document.querySelector("[data-preview-summary-label]");
       const previewExcerptTop = document.querySelector("[data-preview-excerpt-top]");
       const previewExcerptBottom = document.querySelector("[data-preview-excerpt-bottom]");
+      const root = document.documentElement;
+      const pageBody = document.body;
       let lastTrigger = null;
 
       if (!carousel || !track) return;
@@ -1337,7 +1436,6 @@
         const categoryLabel = card.querySelector(".edition-card-category");
         const titleLabel = card.querySelector(".edition-card-body h3");
         const summaryLabel = card.querySelector(".edition-card-body p");
-        const footerLabel = card.querySelector(".edition-card-footer strong");
         const chipLabel = card.querySelector(".edition-card-chip");
         card.dataset.previewCategory = data.category;
         card.dataset.previewTitle = data.title;
@@ -1345,7 +1443,6 @@
         if (categoryLabel) categoryLabel.textContent = data.category;
         if (titleLabel) titleLabel.textContent = data.title;
         if (summaryLabel) summaryLabel.textContent = data.summary;
-        if (footerLabel) footerLabel.textContent = data.footer;
         if (chipLabel) chipLabel.textContent = data.chip;
       });
 
@@ -1404,6 +1501,16 @@
       }
 
       const cards = Array.from(track.querySelectorAll(".edition-card"));
+      const previewTriggers = Array.from(track.querySelectorAll("[data-preview-trigger]"));
+      const cloneCards = Array.from(track.querySelectorAll("[data-clone], .is-clone"));
+
+      cloneCards.forEach((card) => {
+        card.setAttribute("aria-hidden", "true");
+        card.style.pointerEvents = "none";
+        card.querySelectorAll("a, button, input, textarea, select, [tabindex]").forEach((element) => {
+          element.setAttribute("tabindex", "-1");
+        });
+      });
 
       const getStep = () => {
         const firstCard = cards[0];
@@ -1413,9 +1520,14 @@
         return firstCard.getBoundingClientRect().width + gap;
       };
 
-      const openPreview = (card) => {
+      const setModalState = (isOpen) => {
+        root.classList.toggle("editions-modal-open", isOpen);
+        pageBody.classList.toggle("editions-modal-open", isOpen);
+      };
+
+      const openPreview = (card, trigger) => {
         if (!modal || !card) return;
-        lastTrigger = card;
+        lastTrigger = trigger || card;
         previewCategory.textContent = card.dataset.previewCategory || "";
         previewTime.textContent = card.dataset.previewTime || "";
         previewTitle.textContent = card.dataset.previewTitle || "";
@@ -1423,15 +1535,17 @@
         const excerpt = (card.dataset.previewExcerpt || "").split("\n\n");
         previewExcerptTop.textContent = excerpt[0] || "";
         previewExcerptBottom.textContent = excerpt[1] || "";
+        if (previewScroll) previewScroll.scrollTop = 0;
+        if (modalDialog) modalDialog.scrollTop = 0;
         modal.hidden = false;
-        document.body.style.overflow = "hidden";
+        setModalState(true);
         closeButton?.focus();
       };
 
       const closePreview = () => {
         if (!modal) return;
         modal.hidden = true;
-        document.body.style.overflow = "";
+        setModalState(false);
         lastTrigger?.focus();
       };
 
@@ -1442,13 +1556,13 @@
         });
       };
 
-      cards.forEach((card) => {
-        card.addEventListener("click", () => openPreview(card));
-        card.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            openPreview(card);
-          }
+      previewTriggers.forEach((trigger) => {
+        const card = trigger.closest(".edition-card");
+        if (!card) return;
+        trigger.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          openPreview(card, trigger);
         });
       });
 

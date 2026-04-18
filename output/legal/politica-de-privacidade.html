@@ -3,395 +3,200 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='icon' type='image/png' sizes='16x16' href='../assets//logos//favicons/favicon-16.png'>
-    <link rel='icon' type='image/png' sizes='32x32' href='../assets//logos//favicons/favicon-32.png'>
-    <link rel='icon' type='image/png' sizes='48x48' href='../assets//logos//favicons/favicon-48.png'>
-    <link rel='icon' type='image/png' sizes='64x64' href='../assets//logos//favicons/favicon-64.png'>
-    <link rel='shortcut icon' href='../assets//logos//favicons/favicon.ico'>
-  <title>PolÃ­tica de Privacidade | Papo de LideranÃ§a</title>
-  <style>
-    :root{--color-primary:#0F2A3D;--color-secondary:#1E4A66;--color-accent:#22A06B;--color-accent-soft:#2FC28C;--color-background:#F7F9FB;--color-surface:#FFFFFF;--color-text:#0B1217;--color-muted:#5B6B75;--color-border:#E4E7EB;--color-gradient:linear-gradient(135deg, #0F2A3D 0%, #1E4A66 50%, #22A06B 100%);--navy: #0F2A3D;--navy-soft: #1E4A66;--green: #22A06B;--green2: #2FC28C;--text: #0B1217;--muted: #5B6B75;--bg:#F7F9FB;--shadow:0 18px 50px rgba(15,42,61,.10)}
-    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg)} a{text-decoration:none;color:inherit}
-    .site-header{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.82);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.3)}
-    .nav-shell{max-width:1220px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative}
-    .brand{display:flex;align-items:center;gap:12px}.brand-mark{width:42px;height:42px;border-radius:14px;background:radial-gradient(circle at top left,rgba(255,255,255,.28),transparent 45%),linear-gradient(135deg,var(--navy) 0%,#1E4A66 55%,var(--green) 100%);box-shadow:0 14px 30px rgba(15,42,61,.16)}.brand-name{font-size:20px;font-weight:700;color:var(--navy);letter-spacing:-.02em}
-    .nav-right{display:flex;align-items:center;gap:22px;padding:10px 12px 10px 18px;border-radius:999px;background:rgba(255,255,255,.84);border:1px solid rgba(228,231,235,.92);box-shadow:0 12px 28px rgba(15,42,61,.05)}
-    .nav-links{display:flex;align-items:center;gap:18px}.nav-links a{position:relative;font-size:15px;color:var(--navy-soft);font-weight:600}.nav-links a:after{content:"";position:absolute;left:0;bottom:-8px;width:100%;height:2px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}.nav-links a:hover:after,.nav-links .is-active:after{transform:scaleX(1)}.nav-links .is-active{color:var(--navy)}
-    .nav-cta{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;color:#fff;font-weight:700;background:radial-gradient(circle at top left,rgba(255,255,255,.22),transparent 40%),linear-gradient(135deg,#22A06B 0%,#2FC28C 100%);box-shadow:0 18px 34px rgba(34,160,107,.20);padding:13px 20px}
-    .hero-wrap{padding:40px 18px 22px;background:linear-gradient(180deg,#0F2A3D 0%,#1E4A66 100%)} .hero-card{max-width:1220px;margin:0 auto;border-radius:32px;overflow:hidden;box-shadow:var(--shadow);background:radial-gradient(circle at top right,rgba(47,194,140,.16),transparent 28%),linear-gradient(135deg,#0F2A3D 0%,#1E4A66 50%,#22A06B 100%);color:#fff;padding:58px 58px 52px}
-    .eyebrow,.section-badge{display:inline-flex;padding:8px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.eyebrow{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);margin-bottom:18px}.section-badge{background:#F1FBF7;color:var(--green);margin-bottom:16px}
-    h1{margin:0;max-width:820px;font-size:52px;line-height:1.04;letter-spacing:-.03em}.hero-subtitle{max-width:760px;font-size:20px;line-height:1.75;margin:20px 0 0;color:#d9e9f5}
-    .page-wrap{max-width:1220px;margin:0 auto;padding:24px 18px 24px}.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:22px;align-items:start}.toc-card,.policy-card,.notice-card{background:rgba(255,255,255,.92);border:1px solid rgba(228,231,235,.92);border-radius:28px;box-shadow:0 12px 28px rgba(15,42,61,.05)}.toc-card{position:sticky;top:92px;padding:24px}.toc-card h2{margin:0 0 14px;font-size:20px;color:var(--navy)}.toc-list{display:grid;gap:10px}.toc-link{display:block;padding:10px 14px;border:1px solid var(--line);border-radius:16px;background:#F7F9FB;color:var(--navy-soft);font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}.policy-card{padding:34px}.notice-card{padding:22px;margin-bottom:18px;background:linear-gradient(135deg,#0F2A3D 0%,#1E4A66 100%)}.notice-card p{margin:0;color:#fff;font-size:15px;line-height:1.8}
-    .intro{font-size:18px;line-height:1.9;color:#5B6B75;margin:0 0 26px}.policy-card h2{margin:34px 0 14px;font-size:30px;line-height:1.14;color:var(--navy);letter-spacing:-.02em;scroll-margin-top:96px}.policy-card p{margin:0 0 16px;font-size:16px;line-height:1.9;color:#5B6B75}.policy-card ul{margin:0 0 18px;padding-left:22px}.policy-card li{margin:0 0 8px;font-size:16px;line-height:1.8;color:#5B6B75}.defs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.def{padding:18px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,#fff 0%,#f8fbff 100%)}.def strong{display:block;margin-bottom:8px;color:var(--navy)}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:22px;margin:12px 0 24px;background:#fff}table{width:100%;border-collapse:collapse;min-width:760px}th,td{text-align:left;vertical-align:top;padding:16px 18px;border-bottom:1px solid rgba(228,231,235,.92);font-size:15px;line-height:1.7}th{background:#f3faf7;color:var(--navy);font-size:13px;text-transform:uppercase;letter-spacing:.06em}tr:last-child td{border-bottom:none}
-    .contact-box{margin-top:22px;padding:22px;border-radius:22px;background:linear-gradient(135deg,#0F2A3D 0%,#1E4A66 100%)}.contact-box p,.contact-box strong{color:#fff}
-    .footer{background:linear-gradient(180deg,#0B1217 0%,#0F2A3D 100%);color:rgba(224,236,245,.88);margin-top:24px}.footer-shell{max-width:1220px;margin:0 auto;padding:34px 24px 18px}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:22px;padding-bottom:24px}.footer-column h3,.footer-brand h3,.footer-newsletter h3{margin:0 0 12px;color:#fff;font-size:17px;line-height:1.25}.footer-brand p,.footer-column p,.footer-newsletter p{margin:0;font-size:14px;line-height:1.8;color:rgba(212,227,236,.78)}.footer-brand-mark{display:inline-block;width:42px;height:42px;border-radius:14px;margin-bottom:14px;background:radial-gradient(circle at top left,rgba(255,255,255,.25),transparent 45%),linear-gradient(135deg,#0F2A3D 0%,#1E4A66 50%,#22A06B 100%);box-shadow:0 14px 30px rgba(0,0,0,.18)}.footer-nav{display:grid;gap:10px}.footer-socials{display:flex;gap:10px;flex-wrap:wrap}.footer-nav a,.footer-legal a{color:rgba(224,236,245,.86)}.footer-socials a{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);color:#ffffff;border:1px solid rgba(255,255,255,.08);transition:transform .2s ease,background .2s ease,border-color .2s ease}.footer-socials a:hover{transform:translateY(-1px);background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.18)}.footer-socials svg{width:18px;height:18px;fill:currentColor}.footer-contact{display:grid;gap:10px}.footer-contact strong{display:block;color:#fff;font-size:14px;margin-bottom:4px}.footer-newsletter-form{display:grid;gap:10px;margin-top:14px}.footer-newsletter-input{width:100%;height:46px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.08);color:#fff;padding:0 14px;outline:none}.footer-newsletter-input::placeholder{color:rgba(224,236,245,.56)}.footer-newsletter-button{display:inline-flex;align-items:center;justify-content:center;height:46px;border:none;border-radius:999px;background:radial-gradient(circle at top left,rgba(255,255,255,.22),transparent 40%),linear-gradient(135deg,#22A06B 0%,#2FC28C 100%);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 14px 24px rgba(34,160,107,.18)}.footer-note{margin-top:10px;font-size:12px;color:rgba(212,227,236,.62)}.footer-bottom{border-top:1px solid rgba(220,232,242,.12);padding-top:16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:rgba(212,227,236,.64)}.footer-legal{display:flex;gap:18px;flex-wrap:wrap}
-    @media screen and (max-width:980px){.nav-right{gap:14px;padding:10px 12px}.nav-links{gap:14px}.layout{grid-template-columns:1fr}.toc-card{position:static}.footer-grid{grid-template-columns:1fr 1fr}}
-    @media screen and (max-width:640px){.nav-shell{padding:14px 16px}.nav-right{display:none}.hero-wrap{padding:20px 10px 18px}.hero-card{padding:36px 22px 30px}.page-wrap{padding:18px 10px 18px}.toc-card,.policy-card{padding:22px}.defs{grid-template-columns:1fr}h1{font-size:38px}.hero-subtitle,.intro{font-size:16px}.policy-card h2{font-size:26px}.footer-shell{padding:28px 16px 18px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;align-items:flex-start}}
-  .footer-mailerlite{margin-top:2px}.footer-newsletter{display:grid;align-content:start;gap:8px}.footer-newsletter h3{margin:0;color:#fff;font-size:15px;line-height:1.2}.footer-newsletter p{display:none}.footer-ml-embedded{width:100%}.footer-ml-embedded .ml-form-embedWrapper,.footer-ml-embedded .ml-form-embedContainer,.footer-ml-embedded .ml-form-embedBody{background:transparent!important;border:none!important;box-shadow:none!important;padding:0!important;margin:0!important;max-width:none!important}.footer-ml-embedded .ml-form-embedHeader,.footer-ml-embedded .ml-form-formContent h1,.footer-ml-embedded .ml-form-formContent h2,.footer-ml-embedded .ml-form-formContent h3,.footer-ml-embedded .ml-form-formContent h4,.footer-ml-embedded .ml-form-formContent p{display:none!important}.footer-ml-embedded form{display:grid!important;gap:10px!important;margin:0!important}.footer-ml-embedded .ml-form-formContent,.footer-ml-embedded .ml-form-fieldRow{margin:0!important;width:100%!important}.footer-ml-embedded .ml-field-group,.footer-ml-embedded .ml-field-group input,.footer-ml-embedded input[type="email"]{width:100%!important}.footer-ml-embedded input[type="email"]{height:46px!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:14px!important;background:rgba(255,255,255,.08)!important;color:#fff!important;padding:0 14px!important;outline:none!important;box-shadow:none!important}.footer-ml-embedded input[type="email"]::placeholder{color:rgba(224,236,245,.56)!important}.footer-ml-embedded .ml-form-embedSubmit{margin:0!important;width:100%!important}.footer-ml-embedded .ml-form-embedSubmit > * + *{display:none!important}.footer-ml-embedded button,.footer-ml-embedded input[type="submit"]{display:inline-flex!important;align-items:center!important;justify-content:center;width:100%!important;height:46px!important;border:none!important;border-radius:999px!important;background:radial-gradient(circle at top left,rgba(255,255,255,.22),transparent 40%),linear-gradient(135deg,#22A06B 0%,#2FC28C 100%)!important;color:#fff!important;font-weight:700!important;cursor:pointer!important;box-shadow:0 14px 24px rgba(34,160,107,.18)!important;padding:0 18px!important}.footer-ml-embedded .ml-form-successBody{margin-top:6px;display:block!important;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 16px;color:#fff}.footer-ml-embedded .ml-form-successBody h4{margin:0 0 6px;color:#fff;font-size:16px;line-height:1.3}.footer-ml-embedded .ml-form-successBody p{display:block!important;margin:0;color:rgba(224,236,245,.82)!important;font-size:13px!important;line-height:1.6!important}</style>
-<link rel="stylesheet" href="../assets/css/page-transition.css">
-<style id="footer-brand-refine">
-  .footer{margin-top:32px!important;background:linear-gradient(180deg,#0B1217 0%,#0F2A3D 100%)!important;color:rgba(224,236,245,.88)!important}
-  .footer-shell{width:min(1220px,calc(100% - 48px))!important;max-width:none!important;margin:0 auto!important;padding:40px 0 22px!important;background:transparent!important;border-radius:0!important;box-shadow:none!important}
-  .footer-grid{display:grid!important;grid-template-columns:minmax(240px,1.15fr) minmax(140px,max-content) minmax(200px,max-content) minmax(220px,max-content)!important;justify-content:space-between!important;gap:30px!important;padding-bottom:28px!important;align-items:start!important}
-  .footer-grid>.footer-column:last-child{justify-self:end!important;width:min(100%,220px)!important}
-  .footer-brand{display:grid!important;grid-template-columns:38px minmax(0,1fr)!important;column-gap:14px!important;row-gap:12px!important;align-items:center!important}
-  .footer-brand-mark{display:block!important;width:38px!important;height:38px!important;margin:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;object-fit:contain!important;grid-column:1!important;grid-row:1!important}
-  .footer-brand h3{margin:0!important;color:#fff!important;font-size:18px!important;font-weight:700!important;line-height:1.08!important;letter-spacing:-.02em!important;grid-column:2!important;grid-row:1!important}
-  .footer-brand p{grid-column:1 / -1!important;max-width:32ch!important;margin:0!important;font-size:14px!important;font-weight:400!important;color:rgba(224,236,245,.74)!important;line-height:1.78!important}
-  .footer-column h3{margin:0 0 14px!important;color:#fff!important;font-size:16px!important;font-weight:700!important;line-height:1.15!important;letter-spacing:-.01em!important}
-  .footer-column>p{margin:0 0 12px!important;font-size:14px!important;color:rgba(224,236,245,.74)!important;line-height:1.6!important}
-  .footer-nav{display:grid!important;gap:12px!important;align-content:start!important}
-  .footer-nav a,.footer-legal a{font-size:14px!important;font-weight:400!important;color:rgba(224,236,245,.82)!important;transition:color .2s ease,opacity .2s ease!important}
-  .footer-nav a:hover,.footer-legal a:hover{color:#fff!important}
-  .footer-contact{display:grid!important;gap:14px!important;align-content:start!important}
-  .footer-contact strong{display:block!important;margin-bottom:5px!important;color:#fff!important;font-size:14px!important;font-weight:700!important}
-  .footer-contact span{font-size:14px!important;font-weight:400!important;color:rgba(224,236,245,.82)!important}
-  .footer-socials{display:flex!important;align-items:center!important;flex-wrap:wrap!important;gap:12px!important;justify-content:center!important}
-  .footer-socials a{display:flex!important;align-items:center!important;justify-content:center!important;width:40px!important;height:40px!important;flex:0 0 40px!important;margin:0!important;padding:0!important;color:#fff!important;background:rgba(255,255,255,.05)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:999px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;transition:transform .22s ease,background .22s ease,border-color .22s ease!important}
-  .footer-socials a:hover{transform:translateY(-2px)!important;background:rgba(255,255,255,.1)!important;border-color:rgba(255,255,255,.2)!important}
-  .footer-socials svg{display:flex!important;align-items:center!important;justify-content:center!important;width:16px!important;height:16px!important;flex:0 0 16px!important;margin:0!important;padding:0!important;fill:currentColor!important;stroke:currentColor!important;backface-visibility:hidden!important;transform:translateZ(0)!important;transform-origin:center!important;overflow:visible!important}
-  .footer-socials svg path{fill:currentColor!important;stroke:none!important}
-  .footer-bottom{border-top:1px solid rgba(220,232,242,.1)!important;padding-top:18px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:20px!important;flex-wrap:wrap!important;font-size:13px!important;font-weight:400!important;color:rgba(212,227,236,.64)!important}
-  .footer-legal{display:flex!important;gap:20px!important;flex-wrap:wrap!important}`r`n  .content-wrap,.page-wrap,.content,.wrap{padding-bottom:0!important}`r`n  .content-wrap>*:last-child,.page-wrap>*:last-child,.content>*:last-child,.wrap>*:last-child,.content-shell>*:last-child,.page-shell>*:last-child,.layout>*:last-child,.content-grid>*:last-child,.policy-card>*:last-child,.article-shell>*:last-child,main>*:last-child,.section:last-child,.newsletter-cta:last-child,.cta-panel:last-child,.cta-section:last-child,.gate-card:last-child,.featured:last-child,.filter-bar:last-child{margin-bottom:0!important}
-  @media screen and (max-width:640px){.footer-shell{width:min(1220px,calc(100% - 24px))!important;padding:30px 0 20px!important}.footer-grid{grid-template-columns:1fr!important;gap:24px!important}.footer-grid>.footer-column:last-child{justify-self:start!important;width:100%!important}.footer-brand{grid-template-columns:34px minmax(0,1fr)!important}.footer-brand-mark{width:34px!important;height:34px!important;object-fit:contain!important}.footer-socials{justify-content:flex-start!important}.footer-socials a{width:38px!important;height:38px!important;flex:0 0 38px!important}.footer-bottom{flex-direction:column!important;align-items:flex-start!important}.content-wrap,.page-wrap,.content,.wrap{padding-bottom:0!important}}
-</style>
-<!-- Internal Header Override -->
-<style id="internal-header-refine">
-  .site-header {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 30 !important;
-    background: transparent !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
-  }
-
-  .site-header::after {
-    display: none !important;
-  }
-
-  .site-header.is-scrolled {
-    background: transparent !important;
-    border-bottom: none !important;
-    box-shadow: none !important;
-  }
-
-  .nav-shell {
-    max-width: 1220px !important;
-    margin: 0 auto !important;
-    padding: 18px 24px 20px !important;
-    display: grid !important;
-    grid-template-columns: auto 1fr !important;
-    align-items: center !important;
-    gap: 22px !important;
-    position: relative !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-
-  .brand {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-  }
-
-  .brand-mark {
-    width: 42px !important;
-    height: 42px !important;
-    border-radius: 14px !important;
-    background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.22), transparent 48%), linear-gradient(135deg, #10314f 0%, #1E4A66 50%, #22A06B 100%) !important;
-    box-shadow: 0 14px 28px rgba(4, 18, 31, 0.22) !important;
-  }
-
-  .brand-name {
-    font-size: 20px !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.03em !important;
-    color: rgba(248, 251, 253, 0.98) !important;
-    text-shadow: 0 1px 1px rgba(4, 18, 31, 0.22) !important;
-  }
-
-  .nav-right {
-    display: flex !important;
-    align-items: center !important;
-    justify-self: center !important;
-    gap: 24px !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-
-  .nav-links {
-    display: flex !important;
-    align-items: center !important;
-    gap: 22px !important;
-  }
-
-  .nav-links a {
-    position: relative !important;
-    font-size: 15px !important;
-    font-weight: 500 !important;
-    letter-spacing: -0.01em !important;
-    color: rgba(233, 241, 247, 0.88) !important;
-    text-shadow: 0 1px 1px rgba(4, 18, 31, 0.22) !important;
-    transition: color .22s ease !important;
-  }
-
-  .nav-links a::after {
-    content: "" !important;
-    position: absolute !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: -8px !important;
-    height: 2px !important;
-    border-radius: 999px !important;
-    background: linear-gradient(135deg, #169b6b 0%, #2FC28C 100%) !important;
-    transform: scaleX(0) !important;
-    transform-origin: center !important;
-    transition: transform .22s ease !important;
-  }
-
-  .nav-links a:hover,
-  .nav-links a:focus-visible,
-  .nav-links .is-active {
-    color: rgba(248, 251, 253, 0.98) !important;
-  }
-
-  .nav-links a:hover::after,
-  .nav-links a:focus-visible::after,
-  .nav-links .is-active::after {
-    transform: scaleX(1) !important;
-  }
-
-  .nav-cta {
-    display: none !important;
-    align-items: center !important;
-    justify-content: center !important;
-    padding: 13px 22px !important;
-    border-radius: 999px !important;
-    background: linear-gradient(135deg, #169b6b 0%, #2FC28C 100%) !important;
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    box-shadow: 0 12px 24px rgba(22, 155, 107, 0.16) !important;
-    transition: transform .22s ease, box-shadow .22s ease !important;
-  }
-
-  .nav-cta:hover,
-  .nav-cta:focus-visible {
-    transform: translateY(-1px) !important;
-    box-shadow: 0 18px 32px rgba(22, 155, 107, 0.22) !important;
-  }
-
-  .nav-toggle-label {
-    display: none !important;
-    width: 46px !important;
-    height: 46px !important;
-    border-radius: 14px !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    background: rgba(255, 255, 255, 0.06) !important;
-    align-items: center !important;
-    justify-content: center !important;
-    cursor: pointer !important;
-  }
-
-  .nav-toggle-label span,
-  .nav-toggle-label span:before,
-  .nav-toggle-label span:after {
-    width: 20px !important;
-    height: 2px !important;
-    background: #f3f8fc !important;
-    border-radius: 999px !important;
-    position: relative !important;
-    display: block !important;
-  }
-
-  .nav-toggle-label span:before,
-  .nav-toggle-label span:after {
-    content: "" !important;
-    position: absolute !important;
-    left: 0 !important;
-  }
-
-  .nav-toggle-label span:before {
-    top: -6px !important;
-  }
-
-  .nav-toggle-label span:after {
-    top: 6px !important;
-  }
-
-  .hero-wrap {
-    margin-top: 0 !important;
-    padding-top: 108px !important;
-  }
-
-  @media screen and (max-width: 920px) {
-    .nav-shell {
-      display: flex !important;
-      justify-content: space-between !important;
-    }
-
-    .nav-toggle-label {
-      display: inline-flex !important;
-    }
-
-    .nav-right {
-      position: absolute !important;
-      left: 16px !important;
-      right: 16px !important;
-      margin-right: 0 !important;
-      top: calc(100% + 10px) !important;
-      display: none !important;
-      flex-direction: column !important;
-      align-items: stretch !important;
-      gap: 16px !important;
-      padding: 18px !important;
-      border-radius: 24px !important;
-      background: rgba(9, 28, 45, 0.94) !important;
-      border: 1px solid rgba(255, 255, 255, 0.08) !important;
-      box-shadow: 0 24px 60px rgba(1, 10, 18, 0.22) !important;
-      backdrop-filter: blur(14px) !important;
-    }
-
-    .nav-links {
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      gap: 14px !important;
-    }
-
-    .nav-links a {
-      color: rgba(233, 241, 247, 0.88) !important;
-    }
-
-    .nav-toggle:checked ~ .nav-right {
-      display: flex !important;
-    }
-
-    .nav-toggle:checked + .nav-toggle-label span {
-      background: transparent !important;
-    }
-
-    .nav-toggle:checked + .nav-toggle-label span:before {
-      transform: translateY(6px) rotate(45deg) !important;
-    }
-
-    .nav-toggle:checked + .nav-toggle-label span:after {
-      transform: translateY(-6px) rotate(-45deg) !important;
-    }
-  }
-
-  @media screen and (max-width: 720px) {
-    .nav-shell {
-      padding: 14px 16px 16px !important;
-    }
-
-    .brand-name {
-      font-size: 1.34rem !important;
-    }
-
-    .nav-cta {
-      display: none !important;
-    }
-
-    .hero-wrap {
-      padding-top: 88px !important;
-    }
-  }
-</style>
-<!-- End Internal Header Override --><link rel="stylesheet" href="../assets/css/logo-theme.css">
-<link rel="stylesheet" href="../assets/css/logo-theme.css">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logos/favicons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/logos/favicons/favicon-32.png">
+  <link rel="shortcut icon" href="../assets/logos/favicons/favicon.ico">
+  <title>política de privacidade | Papo de Liderança</title>
+  <meta name="description" content="Política de privacidade do Papo de Liderança, apresentada com clareza, leitura confortável e estrutura editorial discreta.">
+  <link rel="stylesheet" href="../landing-newsletter/style.css">
+  <link rel="stylesheet" href="../assets/css/page-transition.css">
+  <link rel="stylesheet" href="../assets/css/logo-theme.css">
+  <link rel="stylesheet" href="../assets/css/legal-pages.css">
 </head>
-<body class="theme-dark" data-scroll-logo="dark">
-  <header class="site-header" data-site-header="internal"><div class="nav-shell"><a class="brand" href="../landing-newsletter/index.html"><img class="logo" src="../assets/logo-light.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de LideranÃ§a"><span class="brand-name">Papo de LideranÃ§a</span></a><nav class="nav-right" aria-label="NavegaÃ§Ã£o principal"><div class="nav-links"><a href="../landing-newsletter/index.html">Home</a><a href="../pages/sobre.html">Sobre</a><a href="../pages/artigos.html">Artigos</a><a href="../pages/newsletter.html">Newsletter</a><a href="../pages/contato.html">Contato</a></div><a class="nav-cta" href="../pages/newsletter.html">Inscrever-se</a></nav></div></header>
-  <div class="hero-wrap"><section class="hero-card"><div class="eyebrow">InformaÃ§Ãµes Legais</div><h1>PolÃ­tica de Privacidade</h1><p class="hero-subtitle">Esta PolÃ­tica de Privacidade descreve, de forma detalhada, como o Papo de LideranÃ§a coleta, utiliza, armazena, compartilha, protege e trata dados pessoais no contexto de seu site, de seus formulÃ¡rios e de sua newsletter, em conformidade com a LGPD.</p></section></div>
-  <main class="page-wrap"><div class="layout"><aside class="toc-card"><h2>SumÃ¡rio</h2><div class="toc-list"><a class="toc-link" href="#identificacao">IdentificaÃ§Ã£o do Controlador</a><a class="toc-link" href="#definicoes">DefiniÃ§Ãµes TerminolÃ³gicas</a><a class="toc-link" href="#visao-geral">PreÃ¢mbulo / VisÃ£o Geral</a><a class="toc-link" href="#base-legal">Base Legal</a><a class="toc-link" href="#nao-entrega">ConsequÃªncias da NÃ£o Entrega</a><a class="toc-link" href="#dados">Dados Coletados</a><a class="toc-link" href="#finalidades">Finalidades Resumidas</a><a class="toc-link" href="#compartilhamento">Compartilhamento</a><a class="toc-link" href="#transferencia">TransferÃªncia Internacional</a><a class="toc-link" href="#cookies">Cookies</a><a class="toc-link" href="#retencao">RetenÃ§Ã£o</a><a class="toc-link" href="#seguranca">SeguranÃ§a</a><a class="toc-link" href="#direitos">Direitos do Titular</a><a class="toc-link" href="#exercicio">Como Exercer Direitos</a><a class="toc-link" href="../pages/newsletter.html">Newsletter</a><a class="toc-link" href="#terceiros">Sites de Terceiros</a><a class="toc-link" href="#atualizacoes">AtualizaÃ§Ãµes</a><a class="toc-link" href="#contato">Contato</a></div></aside><section class="policy-card"><div class="notice-card"><p>O Papo de LideranÃ§a trata privacidade como parte essencial da relaÃ§Ã£o de confianÃ§a com leitores, assinantes e visitantes. O uso do site implica ciÃªncia desta polÃ­tica, sem prejuÃ­zo dos direitos legais assegurados ao titular.</p></div><p class="intro">Esta polÃ­tica foi estruturada para um ambiente digital de conteÃºdo, newsletter e captaÃ§Ã£o de leads, considerando formulÃ¡rios de contato, automaÃ§Ã£o de e-mail, cookies, analytics, hospedagem e demais recursos necessÃ¡rios Ã  operaÃ§Ã£o do site.</p><h2 id="identificacao">1. IdentificaÃ§Ã£o do controlador</h2><p>O <strong>Papo de LideranÃ§a</strong> Ã© o responsÃ¡vel pelo tratamento dos dados pessoais coletados por meio de seu site, formulÃ¡rios, pÃ¡ginas de captura, newsletter e canais de relacionamento digital vinculados Ã  plataforma. Para os fins da Lei Geral de ProteÃ§Ã£o de Dados Pessoais, o Papo de LideranÃ§a atua como <strong>controlador</strong>, pois define as finalidades e os meios essenciais de tratamento dos dados pessoais no contexto de sua operaÃ§Ã£o.</p><p>Na condiÃ§Ã£o de controlador, o projeto pode contar com operadores e fornecedores especializados para viabilizar infraestrutura, formulÃ¡rios, automaÃ§Ã£o de e-mail, hospedagem, analytics e suporte tÃ©cnico, sem afastar sua responsabilidade pelas decisÃµes centrais de tratamento.</p><h2 id="definicoes">2. DefiniÃ§Ãµes terminolÃ³gicas</h2><div class="defs"><div class="def"><strong>Titular dos dados</strong><span>Pessoa natural a quem se referem os dados pessoais tratados, como visitantes, assinantes da newsletter e usuÃ¡rios que entram em contato com o site.</span></div><div class="def"><strong>Controlador</strong><span>Pessoa natural ou jurÃ­dica responsÃ¡vel pelas decisÃµes referentes ao tratamento de dados pessoais. Nesta polÃ­tica, o Papo de LideranÃ§a atua como controlador.</span></div><div class="def"><strong>Operador</strong><span>Pessoa natural ou jurÃ­dica que realiza o tratamento de dados pessoais em nome do controlador, a exemplo de serviÃ§os de e-mail marketing, hospedagem e anÃ¡lise.</span></div><div class="def"><strong>Dados pessoais</strong><span>InformaÃ§Ãµes relacionadas a pessoa natural identificada ou identificÃ¡vel, como nome, e-mail, endereÃ§o IP e dados de navegaÃ§Ã£o associados a um indivÃ­duo.</span></div><div class="def"><strong>Tratamento</strong><span>Toda operaÃ§Ã£o realizada com dados pessoais, como coleta, uso, armazenamento, acesso, compartilhamento, eliminaÃ§Ã£o, anonimizaÃ§Ã£o ou bloqueio.</span></div><div class="def"><strong>Cookies</strong><span>Arquivos ou identificadores armazenados no dispositivo do usuÃ¡rio para viabilizar funcionalidades, personalizaÃ§Ã£o, mediÃ§Ã£o e melhoria de navegaÃ§Ã£o.</span></div><div class="def"><strong>Consentimento</strong><span>ManifestaÃ§Ã£o livre, informada e inequÃ­voca pela qual o titular concorda com o tratamento de seus dados para finalidade determinada.</span></div><div class="def"><strong>Site / plataforma</strong><span>Conjunto de pÃ¡ginas, formulÃ¡rios, conteÃºdos e integraÃ§Ãµes digitais disponibilizados pelo Papo de LideranÃ§a.</span></div></div><h2 id="visao-geral">3. PreÃ¢mbulo / visÃ£o geral</h2><p>O Papo de LideranÃ§a utiliza dados pessoais de maneira compatÃ­vel com sua atividade editorial, institucional e de relacionamento, buscando adotar prÃ¡ticas de transparÃªncia, minimizaÃ§Ã£o de coleta, seguranÃ§a da informaÃ§Ã£o e respeito aos direitos do titular. Esta polÃ­tica regula a coleta, o uso, o armazenamento, o compartilhamento, a proteÃ§Ã£o, a retenÃ§Ã£o e a eliminaÃ§Ã£o de dados tratados no Ã¢mbito do site.</p><p>O tratamento pode ocorrer em pÃ¡ginas pÃºblicas, formulÃ¡rios de contato, inscriÃ§Ãµes em newsletter, integraÃ§Ãµes com plataformas de automaÃ§Ã£o, anÃ¡lises de navegaÃ§Ã£o, seguranÃ§a da infraestrutura e atividades relacionadas Ã  produÃ§Ã£o e distribuiÃ§Ã£o de conteÃºdo sobre lideranÃ§a, carreira, mentalidade e produtividade.</p><h2 id="base-legal">4. Base legal para o tratamento de dados</h2><p>Os dados pessoais tratados pelo Papo de LideranÃ§a serÃ£o processados com fundamento em bases legais vÃ¡lidas previstas na LGPD, conforme a natureza da interaÃ§Ã£o e a finalidade do tratamento.</p><ul><li><strong>Consentimento</strong>, especialmente para envio de newsletter, comunicaÃ§Ãµes editoriais e materiais relacionados.</li><li><strong>LegÃ­timo interesse</strong>, para seguranÃ§a do site, anÃ¡lise de navegaÃ§Ã£o, aperfeiÃ§oamento de conteÃºdo, melhoria da experiÃªncia e mensuraÃ§Ã£o de desempenho, desde que observados os direitos do titular.</li><li><strong>ExecuÃ§Ã£o de procedimentos preliminares relacionados a contato ou relacionamento</strong>, quando o usuÃ¡rio solicita retorno, envia mensagem ou manifesta interesse em relacionamento futuro.</li><li><strong>Cumprimento de obrigaÃ§Ã£o legal ou regulatÃ³ria</strong>, quando o tratamento for necessÃ¡rio para atender exigÃªncias legais, ordens judiciais, requisiÃ§Ãµes de autoridades ou deveres de conformidade.</li></ul><h2 id="nao-entrega">5. ConsequÃªncias da nÃ£o entrega dos dados</h2><p>O fornecimento de determinados dados pessoais pode ser necessÃ¡rio para viabilizar funcionalidades especÃ­ficas do site. A recusa em fornecer certas informaÃ§Ãµes poderÃ¡ impedir o envio da newsletter, dificultar a resposta a mensagens encaminhadas pelos formulÃ¡rios, limitar a personalizaÃ§Ã£o de comunicaÃ§Ãµes ou comprometer o funcionamento de certos recursos tÃ©cnicos relacionados Ã  experiÃªncia de navegaÃ§Ã£o.</p><p>A negativa de fornecimento, quando o dado for opcional, nÃ£o impede necessariamente o acesso a conteÃºdos pÃºblicos do site, mas poderÃ¡ restringir serviÃ§os adicionais e formas de relacionamento oferecidas pela plataforma.</p><h2 id="dados">6. Dados coletados, forma de coleta e finalidades</h2><div class="table-wrap"><table><thead><tr><th>Dado coletado</th><th>Como Ã© coletado</th><th>Finalidade de uso</th></tr></thead><tbody><tr><td>Nome</td><td>Informado voluntariamente em formulÃ¡rios, quando aplicÃ¡vel</td><td>IdentificaÃ§Ã£o, personalizaÃ§Ã£o da comunicaÃ§Ã£o e organizaÃ§Ã£o de relacionamento</td></tr><tr><td>E-mail</td><td>Inserido em formulÃ¡rios de newsletter ou contato</td><td>Envio de newsletter, resposta a mensagens e comunicaÃ§Ãµes institucionais</td></tr><tr><td>Telefone</td><td>Informado voluntariamente, quando disponÃ­vel</td><td>Contato complementar e atendimento a demandas especÃ­ficas</td></tr><tr><td>Empresa / cargo</td><td>Informado em futuros formulÃ¡rios ou interaÃ§Ãµes profissionais</td><td>ContextualizaÃ§Ã£o de perfil e personalizaÃ§Ã£o de comunicaÃ§Ã£o</td></tr><tr><td>EndereÃ§o IP</td><td>Capturado automaticamente por servidores e serviÃ§os tÃ©cnicos</td><td>SeguranÃ§a, prevenÃ§Ã£o a abuso, anÃ¡lise tÃ©cnica e mensuraÃ§Ã£o de uso</td></tr><tr><td>LocalizaÃ§Ã£o aproximada</td><td>Inferida por IP ou recursos analÃ­ticos</td><td>CompreensÃ£o agregada de audiÃªncia e orientaÃ§Ã£o editorial</td></tr><tr><td>Navegador, dispositivo e sistema operacional</td><td>Coletados automaticamente por cookies, logs e analytics</td><td>Compatibilidade, suporte tÃ©cnico, performance e experiÃªncia</td></tr><tr><td>PÃ¡ginas visitadas</td><td>Registradas por analytics, logs e cookies</td><td>AnÃ¡lise de interesse, arquitetura de navegaÃ§Ã£o e melhoria de conteÃºdo</td></tr><tr><td>Tempo de navegaÃ§Ã£o</td><td>Coletado automaticamente por ferramentas analÃ­ticas</td><td>AvaliaÃ§Ã£o de engajamento, usabilidade e desempenho editorial</td></tr><tr><td>Origem de trÃ¡fego</td><td>Capturada por parÃ¢metros, analytics e links de referÃªncia</td><td>MensuraÃ§Ã£o de canais, avaliaÃ§Ã£o de campanhas e entendimento de audiÃªncia</td></tr><tr><td>Cookies e identificadores</td><td>Armazenados no navegador ou dispositivo do usuÃ¡rio</td><td>Funcionamento tÃ©cnico, personalizaÃ§Ã£o, mediÃ§Ã£o e anÃ¡lise</td></tr></tbody></table></div><h2 id="finalidades">7. Finalidades resumidas do tratamento</h2><ul><li>enviar newsletter e conteÃºdos editoriais;</li><li>responder mensagens e solicitaÃ§Ãµes de contato;</li><li>melhorar a experiÃªncia do usuÃ¡rio no site;</li><li>analisar navegaÃ§Ã£o, desempenho e comportamento de uso;</li><li>personalizar comunicaÃ§Ã£o e segmentar conteÃºdos de forma razoÃ¡vel;</li><li>realizar aÃ§Ãµes de marketing compatÃ­veis com a relaÃ§Ã£o estabelecida;</li><li>mensurar desempenho do site, pÃ¡ginas, formulÃ¡rios e conteÃºdos;</li><li>orientar a criaÃ§Ã£o de materiais mais relevantes para a audiÃªncia.</li></ul><h2 id="compartilhamento">8. Compartilhamento de dados</h2><p>Os dados pessoais nÃ£o sÃ£o vendidos. O compartilhamento poderÃ¡ ocorrer apenas com operadores e fornecedores essenciais ao funcionamento da plataforma, tais como serviÃ§os de e-mail marketing, provedores de hospedagem, ferramentas de analytics, soluÃ§Ãµes de formulÃ¡rio e prestadores tÃ©cnicos necessÃ¡rios Ã  manutenÃ§Ã£o, seguranÃ§a e evoluÃ§Ã£o do site.</p><p>Esse compartilhamento ocorre na extensÃ£o estritamente necessÃ¡ria Ã  execuÃ§Ã£o das finalidades legÃ­timas e operacionais do Papo de LideranÃ§a.</p><h2 id="transferencia">9. TransferÃªncia internacional de dados</h2><p>Algumas ferramentas utilizadas pelo site poderÃ£o armazenar ou processar dados fora do Brasil, especialmente no contexto de plataformas de e-mail marketing, analytics, infraestrutura e suporte tecnolÃ³gico. Quando houver transferÃªncia internacional, o Papo de LideranÃ§a buscarÃ¡ adotar medidas compatÃ­veis com a legislaÃ§Ã£o, incluindo seleÃ§Ã£o criteriosa de fornecedores e salvaguardas adequadas, quando aplicÃ¡veis.</p><h2 id="cookies">10. Cookies e tecnologias de rastreamento</h2><p>Cookies sÃ£o pequenos arquivos ou identificadores utilizados para garantir funcionalidades, lembrar preferÃªncias, compreender padrÃµes de uso e medir desempenho. No contexto do Papo de LideranÃ§a, podem ser empregados cookies necessÃ¡rios, analÃ­ticos e de personalizaÃ§Ã£o.</p><ul><li><strong>Cookies necessÃ¡rios</strong>: viabilizam o funcionamento tÃ©cnico do site e recursos essenciais.</li><li><strong>Cookies analÃ­ticos</strong>: ajudam a medir trÃ¡fego, engajamento, pÃ¡ginas acessadas e desempenho.</li><li><strong>Cookies de personalizaÃ§Ã£o</strong>: permitem lembrar preferÃªncias e adaptar certos elementos da experiÃªncia.</li></ul><p>O usuÃ¡rio pode gerenciar, bloquear ou excluir cookies nas configuraÃ§Ãµes do navegador. A desativaÃ§Ã£o de determinados cookies poderÃ¡ afetar funcionalidades e a qualidade da navegaÃ§Ã£o.</p><h2 id="retencao">11. Armazenamento e retenÃ§Ã£o dos dados</h2><p>Os dados pessoais serÃ£o mantidos pelo tempo necessÃ¡rio ao cumprimento das finalidades para as quais foram coletados, observadas a base legal aplicÃ¡vel, a natureza do relacionamento, a necessidade operacional e eventuais obrigaÃ§Ãµes legais, regulatÃ³rias ou de defesa de direitos.</p><p>Quando deixarem de ser necessÃ¡rios, os dados poderÃ£o ser eliminados, anonimizados ou bloqueados, ressalvadas hipÃ³teses legais que autorizem ou exijam sua conservaÃ§Ã£o.</p><h2 id="seguranca">12. SeguranÃ§a da informaÃ§Ã£o</h2><p>O Papo de LideranÃ§a adota medidas tÃ©cnicas e organizacionais razoÃ¡veis para proteger dados pessoais contra acessos nÃ£o autorizados, perda, destruiÃ§Ã£o, alteraÃ§Ã£o, divulgaÃ§Ã£o indevida ou qualquer forma de tratamento inadequado.</p><p>Apesar dos esforÃ§os empregados, nenhum ambiente digital Ã© absolutamente inviolÃ¡vel. Assim, nÃ£o se pode garantir seguranÃ§a absoluta contra toda e qualquer hipÃ³tese de incidente.</p><h2 id="direitos">13. Direitos do titular de dados</h2><p>Nos termos da LGPD, o titular poderÃ¡ exercer, conforme aplicÃ¡vel, os seguintes direitos:</p><ul><li>confirmaÃ§Ã£o da existÃªncia de tratamento;</li><li>acesso aos dados pessoais;</li><li>correÃ§Ã£o de dados incompletos, inexatos ou desatualizados;</li><li>anonimizaÃ§Ã£o, bloqueio ou eliminaÃ§Ã£o de dados desnecessÃ¡rios, excessivos ou tratados em desconformidade;</li><li>portabilidade dos dados, quando aplicÃ¡vel;</li><li>informaÃ§Ã£o sobre compartilhamento com entidades pÃºblicas e privadas;</li><li>revogaÃ§Ã£o do consentimento;</li><li>solicitaÃ§Ã£o de exclusÃ£o dos dados, quando cabÃ­vel.</li></ul><h2 id="exercicio">14. Como exercer seus direitos</h2><p>O titular poderÃ¡ exercer seus direitos por meio de solicitaÃ§Ã£o enviada ao e-mail <strong>contato@papodelideranca.com</strong>. Para proteÃ§Ã£o do prÃ³prio titular e prevenÃ§Ã£o a fraudes, o Papo de LideranÃ§a poderÃ¡ solicitar informaÃ§Ãµes adicionais razoÃ¡veis para confirmar identidade e delimitar corretamente o pedido.</p><h2 id="newsletter">15. Newsletter e descadastramento</h2><p>O usuÃ¡rio pode cancelar o recebimento da newsletter a qualquer momento por meio do link de descadastramento presente nos e-mails enviados ou mediante solicitaÃ§Ã£o direta por e-mail. O descadastramento impede novas comunicaÃ§Ãµes da newsletter, sem prejuÃ­zo da manutenÃ§Ã£o de registros estritamente necessÃ¡rios para finalidades legais, de seguranÃ§a ou exercÃ­cio regular de direitos.</p><h2 id="terceiros">16. Links para sites de terceiros</h2><p>O site pode conter links para plataformas, pÃ¡ginas e ambientes de terceiros. Esta PolÃ­tica de Privacidade nÃ£o se aplica a esses sites externos, que possuem regras prÃ³prias. Recomenda-se que o usuÃ¡rio consulte as polÃ­ticas especÃ­ficas de cada ambiente antes de fornecer dados pessoais ou prosseguir com interaÃ§Ãµes fora do domÃ­nio do Papo de LideranÃ§a.</p><h2 id="atualizacoes">17. AtualizaÃ§Ãµes desta polÃ­tica</h2><p>Esta polÃ­tica poderÃ¡ ser revisada e atualizada periodicamente para refletir mudanÃ§as regulatÃ³rias, tecnolÃ³gicas, operacionais ou estratÃ©gicas. A versÃ£o mais atual estarÃ¡ sempre disponÃ­vel no site, sendo recomendada a consulta periÃ³dica deste documento.</p><h2 id="contato">18. Contato</h2><div class="contact-box"><p>Em caso de dÃºvidas, solicitaÃ§Ãµes relacionadas a dados pessoais ou questÃµes sobre esta PolÃ­tica de Privacidade, entre em contato pelo e-mail abaixo:</p><p><strong>contato@papodelideranca.com</strong></p><p>Ãšltima atualizaÃ§Ã£o: Abril de 2026</p></div></section></div></main>
-  <footer class="footer"><div class="footer-shell"><div class="footer-grid"><div class="footer-brand"><img class="footer-brand-mark" src="../assets/logo-light.png" alt="Papo de LideranÃ§a"><h3>Papo de LideranÃ§a</h3><p>leituras semanais para quem quer<br>pensar melhor,<br>decidir com mais critÃ©rio<br>e evoluir com consistÃªncia.</p></div><div class="footer-column"><h3>NavegaÃ§Ã£o</h3><div class="footer-nav"><a href="../landing-newsletter/index.html">Home</a><a href="../pages/sobre.html">Sobre</a><a href="../pages/artigos.html">Artigos</a><a href="../pages/newsletter.html">Newsletter</a><a href="../pages/contato.html">Contato</a></div></div><div class="footer-column"><h3>Contato</h3><div class="footer-contact"><div><strong>Email</strong><span>contato@papodelideranca.com</span></div><div><strong>Telefone</strong><span>(48) 99963-9801</span></div></div></div><div class="footer-column"><h3>Redes sociais</h3><p style="margin-bottom:12px;">Acompanhe tambÃ©m nas redes</p><div class="footer-socials"><a href="#" aria-label="X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2H21l-6.53 7.462L22.154 22h-6.016l-4.71-6.17L6.03 22H3.27l6.985-7.983L2 2h6.17l4.258 5.632L18.244 2Zm-1.056 18h1.527L6.02 3.894H4.38L17.188 20Z"/></svg></a><a href="#" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2.2A2.8 2.8 0 0 0 4.2 7v10A2.8 2.8 0 0 0 7 19.8h10a2.8 2.8 0 0 0 2.8-2.8V7A2.8 2.8 0 0 0 17 4.2H7Zm10.35 1.65a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2.2A2.8 2.8 0 1 0 12 14.8 2.8 2.8 0 0 0 12 9.2Z"/></svg></a><a href="#" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5a1.56 1.56 0 1 1 0-3.12 1.56 1.56 0 0 1 0 3.12ZM5.5 10h2.9v8.5H5.5V10Zm4.72 0h2.78v1.16h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.44v4.4h-2.9v-3.9c0-.93-.02-2.13-1.3-2.13s-1.5 1.01-1.5 2.06v3.97h-2.9V10Z"/></svg></a><a href="#" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.75l.41-3.2H13.5V8.56c0-.92.26-1.54 1.58-1.54h1.69V4.16c-.82-.09-1.64-.14-2.47-.13-2.44 0-4.11 1.49-4.11 4.23v2.34H7.92v3.2h2.27V22h3.31Z"/></svg></a></div></div></div><div class="footer-bottom"><div>Â© 2026 Papo de LideranÃ§a. Todos os direitos reservados.</div><div class="footer-legal"><a href="politica-de-privacidade.html">PolÃ­tica de Privacidade</a><a href="termos-de-uso.html">Termos de Uso</a></div></div></div></footer>
-<!-- MailerLite Universal -->
-<script>
-    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
-    ml('account', '2252828');
-</script>
-<!-- End MailerLite Universal --><script src="../assets/js/page-transition.js"></script>
-<!-- Internal Header Scroll -->
-<script>
-  (function () {
-    var header = document.querySelector('.site-header[data-site-header="internal"]');
-    if (!header) return;
+<body class="theme-light legal-page" data-scroll-logo="dark">
+  <header class="site-header" data-site-header>
+    <div class="container header-inner">
+      <a class="brand" href="../landing-newsletter/index.html#inicio" aria-label="Papo de Liderança">
+        <img class="logo" src="../assets/logo-dark.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de Liderança">
+        <span class="brand-name">Papo de Liderança</span>
+      </a>
 
-    var syncState = function () {
-      header.classList.toggle('is-scrolled', window.scrollY > 24);
-    };
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-nav-toggle>
+        <span></span>
+        <span></span>
+      </button>
 
-    syncState();
-    window.addEventListener('scroll', syncState, { passive: true });
-  })();
-</script>
-<!-- End Internal Header Scroll -->
-<script src="../assets/js/logo-theme.js"></script>
+      <nav class="main-nav" id="main-nav" aria-label="Navegação principal" data-nav-panel>
+        <a href="../landing-newsletter/index.html#inicio">início</a>
+        <a href="../pages/sobre.html">sobre</a>
+        <a href="../pages/edicoes.html">edições</a>
+        <a href="../pages/autoridade.html">autoridade</a>
+        <details class="nav-legal-mobile" open>
+          <summary>termos e políticas</summary>
+          <div class="nav-legal-mobile-panel">
+            <a class="is-current" href="../legal/politica-de-privacidade.html">política de privacidade</a>
+            <a href="../legal/termos-de-uso.html">termos de uso</a>
+          </div>
+        </details>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-login" href="../pages/login.html">login</a>
+        <details class="legal-menu">
+          <summary class="header-legal-trigger">termos e políticas</summary>
+          <div class="legal-menu-panel" role="list">
+            <a class="is-current" href="../legal/politica-de-privacidade.html">política de privacidade</a>
+            <a href="../legal/termos-de-uso.html">termos de uso</a>
+          </div>
+        </details>
+        <a class="header-cta" href="../landing-newsletter/index.html#inscreva-se">inscreva-se</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="legal-main">
+    <div class="container legal-stack">
+      <section class="legal-hero">
+        <span class="legal-kicker">documento jurídico</span>
+        <h1>política de privacidade</h1>
+        <p>esta página explica, de forma clara e direta, como os dados podem ser tratados quando você navega pelo site, entra em contato com o projeto ou se inscreve para receber a newsletter.</p>
+      </section>
+
+      <div class="legal-grid">
+        <aside class="legal-toc" aria-label="sumário da política">
+          <h2>sumário</h2>
+          <nav>
+            <a href="#dados">quais dados podem ser coletados</a>
+            <a href="#finalidades">como esses dados são usados</a>
+            <a href="#armazenamento">armazenamento e proteção</a>
+            <a href="#direitos">seus direitos</a>
+            <a href="#contato">contato</a>
+          </nav>
+        </aside>
+
+        <article class="legal-content">
+          <p class="legal-intro">o Papo de Liderança opera com uma lógica simples: coletar o mínimo necessário para sustentar uma experiência editorial útil, segura e estável, sem transformar o uso do site em um ambiente de coleta excessiva.</p>
+
+          <div class="legal-note-grid">
+            <div class="legal-note">
+              <strong>coleta enxuta</strong>
+              <p>dados pessoais são tratados com parcimônia, sempre ligados a uma finalidade concreta.</p>
+            </div>
+            <div class="legal-note">
+              <strong>uso responsável</strong>
+              <p>as informações servem para operar o produto editorial, melhorar a experiência e manter a comunicação essencial.</p>
+            </div>
+            <div class="legal-note">
+              <strong>clareza de acesso</strong>
+              <p>sempre que necessário, você pode pedir informações, correções ou remoção nos limites legais aplicáveis.</p>
+            </div>
+          </div>
+
+          <section id="dados">
+            <h2>quais dados podem ser coletados</h2>
+            <p>o site pode tratar dados informados diretamente por você, como nome e e-mail, quando houver inscrição, contato ou algum tipo de solicitação. também podem existir registros técnicos de navegação, em caráter limitado, necessários para funcionamento, segurança, medição de acesso e continuidade do serviço.</p>
+            <p>dependendo do ponto de contato, essa coleta pode incluir dados básicos de dispositivo, navegador, horários de acesso e páginas visitadas. esses registros não mudam a natureza editorial do projeto e não são usados para ampliar ruído, apenas para manter o ambiente funcional e confiável.</p>
+          </section>
+
+          <section id="finalidades">
+            <h2>como esses dados são usados</h2>
+            <p>os dados podem ser usados para entregar a newsletter, responder mensagens, manter a experiência estável, prevenir abuso e compreender o funcionamento essencial da jornada de leitura. o tratamento também pode servir para ajustar comunicações, melhorar organização do conteúdo e reduzir falhas operacionais.</p>
+            <p>o Papo de Liderança não estrutura sua proposta em venda de base de dados. o uso das informações permanece vinculado ao serviço editorial e às necessidades legítimas de operação, segurança e relacionamento com o leitor.</p>
+          </section>
+
+          <section id="bases-legais">
+            <h2>bases jurídicas do tratamento</h2>
+            <p>o tratamento de dados pessoais é realizado conforme a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018), sempre com vinculação a finalidades específicas e compatíveis com a natureza do serviço editorial.</p>
+            <div class="legal-bases">
+              <div class="legal-basis-card">
+                <strong>consentimento</strong>
+                <p>utilizado quando você informa seus dados para receber a newsletter ou autoriza comunicações editoriais específicas.</p>
+              </div>
+              <div class="legal-basis-card">
+                <strong>execução de procedimentos relacionados ao serviço</strong>
+                <p>aplicável quando o tratamento é necessário para viabilizar a entrega do conteúdo, responder solicitações ou operar funcionalidades ligadas à inscrição.</p>
+              </div>
+              <div class="legal-basis-card">
+                <strong>legítimo interesse</strong>
+                <p>utilizado de forma ponderada para segurança do ambiente, prevenção de abuso, melhoria do serviço e análise essencial de funcionamento, sempre respeitando direitos e expectativas do leitor.</p>
+              </div>
+              <div class="legal-basis-card">
+                <strong>cumprimento de obrigação legal ou regulatória</strong>
+                <p>quando houver necessidade de preservação de registros, atendimento a determinações legais ou exercício regular de direitos em processos administrativos, arbitrais ou judiciais.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="compartilhamento">
+            <h2>compartilhamento com terceiros</h2>
+            <p>os dados podem ser compartilhados com fornecedores que apoiam a operação do site, da newsletter e da infraestrutura técnica do projeto, sempre dentro de limites compatíveis com as finalidades descritas nesta política.</p>
+            <p>esse compartilhamento pode envolver serviços de hospedagem, envio de e-mails, analytics essencial, segurança e armazenamento. sempre que possível, são adotadas medidas contratuais e técnicas para reduzir riscos e preservar confidencialidade.</p>
+          </section>
+
+          <section id="cookies">
+            <h2>cookies e registros técnicos</h2>
+            <p>o site pode utilizar cookies e tecnologias similares para manter funcionamento básico, segurança, preferências de navegação e leitura mínima de desempenho. isso inclui registros técnicos compatíveis com a melhoria da experiência e com a proteção do ambiente.</p>
+            <p>caso o uso de determinada tecnologia dependa de consentimento, essa condição deve ser respeitada conforme a legislação aplicável e a configuração adotada no ambiente.</p>
+          </section>
+
+          <section id="armazenamento">
+            <h2>armazenamento e proteção</h2>
+            <p>as informações podem ser armazenadas pelo tempo necessário para cumprir as finalidades descritas nesta política, respeitando obrigações legais, segurança do serviço e manutenção do histórico mínimo necessário para operação responsável.</p>
+            <p>medidas compatíveis com o porte do projeto são adotadas para reduzir risco de acesso indevido, perda, alteração ou uso inadequado. ainda assim, nenhum ambiente digital pode ser tratado como absolutamente invulnerável, o que exige cuidado contínuo na forma como dados são mantidos e acessados.</p>
+          </section>
+
+          <section id="direitos">
+            <h2>seus direitos</h2>
+            <p>nos termos aplicáveis da legislação de proteção de dados, você pode solicitar confirmação de tratamento, acesso, correção, atualização, anonimização, bloqueio, exclusão ou esclarecimentos adicionais, quando cabível.</p>
+            <p>também é possível revogar consentimento para comunicações futuras sempre que essa for a base adequada para o tratamento. cada pedido será avaliado de acordo com a finalidade envolvida, as exigências legais e os limites técnicos compatíveis com o serviço.</p>
+          </section>
+
+          <section id="contato">
+            <h2>contato</h2>
+            <p>se você quiser falar sobre privacidade, dados pessoais ou qualquer ponto desta política, o caminho mais direto é o contato editorial abaixo:</p>
+            <p><a href="mailto:contato@papodelideranca.com">contato@papodelideranca.com</a></p>
+          </section>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer legal-footer">
+    <div class="footer-shell">
+      <div class="footer-grid footer-grid--legal">
+        <div class="footer-brand">
+          <img class="footer-brand-mark" src="../assets/logo-light.png" alt="Papo de Liderança">
+          <h3>Papo de Liderança</h3>
+          <p>leituras semanais para quem quer pensar melhor, decidir com mais critério e evoluir com consistência.</p>
+        </div>
+        <div class="footer-column">
+          <h3>navegação</h3>
+          <div class="footer-nav">
+            <a href="../landing-newsletter/index.html#inicio">início</a>
+            <a href="../pages/sobre.html">sobre</a>
+            <a href="../pages/edicoes.html">edições</a>
+            <a href="../pages/autoridade.html">autoridade</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>contato editorial</h3>
+          <div class="footer-contact">
+            <div><strong>email</strong><span>contato@papodelideranca.com</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Papo de Liderança. Todos os direitos reservados.</div>
+        <div class="footer-legal">
+          <a href="../legal/politica-de-privacidade.html">política de privacidade</a>
+          <a href="../legal/termos-de-uso.html">termos de uso</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../landing-newsletter/script.js"></script>
+  <script src="../assets/js/page-transition.js"></script>
+  <script src="../assets/js/logo-theme.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
