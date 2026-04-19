@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -451,7 +451,7 @@
       align-items: flex-start;
       justify-content: center;
       min-height: 100dvh;
-      padding: max(12px, env(safe-area-inset-top)) clamp(12px, 2vw, 20px) max(12px, env(safe-area-inset-bottom));
+      padding: max(16px, env(safe-area-inset-top)) clamp(10px, 1.8vw, 16px) max(16px, env(safe-area-inset-bottom));
       overflow-y: auto;
       overscroll-behavior: contain;
       background: rgba(11, 18, 23, 0.36);
@@ -465,13 +465,13 @@
       filter: none !important;
     }
     .editions-preview-dialog {
-      width: min(720px, calc(100vw - 24px));
-      max-height: calc(100dvh - 24px);
+      width: min(640px, calc(100vw - 20px));
+      max-height: min(620px, calc(100dvh - 32px));
       display: flex;
       flex-direction: column;
       overflow: hidden;
       margin: 0 auto;
-      border-radius: 36px;
+      border-radius: 28px;
       border: 1px solid rgba(228, 231, 235, 0.62);
       background: linear-gradient(180deg, rgba(255,255,255,0.985) 0%, rgba(244,248,250,0.99) 100%);
       box-shadow: 0 28px 64px rgba(11, 18, 23, 0.14);
@@ -480,14 +480,18 @@
       display: flex;
       justify-content: flex-end;
       flex: 0 0 auto;
-      padding: 22px 24px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      padding: 14px 16px 0;
+      background: linear-gradient(180deg, rgba(248, 251, 252, 0.96) 0%, rgba(248, 251, 252, 0.72) 68%, rgba(248, 251, 252, 0) 100%);
     }
     .editions-preview-scroll {
       flex: 1 1 auto;
       min-height: 0;
       overflow-y: auto;
       overscroll-behavior: contain;
-      padding: 0 28px 26px;
+      padding: 0 22px 20px;
     }
     .editions-preview-close {
       display: inline-flex;
@@ -513,7 +517,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 14px;
-      margin: 10px 0 16px;
+      margin: 4px 0 12px;
     }
     .editions-preview-meta span:last-child {
       color: rgba(91, 107, 117, 0.72);
@@ -522,39 +526,39 @@
       text-transform: none;
     }
     .editions-preview-dialog h3 {
-      margin: 0 0 12px;
+      margin: 0 0 10px;
       max-width: 11ch;
-      font-size: clamp(2rem, 3vw, 3rem);
-      line-height: 0.98;
+      font-size: clamp(1.8rem, 2.6vw, 2.7rem);
+      line-height: 0.96;
       letter-spacing: -0.05em;
       text-transform: lowercase;
     }
     .editions-preview-intro {
       max-width: 56ch;
-      margin: 0 0 14px;
+      margin: 0 0 10px;
       color: rgba(91, 107, 117, 0.84);
-      font-size: 0.98rem;
-      line-height: 1.78;
+      font-size: 0.95rem;
+      line-height: 1.68;
       text-transform: none;
     }
     .editions-preview-excerpt {
       position: relative;
       display: grid;
-      gap: 14px;
-      margin-top: 14px;
+      gap: 10px;
+      margin-top: 10px;
       padding-top: 0;
     }
     .editions-preview-excerpt p {
       margin: 0;
       color: rgba(91, 107, 117, 0.78);
-      font-size: 0.97rem;
-      line-height: 1.82;
+      font-size: 0.94rem;
+      line-height: 1.72;
       text-transform: none;
     }
     .editions-preview-gate {
       position: relative;
-      margin-top: 8px;
-      padding: 44px 0 0;
+      margin-top: 4px;
+      padding: 30px 0 0;
       overflow: hidden;
     }
     .editions-preview-gate::before {
@@ -569,10 +573,10 @@
       position: relative;
       z-index: 1;
       display: grid;
-      gap: 14px;
+      gap: 10px;
       justify-items: start;
-      padding: 22px 22px 20px;
-      border-radius: 28px;
+      padding: 18px 18px 16px;
+      border-radius: 24px;
       border: 1px solid rgba(228, 231, 235, 0.78);
       background: rgba(255, 255, 255, 0.92);
       box-shadow: 0 12px 24px rgba(15, 42, 61, 0.04);
@@ -590,9 +594,67 @@
       line-height: 1.76;
       text-transform: none;
     }
+    .editions-preview-lock.is-success .newsletter-form,
+    .editions-preview-lock.is-success .hero-trustline,
+    .editions-preview-lock.is-success .form-feedback {
+      display: none;
+    }
     .editions-preview-lock .newsletter-form {
       width: 100%;
       margin-top: 8px;
+    }
+    .editions-preview-lock .email-pill.is-invalid {
+      border-color: rgba(180, 76, 76, 0.3);
+      box-shadow: 0 0 0 4px rgba(180, 76, 76, 0.08);
+    }
+    .editions-preview-lock .form-feedback.is-error {
+      color: rgba(132, 47, 47, 0.92);
+    }
+    .editions-preview-lock .form-feedback.is-success {
+      display: none;
+    }
+    .editions-preview-success[hidden] {
+      display: none;
+    }
+    .editions-preview-success {
+      display: grid;
+      gap: 10px;
+      width: 100%;
+      padding: 4px 0 2px;
+      outline: none;
+    }
+    .editions-preview-success-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(34, 160, 107, 0.11);
+      color: rgba(20, 90, 61, 0.92);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: lowercase;
+    }
+    .editions-preview-success h4 {
+      margin: 0;
+      color: var(--text);
+      font-size: 1.28rem;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      text-transform: lowercase;
+    }
+    .editions-preview-success p {
+      margin: 0;
+      color: rgba(91, 107, 117, 0.82);
+      font-size: 0.94rem;
+      line-height: 1.76;
+      text-transform: none;
+    }
+    .editions-preview-success-signoff {
+      color: rgba(15, 42, 61, 0.92);
+      font-weight: 600;
     }
     .editions-final-cta { padding: 26px 0 30px; }
     .editions-final-cta-shell {
@@ -624,109 +686,60 @@
       position: relative;
       width: min(100%, 430px);
       height: 374px;
-    }
-    .editions-coffee-visual::before {
-      content: "";
-      position: absolute;
-      inset: 42px 48px 40px;
-      border-radius: 50%;
-      background:
-        radial-gradient(ellipse at center, rgba(255, 255, 255, 0.96) 0%, rgba(233, 241, 245, 0.62) 42%, rgba(233, 241, 245, 0.12) 72%, transparent 100%);
-      opacity: 0.92;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      overflow: visible;
     }
     .editions-coffee-visual::after {
       content: "";
       position: absolute;
-      left: 88px;
-      right: 86px;
-      bottom: 42px;
-      height: 28px;
+      left: 92px;
+      right: 92px;
+      bottom: 38px;
+      height: 30px;
       border-radius: 999px;
-      background: radial-gradient(ellipse at center, rgba(15, 42, 61, 0.1) 0%, rgba(15, 42, 61, 0.03) 58%, transparent 100%);
-      opacity: 0.88;
+      background: radial-gradient(ellipse at center, rgba(15, 42, 61, 0.12) 0%, rgba(15, 42, 61, 0.035) 54%, transparent 100%);
+      opacity: 0.74;
     }
-    .editions-coffee-illustration {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-    .editions-coffee-base-shadow {
-      fill: rgba(15, 42, 61, 0.08);
-      filter: blur(8px);
-    }
-    .editions-coffee-saucer-top {
-      fill: url(#coffeeSaucerFill);
-      stroke: rgba(15, 42, 61, 0.085);
-      stroke-width: 1.05;
-    }
-    .editions-coffee-saucer-bottom {
-      fill: rgba(15, 42, 61, 0.06);
-      opacity: 0.34;
-    }
-    .editions-coffee-cup-body {
-      fill: url(#coffeeCupFill);
-      stroke: rgba(15, 42, 61, 0.115);
-      stroke-width: 1.05;
-    }
-    .editions-coffee-cup-highlight {
-      fill: url(#coffeeCupHighlight);
-      opacity: 0.86;
-    }
-    .editions-coffee-rim {
-      fill: rgba(251, 253, 254, 0.99);
-      stroke: rgba(15, 42, 61, 0.1);
-      stroke-width: 1.05;
-    }
-    .editions-coffee-surface {
-      fill: url(#coffeeSurfaceFill);
-    }
-    .editions-coffee-inner-shadow {
-      fill: rgba(15, 42, 61, 0.045);
-    }
-    .editions-coffee-surface-glow {
-      fill: rgba(255, 255, 255, 0.18);
-    }
-    .editions-coffee-handle-shape {
-      fill: none;
-      stroke: rgba(15, 42, 61, 0.15);
-      stroke-width: 8.5;
-      stroke-linecap: round;
-    }
-    .editions-coffee-handle-core {
-      fill: none;
-      stroke: rgba(255,255,255,0.92);
-      stroke-width: 4.8;
-      stroke-linecap: round;
+    .editions-coffee-photo {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: clamp(320px, 84%, 404px);
+      max-width: 100%;
+      max-height: 382px;
+      margin: 0 auto;
+      object-fit: contain;
+      object-position: center center;
+      filter: drop-shadow(0 18px 24px rgba(15, 42, 61, 0.1));
     }
     .editions-coffee-steam {
       fill: none;
-      stroke: rgba(122, 142, 153, 0.28);
-      stroke-width: 2.35;
+      stroke: rgba(121, 137, 145, 0.24);
+      stroke-width: 2.05;
       stroke-linecap: round;
       opacity: 0;
       transform-origin: center bottom;
-      animation: coffeeSteamRise 13s ease-in-out infinite;
+      animation: coffeeSteamRise 14s ease-in-out infinite;
     }
     .editions-coffee-steam.steam-a {
       animation-delay: 0s;
     }
     .editions-coffee-steam.steam-b {
-      animation-delay: 2.8s;
-      stroke-width: 1.95;
+      animation-delay: 2.5s;
+      stroke-width: 1.75;
       opacity: 0;
     }
     .editions-coffee-steam.steam-c {
-      animation-delay: 5.1s;
-      stroke-width: 2.1;
+      animation-delay: 4.8s;
+      stroke-width: 1.9;
     }
     .editions-coffee-steam.steam-d {
-      animation-delay: 7.4s;
-      stroke-width: 1.8;
-      stroke: rgba(122, 142, 153, 0.22);
+      animation-delay: 7.1s;
+      stroke-width: 1.65;
+      stroke: rgba(121, 137, 145, 0.2);
     }
-    .editions-coffee-illustration,
     .editions-cta-form-wrap .newsletter-form button,
     .editions-cta-form-wrap .email-pill {
       transition: box-shadow 240ms ease, border-color 240ms ease, background-color 240ms ease;
@@ -894,13 +907,13 @@
       .editions-preview-dialog {
         width: calc(100vw - 20px);
         max-height: calc(100dvh - 20px);
-        border-radius: 28px;
+        border-radius: 24px;
       }
       .editions-preview-topbar {
         padding: 12px 12px 0;
       }
       .editions-preview-scroll {
-        padding: 0 18px 18px;
+        padding: 0 16px 16px;
       }
     }
     @media (max-width: 640px) {
@@ -917,17 +930,18 @@
         align-items: center;
       }
       .editions-coffee-visual {
-        width: min(100%, 250px);
-        height: 220px;
-        flex-basis: 250px;
-      }
-      .editions-coffee-visual::before {
-        inset: 18px 18px 10px;
+        width: min(100%, 270px);
+        height: 236px;
+        flex-basis: 270px;
       }
       .editions-coffee-visual::after {
         left: 48px;
         right: 48px;
-        bottom: 20px;
+        bottom: 18px;
+      }
+      .editions-coffee-photo {
+        width: min(100%, 242px);
+        max-height: 242px;
       }
       .editions-coffee-steam {
         stroke-width: 1.9;
@@ -970,7 +984,7 @@
         </details>
       </nav>
       <div class="header-actions">
-        <a class="header-login" href="./login.html">login</a>
+        <a class="header-login" href="../auth/login.html">login</a>
         <a class="header-cta" href="#inscreva-se">inscreva-se</a>
         <details class="legal-menu legal-menu--icon">
           <summary class="header-legal-trigger header-legal-trigger--icon" aria-label="abrir links legais">
@@ -1012,7 +1026,7 @@
 
         <div class="editions-carousel-shell">
           <div class="editions-carousel-topbar">
-            <p>cards grandes, navegação suave e uma prévia real do tipo de conteúdo que merece continuar depois do clique.</p>
+            <p>uma amostra real do produto, com espaço para navegar no seu ritmo e entender como cada edição conduz a leitura.</p>
             <div class="editions-carousel-controls" aria-label="Controles do carrossel">
               <button type="button" data-editions-prev aria-label="Ver edição anterior">←</button>
               <button type="button" data-editions-next aria-label="Ver próxima edição">→</button>
@@ -1136,44 +1150,7 @@
           <div class="editions-cta-lower">
             <div class="editions-coffee-ritual">
               <div class="editions-coffee-visual" aria-hidden="true">
-                <svg class="editions-coffee-illustration" viewBox="0 0 244 244" role="presentation" focusable="false">
-                  <defs>
-                    <linearGradient id="coffeeCupFill" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="rgba(255,255,255,0.995)" />
-                      <stop offset="58%" stop-color="rgba(244,248,250,0.99)" />
-                      <stop offset="100%" stop-color="rgba(228,236,241,0.98)" />
-                    </linearGradient>
-                    <linearGradient id="coffeeCupHighlight" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="rgba(255,255,255,0.98)" />
-                      <stop offset="55%" stop-color="rgba(255,255,255,0.24)" />
-                      <stop offset="100%" stop-color="rgba(255,255,255,0)" />
-                    </linearGradient>
-                    <linearGradient id="coffeeSaucerFill" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="rgba(255,255,255,0.96)" />
-                      <stop offset="100%" stop-color="rgba(228,235,240,0.98)" />
-                    </linearGradient>
-                    <linearGradient id="coffeeSurfaceFill" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="rgba(88,62,48,0.97)" />
-                      <stop offset="56%" stop-color="rgba(59,42,33,0.96)" />
-                      <stop offset="100%" stop-color="rgba(40,29,24,0.95)" />
-                    </linearGradient>
-                  </defs>
-                  <ellipse class="editions-coffee-base-shadow" cx="122" cy="206" rx="76" ry="13"></ellipse>
-                  <ellipse class="editions-coffee-saucer-bottom" cx="122" cy="191" rx="70" ry="9"></ellipse>
-                  <ellipse class="editions-coffee-saucer-top" cx="122" cy="186" rx="78" ry="13"></ellipse>
-                  <path class="editions-coffee-cup-body" d="M76 96C76 87.2 83.2 80 92 80H152C160.8 80 168 87.2 168 96V152C168 173.4 150.6 190.8 129.2 190.8H114.8C93.4 190.8 76 173.4 76 152V96Z"></path>
-                  <path class="editions-coffee-cup-highlight" d="M90 89C90 84.6 93.6 81 98 81H112.5C101.8 95.2 98.8 116.1 102.6 141.2C105.1 157.9 110.1 173 117.4 185H111.8C99.7 185 90 175.3 90 163.2V89Z"></path>
-                  <ellipse class="editions-coffee-rim" cx="122" cy="83" rx="52" ry="11"></ellipse>
-                  <ellipse class="editions-coffee-surface" cx="122" cy="84.2" rx="43.4" ry="7.7"></ellipse>
-                  <ellipse class="editions-coffee-surface-glow" cx="110" cy="81.6" rx="14" ry="3.2" opacity="0.42"></ellipse>
-                  <ellipse class="editions-coffee-inner-shadow" cx="122" cy="89" rx="36" ry="5.8" opacity="0.22"></ellipse>
-                  <path class="editions-coffee-handle-shape" d="M169 101C186 101 194 112 194 127C194 142 186 153 172 157"></path>
-                  <path class="editions-coffee-handle-core" d="M171 108C181 108 186 116 186 126.8C186 137.6 181 145 173 148.6"></path>
-                  <path class="editions-coffee-steam steam-a" d="M99 72C95 64 95 54 101 46C106 39 107 29 103 20"></path>
-                  <path class="editions-coffee-steam steam-b" d="M118 70C114 62 115 53 122 44C128 36 129 25 124 16"></path>
-                  <path class="editions-coffee-steam steam-c" d="M136 72C132 65 133 56 140 48C145 41 146 31 142 22"></path>
-                  <path class="editions-coffee-steam steam-d" d="M152 75C149 69 150 60 156 52C161 45 162 36 159 28"></path>
-                </svg>
+                <img class="editions-coffee-photo" src="../assets/images/edicoes/coffee-to-go-premium.png" alt="" loading="lazy" decoding="async">
               </div>
             </div>
             <div class="editions-cta-form-wrap">
@@ -1228,6 +1205,14 @@
             </form>
             <p class="hero-trustline">gratuita · 1 edição por semana · leitura em 5 min</p>
             <div class="form-feedback" data-form-feedback aria-live="polite"></div>
+            <div class="editions-preview-success" data-preview-success aria-live="polite" role="status" tabindex="-1" hidden>
+              <span class="editions-preview-success-chip">próxima edição a caminho</span>
+              <h4 data-preview-success-title>inscrição confirmada</h4>
+              <p>Que bom ter você com a gente no Papo de Liderança.</p>
+              <p>Seu e-mail foi recebido com sucesso. Agora, vale checar sua caixa de entrada e, se necessário, a pasta de promoções ou spam para garantir que as próximas edições cheguem até você.</p>
+              <p>A ideia, daqui para frente, é contribuir com leituras curtas, bem editadas e realmente úteis — com mais clareza, menos ruído e insights que possam impactar positivamente a forma como você lidera, trabalha e decide.</p>
+              <p class="editions-preview-success-signoff">nos vemos na próxima edição.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1252,10 +1237,9 @@
           </div>
         </div>
         <div class="footer-column">
-          <h3>Contato</h3>
+          <h3>contato editorial</h3>
           <div class="footer-contact">
-            <div><strong>Email</strong><span>contato@papodelideranca.com</span></div>
-            <div><strong>Telefone</strong><span>(48) 99963-9801</span></div>
+            <div><strong>email</strong><span>contato@papodelideranca.com</span></div>
           </div>
         </div>
         <div class="footer-column">
@@ -1267,7 +1251,6 @@
             <a href="#" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5a1.56 1.56 0 1 1 0-3.12 1.56 1.56 0 0 1 0 3.12ZM5.5 10h2.9v8.5H5.5V10Zm4.72 0h2.78v1.16h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.44v4.4h-2.9v-3.9c0-.93-.02-2.13-1.3-2.13s-1.5 1.01-1.5 2.06v3.97h-2.9V10Z"/></svg></a>
             <a href="#" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.75l.41-3.2H13.5V8.56c0-.92.26-1.54 1.58-1.54h1.69V4.16c-.82-.09-1.64-.14-2.47-.13-2.44 0-4.11 1.49-4.11 4.23v2.34H7.92v3.2h2.27V22h3.31Z"/></svg></a>
           </div>
-          <a class="footer-cta-inline" href="#inscreva-se">inscreva-se</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -1299,11 +1282,28 @@
       const previewSummary = document.querySelector("[data-preview-summary-label]");
       const previewExcerptTop = document.querySelector("[data-preview-excerpt-top]");
       const previewExcerptBottom = document.querySelector("[data-preview-excerpt-bottom]");
+      const previewLock = modal?.querySelector(".editions-preview-lock");
+      let previewForm = modal?.querySelector(".newsletter-form[data-newsletter-form]");
+      let previewEmailInput = previewForm?.querySelector('input[name="email"]');
+      let previewEmailPill = previewForm?.querySelector(".email-pill");
+      const previewFeedback = modal?.querySelector("[data-form-feedback]");
+      const previewSuccess = modal?.querySelector("[data-preview-success]");
+      const previewSuccessTitle = modal?.querySelector("[data-preview-success-title]");
+      const previewTrustline = modal?.querySelector(".hero-trustline");
       const root = document.documentElement;
       const pageBody = document.body;
       let lastTrigger = null;
 
       if (!carousel || !track) return;
+
+      if (previewForm) {
+        const cleanPreviewForm = previewForm.cloneNode(true);
+        cleanPreviewForm.setAttribute("novalidate", "novalidate");
+        previewForm.replaceWith(cleanPreviewForm);
+        previewForm = cleanPreviewForm;
+        previewEmailInput = previewForm.querySelector('input[name="email"]');
+        previewEmailPill = previewForm.querySelector(".email-pill");
+      }
 
       document.title = "Edições | Papo de Liderança";
 
@@ -1525,9 +1525,59 @@
         pageBody.classList.toggle("editions-modal-open", isOpen);
       };
 
+      const resetPreviewSignup = () => {
+        if (previewForm) previewForm.hidden = false;
+        if (previewTrustline) previewTrustline.hidden = false;
+        if (previewSuccess) previewSuccess.hidden = true;
+        if (previewLock) previewLock.classList.remove("is-success");
+        if (previewFeedback) {
+          previewFeedback.textContent = "";
+          previewFeedback.classList.remove("is-error", "is-success");
+        }
+        if (previewEmailInput) {
+          previewEmailInput.value = "";
+          previewEmailInput.removeAttribute("aria-invalid");
+          previewEmailInput.setCustomValidity("");
+        }
+        previewEmailPill?.classList.remove("is-invalid");
+      };
+
+      const showPreviewError = (message) => {
+        if (!previewFeedback) return;
+        previewFeedback.textContent = message;
+        previewFeedback.classList.remove("is-success");
+        previewFeedback.classList.add("is-error");
+        previewEmailInput?.setAttribute("aria-invalid", "true");
+        previewEmailPill?.classList.add("is-invalid");
+      };
+
+      const showPreviewSuccess = () => {
+        if (previewForm) previewForm.hidden = true;
+        if (previewTrustline) previewTrustline.hidden = true;
+        if (previewLock) previewLock.classList.add("is-success");
+        if (previewFeedback) {
+          previewFeedback.textContent = "";
+          previewFeedback.classList.remove("is-error", "is-success");
+        }
+        if (previewSuccessTitle) previewSuccessTitle.textContent = "inscrição confirmada";
+        if (previewSuccess) {
+          previewSuccess.hidden = false;
+          window.requestAnimationFrame(() => {
+            previewSuccess.focus();
+          });
+        }
+        if (previewEmailInput) {
+          previewEmailInput.value = "";
+          previewEmailInput.removeAttribute("aria-invalid");
+          previewEmailInput.setCustomValidity("");
+        }
+        previewEmailPill?.classList.remove("is-invalid");
+      };
+
       const openPreview = (card, trigger) => {
         if (!modal || !card) return;
         lastTrigger = trigger || card;
+        resetPreviewSignup();
         previewCategory.textContent = card.dataset.previewCategory || "";
         previewTime.textContent = card.dataset.previewTime || "";
         previewTitle.textContent = card.dataset.previewTitle || "";
@@ -1535,15 +1585,19 @@
         const excerpt = (card.dataset.previewExcerpt || "").split("\n\n");
         previewExcerptTop.textContent = excerpt[0] || "";
         previewExcerptBottom.textContent = excerpt[1] || "";
-        if (previewScroll) previewScroll.scrollTop = 0;
-        if (modalDialog) modalDialog.scrollTop = 0;
         modal.hidden = false;
         setModalState(true);
-        closeButton?.focus();
+        window.requestAnimationFrame(() => {
+          modal.scrollTop = 0;
+          if (previewScroll) previewScroll.scrollTop = 0;
+          if (modalDialog) modalDialog.scrollTop = 0;
+          closeButton?.focus();
+        });
       };
 
       const closePreview = () => {
         if (!modal) return;
+        resetPreviewSignup();
         modal.hidden = true;
         setModalState(false);
         lastTrigger?.focus();
@@ -1566,6 +1620,35 @@
         });
       });
 
+      previewEmailInput?.addEventListener("input", () => {
+        previewEmailInput.setCustomValidity("");
+        previewEmailInput.removeAttribute("aria-invalid");
+        previewEmailPill?.classList.remove("is-invalid");
+        if (previewFeedback?.classList.contains("is-error")) {
+          previewFeedback.textContent = "";
+          previewFeedback.classList.remove("is-error");
+        }
+      });
+
+      previewForm?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        if (!previewEmailInput) return;
+        const email = previewEmailInput.value.trim();
+        const emailLooksValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        previewEmailInput.value = email;
+        previewEmailInput.setCustomValidity("");
+
+        if (!emailLooksValid) {
+          showPreviewError("insira um e-mail válido para receber a próxima edição.");
+          return;
+        }
+
+        showPreviewSuccess();
+        window.PapoNewsletter?.scheduleRefresh?.();
+      });
+
       prevButton?.addEventListener("click", () => {
         stepCarousel(-1);
       });
@@ -1586,3 +1669,6 @@
   </script>
 </body>
 </html>
+
+
+

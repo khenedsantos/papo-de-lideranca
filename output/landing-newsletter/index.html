@@ -39,7 +39,7 @@
       </nav>
 
       <div class="header-actions">
-        <a class="header-login" href="../pages/login.html">login</a>
+        <a class="header-login" href="../auth/login.html">login</a>
         <a class="header-cta" href="#inscreva-se">inscreva-se</a>
         <details class="legal-menu legal-menu--icon">
           <summary class="header-legal-trigger header-legal-trigger--icon" aria-label="abrir links legais">
@@ -122,19 +122,20 @@
           <p class="section-support">leituras curtas, bem editadas e aplicáveis para entrar na rotina sem pesar nem virar ruído.</p>
         </div>
 
-        <div class="preview-tabs" role="tablist" aria-label="prévia de edições">
-          <input class="preview-tab-input" type="radio" name="weekly-preview" id="preview-tab-1" checked>
-          <label class="preview-tab-label" for="preview-tab-1">clareza antes da reação</label>
-
-          <input class="preview-tab-input" type="radio" name="weekly-preview" id="preview-tab-2">
-          <label class="preview-tab-label" for="preview-tab-2">o que vale levar daqui</label>
-
-          <input class="preview-tab-input" type="radio" name="weekly-preview" id="preview-tab-3">
-          <label class="preview-tab-label" for="preview-tab-3">aplique isso hoje</label>
+        <div class="preview-tabs" role="tablist" aria-label="prévia editorial da edição da semana" data-preview-tabs>
+          <button class="preview-tab-label is-active" type="button" role="tab" id="preview-tab-1" aria-selected="true" aria-controls="preview-panel-1" data-preview-tab>
+            a edição
+          </button>
+          <button class="preview-tab-label" type="button" role="tab" id="preview-tab-2" aria-selected="false" aria-controls="preview-panel-2" tabindex="-1" data-preview-tab>
+            o que vale levar daqui
+          </button>
+          <button class="preview-tab-label" type="button" role="tab" id="preview-tab-3" aria-selected="false" aria-controls="preview-panel-3" tabindex="-1" data-preview-tab>
+            aplique isso hoje
+          </button>
         </div>
 
-        <div class="preview-shell">
-          <article class="weekly-preview-panel weekly-preview-panel--primary">
+        <div class="preview-shell" data-preview-shell>
+          <article class="weekly-preview-panel weekly-preview-panel--primary is-active" id="preview-panel-1" role="tabpanel" aria-labelledby="preview-tab-1" data-preview-panel>
             <div class="weekly-preview-layout">
               <div class="weekly-preview-main">
                 <div class="weekly-preview-meta">
@@ -142,86 +143,93 @@
                   <span class="preview-readtime">5 min de leitura</span>
                 </div>
                 <h3>clareza antes da reação</h3>
-                <p>quando o cenário acelera, liderança melhor não nasce de resposta imediata. nasce de leitura, critério e direção suficiente para manter o time avançando.</p>
+                <p>quando a pressão acelera o ambiente, liderança melhor não nasce de resposta imediata. nasce de leitura de contexto, critério e direção suficiente para seguir.</p>
+                <p>uma leitura breve sobre como decidir sem contaminar o time com urgência artificial.</p>
                 <div class="weekly-preview-apply">
                   <span>aplique isso</span>
-                  <strong>antes da próxima reunião, separe prioridade, ruído e hipótese.</strong>
+                  <strong>antes da próxima reunião, separe o que é prioridade, o que é ruído e o que ainda é hipótese.</strong>
                 </div>
-                <a class="preview-cta-link" href="../pages/edicoes.html#clareza-antes-da-reacao">ver edição completa</a>
+                <a class="preview-cta-link" href="../pages/edicoes.html#clareza-antes-da-reacao">ver uma edição na prática</a>
               </div>
 
               <div class="weekly-preview-side">
                 <article class="weekly-preview-note">
                   <span class="weekly-preview-note-kicker">o que vale levar daqui</span>
-                  <strong>direção suficiente vale mais do que certeza teatral.</strong>
-                  <p>quando a leitura melhora o critério, a decisão deixa de contaminar o time com ansiedade desnecessária.</p>
+                  <strong>boa liderança não reage ao barulho primeiro.</strong>
+                  <p>ela sustenta leitura suficiente do contexto para oferecer direção antes de espalhar ansiedade.</p>
                 </article>
                 <article class="weekly-preview-note">
-                  <span class="weekly-preview-note-kicker">ideia da semana</span>
-                  <strong>clareza não vem da pressa.</strong>
-                  <p>vem da capacidade de observar o contexto antes de reagir ao barulho dele.</p>
+                  <span class="weekly-preview-note-kicker">aplique isso hoje</span>
+                  <strong>separe cinco minutos para limpar a conversa antes de decidir.</strong>
+                  <p>esse pequeno intervalo já muda o tom do encontro e melhora o critério coletivo.</p>
                 </article>
               </div>
             </div>
           </article>
 
-          <article class="weekly-preview-panel">
+          <article class="weekly-preview-panel" id="preview-panel-2" role="tabpanel" aria-labelledby="preview-tab-2" data-preview-panel hidden>
             <div class="weekly-preview-layout">
               <div class="weekly-preview-main">
                 <div class="weekly-preview-meta">
                   <span class="preview-badge">liderança</span>
                   <span class="preview-readtime">5 min de leitura</span>
                 </div>
-                <h3>o que vale levar daqui</h3>
-                <p>uma boa edição não termina no clique. ela deixa um critério simples para atravessar conversas difíceis com mais direção e menos reação.</p>
+                <h3>o insight central</h3>
+                <p>antes da próxima conversa importante, separe três coisas: o que é fato, o que é hipótese e o que é ruído.</p>
+                <p>é esse tipo de distinção simples que tira a liderança do impulso e devolve direção para a conversa.</p>
                 <div class="weekly-preview-apply">
-                  <span>aplique isso</span>
-                  <strong>antes de responder, nomeie o que já é fato, o que ainda é hipótese e o que pede observação.</strong>
+                  <span>fecho editorial</span>
+                  <strong>boa liderança não acelera ansiedade. oferece direção.</strong>
                 </div>
-                <a class="preview-cta-link" href="../pages/edicoes.html#o-que-sustenta-um-time-quando-o-cenario-oscila">ver edição completa</a>
+                <a class="preview-cta-link" href="../pages/edicoes.html#clareza-antes-da-reacao">ver uma edição na prática</a>
               </div>
 
               <div class="weekly-preview-side">
                 <article class="weekly-preview-note">
                   <span class="weekly-preview-note-kicker">o que vale levar daqui</span>
-                  <strong>times estáveis não pedem líderes sem dúvida.</strong>
-                  <p>pedem líderes que saibam sustentar direção mesmo quando ainda faltam respostas completas.</p>
+                  <strong>critério quase sempre melhora quando a conversa desacelera um pouco.</strong>
+                  <p>nomear fatos, hipóteses e ruído evita que a urgência artificial vire método.</p>
                 </article>
                 <article class="weekly-preview-note">
-                  <span class="weekly-preview-note-kicker">aplique isso hoje</span>
-                  <strong>reduza o impulso de preencher o silêncio.</strong>
-                  <p>uma pausa bem usada melhora a pergunta, e a pergunta certa melhora a decisão.</p>
+                  <span class="weekly-preview-note-kicker">na prática</span>
+                  <strong>clareza útil costuma nascer de separação, não de velocidade.</strong>
+                  <p>quando você organiza o cenário antes da resposta, a equipe recebe direção em vez de tensão.</p>
                 </article>
               </div>
             </div>
           </article>
 
-          <article class="weekly-preview-panel">
+          <article class="weekly-preview-panel" id="preview-panel-3" role="tabpanel" aria-labelledby="preview-tab-3" data-preview-panel hidden>
             <div class="weekly-preview-layout">
               <div class="weekly-preview-main">
                 <div class="weekly-preview-meta">
-                  <span class="preview-badge">decisão</span>
+                  <span class="preview-badge">liderança</span>
                   <span class="preview-readtime">5 min de leitura</span>
                 </div>
-                <h3>aplique isso hoje</h3>
-                <p>uma leitura útil sempre devolve alguma ação simples. aqui, o ponto não é fazer mais, mas melhorar o critério da próxima conversa importante.</p>
+                <h3>um movimento simples para hoje</h3>
+                <p>na próxima reunião, reserve 5 minutos para responder com o time:</p>
                 <div class="weekly-preview-apply">
-                  <span>ideia da semana</span>
-                  <strong>pergunte o que merece energia agora, o que pode esperar e o que ainda não está claro o bastante.</strong>
+                  <span>aplique isso hoje</span>
+                  <ul class="weekly-preview-list">
+                    <li>o que é prioridade agora?</li>
+                    <li>o que ainda é incerto?</li>
+                    <li>o que não precisa entrar nesta conversa?</li>
+                  </ul>
                 </div>
-                <a class="preview-cta-link" href="../pages/edicoes.html#repertorio-melhor-decisoes-melhores">ver edição completa</a>
+                <p class="weekly-preview-closing">isso já desloca a conversa do impulso para o critério.</p>
+                <a class="preview-cta-link" href="../pages/edicoes.html#clareza-antes-da-reacao">ver uma edição na prática</a>
               </div>
 
               <div class="weekly-preview-side">
                 <article class="weekly-preview-note">
-                  <span class="weekly-preview-note-kicker">o que vale levar daqui</span>
-                  <strong>leitura curta não é leitura rasa.</strong>
-                  <p>quando a edição é bem editada, poucos minutos já bastam para ajustar direção e repertório.</p>
+                  <span class="weekly-preview-note-kicker">por que funciona</span>
+                  <strong>o time ganha clareza quando a reunião deixa de carregar tudo de uma vez.</strong>
+                  <p>delimitar prioridade, incerteza e excesso reduz ruído sem transformar a conversa em controle.</p>
                 </article>
                 <article class="weekly-preview-note">
-                  <span class="weekly-preview-note-kicker">aplique isso hoje</span>
-                  <strong>leve uma pergunta melhor para a próxima reunião.</strong>
-                  <p>isso muda mais a conversa do que chegar com respostas rápidas demais.</p>
+                  <span class="weekly-preview-note-kicker">efeito esperado</span>
+                  <strong>menos impulso, mais direção compartilhada.</strong>
+                  <p>é um ajuste pequeno, mas suficiente para melhorar o ritmo do trabalho no mesmo dia.</p>
                 </article>
               </div>
             </div>
@@ -426,11 +434,7 @@ repertório para decidir melhor.</p>
           </div>
         </div>
         <div class="footer-column">
-          <h3>Contato</h3>
-          <div class="footer-contact">
-            <div><strong>Email</strong><span>contato@papodelideranca.com</span></div>
-            <div><strong>Telefone</strong><span>(48) 99963-9801</span></div>
-          </div>
+          <h3>contato editorial</h3><div class="footer-contact"><div><strong>email</strong><span>contato@papodelideranca.com</span></div></div>
         </div>
         <div class="footer-column">
           <h3>Redes sociais</h3>
@@ -441,7 +445,6 @@ repertório para decidir melhor.</p>
             <a href="#" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5a1.56 1.56 0 1 1 0-3.12 1.56 1.56 0 0 1 0 3.12ZM5.5 10h2.9v8.5H5.5V10Zm4.72 0h2.78v1.16h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.44v4.4h-2.9v-3.9c0-.93-.02-2.13-1.3-2.13s-1.5 1.01-1.5 2.06v3.97h-2.9V10Z"/></svg></a>
             <a href="#" aria-label="Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.75l.41-3.2H13.5V8.56c0-.92.26-1.54 1.58-1.54h1.69V4.16c-.82-.09-1.64-.14-2.47-.13-2.44 0-4.11 1.49-4.11 4.23v2.34H7.92v3.2h2.27V22h3.31Z"/></svg></a>
           </div>
-          <a class="footer-cta-inline" href="#inscreva-se">inscreva-se</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -459,6 +462,8 @@ repertório para decidir melhor.</p>
 <script src="../assets/js/logo-theme.js"></script>
 </body>
 </html>
+
+
 
 
 

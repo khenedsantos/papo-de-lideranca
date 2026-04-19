@@ -29,6 +29,64 @@ function setupHeaderScrollState() {
   window.addEventListener("scroll", syncState, { passive: true });
 }
 
+function setupPreviewTabs() {
+  const tablist = document.querySelector("[data-preview-tabs]");
+  const tabs = tablist ? Array.from(tablist.querySelectorAll("[data-preview-tab]")) : [];
+  const panels = Array.from(document.querySelectorAll("[data-preview-panel]"));
+
+  if (!tablist || tabs.length === 0 || panels.length === 0) return;
+
+  const activateTab = (tabToActivate, moveFocus = false) => {
+    tabs.forEach((tab) => {
+      const isActive = tab === tabToActivate;
+      const panelId = tab.getAttribute("aria-controls");
+      const panel = panelId ? document.getElementById(panelId) : null;
+
+      tab.classList.toggle("is-active", isActive);
+      tab.setAttribute("aria-selected", String(isActive));
+      tab.setAttribute("tabindex", isActive ? "0" : "-1");
+
+      if (panel) {
+        panel.hidden = !isActive;
+        panel.classList.toggle("is-active", isActive);
+      }
+    });
+
+    if (moveFocus) {
+      tabToActivate.focus();
+    }
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      activateTab(tab);
+    });
+
+    tab.addEventListener("keydown", (event) => {
+      if (!["ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+
+      if (event.key === "Home") {
+        activateTab(tabs[0], true);
+        return;
+      }
+
+      if (event.key === "End") {
+        activateTab(tabs[tabs.length - 1], true);
+        return;
+      }
+
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      const nextIndex = (index + direction + tabs.length) % tabs.length;
+      activateTab(tabs[nextIndex], true);
+    });
+  });
+
+  const activeTab =
+    tabs.find((tab) => tab.getAttribute("aria-selected") === "true") || tabs[0];
+  activateTab(activeTab);
+}
+
 function setupAccordion() {
   const items = document.querySelectorAll(".faq-item");
 
@@ -232,38 +290,125 @@ function setupCarousel(carousel) {
   startAutoplay();
 }
 
+const LEGACY_NEWSLETTER_STORAGE_KEY = "papo_lideranca_newsletter_subscribed";
+let newsletterRefreshTimeout = null;
+
+function clearLegacyNewsletterState() {
+  try {
+    window.localStorage.removeItem(LEGACY_NEWSLETTER_STORAGE_KEY);
+    window.sessionStorage.removeItem(LEGACY_NEWSLETTER_STORAGE_KEY);
+  } catch (error) {
+    return;
+  }
+}
+
+function scheduleNewsletterRefresh() {
+  clearLegacyNewsletterState();
+
+  if (newsletterRefreshTimeout) {
+    window.clearTimeout(newsletterRefreshTimeout);
+  }
+
+  newsletterRefreshTimeout = window.setTimeout(() => {
+    clearLegacyNewsletterState();
+    window.location.reload();
+  }, 2000);
+}
+
+window.PapoNewsletter = {
+  scheduleRefresh: scheduleNewsletterRefresh,
+  clearLegacyState: clearLegacyNewsletterState,
+};
+
 function setupForms() {
   const forms = document.querySelectorAll("[data-newsletter-form]");
 
-  forms.forEach((form) => {
-    const feedback = form.parentElement.querySelector("[data-form-feedback]");
+  function isPreviewForm(form) {
+    return Boolean(form.closest("[data-editions-modal]"));
+  }
+
+  function showError(feedback, message) {
+    if (!feedback) return;
+    feedback.classList.remove("is-success");
+    feedback.classList.add("is-error");
+    feedback.textContent = message;
+  }
+
+  function showSuccess(feedback) {
+    if (!feedback) return;
+    feedback.classList.remove("is-error");
+    feedback.classList.add("is-success");
+    feedback.innerHTML = `
+      <span class="form-feedback-title">inscrição confirmada</span>
+      <span class="form-feedback-copy">cheque seu e-mail. é muito bom ter você com a gente.</span>
+      <span class="form-feedback-copy">o Papo de Liderança agora entra na sua rotina com leituras curtas, úteis e sem ruído.</span>
+    `;
+  }
+
+  const generalForms = Array.from(forms)
+    .filter((form) => !isPreviewForm(form))
+    .map((form) => ({
+      form,
+      feedback: form.parentElement.querySelector("[data-form-feedback]"),
+      emailField: form.querySelector('input[type="email"]'),
+    }));
+
+  function resetNewsletterBlock({ feedback, emailField }) {
+    if (emailField) {
+      emailField.value = "";
+      emailField.removeAttribute("aria-invalid");
+      emailField.setCustomValidity("");
+    }
+
+    if (feedback) {
+      feedback.textContent = "";
+      feedback.classList.remove("is-error", "is-success");
+    }
+  }
+
+  generalForms.forEach(({ form, feedback, emailField }) => {
+    if (!emailField) return;
+
+    resetNewsletterBlock({ feedback, emailField });
+
+    emailField?.addEventListener("input", () => {
+      emailField.setCustomValidity("");
+      emailField.removeAttribute("aria-invalid");
+      if (feedback) {
+        feedback.textContent = "";
+        feedback.classList.remove("is-error", "is-success");
+      }
+    });
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      const emailField = form.querySelector('input[type="email"]');
       const email = emailField?.value.trim() || "";
+      const emailLooksValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-      if (!email || !email.includes("@")) {
-        if (feedback) {
-          feedback.textContent = "Digite um e-mail válido para continuar.";
-        }
+      if (emailField) {
+        emailField.value = email;
+        emailField.setCustomValidity("");
+      }
+
+      if (!emailField || !emailLooksValid || !emailField.checkValidity()) {
+        emailField?.setAttribute("aria-invalid", "true");
+        showError(feedback, "insira um e-mail válido para receber a próxima edição.");
         return;
       }
 
-      if (feedback) {
-        feedback.textContent =
-          "Inscrição simulada com sucesso para teste local. Para integrar com sua ferramenta, edite o envio em script.js.";
-      }
-
       form.reset();
+      showSuccess(feedback);
+      scheduleNewsletterRefresh();
     });
   });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  clearLegacyNewsletterState();
   setupNavigation();
   setupHeaderScrollState();
+  setupPreviewTabs();
   setupAccordion();
   setupHeroSwiper();
   setupForms();

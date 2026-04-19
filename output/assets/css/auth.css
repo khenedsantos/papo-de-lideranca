@@ -28,6 +28,10 @@ body.auth-page {
   justify-self: end;
 }
 
+.auth-header .header-actions .header-login {
+  min-height: 48px;
+}
+
 .auth-main {
   padding: 34px 0 60px;
 }
@@ -177,7 +181,7 @@ body.auth-page {
 
 .auth-form {
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .auth-field {
@@ -242,6 +246,13 @@ body.auth-page {
   gap: 16px;
 }
 
+.auth-inline-row--stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 2px;
+}
+
 .auth-link,
 .auth-backlink {
   color: rgba(15, 42, 61, 0.8);
@@ -257,20 +268,33 @@ body.auth-page {
   color: var(--accent-a);
 }
 
+.auth-link--secondary {
+  color: rgba(91, 107, 117, 0.86);
+}
+
 .auth-primary {
   min-height: 58px;
   padding: 0 26px;
   font-weight: 700;
   font-size: 1rem;
   text-transform: lowercase;
+  margin-top: 2px;
 }
 
 .auth-feedback {
-  min-height: 22px;
-  color: rgba(34, 160, 107, 0.92);
+  min-height: 24px;
+  color: rgba(15, 42, 61, 0.82);
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.6;
   text-transform: none;
+}
+
+.auth-feedback.is-error {
+  color: rgba(132, 47, 47, 0.92);
+}
+
+.auth-feedback.is-success {
+  color: rgba(15, 42, 61, 0.84);
 }
 
 .auth-divider {
@@ -300,8 +324,9 @@ body.auth-page {
 
 .auth-secondary {
   display: grid;
-  gap: 14px;
-  padding: 22px 22px 24px;
+  gap: 12px;
+  margin-top: 4px;
+  padding: 20px 22px 22px;
   border-radius: 26px;
   background: rgba(244, 248, 250, 0.86);
   border: 1px solid rgba(228, 231, 235, 0.72);
@@ -323,16 +348,22 @@ body.auth-page {
   line-height: 1.8;
 }
 
-.auth-secondary .header-cta {
+.auth-secondary-link {
   justify-self: start;
-  min-height: 50px;
-  padding: 0 22px;
+  color: rgba(15, 42, 61, 0.82);
   font-size: 0.94rem;
   font-weight: 700;
+  text-transform: lowercase;
+  text-decoration: none;
+}
+
+.auth-secondary-link:hover,
+.auth-secondary-link:focus-visible {
+  color: var(--accent-a);
 }
 
 .auth-trust {
-  margin-top: 16px;
+  margin-top: 18px;
   color: rgba(91, 107, 117, 0.68);
   font-size: 0.88rem;
   line-height: 1.72;
@@ -418,6 +449,11 @@ body.auth-page {
 
   .auth-main {
     padding: 24px 0 46px;
+  }
+
+  .auth-inline-row,
+  .auth-inline-row--stacked {
+    align-items: flex-start;
   }
 
   .auth-editorial,
