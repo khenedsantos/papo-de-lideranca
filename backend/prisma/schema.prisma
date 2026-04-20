@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  MEMBER
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  PAUSED
+  CANCELED
+}
+
+enum SubscriptionPlan {
+  FREE
+  PREMIUM
+}
+
+model User {
+  id              String            @id @default(cuid())
+  name            String
+  email           String            @unique
+  passwordHash    String
+  role            UserRole          @default(MEMBER)
+  isActive        Boolean           @default(true)
+  subscriptions   Subscription[]
+  readingProgress ReadingProgress[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+}
+
+model Subscription {
+  id        String             @id @default(cuid())
+  userId    String
+  status    SubscriptionStatus @default(ACTIVE)
+  plan      SubscriptionPlan   @default(FREE)
+  startedAt DateTime
+  endsAt    DateTime?
+  user      User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  @@index([userId])
+}
+
+model Category {
+  id            String         @id @default(cuid())
+  name          String
+  slug          String         @unique
+  description   String
+  articles      Article[]
+  shortEditions ShortEdition[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model Article {
+  id              String            @id @default(cuid())
+  title           String
+  slug            String            @unique
+  excerpt         String
+  content         String
+  readTimeMinutes Int
+  isPublished     Boolean           @default(false)
+  publishedAt     DateTime?
+  categoryId      String
+  category        Category          @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  readingProgress ReadingProgress[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([categoryId])
+}
+
+model ShortEdition {
+  id              String            @id @default(cuid())
+  title           String
+  slug            String            @unique
+  excerpt         String
+  ideaCentral     String
+  whatMatters     Json
+  applyToday      Json
+  quoteOfWeek     String
+  readTimeMinutes Int
+  isPublished     Boolean           @default(false)
+  publishedAt     DateTime?
+  categoryId      String
+  category        Category          @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  readingProgress ReadingProgress[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([categoryId])
+}
+
+model ReadingProgress {
+  id             String       @id @default(cuid())
+  userId         String
+  articleId      String?
+  shortEditionId String?
+  progressPercent Int
+  lastReadAt     DateTime
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  article        Article?     @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  shortEdition   ShortEdition? @relation(fields: [shortEditionId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([userId])
+  @@index([articleId])
+  @@index([shortEditionId])
+}
+

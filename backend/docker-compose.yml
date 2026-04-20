@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: papo-backend-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: papo-backend-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/papo_de_lideranca?schema=public
+    depends_on:
+      - postgres
+    ports:
+      - '${PORT:-3000}:3000'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: sh -c "npx prisma generate && npm run start:dev"
+
+volumes:
+  postgres_data:
