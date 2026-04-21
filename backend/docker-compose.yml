@@ -11,6 +11,11 @@ services:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   api:
     build:
@@ -23,13 +28,11 @@ services:
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/papo_de_lideranca?schema=public
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     ports:
-      - '${PORT:-3000}:3000'
-    volumes:
-      - .:/app
-      - /app/node_modules
-    command: sh -c "npx prisma generate && npm run start:dev"
+      - '${PORT:-3001}:${PORT:-3001}'
+    command: sh -c "npm run db:prepare && npm run start:prod"
 
 volumes:
   postgres_data:

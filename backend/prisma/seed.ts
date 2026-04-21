@@ -33,34 +33,69 @@ async function main() {
   ];
 
   const categoryMap = new Map<string, string>();
+
   for (const category of categories) {
     const record = await prisma.category.upsert({
       where: { slug: category.slug },
       update: category,
       create: category,
     });
+
     categoryMap.set(record.slug, record.id);
   }
 
   const adminEmail = process.env.ADMIN_SEED_EMAIL ?? 'admin@papodelideranca.local';
-  const adminPassword = process.env.ADMIN_SEED_PASSWORD ?? 'ChangeMe123!';
+  const adminPassword = process.env.ADMIN_SEED_PASSWORD ?? 'AdminNovaSenha123!';
   const adminName = process.env.ADMIN_SEED_NAME ?? 'Admin Papo';
-  const passwordHash = await bcrypt.hash(adminPassword, 10);
+  const adminPasswordHash = await bcrypt.hash(adminPassword, 10);
 
   const admin = await prisma.user.upsert({
     where: { email: adminEmail },
     update: {
       name: adminName,
-      passwordHash,
+      passwordHash: adminPasswordHash,
       role: 'ADMIN',
       isActive: true,
+      hasCompletedAccess: true,
+      resetPasswordToken: null,
+      resetPasswordExpiresAt: null,
     },
     create: {
       name: adminName,
       email: adminEmail,
-      passwordHash,
+      passwordHash: adminPasswordHash,
       role: 'ADMIN',
       isActive: true,
+      hasCompletedAccess: true,
+      resetPasswordToken: null,
+      resetPasswordExpiresAt: null,
+    },
+  });
+
+  const invitedPasswordHash = await bcrypt.hash('PendingAccess123!', 10);
+
+  await prisma.user.upsert({
+    where: { email: 'convite@papodelideranca.local' },
+    update: {
+      name: 'Usuário Convite',
+      passwordHash: invitedPasswordHash,
+      role: 'MEMBER',
+      isActive: true,
+      hasCompletedAccess: false,
+      resetPasswordToken: null,
+      resetPasswordExpiresAt: null,
+      lastLoginAt: null,
+    },
+    create: {
+      name: 'Usuário Convite',
+      email: 'convite@papodelideranca.local',
+      passwordHash: invitedPasswordHash,
+      role: 'MEMBER',
+      isActive: true,
+      hasCompletedAccess: false,
+      resetPasswordToken: null,
+      resetPasswordExpiresAt: null,
+      lastLoginAt: null,
     },
   });
 
@@ -152,7 +187,8 @@ async function main() {
         'Feche com uma direção curta, não com excesso de cenários.',
         'Evite transformar leitura provisória em posicionamento definitivo.',
       ],
-      quoteOfWeek: 'Liderança madura não acelera ansiedade. Ela organiza a leitura do que importa.',
+      quoteOfWeek:
+        'Liderança madura não acelera ansiedade. Ela organiza a leitura do que importa.',
       readTimeMinutes: 2,
       isPublished: true,
       publishedAt: new Date('2026-04-19T09:00:00.000Z'),
@@ -174,7 +210,8 @@ async function main() {
         'Feche com uma direção curta, não com excesso de cenários.',
         'Evite transformar leitura provisória em posicionamento definitivo.',
       ],
-      quoteOfWeek: 'Liderança madura não acelera ansiedade. Ela organiza a leitura do que importa.',
+      quoteOfWeek:
+        'Liderança madura não acelera ansiedade. Ela organiza a leitura do que importa.',
       readTimeMinutes: 2,
       isPublished: true,
       publishedAt: new Date('2026-04-19T09:00:00.000Z'),
@@ -199,7 +236,8 @@ async function main() {
         'Revise travas no meio da semana antes de elas crescerem.',
         'Feche a semana com uma revisão curta do que funcionou e do que precisa de ajuste.',
       ],
-      quoteOfWeek: 'Quando o ritmo é claro, a equipe precisa de menos controle para continuar bem.',
+      quoteOfWeek:
+        'Quando o ritmo é claro, a equipe precisa de menos controle para continuar bem.',
       readTimeMinutes: 3,
       isPublished: true,
       publishedAt: new Date('2026-04-19T10:00:00.000Z'),
@@ -221,7 +259,8 @@ async function main() {
         'Revise travas no meio da semana antes de elas crescerem.',
         'Feche a semana com uma revisão curta do que funcionou e do que precisa de ajuste.',
       ],
-      quoteOfWeek: 'Quando o ritmo é claro, a equipe precisa de menos controle para continuar bem.',
+      quoteOfWeek:
+        'Quando o ritmo é claro, a equipe precisa de menos controle para continuar bem.',
       readTimeMinutes: 3,
       isPublished: true,
       publishedAt: new Date('2026-04-19T10:00:00.000Z'),

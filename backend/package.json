@@ -12,9 +12,14 @@
     "format": "prettier --write \"src/**/*.ts\" \"prisma/**/*.ts\"",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:studio": "prisma studio",
     "prisma:seed": "ts-node --project tsconfig.json prisma/seed.ts",
-    "seed": "npm run prisma:seed"
+    "seed": "npm run prisma:seed",
+    "db:prepare": "npm run prisma:migrate:deploy && npm run seed",
+    "db:prepare:full": "npm run prisma:generate && npm run db:prepare",
+    "docker:up": "docker compose up -d postgres",
+    "docker:up:build": "docker compose up --build"
   },
   "keywords": [],
   "author": "Papo de Liderança",

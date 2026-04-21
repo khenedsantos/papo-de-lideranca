@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import type { StringValue } from 'ms';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -29,4 +30,3 @@ import { JwtStrategy } from './strategies/jwt.strategy';
   exports: [AuthService, PassportModule, JwtModule],
 })
 export class AuthModule {}
-import type { StringValue } from 'ms';

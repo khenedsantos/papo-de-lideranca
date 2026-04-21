@@ -24,16 +24,20 @@ enum SubscriptionPlan {
 }
 
 model User {
-  id              String            @id @default(cuid())
-  name            String
-  email           String            @unique
-  passwordHash    String
-  role            UserRole          @default(MEMBER)
-  isActive        Boolean           @default(true)
-  subscriptions   Subscription[]
-  readingProgress ReadingProgress[]
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  id                    String            @id @default(cuid())
+  name                  String
+  email                 String            @unique
+  passwordHash          String
+  role                  UserRole          @default(MEMBER)
+  isActive              Boolean           @default(true)
+  hasCompletedAccess    Boolean           @default(false)
+  resetPasswordToken    String?
+  resetPasswordExpiresAt DateTime?
+  lastLoginAt           DateTime?
+  subscriptions         Subscription[]
+  readingProgress       ReadingProgress[]
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
 }
 
 model Subscription {
@@ -117,4 +121,3 @@ model ReadingProgress {
   @@index([articleId])
   @@index([shortEditionId])
 }
-
