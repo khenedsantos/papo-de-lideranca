@@ -51,29 +51,42 @@
           <div class="auth-card-header">
             <span class="section-kicker">ativação</span>
             <h1 id="create-password-title">crie seu acesso</h1>
-            <p>defina sua senha para acessar suas edições e manter sua rotina de leitura.</p>
+            <p>informe o e-mail do convite e defina sua senha para liberar seu acesso com a mesma discrição da experiência editorial.</p>
           </div>
 
-          <form class="auth-form" data-auth-form data-success-message="senha criada nesta versão de demonstração.">
+          <form class="auth-form" data-create-access-form>
             <div class="auth-field">
-              <label for="new-password">nova senha</label>
+              <label for="create-access-email">e-mail do convite</label>
               <div class="auth-input-shell">
-                <input id="new-password" name="new-password" type="password" placeholder="crie uma senha" required>
-                <button class="password-toggle" type="button" data-toggle-password aria-controls="new-password" aria-label="Mostrar senha">mostrar</button>
+                <input id="create-access-email" name="email" type="email" placeholder="seu e-mail de acesso" autocomplete="email" required>
               </div>
             </div>
 
             <div class="auth-field">
-              <label for="confirm-password">confirmar senha</label>
+              <label for="create-access-password">nova senha</label>
               <div class="auth-input-shell">
-                <input id="confirm-password" name="confirm-password" type="password" placeholder="repita sua senha" required>
-                <button class="password-toggle" type="button" data-toggle-password aria-controls="confirm-password" aria-label="Mostrar senha">mostrar</button>
+                <input id="create-access-password" name="password" type="password" placeholder="crie uma senha" autocomplete="new-password" required>
+                <button class="password-toggle" type="button" data-toggle-password aria-controls="create-access-password" aria-label="Mostrar senha">mostrar</button>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label for="create-access-confirm-password">confirmar senha</label>
+              <div class="auth-input-shell">
+                <input id="create-access-confirm-password" name="confirm-password" type="password" placeholder="repita sua senha" autocomplete="new-password" required>
+                <button class="password-toggle" type="button" data-toggle-password aria-controls="create-access-confirm-password" aria-label="Mostrar senha">mostrar</button>
               </div>
             </div>
 
             <button class="header-cta auth-primary" type="submit">criar acesso</button>
             <div class="auth-feedback" data-auth-feedback aria-live="polite"></div>
           </form>
+
+          <div class="auth-secondary" data-create-access-success hidden>
+            <h2>acesso liberado</h2>
+            <p>sua senha inicial foi definida. em instantes, voce segue para o login e continua da sua area de leitura.</p>
+            <a class="auth-secondary-link" href="./login.html">ir para o login</a>
+          </div>
 
           <p class="auth-trust">simples, seguro e direto ao ponto.</p>
           <p class="auth-trust"><a class="auth-backlink" href="./login.html">voltar ao login</a></p>
@@ -92,7 +105,8 @@
   
   <script src="../assets/js/page-transition.js"></script>
   <script src="../assets/js/logo-theme.js"></script>
-  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/create-access.js"></script>
 </body>
 </html>
 

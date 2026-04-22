@@ -40,8 +40,8 @@
             <span>você sabe o que fazer, quanto tempo leva e onde volta depois.</span>
           </div>
           <div class="auth-note">
-            <strong>fluxo pronto</strong>
-            <span>o front-end já está preparado para receber a lógica real do envio.</span>
+            <strong>fluxo real</strong>
+            <span>o pedido já conversa com o backend e prepara a próxima etapa quando houver token disponível em ambiente local.</span>
           </div>
         </div>
       </section>
@@ -54,17 +54,23 @@
             <p>insira seu e-mail e enviaremos um link para redefinir sua senha.</p>
           </div>
 
-          <form class="auth-form" data-auth-form data-success-message="link preparado nesta versão de demonstração.">
+          <form class="auth-form" data-forgot-password-form>
             <div class="auth-field">
               <label for="recover-email">e-mail</label>
               <div class="auth-input-shell">
-                <input id="recover-email" name="email" type="email" placeholder="seu e-mail" required>
+                <input id="recover-email" name="email" type="email" placeholder="seu e-mail" autocomplete="email" required>
               </div>
             </div>
 
             <button class="header-cta auth-primary" type="submit">enviar link</button>
             <div class="auth-feedback" data-auth-feedback aria-live="polite"></div>
           </form>
+
+          <div class="auth-secondary auth-secondary--support" data-reset-link-panel hidden>
+            <h2>link pronto para o teste local</h2>
+            <p data-reset-link-note>o backend devolveu um token de redefinição para este ambiente. siga para a próxima etapa sem expor o token na interface.</p>
+            <a class="auth-secondary-link" href="./redefinir-senha.html" data-reset-link>seguir para redefinir a senha</a>
+          </div>
 
           <p class="auth-trust"><a class="auth-backlink" href="./login.html">voltar ao login</a></p>
         </div>
@@ -82,7 +88,8 @@
   
   <script src="../assets/js/page-transition.js"></script>
   <script src="../assets/js/logo-theme.js"></script>
-  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/forgot-password.js"></script>
 </body>
 </html>
 

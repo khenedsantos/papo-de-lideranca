@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="../assets/css/dashboard.css">
   <link rel="stylesheet" href="../assets/css/edicoes-curtas.css">
 </head>
-<body class="dashboard-page dashboard-page--lite short-editions-page">
+<body class="dashboard-page dashboard-page--lite short-editions-page" data-page="short-editions">
   <header class="site-header dashboard-header dashboard-header--lite">
     <div class="container header-inner">
       <a class="brand" href="../landing-newsletter/index.html#inicio" aria-label="Papo de Liderança">
@@ -27,7 +27,7 @@
         <a class="is-current" href="./edicoes-curtas.html">edições curtas</a>
       </nav>
       <div class="header-actions">
-        <a class="header-login" href="../auth/login.html">sair</a>
+        <a class="header-login" href="../auth/login.html" data-auth-logout>sair</a>
       </div>
     </div>
   </header>
@@ -222,5 +222,7 @@
 
   <script src="../assets/js/page-transition.js"></script>
   <script src="../assets/js/logo-theme.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/dashboard.js"></script>
 </body>
 </html>

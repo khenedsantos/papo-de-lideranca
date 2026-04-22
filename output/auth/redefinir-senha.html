@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logos/favicons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/logos/favicons/favicon-32.png">
+  <link rel="shortcut icon" href="../assets/logos/favicons/favicon.ico">
+  <title>Redefinir Senha | Papo de Liderança</title>
+  <meta name="description" content="Defina uma nova senha para retomar seu acesso ao Papo de Liderança com segurança e clareza.">
+  <link rel="stylesheet" href="../landing-newsletter/style.css">
+  <link rel="stylesheet" href="../assets/css/page-transition.css">
+  <link rel="stylesheet" href="../assets/css/logo-theme.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
+</head>
+<body class="auth-page auth-page--quiet">
+  <header class="site-header auth-header">
+    <div class="container header-inner">
+      <a class="brand" href="../landing-newsletter/index.html#inicio" aria-label="Papo de Liderança">
+        <img class="logo" src="../assets/logo-dark.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de Liderança">
+        <span class="brand-name">Papo de Liderança</span>
+      </a>
+      <div class="header-actions">
+        <a class="header-login" href="./login.html">voltar ao login</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="container auth-shell">
+      <section class="auth-editorial" aria-labelledby="reset-editorial-title">
+        <div class="auth-editorial-copy">
+          <span class="section-kicker">redefinição</span>
+          <h2 id="reset-editorial-title">voltar com segurança também pode ser elegante.</h2>
+          <p>esta etapa confirma seu token e define a nova senha sem ruído, mantendo o mesmo acabamento do restante da experiência.</p>
+        </div>
+        <div class="auth-editorial-notes" aria-label="Notas da redefinição">
+          <div class="auth-note">
+            <strong>token validado</strong>
+            <span data-token-status>verificando o token desta sessão de redefinição.</span>
+          </div>
+          <div class="auth-note">
+            <strong>transição curta</strong>
+            <span>assim que a senha for atualizada, você volta ao login com o novo acesso pronto para uso.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="auth-panel" aria-labelledby="reset-title">
+        <div class="auth-card">
+          <div class="auth-card-header">
+            <span class="section-kicker">senha</span>
+            <h1 id="reset-title">redefinir senha</h1>
+            <p>defina sua nova senha para continuar a leitura com a mesma clareza da experiência principal.</p>
+          </div>
+
+          <form class="auth-form" data-reset-password-form>
+            <input type="hidden" name="token">
+
+            <div class="auth-field">
+              <label for="reset-password">nova senha</label>
+              <div class="auth-input-shell">
+                <input id="reset-password" name="password" type="password" placeholder="crie uma nova senha" autocomplete="new-password" required>
+                <button class="password-toggle" type="button" data-toggle-password aria-controls="reset-password" aria-label="Mostrar senha">mostrar</button>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label for="reset-password-confirm">confirmar senha</label>
+              <div class="auth-input-shell">
+                <input id="reset-password-confirm" name="confirm-password" type="password" placeholder="repita sua nova senha" autocomplete="new-password" required>
+                <button class="password-toggle" type="button" data-toggle-password aria-controls="reset-password-confirm" aria-label="Mostrar senha">mostrar</button>
+              </div>
+            </div>
+
+            <button class="header-cta auth-primary" type="submit">redefinir senha</button>
+            <div class="auth-feedback" data-auth-feedback aria-live="polite"></div>
+          </form>
+
+          <div class="auth-secondary auth-secondary--support" data-reset-success hidden>
+            <h2>senha atualizada</h2>
+            <p>sua nova senha foi registrada. vamos levar você de volta ao login para entrar com o acesso recém-atualizado.</p>
+            <a class="auth-secondary-link" href="./login.html">voltar ao login</a>
+          </div>
+
+          <p class="auth-trust"><a class="auth-backlink" href="./recuperar-senha.html">solicitar novo link</a></p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="auth-footer">
+    <div class="container auth-footer-copy">
+      <span>segurança suficiente para proteger seu acesso sem alongar o caminho de volta.</span>
+      <a href="../landing-newsletter/index.html#inicio">voltar ao início</a>
+    </div>
+  </footer>
+
+  <script src="../assets/js/page-transition.js"></script>
+  <script src="../assets/js/logo-theme.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/reset-password.js"></script>
+</body>
+</html>

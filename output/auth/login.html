@@ -54,7 +54,7 @@
             <p>entre com o e-mail e a senha do seu acesso para continuar a leitura com clareza e consistência.</p>
           </div>
 
-          <form class="auth-form" data-auth-form data-success-message="acesso validado. agora é só conectar este passo com a autenticação real." data-error-message="não foi possível entrar agora. revise seus dados ou tente novamente.">
+          <form class="auth-form" data-auth-form data-redirect-url="../app/dashboard.html" data-success-message="acesso validado. redirecionando para a sua área." data-error-message="não foi possível entrar agora. revise seus dados ou tente novamente.">
             <div class="auth-field">
               <label for="login-email">e-mail</label>
               <div class="auth-input-shell">
@@ -103,6 +103,7 @@
   
   <script src="../assets/js/page-transition.js"></script>
   <script src="../assets/js/logo-theme.js"></script>
+  <script src="../assets/js/api.js"></script>
   <script src="../assets/js/auth-login.js"></script>
 </body>
 </html>
