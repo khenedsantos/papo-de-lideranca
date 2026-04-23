@@ -53,7 +53,10 @@ async function loadBibliotecaState(auth) {
       if (error && (error.status === 401 || error.status === 403) && auth) {
         auth.clearSession();
         window.location.replace("../auth/login.html");
+        return;
       }
+
+      applyBibliotecaCurrentReadingError();
     })
     .finally(() => {
       bibliotecaRefreshInFlight = null;
@@ -83,9 +86,60 @@ function bindBibliotecaRefresh(auth) {
 function populateBibliotecaCurrentReading(summary, progressBySlug) {
   const currentReading = resolveBibliotecaCurrentReading(summary, progressBySlug);
 
-  if (!currentReading || !currentReading.content) return;
+  if (!currentReading || !currentReading.content) {
+    applyBibliotecaCurrentReadingEmpty();
+    return;
+  }
 
   applyBibliotecaCurrentReading(currentReading);
+}
+
+function applyBibliotecaCurrentReadingEmpty() {
+  setText("[data-library-current-category]", "acervo");
+  setText("[data-library-current-time]", "-- min");
+  setText("[data-library-current-title]", "nenhuma leitura em andamento");
+  setText(
+    "[data-library-current-excerpt]",
+    "quando você iniciar uma leitura, este espaço passa a mostrar o ponto certo de retomada.",
+  );
+  setLink("[data-library-current-link]", "./biblioteca.html#biblioteca-completa", "explorar biblioteca");
+  setProgressValue(
+    document.querySelector("[data-library-current-progress]"),
+    0,
+    document.querySelector("[data-library-current-progress-label]"),
+    "0%",
+  );
+  setCurrentStateLabel("sem leitura ativa");
+  setText("[data-library-current-note-label]", "próximo passo");
+  setText(
+    "[data-library-current-note-value]",
+    "escolha um texto do acervo para começar a registrar progresso real.",
+  );
+  syncCurrentFeatureState(false, false);
+}
+
+function applyBibliotecaCurrentReadingError() {
+  setText("[data-library-current-category]", "biblioteca");
+  setText("[data-library-current-time]", "-- min");
+  setText("[data-library-current-title]", "não foi possível sincronizar");
+  setText(
+    "[data-library-current-excerpt]",
+    "o progresso real não pôde ser carregado agora. verifique se a API local está ativa e tente atualizar a página.",
+  );
+  setLink("[data-library-current-link]", "./biblioteca.html", "tentar novamente");
+  setProgressValue(
+    document.querySelector("[data-library-current-progress]"),
+    0,
+    document.querySelector("[data-library-current-progress-label]"),
+    "indisponível",
+  );
+  setCurrentStateLabel("sem sincronização");
+  setText("[data-library-current-note-label]", "progresso real");
+  setText(
+    "[data-library-current-note-value]",
+    "a biblioteca evita mostrar progresso antigo quando a integração não responde.",
+  );
+  syncCurrentFeatureState(false, false);
 }
 
 function applyBibliotecaCurrentReading(currentReading) {
