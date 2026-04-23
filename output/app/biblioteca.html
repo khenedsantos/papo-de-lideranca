@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../assets/css/page-transition.css">
   <link rel="stylesheet" href="../assets/css/logo-theme.css">
   <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/back-to-top.css">
   <link rel="stylesheet" href="../assets/css/biblioteca.css">
 </head>
 <body class="dashboard-page dashboard-page--lite biblioteca-page" data-page="biblioteca">
@@ -55,26 +56,26 @@
         <article class="biblioteca-feature">
           <div class="biblioteca-feature-copy">
             <div class="biblioteca-meta">
-              <span>gestão de equipes</span>
-              <span>7 min</span>
+              <span data-library-current-category>gestão de equipes</span>
+              <span data-library-current-time>7 min</span>
             </div>
-            <h3>feedback que desenvolve</h3>
-            <p>retome o texto que ajuda a transformar feedback em clareza, responsabilidade e evolução real no time.</p>
-            <a class="biblioteca-link" href="./artigos/artigo-feedback-que-desenvolve.html">continuar leitura</a>
+            <h3 data-library-current-title>feedback que desenvolve</h3>
+            <p data-library-current-excerpt>retome o texto que ajuda a transformar feedback em clareza, responsabilidade e evolução real no time.</p>
+            <a class="biblioteca-link" href="./artigos/artigo-feedback-que-desenvolve.html" data-library-current-link>continuar leitura</a>
           </div>
-          <div class="biblioteca-feature-side">
+          <div class="biblioteca-feature-side" data-library-current-shell>
             <div class="biblioteca-progress">
               <div class="biblioteca-progress-head">
                 <span>lido até aqui</span>
-                <strong>62%</strong>
+                <strong data-library-current-progress-label>62%</strong>
               </div>
-              <div class="biblioteca-progress-bar" aria-hidden="true">
+              <div class="biblioteca-progress-bar" aria-hidden="true" data-library-current-progress>
                 <span></span>
               </div>
             </div>
             <div class="biblioteca-feature-side-note">
-              <strong>próximo ponto</strong>
-              <p>voltar no trecho em que clareza e respeito deixam de competir na conversa.</p>
+              <strong data-library-current-note-label>próximo ponto</strong>
+              <p data-library-current-note-value>voltar no trecho em que clareza e respeito deixam de competir na conversa.</p>
             </div>
           </div>
         </article>
@@ -322,5 +323,7 @@
   <script src="../assets/js/logo-theme.js"></script>
   <script src="../assets/js/api.js"></script>
   <script src="../assets/js/dashboard.js"></script>
+  <script src="../assets/js/back-to-top.js"></script>
+  <script src="../assets/js/biblioteca.js"></script>
 </body>
 </html>

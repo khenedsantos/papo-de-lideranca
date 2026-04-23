@@ -23,6 +23,12 @@ enum SubscriptionPlan {
   PREMIUM
 }
 
+enum ReadingProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+}
+
 model User {
   id                    String            @id @default(cuid())
   name                  String
@@ -105,19 +111,25 @@ model ShortEdition {
 }
 
 model ReadingProgress {
-  id             String       @id @default(cuid())
-  userId         String
-  articleId      String?
-  shortEditionId String?
-  progressPercent Int
-  lastReadAt     DateTime
-  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  article        Article?     @relation(fields: [articleId], references: [id], onDelete: Cascade)
-  shortEdition   ShortEdition? @relation(fields: [shortEditionId], references: [id], onDelete: Cascade)
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
+  id              String                @id @default(cuid())
+  userId          String
+  articleId       String?
+  shortEditionId  String?
+  progressPercent Int                   @default(0)
+  status          ReadingProgressStatus @default(NOT_STARTED)
+  lastReadAt      DateTime              @default(now())
+  completedAt     DateTime?
+  user            User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  article         Article?              @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  shortEdition    ShortEdition?         @relation(fields: [shortEditionId], references: [id], onDelete: Cascade)
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
 
   @@index([userId])
+  @@index([userId, status])
   @@index([articleId])
   @@index([shortEditionId])
+  @@index([userId, lastReadAt])
+  @@unique([userId, articleId])
+  @@unique([userId, shortEditionId])
 }

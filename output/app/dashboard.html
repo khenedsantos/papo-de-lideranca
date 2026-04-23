@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../assets/css/page-transition.css">
   <link rel="stylesheet" href="../assets/css/logo-theme.css">
   <link rel="stylesheet" href="../assets/css/dashboard.css">
+  <link rel="stylesheet" href="../assets/css/back-to-top.css">
 </head>
 <body class="dashboard-page dashboard-page--lite" data-page="dashboard">
   <header class="site-header dashboard-header dashboard-header--lite">
@@ -40,8 +41,8 @@
               <h1 class="dashboard-hero-stage dashboard-hero-stage--title">olá, <span data-user-first-name>assinante</span>. sua próxima linha de raciocínio já está preparada.</h1>
               <p class="dashboard-hero-stage dashboard-hero-stage--body">um espaço de continuidade editorial para retomar a leitura certa, no ponto certo, com menos ruído visual e mais contexto para decidir melhor.</p>
               <div class="dashboard-hero-meta dashboard-hero-meta--lite" aria-label="Resumo da rotina">
-                <span class="dashboard-meta-chip dashboard-meta-chip--lite dashboard-hero-stage dashboard-hero-stage--meta" data-user-plan>carregando plano</span>
-                <span class="dashboard-meta-chip dashboard-meta-chip--lite dashboard-hero-stage dashboard-hero-stage--meta" data-user-status>carregando status</span>
+                <span class="dashboard-meta-chip dashboard-meta-chip--lite dashboard-hero-stage dashboard-hero-stage--meta">continuidade editorial</span>
+                <span class="dashboard-meta-chip dashboard-meta-chip--lite dashboard-hero-stage dashboard-hero-stage--meta">progresso real de leitura</span>
               </div>
               <div class="dashboard-hero-actions dashboard-hero-stage dashboard-hero-stage--meta">
                 <a class="header-cta dashboard-primary dashboard-primary--lite" href="./biblioteca.html">explorar biblioteca</a>
@@ -55,16 +56,55 @@
                 <span class="dashboard-hero-summary-label">sua conta</span>
                 <span class="dashboard-hero-summary-badge" data-user-access>carregando acesso</span>
               </div>
-              <strong data-user-email>carregando seu e-mail</strong>
-              <p><span data-user-role>carregando perfil</span> · <span data-user-last-login>carregando último acesso</span></p>
-              <div class="dashboard-hero-summary-grid">
-                <article class="dashboard-hero-summary-item">
-                  <span>plano</span>
-                  <strong data-user-plan-detail>carregando plano</strong>
+
+              <div class="dashboard-account-profile">
+                <div class="dashboard-account-avatar" data-user-initials>PL</div>
+                <div class="dashboard-account-identity">
+                  <strong data-user-email>carregando seu e-mail</strong>
+                  <p data-user-member-since hidden>membro desde</p>
+                  <p data-user-last-login>carregando último acesso</p>
+                </div>
+              </div>
+
+              <div class="dashboard-account-stack">
+                <article class="dashboard-account-row">
+                  <span class="dashboard-account-row-icon" aria-hidden="true">P</span>
+                  <div class="dashboard-account-row-copy">
+                    <span>sua assinatura</span>
+                    <strong><span data-user-plan>plano premium</span> <small data-user-status>ativa</small></strong>
+                    <p>acesso completo ao acervo</p>
+                  </div>
+                  <span class="dashboard-account-row-arrow" aria-hidden="true">&rsaquo;</span>
                 </article>
-                <article class="dashboard-hero-summary-item">
-                  <span>status</span>
-                  <strong data-user-status-detail>carregando status</strong>
+
+                <article class="dashboard-account-row">
+                  <span class="dashboard-account-row-icon" aria-hidden="true">O</span>
+                  <div class="dashboard-account-row-copy">
+                    <span>seu perfil</span>
+                    <strong data-user-role>carregando perfil</strong>
+                  </div>
+                  <span class="dashboard-account-row-arrow" aria-hidden="true">&rsaquo;</span>
+                </article>
+
+                <article class="dashboard-account-row">
+                  <span class="dashboard-account-row-icon" aria-hidden="true">S</span>
+                  <div class="dashboard-account-row-copy">
+                    <span>segurança</span>
+                    <strong>senha</strong>
+                    <p>gerencie sua senha de acesso</p>
+                  </div>
+                  <span class="dashboard-account-row-arrow" aria-hidden="true">&rsaquo;</span>
+                </article>
+              </div>
+
+              <div class="dashboard-account-support">
+                <article class="dashboard-account-row dashboard-account-row--support">
+                  <span class="dashboard-account-row-icon" aria-hidden="true">?</span>
+                  <div class="dashboard-account-row-copy">
+                    <strong>precisa de ajuda?</strong>
+                    <p>fale com o suporte</p>
+                  </div>
+                  <span class="dashboard-account-row-arrow" aria-hidden="true">&rsaquo;</span>
                 </article>
               </div>
               <div class="dashboard-inline-feedback" data-dashboard-feedback aria-live="polite"></div>
@@ -76,115 +116,174 @@
 
     <section class="dashboard-content dashboard-content--lite">
       <div class="container dashboard-stack dashboard-stack--lite">
-        <section class="dashboard-section dashboard-section--feature dashboard-section--feature-lite" aria-labelledby="continue-title" data-reveal>
-          <div class="dashboard-section-head dashboard-section-head--lite">
-            <h2 id="continue-title">continue sua linha de raciocínio</h2>
-            <p>o centro da sua área logada agora é a retomada. uma peça principal, bem resolvida, para continuar a leitura que já estava gerando clareza.</p>
-          </div>
-
-          <article class="dashboard-feature-card dashboard-feature-card--lite">
-            <div class="dashboard-feature-shell dashboard-feature-shell--lite">
-              <div class="dashboard-feature-copy dashboard-feature-copy--lite">
-                <div class="dashboard-card-meta dashboard-card-meta--lite">
-                  <span class="edition-card-category edition-card-category--lite">mentalidade</span>
-                  <span class="edition-card-time edition-card-time--lite">5 min</span>
-                </div>
-                <h3>disciplina emocional para liderar bem em cenários de pressão</h3>
-                <p>quando a pressão acelera o ambiente, liderança melhor não nasce de impulso. esta leitura retoma exatamente o ponto em que clareza emocional começa a virar direção prática.</p>
-                <a class="header-cta dashboard-primary dashboard-primary--lite" href="./artigos/artigo-disciplina-emocional-sob-pressao.html">continuar leitura</a>
+        <section class="dashboard-section dashboard-section--feature dashboard-section--feature-lite" aria-labelledby="journey-title" data-reveal>
+          <article class="dashboard-journey-card" data-journey-card>
+            <div class="dashboard-journey-grid">
+              <div class="dashboard-journey-copy">
+                <span class="dashboard-journey-kicker">sua jornada</span>
+                <h2 id="journey-title" data-journey-headline>você está construindo consistência.</h2>
+                <p data-journey-support>continue avançando um pouco a cada dia. pequenos passos geram grandes mudanças.</p>
+                <a class="header-cta dashboard-primary dashboard-primary--lite" href="./biblioteca.html" data-current-reading-link data-journey-primary-cta>continuar leitura</a>
               </div>
 
-              <div class="dashboard-feature-side dashboard-feature-side--lite">
-                <div class="dashboard-feature-progress dashboard-feature-progress--lite">
-                  <div class="dashboard-feature-progress-copy">
-                    <span>progresso</span>
-                    <strong>85%</strong>
-                  </div>
-                  <div class="dashboard-progress-pill dashboard-progress-pill--lite">
-                    <div class="dashboard-progress-bar dashboard-progress-bar--lite" aria-hidden="true" data-progress="85">
+              <div class="dashboard-journey-panel" aria-label="Progresso da jornada">
+                <div class="dashboard-journey-panel-head">
+                  <span>progresso da jornada</span>
+                  <span>esta semana</span>
+                </div>
+                <div class="dashboard-journey-progress">
+                  <strong data-journey-percent-label>0%</strong>
+                  <div class="dashboard-progress-pill dashboard-progress-pill--lite dashboard-journey-progress-pill">
+                    <div class="dashboard-progress-bar dashboard-progress-bar--lite" aria-hidden="true" data-progress="0" data-journey-progress>
                       <span></span>
                     </div>
                   </div>
                 </div>
-                <div class="dashboard-feature-aside dashboard-feature-aside--lite">
-                  <div class="dashboard-feature-aside-row dashboard-feature-aside-row--lite">
-                    <span>contexto</span>
-                    <strong>pressão, resposta e estabilidade</strong>
-                  </div>
-                  <div class="dashboard-feature-aside-row dashboard-feature-aside-row--lite">
-                    <span>ganho esperado</span>
-                    <strong>mais clareza, menos contágio emocional</strong>
-                  </div>
+
+                <div class="dashboard-journey-metrics" aria-label="Métricas da semana">
+                  <article class="dashboard-journey-metric">
+                    <span>dias de leitura</span>
+                    <strong data-journey-reading-days>0 / 7</strong>
+                    <small>esta semana</small>
+                  </article>
+                  <article class="dashboard-journey-metric">
+                    <span>tempo dedicado</span>
+                    <strong data-journey-dedicated-time>0 min</strong>
+                    <small>esta semana</small>
+                  </article>
+                  <article class="dashboard-journey-metric">
+                    <span>leituras concluídas</span>
+                    <strong data-journey-completed-week>0</strong>
+                    <small>esta semana</small>
+                  </article>
                 </div>
+
+                <article class="dashboard-journey-current">
+                  <div>
+                    <span data-current-reading-progress-title>em andamento</span>
+                    <h3 data-current-reading-title>disciplina emocional para liderar bem em cenários de pressão</h3>
+                    <p data-current-reading-excerpt>retome a leitura com o progresso real da sua conta.</p>
+                  </div>
+                  <div class="dashboard-journey-current-progress">
+                    <span data-current-reading-progress-label>0% lido</span>
+                    <div class="dashboard-progress-bar dashboard-progress-bar--lite" aria-hidden="true" data-progress="0" data-current-reading-progress>
+                      <span></span>
+                    </div>
+                  </div>
+                  <a class="dashboard-card-link" href="./biblioteca.html" data-journey-secondary-cta>continue de onde parou</a>
+                </article>
               </div>
+            </div>
+
+            <div class="dashboard-journey-next">
+              <div>
+                <span>próximo passo sugerido</span>
+                <p data-journey-next-step>voltar ao trecho em que clareza e respeito deixam de competir na conversa.</p>
+              </div>
+              <a class="dashboard-secondary dashboard-secondary--hero" href="./biblioteca.html" data-journey-next-link>ver próximo ponto</a>
             </div>
           </article>
         </section>
 
-        <section class="dashboard-band dashboard-band--premium" aria-labelledby="band-title" data-reveal>
-          <div class="dashboard-band-grid dashboard-band-grid--premium">
-            <section class="dashboard-section dashboard-section--account-lite" aria-labelledby="account-title">
-              <div class="dashboard-section-head dashboard-section-head--lite">
-                <h2 id="account-title">sua conta editorial</h2>
-                <p>um retrato direto da sessão atual, sem transformar informação útil em uma parede de caixas equivalentes.</p>
+        <section class="dashboard-band dashboard-band--premium dashboard-editorial-band" aria-labelledby="editorial-progress-title" data-reveal>
+          <div class="dashboard-band-grid dashboard-band-grid--premium dashboard-editorial-grid">
+            <section class="dashboard-editorial-panel dashboard-editorial-progress" aria-labelledby="editorial-progress-title">
+              <div class="dashboard-editorial-head">
+                <span class="dashboard-editorial-icon" aria-hidden="true">+</span>
+                <div>
+                  <h2 id="editorial-progress-title">seu progresso editorial</h2>
+                  <p>acompanhe sua consistência de leitura e o impacto da sua rotina ao longo do tempo.</p>
+                </div>
               </div>
 
-              <div class="dashboard-account-grid dashboard-account-grid--premium">
-                <article class="dashboard-account-card dashboard-account-card--premium">
-                  <span>nome</span>
-                  <strong data-user-name>carregando nome</strong>
-                </article>
-                <article class="dashboard-account-card dashboard-account-card--premium">
-                  <span>e-mail</span>
-                  <strong data-user-email>carregando e-mail</strong>
-                </article>
-                <article class="dashboard-account-card dashboard-account-card--premium">
-                  <span>perfil</span>
-                  <strong data-user-role>carregando perfil</strong>
-                </article>
-                <article class="dashboard-account-card dashboard-account-card--premium">
-                  <span>plano</span>
-                  <strong data-user-plan-detail>carregando plano</strong>
-                </article>
-                <article class="dashboard-account-card dashboard-account-card--premium">
-                  <span>status</span>
-                  <strong data-user-status-detail>carregando status</strong>
-                </article>
-                <article class="dashboard-account-card dashboard-account-card--premium">
-                  <span>acesso</span>
-                  <strong data-user-access>carregando acesso</strong>
-                </article>
+              <div class="dashboard-weekly-surface" aria-label="Resumo desta semana">
+                <span class="dashboard-soft-label">esta semana</span>
+                <div class="dashboard-weekly-metrics">
+                  <article>
+                    <span class="dashboard-metric-icon" aria-hidden="true">D</span>
+                    <strong data-editorial-read-count>0</strong>
+                    <p>edições lidas</p>
+                  </article>
+                  <article>
+                    <span class="dashboard-metric-icon" aria-hidden="true">T</span>
+                    <strong data-editorial-minutes>0</strong>
+                    <p>minutos de leitura</p>
+                  </article>
+                  <article>
+                    <span class="dashboard-metric-icon" aria-hidden="true">C</span>
+                    <strong data-editorial-days>0</strong>
+                    <p>dias de consistência</p>
+                  </article>
+                </div>
+              </div>
+
+              <div class="dashboard-streak-block" aria-label="Sua sequência atual">
+                <div class="dashboard-streak-head">
+                  <h3>sua sequência atual</h3>
+                  <strong data-editorial-streak-count>0 dias</strong>
+                </div>
+                <div class="dashboard-streak-days" aria-hidden="true">
+                  <span data-streak-day>S</span>
+                  <span data-streak-day>T</span>
+                  <span data-streak-day>Q</span>
+                  <span data-streak-day>Q</span>
+                  <span data-streak-day>S</span>
+                  <span data-streak-day>S</span>
+                  <span data-streak-day>D</span>
+                </div>
+                <p>pequenas constâncias geram grandes resultados.</p>
+              </div>
+
+              <div class="dashboard-weekly-goal">
+                <span class="dashboard-goal-icon" aria-hidden="true">M</span>
+                <div class="dashboard-goal-copy">
+                  <span>meta semanal</span>
+                  <strong data-editorial-goal-label>0/5 leituras concluídas</strong>
+                  <p data-editorial-goal-support>continue no seu ritmo.</p>
+                  <div class="dashboard-goal-track" aria-hidden="true">
+                    <i data-editorial-goal-bar></i>
+                  </div>
+                </div>
+                <strong class="dashboard-goal-percent" data-editorial-goal-percent>0%</strong>
               </div>
             </section>
 
-            <section class="dashboard-section dashboard-section--curation" aria-labelledby="band-title">
-              <div class="dashboard-section-head dashboard-section-head--lite">
-                <h2 id="band-title">curadoria da semana</h2>
-                <p>dois atalhos editoriais para seguir com profundidade sem inflar a área logada com mais cards do que o necessário.</p>
+            <section class="dashboard-editorial-panel dashboard-editorial-curation" aria-labelledby="band-title">
+              <div class="dashboard-editorial-head">
+                <span class="dashboard-editorial-icon" aria-hidden="true">*</span>
+                <div>
+                  <h2 id="band-title">curadoria da semana</h2>
+                  <p>dois atalhos editoriais para seguir com profundidade sem inflar a área logada com mais cards do que o necessário.</p>
+                </div>
               </div>
 
-              <div class="dashboard-curation-stack">
-                <article class="dashboard-highlight-card dashboard-highlight-card--lite">
-                  <div class="dashboard-highlight-copy dashboard-highlight-copy--lite">
-                    <div class="dashboard-card-meta dashboard-card-meta--lite">
-                      <span class="edition-card-category edition-card-category--soft">edição da semana</span>
-                      <span class="edition-card-time edition-card-time--lite">6 min</span>
-                    </div>
-                    <h3>liderar sem microgerenciar</h3>
-                    <p>uma leitura sobre direção, acompanhamento e presença suficiente para sustentar o time sem transformar liderança em controle excessivo.</p>
+              <div class="dashboard-curation-list">
+                <a class="dashboard-curation-item" href="./artigos/artigo-liderar-sem-microgerenciar.html">
+                  <div class="dashboard-curation-topline">
+                    <span class="edition-card-category edition-card-category--soft">edição da semana</span>
+                    <span>6 min</span>
                   </div>
-                  <a class="dashboard-card-link dashboard-card-link--strong" href="./artigos/artigo-liderar-sem-microgerenciar.html">ler edição completa</a>
-                </article>
+                  <span class="dashboard-edition-index">edição 04</span>
+                  <h3>liderar sem microgerenciar</h3>
+                  <p>uma leitura sobre direção, acompanhamento e presença suficiente para sustentar o time sem transformar liderança em controle excessivo.</p>
+                  <i aria-hidden="true">/</i>
+                </a>
 
-                <article class="dashboard-apply-note dashboard-apply-note--lite">
-                  <div class="dashboard-apply-note-copy dashboard-apply-note-copy--lite">
+                <a class="dashboard-curation-item" href="./artigos/artigo-rituais-simples-para-alinhamento.html">
+                  <div class="dashboard-curation-topline">
                     <span class="edition-card-category edition-card-category--muted">para aplicar hoje</span>
-                    <h3>rituais simples que aumentam alinhamento sem engessar a equipe</h3>
-                    <p>um recorte prático sobre check-ins, checkpoints e pequenos acordos que reduzem ruído sem transformar o time em burocracia.</p>
+                    <span>5 min</span>
                   </div>
-                  <a class="dashboard-card-link dashboard-card-link--strong" href="./artigos/artigo-rituais-simples-para-alinhamento.html">ver edição completa</a>
-                </article>
+                  <span class="dashboard-edition-index">edição 09</span>
+                  <h3>rituais simples que aumentam o alinhamento sem engessar</h3>
+                  <p>um recorte prático sobre check-ins, checkpoints e pequenos acordos que reduzem ruído sem transformar o time em burocracia.</p>
+                  <i aria-hidden="true">ok</i>
+                </a>
               </div>
+
+              <blockquote class="dashboard-curation-quote">
+                consistência pequena, impacto grande. essa é a vantagem cumulativa da leitura.
+              </blockquote>
             </section>
           </div>
         </section>
@@ -249,8 +348,7 @@
   <script src="../assets/js/logo-theme.js"></script>
   <script src="../assets/js/api.js"></script>
   <script src="../assets/js/dashboard.js"></script>
+  <script src="../assets/js/back-to-top.js"></script>
 </body>
 </html>
-
-
 

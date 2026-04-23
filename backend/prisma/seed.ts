@@ -120,151 +120,320 @@ async function main() {
     },
   });
 
-  await prisma.article.upsert({
-    where: { slug: 'artigo-disciplina-emocional-sob-pressao' },
-    update: {
-      title: 'disciplina emocional sob pressão',
-      excerpt: 'Presença, pausa e critério quando o ambiente acelera mais do que deveria.',
-      content:
-        '## Clareza sob pressão\n\nDecidir bem exige separar contexto de impulso. Este artigo aprofunda como proteger o time de reações precipitadas e organizar a conversa com mais presença.',
-      readTimeMinutes: 5,
-      isPublished: true,
-      publishedAt: new Date('2026-04-18T12:00:00.000Z'),
-      categoryId: categoryMap.get('mentalidade')!,
+  const articles = [
+    {
+      slug: 'artigo-autoridade-sem-dureza',
+      title: 'autoridade sem dureza',
+      excerpt: 'Firmeza, clareza de direção e presença suficiente para liderar sem endurecer o ambiente.',
+      readTimeMinutes: 6,
+      categorySlug: 'lideranca',
+      publishedAt: new Date('2026-04-10T12:00:00.000Z'),
     },
-    create: {
-      title: 'disciplina emocional sob pressão',
+    {
+      slug: 'artigo-carreira-antes-da-promocao',
+      title: 'o que profissionais promovidos fazem antes do cargo chegar',
+      excerpt: 'Como evoluir com maturidade, valor percebido e consistência antes da próxima promoção.',
+      readTimeMinutes: 4,
+      categorySlug: 'carreira',
+      publishedAt: new Date('2026-04-11T12:00:00.000Z'),
+    },
+    {
+      slug: 'artigo-feedback-que-desenvolve',
+      title: 'feedback que desenvolve',
+      excerpt: 'Um texto sobre feedback com clareza, responsabilidade e evolução real no time.',
+      readTimeMinutes: 7,
+      categorySlug: 'gestao-de-equipes',
+      publishedAt: new Date('2026-04-12T12:00:00.000Z'),
+    },
+    {
+      slug: 'artigo-liderar-sem-microgerenciar',
+      title: 'liderar sem microgerenciar',
+      excerpt: 'Direção, acompanhamento e presença suficiente sem transformar liderança em controle excessivo.',
+      readTimeMinutes: 6,
+      categorySlug: 'gestao-de-equipes',
+      publishedAt: new Date('2026-04-13T12:00:00.000Z'),
+    },
+    {
+      slug: 'artigo-mentalidade-que-gera-influencia',
+      title: 'a mentalidade que gera influência',
+      excerpt: 'Critério interno, presença e postura para ampliar influência sem performance teatral.',
+      readTimeMinutes: 5,
+      categorySlug: 'mentalidade',
+      publishedAt: new Date('2026-04-14T12:00:00.000Z'),
+    },
+    {
+      slug: 'artigo-produtividade-do-lider',
+      title: 'produtividade do líder',
+      excerpt: 'Energia, foco e escolha para proteger o trabalho intelectual de maior qualidade.',
+      readTimeMinutes: 6,
+      categorySlug: 'produtividade',
+      publishedAt: new Date('2026-04-15T12:00:00.000Z'),
+    },
+    {
+      slug: 'artigo-relevancia-sem-autopromocao',
+      title: 'relevância sem autopromoção vazia',
+      excerpt: 'Como tornar valor mais legível sem transformar presença profissional em ruído.',
+      readTimeMinutes: 5,
+      categorySlug: 'carreira',
+      publishedAt: new Date('2026-04-16T12:00:00.000Z'),
+    },
+    {
       slug: 'artigo-disciplina-emocional-sob-pressao',
+      title: 'disciplina emocional sob pressão',
       excerpt: 'Presença, pausa e critério quando o ambiente acelera mais do que deveria.',
-      content:
-        '## Clareza sob pressão\n\nDecidir bem exige separar contexto de impulso. Este artigo aprofunda como proteger o time de reações precipitadas e organizar a conversa com mais presença.',
       readTimeMinutes: 5,
-      isPublished: true,
+      categorySlug: 'mentalidade',
       publishedAt: new Date('2026-04-18T12:00:00.000Z'),
-      categoryId: categoryMap.get('mentalidade')!,
     },
-  });
-
-  await prisma.article.upsert({
-    where: { slug: 'artigo-proteger-tempo-de-pensamento-estrategico' },
-    update: {
-      title: 'proteger tempo de pensamento estratégico',
-      excerpt: 'Um texto para recuperar profundidade num calendário dominado por reatividade.',
-      content:
-        '## Menos reatividade\n\nQuando todo o tempo vira resposta, a liderança perde qualidade de leitura. Este artigo organiza práticas para preservar blocos de pensamento estratégico.',
+    {
+      slug: 'artigo-rituais-simples-para-alinhamento',
+      title: 'rituais simples que aumentam alinhamento sem engessar a equipe',
+      excerpt: 'Poucos rituais, ritmo claro e alinhamento útil sem excesso de processo.',
       readTimeMinutes: 5,
-      isPublished: true,
-      publishedAt: new Date('2026-04-17T12:00:00.000Z'),
-      categoryId: categoryMap.get('produtividade')!,
+      categorySlug: 'gestao-de-equipes',
+      publishedAt: new Date('2026-04-19T12:00:00.000Z'),
     },
-    create: {
-      title: 'proteger tempo de pensamento estratégico',
+    {
       slug: 'artigo-proteger-tempo-de-pensamento-estrategico',
+      title: 'como proteger tempo de pensamento estratégico na rotina do líder',
       excerpt: 'Um texto para recuperar profundidade num calendário dominado por reatividade.',
-      content:
-        '## Menos reatividade\n\nQuando todo o tempo vira resposta, a liderança perde qualidade de leitura. Este artigo organiza práticas para preservar blocos de pensamento estratégico.',
       readTimeMinutes: 5,
-      isPublished: true,
+      categorySlug: 'produtividade',
       publishedAt: new Date('2026-04-17T12:00:00.000Z'),
-      categoryId: categoryMap.get('produtividade')!,
     },
-  });
+  ];
 
-  await prisma.shortEdition.upsert({
-    where: { slug: 'clareza-antes-da-reacao' },
-    update: {
-      title: 'clareza antes da reação',
-      excerpt: 'Uma leitura curta sobre como desacelerar o impulso e organizar direção.',
-      ideaCentral:
-        'Quando a pressão sobe, a liderança mais útil não é a que reage primeiro. É a que consegue nomear o que já é fato, o que ainda é leitura e o que não precisa virar ruído.',
-      whatMatters: [
-        'Nomear o que já está claro reduz ansiedade coletiva.',
-        'Dizer o que ainda está aberto preserva confiança.',
-        'Nem toda urgência merece entrar na sala de decisão.',
-      ],
-      applyToday: [
-        'Abra a próxima conversa difícil listando fatos antes de hipóteses.',
-        'Feche com uma direção curta, não com excesso de cenários.',
-        'Evite transformar leitura provisória em posicionamento definitivo.',
-      ],
-      quoteOfWeek:
-        'Liderança madura não acelera ansiedade. Ela organiza a leitura do que importa.',
-      readTimeMinutes: 2,
-      isPublished: true,
-      publishedAt: new Date('2026-04-19T09:00:00.000Z'),
-      categoryId: categoryMap.get('lideranca')!,
-    },
-    create: {
-      title: 'clareza antes da reação',
+  const articleMap = new Map<string, string>();
+
+  for (const article of articles) {
+    const record = await prisma.article.upsert({
+      where: { slug: article.slug },
+      update: {
+        title: article.title,
+        excerpt: article.excerpt,
+        content: `## ${article.title}\n\n${article.excerpt}`,
+        readTimeMinutes: article.readTimeMinutes,
+        isPublished: true,
+        publishedAt: article.publishedAt,
+        categoryId: categoryMap.get(article.categorySlug)!,
+      },
+      create: {
+        title: article.title,
+        slug: article.slug,
+        excerpt: article.excerpt,
+        content: `## ${article.title}\n\n${article.excerpt}`,
+        readTimeMinutes: article.readTimeMinutes,
+        isPublished: true,
+        publishedAt: article.publishedAt,
+        categoryId: categoryMap.get(article.categorySlug)!,
+      },
+    });
+
+    articleMap.set(record.slug, record.id);
+  }
+
+  const articlePressure = { id: articleMap.get('artigo-disciplina-emocional-sob-pressao')! };
+  const articleStrategy = { id: articleMap.get('artigo-proteger-tempo-de-pensamento-estrategico')! };
+
+  const shortEditions = [
+    {
       slug: 'clareza-antes-da-reacao',
+      title: 'clareza antes da reação',
       excerpt: 'Uma leitura curta sobre como desacelerar o impulso e organizar direção.',
-      ideaCentral:
-        'Quando a pressão sobe, a liderança mais útil não é a que reage primeiro. É a que consegue nomear o que já é fato, o que ainda é leitura e o que não precisa virar ruído.',
-      whatMatters: [
-        'Nomear o que já está claro reduz ansiedade coletiva.',
-        'Dizer o que ainda está aberto preserva confiança.',
-        'Nem toda urgência merece entrar na sala de decisão.',
-      ],
-      applyToday: [
-        'Abra a próxima conversa difícil listando fatos antes de hipóteses.',
-        'Feche com uma direção curta, não com excesso de cenários.',
-        'Evite transformar leitura provisória em posicionamento definitivo.',
-      ],
-      quoteOfWeek:
-        'Liderança madura não acelera ansiedade. Ela organiza a leitura do que importa.',
+      categorySlug: 'lideranca',
       readTimeMinutes: 2,
-      isPublished: true,
       publishedAt: new Date('2026-04-19T09:00:00.000Z'),
-      categoryId: categoryMap.get('lideranca')!,
+    },
+    {
+      slug: 'crescimento-sem-virar-urgencia-cronica',
+      title: 'crescimento sem virar urgência crônica',
+      excerpt: 'Como crescer com consistência sem transformar evolução em pressa permanente.',
+      categorySlug: 'carreira',
+      readTimeMinutes: 3,
+      publishedAt: new Date('2026-04-18T09:00:00.000Z'),
+    },
+    {
+      slug: 'o-que-sustenta-um-time-quando-o-cenario-oscila',
+      title: 'o que sustenta um time quando o cenário oscila',
+      excerpt: 'Estabilidade, clareza e pequenos acordos quando o contexto muda rápido.',
+      categorySlug: 'gestao-de-equipes',
+      readTimeMinutes: 3,
+      publishedAt: new Date('2026-04-17T09:00:00.000Z'),
+    },
+    {
+      slug: 'proteger-tempo-de-pensamento-estrategico',
+      title: 'como proteger tempo de pensamento estratégico',
+      excerpt: 'Uma edição curta para recuperar profundidade em semanas reativas.',
+      categorySlug: 'produtividade',
+      readTimeMinutes: 3,
+      publishedAt: new Date('2026-04-16T09:00:00.000Z'),
+    },
+    {
+      slug: 'repertorio-melhor-decisoes-melhores',
+      title: 'repertório melhor, decisões melhores',
+      excerpt: 'Como ampliar repertório para decidir com mais contexto e menos improviso.',
+      categorySlug: 'mentalidade',
+      readTimeMinutes: 3,
+      publishedAt: new Date('2026-04-15T09:00:00.000Z'),
+    },
+    {
+      slug: 'rituais-simples-para-alinhamento',
+      title: 'rituais simples para alinhamento',
+      excerpt: 'Ritmo leve para o time trabalhar melhor sem transformar tudo em processo.',
+      categorySlug: 'gestao-de-equipes',
+      readTimeMinutes: 3,
+      publishedAt: new Date('2026-04-19T10:00:00.000Z'),
+    },
+  ];
+
+  const shortEditionMap = new Map<string, string>();
+
+  for (const shortEdition of shortEditions) {
+    const record = await prisma.shortEdition.upsert({
+      where: { slug: shortEdition.slug },
+      update: {
+        title: shortEdition.title,
+        excerpt: shortEdition.excerpt,
+        ideaCentral: shortEdition.excerpt,
+        whatMatters: [
+          'clareza sobre o que realmente importa',
+          'ritmo simples para transformar leitura em prática',
+          'menos ruído e mais critério para decidir',
+        ],
+        applyToday: [
+          'escolha uma conversa para aplicar o recorte desta edição',
+          'registre um aprendizado em uma frase',
+          'defina o próximo pequeno passo',
+        ],
+        quoteOfWeek: 'Consistência pequena, impacto grande.',
+        readTimeMinutes: shortEdition.readTimeMinutes,
+        isPublished: true,
+        publishedAt: shortEdition.publishedAt,
+        categoryId: categoryMap.get(shortEdition.categorySlug)!,
+      },
+      create: {
+        title: shortEdition.title,
+        slug: shortEdition.slug,
+        excerpt: shortEdition.excerpt,
+        ideaCentral: shortEdition.excerpt,
+        whatMatters: [
+          'clareza sobre o que realmente importa',
+          'ritmo simples para transformar leitura em prática',
+          'menos ruído e mais critério para decidir',
+        ],
+        applyToday: [
+          'escolha uma conversa para aplicar o recorte desta edição',
+          'registre um aprendizado em uma frase',
+          'defina o próximo pequeno passo',
+        ],
+        quoteOfWeek: 'Consistência pequena, impacto grande.',
+        readTimeMinutes: shortEdition.readTimeMinutes,
+        isPublished: true,
+        publishedAt: shortEdition.publishedAt,
+        categoryId: categoryMap.get(shortEdition.categorySlug)!,
+      },
+    });
+
+    shortEditionMap.set(record.slug, record.id);
+  }
+
+  const shortClarity = { id: shortEditionMap.get('clareza-antes-da-reacao')! };
+  const shortRituals = { id: shortEditionMap.get('rituais-simples-para-alinhamento')! };
+
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+  const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+  const threeDaysAgo = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
+  const fiveDaysAgo = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
+
+  await prisma.readingProgress.upsert({
+    where: {
+      userId_articleId: {
+        userId: admin.id,
+        articleId: articlePressure.id,
+      },
+    },
+    update: {
+      progressPercent: 85,
+      status: 'IN_PROGRESS',
+      lastReadAt: oneHourAgo,
+      completedAt: null,
+    },
+    create: {
+      userId: admin.id,
+      articleId: articlePressure.id,
+      progressPercent: 85,
+      status: 'IN_PROGRESS',
+      lastReadAt: oneHourAgo,
+      completedAt: null,
     },
   });
 
-  await prisma.shortEdition.upsert({
-    where: { slug: 'rituais-simples-para-alinhamento' },
+  await prisma.readingProgress.upsert({
+    where: {
+      userId_articleId: {
+        userId: admin.id,
+        articleId: articleStrategy.id,
+      },
+    },
     update: {
-      title: 'rituais simples para alinhamento',
-      excerpt: 'Ritmo leve para o time trabalhar melhor sem transformar tudo em processo.',
-      ideaCentral:
-        'Equipes não precisam de excesso de cerimônia para manter alinhamento. Precisam de poucos rituais, com cadência confiável e função clara.',
-      whatMatters: [
-        'Check-ins curtos reduzem dispersão.',
-        'Checkpoints evitam surpresa tardia.',
-        'Revisões leves fecham aprendizado sem peso burocrático.',
-      ],
-      applyToday: [
-        'Use 10 minutos no começo da semana para alinhar prioridade, risco e dono.',
-        'Revise travas no meio da semana antes de elas crescerem.',
-        'Feche a semana com uma revisão curta do que funcionou e do que precisa de ajuste.',
-      ],
-      quoteOfWeek:
-        'Quando o ritmo é claro, a equipe precisa de menos controle para continuar bem.',
-      readTimeMinutes: 3,
-      isPublished: true,
-      publishedAt: new Date('2026-04-19T10:00:00.000Z'),
-      categoryId: categoryMap.get('gestao-de-equipes')!,
+      progressPercent: 100,
+      status: 'COMPLETED',
+      lastReadAt: threeDaysAgo,
+      completedAt: threeDaysAgo,
     },
     create: {
-      title: 'rituais simples para alinhamento',
-      slug: 'rituais-simples-para-alinhamento',
-      excerpt: 'Ritmo leve para o time trabalhar melhor sem transformar tudo em processo.',
-      ideaCentral:
-        'Equipes não precisam de excesso de cerimônia para manter alinhamento. Precisam de poucos rituais, com cadência confiável e função clara.',
-      whatMatters: [
-        'Check-ins curtos reduzem dispersão.',
-        'Checkpoints evitam surpresa tardia.',
-        'Revisões leves fecham aprendizado sem peso burocrático.',
-      ],
-      applyToday: [
-        'Use 10 minutos no começo da semana para alinhar prioridade, risco e dono.',
-        'Revise travas no meio da semana antes de elas crescerem.',
-        'Feche a semana com uma revisão curta do que funcionou e do que precisa de ajuste.',
-      ],
-      quoteOfWeek:
-        'Quando o ritmo é claro, a equipe precisa de menos controle para continuar bem.',
-      readTimeMinutes: 3,
-      isPublished: true,
-      publishedAt: new Date('2026-04-19T10:00:00.000Z'),
-      categoryId: categoryMap.get('gestao-de-equipes')!,
+      userId: admin.id,
+      articleId: articleStrategy.id,
+      progressPercent: 100,
+      status: 'COMPLETED',
+      lastReadAt: threeDaysAgo,
+      completedAt: threeDaysAgo,
+    },
+  });
+
+  await prisma.readingProgress.upsert({
+    where: {
+      userId_shortEditionId: {
+        userId: admin.id,
+        shortEditionId: shortClarity.id,
+      },
+    },
+    update: {
+      progressPercent: 100,
+      status: 'COMPLETED',
+      lastReadAt: fiveDaysAgo,
+      completedAt: fiveDaysAgo,
+    },
+    create: {
+      userId: admin.id,
+      shortEditionId: shortClarity.id,
+      progressPercent: 100,
+      status: 'COMPLETED',
+      lastReadAt: fiveDaysAgo,
+      completedAt: fiveDaysAgo,
+    },
+  });
+
+  await prisma.readingProgress.upsert({
+    where: {
+      userId_shortEditionId: {
+        userId: admin.id,
+        shortEditionId: shortRituals.id,
+      },
+    },
+    update: {
+      progressPercent: 42,
+      status: 'IN_PROGRESS',
+      lastReadAt: oneDayAgo,
+      completedAt: null,
+    },
+    create: {
+      userId: admin.id,
+      shortEditionId: shortRituals.id,
+      progressPercent: 42,
+      status: 'IN_PROGRESS',
+      lastReadAt: oneDayAgo,
+      completedAt: null,
     },
   });
 }

@@ -229,6 +229,17 @@ body.biblioteca-page {
   text-transform: lowercase;
 }
 
+.biblioteca-edition-index {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  color: rgba(91, 107, 117, 0.56);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+}
+
 .biblioteca-feature h3 {
   max-width: 12ch;
   font-size: clamp(1.95rem, 3vw, 3rem);
@@ -330,6 +341,14 @@ body.biblioteca-page {
   font-size: 0.95rem;
   font-weight: 700;
   line-height: 1.5;
+  text-transform: lowercase;
+}
+
+.biblioteca-edition-inline {
+  color: rgba(91, 107, 117, 0.54);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: lowercase;
 }
 
@@ -590,6 +609,50 @@ body.biblioteca-page {
 .biblioteca-topic-links a:hover::after,
 .biblioteca-topic-links a:focus-visible::after {
   transform: translateX(2px);
+}
+
+.biblioteca-reading-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(15, 42, 61, 0.08);
+  color: rgba(15, 42, 61, 0.72);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+}
+
+.biblioteca-entry.is-in-progress,
+.biblioteca-compact-card.is-in-progress,
+.biblioteca-feature.is-in-progress,
+.biblioteca-topic-card.is-in-progress {
+  border-color: rgba(34, 160, 107, 0.18);
+}
+
+.biblioteca-entry.is-completed,
+.biblioteca-compact-card.is-completed,
+.biblioteca-feature.is-completed,
+.biblioteca-topic-card.is-completed {
+  border-color: rgba(15, 42, 61, 0.12);
+  background:
+    radial-gradient(circle at top right, rgba(15, 42, 61, 0.05), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 248, 250, 0.97) 100%);
+}
+
+.biblioteca-entry.is-completed .biblioteca-reading-badge,
+.biblioteca-compact-card.is-completed .biblioteca-reading-badge,
+.biblioteca-feature.is-completed .biblioteca-reading-badge,
+.biblioteca-topic-card.is-completed .biblioteca-reading-badge {
+  background: rgba(34, 160, 107, 0.12);
+  color: rgba(34, 160, 107, 0.92);
+}
+
+.biblioteca-feature-side.is-suggested .biblioteca-progress-head span,
+.biblioteca-feature-side.is-completed .biblioteca-progress-head span {
+  color: rgba(15, 42, 61, 0.68);
 }
 
 /* Internal lowercase normalization */

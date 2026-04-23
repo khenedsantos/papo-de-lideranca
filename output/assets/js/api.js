@@ -48,6 +48,7 @@
       method: config.method || "GET",
       headers,
       body: config.body ? JSON.stringify(config.body) : undefined,
+      keepalive: Boolean(config.keepalive),
     });
 
     const contentType = response.headers.get("content-type") || "";
@@ -154,6 +155,69 @@
           confirmPassword: payload.confirmPassword,
         },
       });
+    },
+    getReadingProgress: async function (filters) {
+      const token = this.getToken();
+
+      if (!token) {
+        const error = new Error("Sessao ausente.");
+        error.status = 401;
+        throw error;
+      }
+
+      const params = new URLSearchParams();
+      const query = filters || {};
+
+      if (query.contentType) {
+        params.set("contentType", query.contentType);
+      }
+
+      if (query.status) {
+        params.set("status", query.status);
+      }
+
+      return request(`/reading-progress${params.toString() ? `?${params.toString()}` : ""}`, {
+        token: token,
+      });
+    },
+    getReadingProgressSummary: async function () {
+      const token = this.getToken();
+
+      if (!token) {
+        const error = new Error("Sessao ausente.");
+        error.status = 401;
+        throw error;
+      }
+
+      return request("/reading-progress/summary", {
+        token: token,
+      });
+    },
+    upsertReadingProgress: async function (payload, options) {
+      const token = this.getToken();
+
+      if (!token) {
+        const error = new Error("Sessao ausente.");
+        error.status = 401;
+        throw error;
+      }
+
+      return request("/reading-progress", {
+        method: "POST",
+        token: token,
+        keepalive: Boolean(options && options.keepalive),
+        body: {
+          contentType: payload.contentType,
+          contentId: payload.contentId,
+          progressPercent: payload.progressPercent,
+        },
+      });
+    },
+    listArticles: async function () {
+      return request("/articles");
+    },
+    listShortEditions: async function () {
+      return request("/short-editions");
     },
     getCurrentUser: async function () {
       const token = this.getToken();
