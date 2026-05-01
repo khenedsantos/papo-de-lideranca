@@ -33,7 +33,7 @@ body.auth-page {
 }
 
 .auth-main {
-  padding: 34px 0 60px;
+  padding: 38px 0 64px;
 }
 
 .auth-shell {
@@ -145,17 +145,17 @@ body.auth-page {
   width: 100%;
   padding: clamp(28px, 3.4vw, 42px);
   border-radius: 34px;
-  border: 1px solid rgba(228, 231, 235, 0.72);
+  border: 1px solid rgba(228, 231, 235, 0.78);
   background:
     radial-gradient(circle at top right, rgba(34, 160, 107, 0.1), transparent 24%),
     linear-gradient(180deg, var(--auth-panel-strong) 0%, var(--auth-panel) 100%);
-  box-shadow: var(--auth-card-shadow);
+  box-shadow: 0 26px 60px rgba(15, 42, 61, 0.11);
 }
 
 .auth-card-header {
   display: grid;
   gap: 14px;
-  margin-bottom: 26px;
+  margin-bottom: 30px;
 }
 
 .auth-card-header .section-kicker {
@@ -201,7 +201,7 @@ body.auth-page {
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 60px;
+  min-height: 62px;
   padding: 0 18px;
   border-radius: 22px;
   border: 1px solid rgba(228, 231, 235, 0.84);

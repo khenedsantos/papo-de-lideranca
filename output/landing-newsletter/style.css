@@ -1,4 +1,4 @@
-﻿:root{--color-primary:#0F2A3D;--color-secondary:#1E4A66;--color-accent:#22A06B;--color-accent-soft:#2FC28C;--color-background:#F7F9FB;--color-surface:#FFFFFF;--color-text:#0B1217;--color-muted:#5B6B75;--color-border:#E4E7EB;--color-gradient:linear-gradient(135deg, #0F2A3D 0%, #1E4A66 50%, #22A06B 100%);
+:root{--color-primary:#0F2A3D;--color-secondary:#1E4A66;--color-accent:#22A06B;--color-accent-soft:#2FC28C;--color-background:#F7F9FB;--color-surface:#FFFFFF;--color-text:#0B1217;--color-muted:#5B6B75;--color-border:#E4E7EB;--color-gradient:linear-gradient(135deg, #0F2A3D 0%, #1E4A66 50%, #22A06B 100%);
   --bg: #F7F9FB;
   --bg-soft: #F7F9FB;
   --text: #0B1217;
@@ -3049,6 +3049,73 @@ button, input { font: inherit; }
 
   .final-form button {
     min-width: 0;
+  }
+}
+
+/* Internal shell mobile fallback: internal pages do not use the public hamburger menu. */
+@media (max-width: 960px) {
+  body.dashboard-page .header-inner,
+  body.app-article-page .header-inner,
+  body.short-edition-page .header-inner,
+  body.short-editions-page .header-inner,
+  body.app-category-page .header-inner {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 10px;
+  }
+
+  body.dashboard-page .main-nav,
+  body.app-article-page .main-nav,
+  body.short-edition-page .main-nav,
+  body.short-editions-page .main-nav,
+  body.app-category-page .main-nav {
+    position: static;
+    inset: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    gap: 8px;
+    padding: 0 0 2px;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  body.dashboard-page .header-actions,
+  body.app-article-page .header-actions,
+  body.short-edition-page .header-actions,
+  body.short-editions-page .header-actions,
+  body.app-category-page .header-actions {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  body.dashboard-page .main-nav a,
+  body.app-article-page .main-nav a,
+  body.short-edition-page .main-nav a,
+  body.short-editions-page .main-nav a,
+  body.app-category-page .main-nav a,
+  body.dashboard-page .header-login,
+  body.app-article-page .header-login,
+  body.short-edition-page .header-login,
+  body.short-editions-page .header-login,
+  body.app-category-page .header-login {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-height: 36px;
+    padding: 0 12px;
+    border: 1px solid rgba(220, 228, 233, 0.86);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    white-space: nowrap;
   }
 }
 

@@ -10,15 +10,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const resetPanel = document.querySelector("[data-reset-link-panel]");
   const resetLink = document.querySelector("[data-reset-link]");
   const resetNote = document.querySelector("[data-reset-link-note]");
+  let isComplete = false;
 
   const setLoading = (loading) => {
     if (!submit) return;
 
     submit.dataset.originalLabel = submit.dataset.originalLabel || submit.textContent;
-    submit.disabled = loading;
+    submit.disabled = loading || isComplete;
     submit.classList.toggle("is-loading", loading);
     submit.textContent = loading
-      ? "enviando..."
+      ?"preparando..."
       : (submit.dataset.originalLabel || "enviar link");
   };
 
@@ -62,12 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
     resetPanel.hidden = false;
 
     if (resetNote) {
-      resetNote.textContent = "em ambiente local, o link de redefinição já está pronto para o teste real.";
+      resetNote.textContent = "a próxima etapa foi preparada. continue por aqui para definir uma nova senha.";
     }
   };
 
   emailField?.addEventListener("input", () => {
+    isComplete = false;
     setFieldInvalid(emailField, false);
+    setLoading(false);
     clearFeedback();
     hideResetPanel();
   });
@@ -86,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     hideResetPanel();
 
     if (!auth) {
-      showFeedback("A camada de autenticação não foi carregada corretamente.", "is-error");
+      showFeedback("Não foi possível iniciar a recuperação agora. Recarregue a página e tente novamente.", "is-error");
       return;
     }
 
@@ -101,19 +104,21 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const result = await auth.forgotPassword({ email: emailValue });
 
-      showFeedback(
-        result.message || "Se o e-mail existir, um link de redefinição foi preparado.",
-        "is-success",
-      );
-
       if (result.resetToken) {
+        isComplete = true;
         showResetPanel(result.resetToken);
+        showFeedback("Encontramos seu acesso e preparamos a próxima etapa.", "is-success");
+      } else {
+        showFeedback(
+          result.message || "Se este e-mail estiver cadastrado, enviaremos as instruções de redefinição em instantes.",
+          "is-success",
+        );
       }
     } catch (error) {
       if (error && error.status === 400) {
-        showFeedback("Não foi possível validar esse e-mail. Revise o campo e tente novamente.", "is-error");
+        showFeedback("Não foi possível validar esse e-mail agora. Revise o campo e tente novamente.", "is-error");
       } else if (error instanceof TypeError) {
-        showFeedback("Não foi possível falar com a API local agora. Verifique se o backend está ativo.", "is-error");
+        showFeedback("O serviço de acesso não respondeu agora. Tente novamente ou fale com o suporte editorial.", "is-error");
       } else {
         showFeedback("Não foi possível preparar a redefinição agora. Tente novamente em instantes.", "is-error");
       }

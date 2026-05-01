@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logos/favicons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/logos/favicons/favicon-32.png">
+  <link rel="shortcut icon" href="../assets/logos/favicons/favicon.ico">
+  <title>progresso editorial | Papo de Liderança</title>
+  <meta name="description" content="Acompanhe continuidade, semana atual, ritmo e feedback editorial da sua rotina de leitura.">
+  <link rel="stylesheet" href="../landing-newsletter/style.css?v=premium-20260501a">
+  <link rel="stylesheet" href="../assets/css/page-transition.css">
+  <link rel="stylesheet" href="../assets/css/logo-theme.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css?v=premium-20260501a">
+  <link rel="stylesheet" href="../assets/css/account-pages.css?v=premium-20260501a">
+  <link rel="stylesheet" href="../assets/css/progresso.css?v=premium-20260501a">
+</head>
+<body class="dashboard-page dashboard-page--lite account-page progresso-page" data-page="progresso">
+  <header class="site-header dashboard-header dashboard-header--lite">
+    <div class="container header-inner">
+      <a class="brand" href="./dashboard.html" aria-label="Papo de Liderança">
+        <img class="logo" src="../assets/logo-dark.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de Liderança">
+        <span class="brand-name">Papo de Liderança</span>
+      </a>
+      <nav class="main-nav" aria-label="Navegação interna">
+        <a href="./dashboard.html">minha área</a>
+        <a href="./biblioteca.html">biblioteca</a>
+        <a class="is-current" href="./progresso.html">progresso</a>
+                <a href="./estante.html">estante</a>
+        <a href="./perfil.html">conta</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-login" href="../auth/login.html" data-auth-logout>sair</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="progresso-main">
+    <div class="container progresso-shell">
+      <section class="progresso-panel">
+        <div class="progresso-head">
+          <div class="progresso-copy">
+            <a class="account-page-back" href="./dashboard.html">voltar</a>
+            <span class="progresso-kicker">progresso editorial</span>
+            <h1>seu progresso editorial</h1>
+            <p data-progress-state-copy>organizando seu ritmo editorial real.</p>
+          </div>
+          <div class="progresso-score" aria-label="Percentual do ritmo da semana">
+            <span>ritmo da semana</span>
+            <strong data-progress-goal-percent>0%</strong>
+          </div>
+        </div>
+
+        <section class="progresso-stat-grid" aria-label="Resumo editorial">
+          <article class="progresso-stat">
+            <span>leituras concluídas</span>
+            <strong data-progress-total-completed>0</strong>
+            <p>total da conta</p>
+          </article>
+          <article class="progresso-stat">
+            <span>tempo investido</span>
+            <strong data-progress-total-minutes>0</strong>
+            <p>tempo consolidado</p>
+          </article>
+          <article class="progresso-stat">
+            <span>continuidade</span>
+            <strong data-progress-streak>0 dias</strong>
+            <p data-progress-last-active>sem leitura registrada</p>
+          </article>
+          <article class="progresso-stat">
+            <span>presença na semana</span>
+            <strong data-progress-active-days>0/7</strong>
+            <p>semana atual</p>
+          </article>
+        </section>
+
+        <section class="progresso-grid" aria-label="Detalhes do progresso">
+          <article class="progresso-detail progresso-detail--week">
+            <div class="progresso-detail-head">
+              <span>semana atual</span>
+              <strong data-progress-week-completed>0 leituras</strong>
+            </div>
+            <div class="progresso-week-days" data-progress-week-days aria-label="Presença na semana">
+              <span>SEG</span>
+              <span>TER</span>
+              <span>QUA</span>
+              <span>QUI</span>
+              <span>SEX</span>
+              <span>SAB</span>
+              <span>DOM</span>
+            </div>
+            <p data-progress-week-copy>os dias com presença aparecem conforme a leitura é salva no acervo.</p>
+          </article>
+
+          <article class="progresso-detail progresso-detail--goal">
+            <div class="progresso-detail-head">
+              <span>ritmo da semana</span>
+              <strong data-progress-goal-label>0/5 leituras</strong>
+            </div>
+            <div class="progresso-goal-track" aria-hidden="true">
+              <i data-progress-goal-bar></i>
+            </div>
+            <form class="progresso-goal-form" data-progress-goal-form>
+              <label>
+                <span>leituras por semana</span>
+              <input type="number" min="1" max="50" step="1" value="5" data-progress-goal-input aria-label="leituras por semana">
+              </label>
+              <button type="submit">salvar ritmo</button>
+            </form>
+          </article>
+        </section>
+
+        <section class="progresso-feedback" data-progress-feedback-card aria-live="polite">
+          <span data-progress-feedback-level>feedback</span>
+          <h2 data-progress-feedback-title>carregando progresso</h2>
+          <p data-progress-feedback-message>o feedback será calculado com base no seu progresso real.</p>
+        </section>
+
+        <div class="dashboard-inline-feedback" data-progress-page-feedback aria-live="polite"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="dashboard-footer dashboard-footer--lite">
+    <div class="container dashboard-footer-shell dashboard-footer-shell--lite">
+      <span>Papo de Liderança é um produto editorial feito para quem prefere clareza à distração.</span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/page-transition.js"></script>
+  <script src="../assets/js/logo-theme.js"></script>
+  <script src="../assets/js/api.js?v=premium-20260501a"></script>
+  <script src="../assets/js/session.js?v=premium-20260501a"></script>
+  <script src="../assets/js/app-shell.js?v=premium-20260501a"></script>
+  <script src="../assets/js/progresso.js?v=premium-20260501a"></script>
+</body>
+</html>
+

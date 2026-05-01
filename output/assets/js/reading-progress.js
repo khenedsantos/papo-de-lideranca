@@ -1,3 +1,5 @@
+const READING_PROGRESS_MILESTONES = [10, 25, 50, 75, 100];
+
 document.addEventListener("DOMContentLoaded", async () => {
   const auth = window.PapoAuth;
   const body = document.body;
@@ -9,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (!isArticle && !isShortEdition) return;
 
-  const contentType = isArticle ? "ARTICLE" : "SHORT_EDITION";
+  const contentType = isArticle ?"ARTICLE" : "SHORT_EDITION";
   const slug = resolveCurrentSlug(contentType);
 
   if (!slug) return;
@@ -25,28 +27,32 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const existingProgress = (progressList || []).find((item) => item.contentId === content.id);
     let highestSavedProgress = existingProgress
-      ? Number.parseInt(existingProgress.progressPercent || 0, 10)
+      ?Number.parseInt(existingProgress.progressPercent || 0, 10)
       : 0;
     let pendingRequest = Promise.resolve();
 
     const postProgress = (value, options) => {
       const normalized = Math.max(0, Math.min(Number.parseInt(value || 0, 10), 100));
-      if (normalized <= highestSavedProgress) return;
+      const forceActivity = Boolean(options && options.forceActivity);
+
+      if (normalized <= highestSavedProgress && !forceActivity) return;
 
       pendingRequest = pendingRequest
         .catch(() => null)
         .then(() => auth.upsertReadingProgress({
           contentType: contentType,
           contentId: content.id,
+          slug: content.slug,
           progressPercent: normalized,
+          completed: normalized >= 100,
         }, options))
         .then(() => {
-          highestSavedProgress = normalized;
+          highestSavedProgress = Math.max(highestSavedProgress, normalized);
         })
         .catch(() => null);
     };
 
-    postProgress(10);
+    postProgress(Math.max(10, highestSavedProgress), { forceActivity: true });
 
     let ticking = false;
 
@@ -110,7 +116,14 @@ function calculateReadingProgressPercent() {
     return 10;
   }
 
-  return Math.max(10, Math.min(Math.ceil(viewportPercent / 5) * 5, 95));
+  const completedAwarePercent = viewportPercent >= 90 ?100 : viewportPercent;
+
+  for (let index = READING_PROGRESS_MILESTONES.length - 1; index >= 0; index -= 1) {
+    const milestone = READING_PROGRESS_MILESTONES[index];
+    if (completedAwarePercent >= milestone) return milestone;
+  }
+
+  return 10;
 }
 
 async function loadContentList(auth, contentType) {

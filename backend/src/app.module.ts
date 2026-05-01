@@ -10,6 +10,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { ArticlesModule } from './modules/articles/articles.module';
 import { ShortEditionsModule } from './modules/short-editions/short-editions.module';
 import { ReadingProgressModule } from './modules/reading-progress/reading-progress.module';
+import { BooksModule } from './modules/books/books.module';
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import { ReadingProgressModule } from './modules/reading-progress/reading-progre
     ArticlesModule,
     ShortEditionsModule,
     ReadingProgressModule,
+    BooksModule,
   ],
 })
 export class AppModule {}
-

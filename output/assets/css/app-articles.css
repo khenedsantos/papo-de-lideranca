@@ -291,6 +291,13 @@
   padding: 22px 28px;
 }
 
+.app-article-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+
 .app-article-footer p {
   margin: 0;
   color: rgba(91, 107, 117, 0.76);

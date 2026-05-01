@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logos/favicons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/logos/favicons/favicon-32.png">
+  <link rel="shortcut icon" href="../assets/logos/favicons/favicon.ico">
+  <title>estante | Papo de Liderança</title>
+  <meta name="description" content="Estante editorial premium do Papo de Liderança com livros selecionados por curadoria para assinantes.">
+  <link rel="stylesheet" href="../landing-newsletter/style.css?v=premium-20260501a">
+  <link rel="stylesheet" href="../assets/css/page-transition.css">
+  <link rel="stylesheet" href="../assets/css/logo-theme.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css?v=premium-20260501a">
+  <link rel="stylesheet" href="../assets/css/back-to-top.css">
+  <link rel="stylesheet" href="../assets/css/estante.css?v=premium-20260501a">
+</head>
+<body class="dashboard-page dashboard-page--lite estante-page" data-page="estante">
+  <header class="site-header dashboard-header dashboard-header--lite">
+    <div class="container header-inner">
+      <a class="brand" href="./dashboard.html" aria-label="Papo de Liderança">
+        <img class="logo" src="../assets/logo-dark.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de Liderança">
+        <span class="brand-name">Papo de Liderança</span>
+      </a>
+      <nav class="main-nav" aria-label="Navegação interna">
+        <a href="./dashboard.html">minha área</a>
+        <a href="./biblioteca.html">biblioteca</a>
+        <a href="./progresso.html">progresso</a>
+        <a class="is-current" href="./estante.html">estante</a>
+        <a href="./perfil.html">conta</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-login" href="../auth/login.html" data-auth-logout>sair</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="estante-main">
+    <section class="estante-hero" aria-labelledby="estante-title">
+      <div class="container estante-hero-shell">
+        <div class="estante-hero-copy">
+          <span class="estante-kicker">estante exclusiva</span>
+          <h1 id="estante-title">leituras escolhidas para ampliar seu repertório de liderança.</h1>
+          <p>uma curadoria de livros para assinantes que querem transformar leitura em clareza, decisão e prática.</p>
+          <div class="estante-hero-actions">
+            <a class="estante-primary-action" href="#curadoria">explorar curadoria</a>
+            <a class="estante-secondary-action" href="#destaque">ver livro em destaque</a>
+          </div>
+        </div>
+        <aside class="estante-hero-note" aria-label="Como a estante funciona">
+          <span>menos lista infinita</span>
+          <strong>mais curadoria com contexto.</strong>
+          <p>cada livro entra aqui por uma pergunta prática: que tipo de liderança, carreira ou decisão ele ajuda a amadurecer?</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="estante-featured" id="destaque" aria-labelledby="estante-featured-title">
+      <div class="container estante-featured-shell">
+        <div class="estante-section-head">
+          <span>livro em destaque</span>
+          <h2 id="estante-featured-title">uma escolha para começar com intenção.</h2>
+        </div>
+        <div class="estante-featured-card" data-estante-featured>
+          <div class="estante-loading-card">organizando sua estante...</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="estante-controls" id="curadoria" aria-label="Filtros da estante">
+      <div class="container estante-controls-shell">
+        <label class="estante-search">
+          <span class="sr-only">buscar na estante</span>
+          <input type="search" data-estante-search placeholder="buscar por livro, autor ou desafio" autocomplete="off">
+        </label>
+
+        <div class="estante-filter-block" aria-label="Categorias">
+          <span>categoria</span>
+          <div class="estante-chip-row" data-estante-category-filters>
+            <button class="is-active" type="button" data-category="all">todos</button>
+          </div>
+        </div>
+
+        <div class="estante-filter-block" aria-label="Nível de leitura">
+          <span>nível</span>
+          <div class="estante-chip-row" data-estante-level-filters>
+            <button class="is-active" type="button" data-level="all">todos</button>
+            <button type="button" data-level="ESSENTIAL">essencial</button>
+            <button type="button" data-level="DEEPENING">aprofundamento</button>
+            <button type="button" data-level="PROVOCATION">provocação</button>
+          </div>
+        </div>
+
+        <button class="estante-clear" type="button" data-estante-clear hidden>limpar filtros</button>
+      </div>
+    </section>
+
+    <section class="estante-grid-section" aria-labelledby="estante-grid-title">
+      <div class="container estante-grid-shell">
+        <div class="estante-section-head estante-section-head--split">
+          <div>
+            <span>curadoria completa</span>
+            <h2 id="estante-grid-title">livros para ler com pergunta.</h2>
+          </div>
+          <p data-estante-result-count>carregando curadoria</p>
+        </div>
+        <div class="estante-state" data-estante-state aria-live="polite">organizando sua estante...</div>
+        <div class="estante-grid" data-estante-grid></div>
+      </div>
+    </section>
+
+    <section class="estante-how" aria-labelledby="estante-how-title">
+      <div class="container estante-how-shell">
+        <div class="estante-section-head">
+          <span>como usar esta estante</span>
+          <h2 id="estante-how-title">leitura boa ganha força quando encontra uma pergunta real.</h2>
+        </div>
+        <div class="estante-how-list">
+          <article>
+            <span>01</span>
+            <strong>escolha pelo desafio atual</strong>
+            <p>comece pelo livro que conversa com uma tensão real da sua rotina, não pelo título mais famoso.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <strong>leia com uma pergunta em mente</strong>
+            <p>uma pergunta boa transforma leitura em repertório aplicável, não apenas em acúmulo.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <strong>registre uma nota de margem</strong>
+            <p>guarde a ideia que pode mudar uma conversa, uma decisão ou a forma de liderar a semana.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <strong>volte aos textos relacionados</strong>
+            <p>conecte livro, artigo e edição curta para transformar leitura em prática recorrente.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="dashboard-footer dashboard-footer--lite estante-footer">
+    <div class="container dashboard-footer-shell dashboard-footer-shell--lite">
+      <span>Papo de Liderança é um produto editorial, feito para quem prefere clareza à distração.</span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/page-transition.js"></script>
+  <script src="../assets/js/logo-theme.js"></script>
+  <script src="../assets/js/api.js?v=premium-20260501a"></script>
+  <script src="../assets/js/session.js?v=premium-20260501a"></script>
+  <script src="../assets/js/app-shell.js?v=premium-20260501a"></script>
+  <script src="../assets/js/back-to-top.js"></script>
+  <script src="../assets/js/estante.js?v=premium-20260501a"></script>
+</body>
+</html>

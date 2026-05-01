@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logos/favicons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/logos/favicons/favicon-32.png">
+  <link rel="shortcut icon" href="../assets/logos/favicons/favicon.ico">
+  <title>perfil da conta | Papo de Liderança</title>
+  <meta name="description" content="Gerencie informações pessoais e preferências da conta no Papo de Liderança.">
+  <link rel="stylesheet" href="../landing-newsletter/style.css?v=premium-20260501a">
+  <link rel="stylesheet" href="../assets/css/page-transition.css">
+  <link rel="stylesheet" href="../assets/css/logo-theme.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css?v=premium-20260501a">
+  <link rel="stylesheet" href="../assets/css/account-pages.css?v=premium-20260501a">
+</head>
+<body class="dashboard-page dashboard-page--lite account-page" data-page="perfil">
+  <header class="site-header dashboard-header dashboard-header--lite">
+    <div class="container header-inner">
+      <a class="brand" href="./dashboard.html" aria-label="Papo de Liderança">
+        <img class="logo" src="../assets/logo-dark.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de Liderança">
+        <span class="brand-name">Papo de Liderança</span>
+      </a>
+      <nav class="main-nav" aria-label="Navegação interna">
+        <a href="./dashboard.html">minha área</a>
+        <a href="./biblioteca.html">biblioteca</a>
+        <a href="./progresso.html">progresso</a>
+                <a href="./estante.html">estante</a>
+        <a class="is-current" href="./perfil.html">conta</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-login" href="../auth/login.html" data-auth-logout>sair</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="account-page-main">
+    <div class="container account-page-shell">
+      <section class="account-page-card">
+        <div class="account-page-head">
+          <div class="account-page-copy">
+            <a class="account-page-back" href="./dashboard.html">voltar</a>
+            <h1>perfil da conta</h1>
+            <p>gerencie suas informações pessoais e preferências da conta.</p>
+          </div>
+          <div class="account-page-visual" aria-hidden="true">
+            <span class="account-page-visual-badge">✓</span>
+          </div>
+        </div>
+
+        <div class="account-page-divider" aria-hidden="true"></div>
+
+        <nav class="account-local-nav" aria-label="navegação da conta">
+          <a class="is-current" href="./perfil.html">perfil</a>
+          <a href="./assinatura.html">assinatura</a>
+        </nav>
+
+        <section class="account-page-section" aria-labelledby="dados-pessoais-title">
+          <h2 id="dados-pessoais-title" class="account-page-section-title">dados pessoais</h2>
+
+          <div class="account-data-card">
+            <article class="account-data-row account-data-row--avatar">
+              <span class="account-data-row-icon account-data-row-icon--avatar" data-profile-avatar>
+                <img src="" alt="" data-profile-avatar-image hidden>
+                <span data-profile-avatar-initials>AP</span>
+              </span>
+              <div class="account-data-row-copy">
+                <span>foto</span>
+                <strong>imagem do perfil</strong>
+                <p>uma foto real deixa sua área mais pessoal, sem perder a discrição da experiência.</p>
+              </div>
+              <div class="account-data-actions">
+                <button class="account-data-edit" type="button" data-profile-avatar-button>alterar foto</button>
+                <input class="account-avatar-input" type="file" accept="image/png,image/jpeg,image/webp" data-profile-avatar-input hidden>
+              </div>
+            </article>
+
+            <article class="account-data-row" data-profile-field-row="name">
+              <span class="account-data-row-icon" aria-hidden="true">N</span>
+              <div class="account-data-row-copy">
+                <span>nome</span>
+                <strong data-profile-name>Admin Papo</strong>
+                <form class="account-inline-form" data-profile-form="name" hidden>
+                  <label class="sr-only" for="profile-name-input">nome completo</label>
+                  <input id="profile-name-input" name="name" type="text" autocomplete="name" minlength="2" maxlength="80" required>
+                  <div class="account-inline-actions">
+                    <button type="submit">salvar</button>
+                    <button type="button" data-profile-cancel="name">cancelar</button>
+                  </div>
+                </form>
+              </div>
+              <button class="account-data-edit" type="button" data-profile-edit-name>editar</button>
+            </article>
+
+            <article class="account-data-row" data-profile-field-row="email">
+              <span class="account-data-row-icon" aria-hidden="true">@</span>
+              <div class="account-data-row-copy">
+                <span>e-mail</span>
+                <strong data-profile-email>admin@papodelideranca.local</strong>
+                <p>usado para acesso e recuperação da conta.</p>
+              </div>
+              <a class="account-data-edit" href="mailto:contato@papodelideranca.com?subject=Solicita%C3%A7%C3%A3o%20de%20altera%C3%A7%C3%A3o%20de%20e-mail" data-profile-email-support>solicitar alteração</a>
+            </article>
+
+            <article class="account-data-row">
+              <span class="account-data-row-icon" aria-hidden="true">◎</span>
+              <div class="account-data-row-copy">
+                <span>tipo de acesso</span>
+                <strong data-profile-role>administrador</strong>
+                <p data-profile-role-detail>você tem acesso total à plataforma.</p>
+              </div>
+            </article>
+
+            <article class="account-data-row">
+              <span class="account-data-row-icon" aria-hidden="true">◷</span>
+              <div class="account-data-row-copy">
+                <span>último acesso</span>
+                <strong data-profile-last-login>26 abr. 2026, 10:43</strong>
+                <p data-profile-last-login-detail>navegador Chrome • São Paulo, BR</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="account-page-section" aria-labelledby="status-conta-title">
+          <h2 id="status-conta-title" class="account-page-section-title">status da conta</h2>
+
+          <div class="account-status-card">
+            <div class="account-status-copy">
+              <strong data-profile-status-copy>sua conta está em dia</strong>
+              <p data-profile-status-support>todos os acessos e informações estão seguros.</p>
+            </div>
+            <span class="account-status-badge" data-profile-status-badge>acesso concluído</span>
+          </div>
+        </section>
+
+        <div class="dashboard-inline-feedback" data-account-feedback aria-live="polite"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="dashboard-footer dashboard-footer--lite">
+    <div class="container dashboard-footer-shell dashboard-footer-shell--lite">
+      <span>Papo de Liderança é um produto editorial feito para quem prefere clareza à distração.</span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/page-transition.js"></script>
+  <script src="../assets/js/logo-theme.js"></script>
+  <script src="../assets/js/api.js?v=premium-20260501a"></script>
+  <script src="../assets/js/session.js?v=premium-20260501a"></script>
+  <script src="../assets/js/app-shell.js?v=premium-20260501a"></script>
+  <script src="../assets/js/profile.js?v=premium-20260501a"></script>
+</body>
+</html>
+

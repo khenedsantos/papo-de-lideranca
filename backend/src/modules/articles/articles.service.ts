@@ -1,12 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../common/prisma/prisma.service';
 
+const ARTICLE_STATIC_PATH_PREFIX = './artigos';
+
 @Injectable()
 export class ArticlesService {
   constructor(private readonly prisma: PrismaService) {}
 
   async list() {
-    return this.prisma.article.findMany({
+    const articles = await this.prisma.article.findMany({
       where: {
         isPublished: true,
       },
@@ -29,6 +31,8 @@ export class ArticlesService {
         },
       },
     });
+
+    return articles.map((article) => this.mapArticle(article));
   }
 
   async findBySlug(slug: string) {
@@ -59,7 +63,15 @@ export class ArticlesService {
       throw new NotFoundException('Artigo não encontrado.');
     }
 
-    return article;
+    return this.mapArticle(article);
+  }
+
+  private mapArticle<T extends { slug: string; excerpt?: string }>(article: T) {
+    return {
+      ...article,
+      type: 'article' as const,
+      summary: article.excerpt,
+      staticPath: `${ARTICLE_STATIC_PATH_PREFIX}/${article.slug}.html`,
+    };
   }
 }
-

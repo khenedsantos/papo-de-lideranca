@@ -1,0 +1,283 @@
+(function () {
+  const LEVEL_LABEL = {
+    ESSENTIAL: "essencial",
+    DEEPENING: "aprofundamento",
+    PROVOCATION: "provocação",
+  };
+
+  const state = {
+    books: [],
+    filters: {
+      category: "all",
+      level: "all",
+      q: "",
+    },
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (!document.body.classList.contains("estante-page") || document.body.classList.contains("livro-page")) {
+      return;
+    }
+
+    bindEvents();
+    loadBooks();
+  });
+
+  async function loadBooks() {
+    setState("organizando sua estante...");
+
+    try {
+      const api = getApi();
+      state.books = await api.apiFetch("/books");
+      renderCategoryFilters();
+      renderBooks();
+    } catch (error) {
+      renderLoadError(error);
+    }
+  }
+
+  function bindEvents() {
+    const search = document.querySelector("[data-estante-search]");
+
+    if (search) {
+      search.addEventListener("input", () => {
+        state.filters.q = search.value.trim();
+        renderBooks();
+      });
+    }
+
+    document.addEventListener("click", (event) => {
+      const categoryButton = event.target.closest("[data-category]");
+      const levelButton = event.target.closest("[data-level]");
+      const clearButton = event.target.closest("[data-estante-clear]");
+
+      if (categoryButton) {
+        state.filters.category = categoryButton.dataset.category || "all";
+        renderBooks();
+      }
+
+      if (levelButton) {
+        state.filters.level = levelButton.dataset.level || "all";
+        renderBooks();
+      }
+
+      if (clearButton) {
+        resetFilters();
+        renderBooks();
+      }
+    });
+  }
+
+  function renderCategoryFilters() {
+    const container = document.querySelector("[data-estante-category-filters]");
+    if (!container) return;
+
+    const categories = Array.from(new Set(state.books.map((book) => book.category).filter(Boolean))).sort();
+
+    container.innerHTML = [
+      '<button class="is-active" type="button" data-category="all">todos</button>',
+      ...categories.map((category) => (
+        `<button type="button" data-category="${escapeHtml(category)}">${escapeHtml(category)}</button>`
+      )),
+    ].join("");
+  }
+
+  function renderBooks() {
+    renderActiveFilters();
+    renderFeaturedBook();
+
+    const grid = document.querySelector("[data-estante-grid]");
+    const resultCount = document.querySelector("[data-estante-result-count]");
+    const books = getFilteredBooks();
+
+    if (resultCount) {
+      resultCount.textContent = `${books.length} ${books.length === 1 ? "livro selecionado" : "livros selecionados"}`;
+    }
+
+    if (!grid) return;
+
+    if (!books.length) {
+      grid.innerHTML = "";
+      setState("não encontramos uma leitura para esse filtro. tente ampliar a busca ou voltar para a curadoria completa.", "empty");
+      return;
+    }
+
+    clearState();
+    grid.innerHTML = books.map(renderBookCard).join("");
+  }
+
+  function renderFeaturedBook() {
+    const container = document.querySelector("[data-estante-featured]");
+    if (!container) return;
+
+    const featured = state.books.find((book) => book.isFeatured) || state.books[0];
+
+    if (!featured) {
+      container.innerHTML = '<div class="estante-loading-card">a curadoria está sendo preparada.</div>';
+      return;
+    }
+
+    container.innerHTML = `
+      ${renderCover(featured)}
+      <div class="estante-featured-copy">
+        <div class="estante-meta">
+          <span>${escapeHtml(featured.category)}</span>
+          <span>${escapeHtml(formatLevel(featured.level))}</span>
+          ${featured.readTime ? `<span>${escapeHtml(featured.readTime)}</span>` : ""}
+        </div>
+        <h3>${escapeHtml(featured.title)}</h3>
+        <p class="estante-author">${escapeHtml(featured.author)}</p>
+        <p>${escapeHtml(featured.whyRead || featured.description)}</p>
+        <a class="estante-card-link" href="./livro.html?slug=${encodeURIComponent(featured.slug)}">abrir leitura guiada</a>
+      </div>
+    `;
+  }
+
+  function renderBookCard(book) {
+    return `
+      <article class="estante-card">
+        ${renderCover(book)}
+        <div class="estante-card-copy">
+          <div class="estante-meta">
+            <span>${escapeHtml(book.category)}</span>
+            <span>${escapeHtml(formatLevel(book.level))}</span>
+          </div>
+          <h3>${escapeHtml(book.title)}</h3>
+          <p class="estante-author">${escapeHtml(book.author)}</p>
+          <p>${escapeHtml(book.description)}</p>
+          <p><strong>por que está na estante:</strong> ${escapeHtml(book.whyRead)}</p>
+          <a class="estante-card-link" href="./livro.html?slug=${encodeURIComponent(book.slug)}">ver leitura guiada</a>
+        </div>
+      </article>
+    `;
+  }
+
+  function renderCover(book) {
+    if (book.coverUrl) {
+      return `<img class="estante-book-cover" src="${escapeHtml(resolveAssetUrl(book.coverUrl))}" alt="${escapeHtml(book.coverAlt || book.title)}">`;
+    }
+
+    return `
+      <div class="estante-book-cover" aria-label="${escapeHtml(book.coverAlt || `Capa tipográfica de ${book.title}`)}">
+        <span>${escapeHtml(getCoverTitle(book.title))}</span>
+      </div>
+    `;
+  }
+
+  function getFilteredBooks() {
+    const query = normalize(state.filters.q);
+
+    return state.books.filter((book) => {
+      const matchesCategory = state.filters.category === "all" || book.category === state.filters.category;
+      const matchesLevel = state.filters.level === "all" || book.level === state.filters.level;
+      const text = normalize([
+        book.title,
+        book.subtitle,
+        book.author,
+        book.category,
+        book.description,
+        book.whyRead,
+      ].filter(Boolean).join(" "));
+      const matchesQuery = !query || text.includes(query);
+
+      return matchesCategory && matchesLevel && matchesQuery;
+    });
+  }
+
+  function renderActiveFilters() {
+    document.querySelectorAll("[data-category]").forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.category === state.filters.category);
+    });
+
+    document.querySelectorAll("[data-level]").forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.level === state.filters.level);
+    });
+
+    document.querySelectorAll("[data-estante-clear]").forEach((button) => {
+      button.hidden = !hasActiveFilters();
+    });
+  }
+
+  function resetFilters() {
+    state.filters.category = "all";
+    state.filters.level = "all";
+    state.filters.q = "";
+
+    const search = document.querySelector("[data-estante-search]");
+    if (search) search.value = "";
+  }
+
+  function hasActiveFilters() {
+    return state.filters.category !== "all" || state.filters.level !== "all" || Boolean(state.filters.q);
+  }
+
+  function renderLoadError(error) {
+    if (error && error.status === 403) {
+      setState(
+        'esta estante é exclusiva para assinantes ativos. <a href="./assinatura.html">ver assinatura</a>',
+        "locked",
+      );
+      return;
+    }
+
+    setState("não foi possível carregar a estante agora. tente novamente em instantes.", "error");
+  }
+
+  function setState(message, modifier) {
+    const node = document.querySelector("[data-estante-state]");
+    if (!node) return;
+
+    node.hidden = false;
+    node.className = "estante-state";
+    if (modifier) node.classList.add(`estante-state--${modifier}`);
+    node.innerHTML = message;
+  }
+
+  function clearState() {
+    const node = document.querySelector("[data-estante-state]");
+    if (!node) return;
+    node.hidden = true;
+    node.textContent = "";
+  }
+
+  function getApi() {
+    if (!window.PapoApi || !window.PapoApi.apiFetch) {
+      throw new Error("API indisponível.");
+    }
+
+    return window.PapoApi;
+  }
+
+  function formatLevel(level) {
+    return LEVEL_LABEL[level] || String(level || "leitura").toLowerCase();
+  }
+
+  function resolveAssetUrl(url) {
+    if (window.PapoAuth && window.PapoAuth.resolveAssetUrl) {
+      return window.PapoAuth.resolveAssetUrl(url);
+    }
+
+    return url;
+  }
+
+  function getCoverTitle(title) {
+    const words = String(title || "livro").split(/\s+/).filter(Boolean);
+    return words.slice(0, 4).join(" ");
+  }
+
+  function normalize(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+})();

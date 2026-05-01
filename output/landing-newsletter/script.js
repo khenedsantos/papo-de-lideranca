@@ -1,4 +1,4 @@
-﻿function setupNavigation() {
+function setupNavigation() {
   const toggle = document.querySelector("[data-nav-toggle]");
   const panel = document.querySelector("[data-nav-panel]");
 

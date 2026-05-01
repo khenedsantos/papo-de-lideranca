@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logos/favicons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/logos/favicons/favicon-32.png">
+  <link rel="shortcut icon" href="../assets/logos/favicons/favicon.ico">
+  <title>leitura | Papo de Liderança</title>
+  <meta name="description" content="Leitura editorial do Papo de Liderança.">
+  <link rel="stylesheet" href="../landing-newsletter/style.css?v=premium-20260501a">
+  <link rel="stylesheet" href="../assets/css/page-transition.css">
+  <link rel="stylesheet" href="../assets/css/logo-theme.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css?v=premium-20260501a">
+  <link rel="stylesheet" href="../assets/css/back-to-top.css">
+  <link rel="stylesheet" href="../assets/css/reader.css?v=premium-20260501a">
+</head>
+<body class="dashboard-page dashboard-page--lite reader-page" data-page="leitura">
+  <div class="reader-progress-shell" aria-hidden="true">
+    <i data-reader-progress-bar></i>
+  </div>
+
+  <header class="site-header dashboard-header dashboard-header--lite">
+    <div class="container header-inner">
+      <a class="brand" href="./dashboard.html" aria-label="Papo de Liderança">
+        <img class="logo" src="../assets/logo-dark.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de Liderança">
+        <span class="brand-name">Papo de Liderança</span>
+      </a>
+      <nav class="main-nav" aria-label="Navegação interna">
+        <a href="./dashboard.html">minha área</a>
+        <a class="is-current" href="./biblioteca.html">biblioteca</a>
+        <a href="./progresso.html">progresso</a>
+                <a href="./estante.html">estante</a>
+        <a href="./perfil.html">conta</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-login" href="../auth/login.html" data-auth-logout>sair</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="reader-main">
+    <div class="container reader-shell">
+      <div class="reader-state app-loading-state" data-reader-state aria-live="polite">abrindo sua leitura...</div>
+
+      <nav class="reader-breadcrumb" aria-label="Caminho da leitura">
+        <a href="./biblioteca.html">biblioteca</a>
+        <span data-reader-crumb-category>acervo</span>
+      </nav>
+
+      <article class="reader-article" data-reader-article hidden>
+        <header class="reader-head">
+          <span class="reader-kicker" data-reader-type>leitura</span>
+          <h1 data-reader-title>abrindo sua leitura</h1>
+          <p data-reader-summary></p>
+          <div class="reader-meta" aria-label="Metadados da leitura">
+            <span data-reader-category>acervo</span>
+            <span data-reader-time>tempo editorial</span>
+            <span data-reader-date>data indisponível</span>
+            <span data-reader-progress-label>0%</span>
+          </div>
+        </header>
+
+        <div class="reader-content" data-reader-content></div>
+
+        <footer class="reader-footer">
+          <a class="reader-back-link" href="./biblioteca.html">voltar para biblioteca</a>
+          <a class="reader-next-link" href="./biblioteca.html" data-reader-next hidden>próxima leitura</a>
+        </footer>
+      </article>
+    </div>
+  </main>
+
+  <footer class="dashboard-footer dashboard-footer--lite">
+    <div class="container dashboard-footer-shell dashboard-footer-shell--lite">
+      <span>Papo de Liderança é um produto editorial feito para quem prefere clareza à distração.</span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/page-transition.js"></script>
+  <script src="../assets/js/logo-theme.js"></script>
+  <script src="../assets/js/api.js?v=premium-20260501a"></script>
+  <script src="../assets/js/session.js?v=premium-20260501a"></script>
+  <script src="../assets/js/app-shell.js?v=premium-20260501a"></script>
+  <script src="../assets/js/back-to-top.js"></script>
+  <script src="../assets/js/reader.js?v=premium-20260501a"></script>
+</body>
+</html>
+

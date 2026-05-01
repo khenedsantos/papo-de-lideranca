@@ -1,6 +1,8 @@
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { static as serveStatic } from 'express';
+import { join } from 'path';
 import { AppModule } from './app.module';
 
 const DEFAULT_LOCAL_FRONTEND_ORIGINS = [
@@ -22,7 +24,7 @@ function parseFrontendOrigins(origins: string | undefined, isProduction: boolean
     return configuredOrigins;
   }
 
-  return isProduction ? [] : DEFAULT_LOCAL_FRONTEND_ORIGINS;
+  return isProduction ?[] : DEFAULT_LOCAL_FRONTEND_ORIGINS;
 }
 
 async function bootstrap() {
@@ -33,6 +35,8 @@ async function bootstrap() {
     configService.get<string>('FRONTEND_ORIGINS'),
     isProduction,
   );
+
+  app.use('/uploads', serveStatic(join(process.cwd(), 'uploads')));
 
   app.enableCors({
     origin(

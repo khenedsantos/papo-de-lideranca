@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/logos/favicons/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/logos/favicons/favicon-32.png">
+  <link rel="shortcut icon" href="../assets/logos/favicons/favicon.ico">
+  <title>livro | Papo de Liderança</title>
+  <meta name="description" content="Leitura guiada de livro na Estante do Papo de Liderança.">
+  <link rel="stylesheet" href="../landing-newsletter/style.css?v=premium-20260501a">
+  <link rel="stylesheet" href="../assets/css/page-transition.css">
+  <link rel="stylesheet" href="../assets/css/logo-theme.css">
+  <link rel="stylesheet" href="../assets/css/dashboard.css?v=premium-20260501a">
+  <link rel="stylesheet" href="../assets/css/back-to-top.css">
+  <link rel="stylesheet" href="../assets/css/estante.css?v=premium-20260501a">
+</head>
+<body class="dashboard-page dashboard-page--lite estante-page livro-page" data-page="livro">
+  <header class="site-header dashboard-header dashboard-header--lite">
+    <div class="container header-inner">
+      <a class="brand" href="./dashboard.html" aria-label="Papo de Liderança">
+        <img class="logo" src="../assets/logo-dark.png" data-logo-light="../assets/logo-light.png" data-logo-dark="../assets/logo-dark.png" alt="Papo de Liderança">
+        <span class="brand-name">Papo de Liderança</span>
+      </a>
+      <nav class="main-nav" aria-label="Navegação interna">
+        <a href="./dashboard.html">minha área</a>
+        <a href="./biblioteca.html">biblioteca</a>
+        <a href="./progresso.html">progresso</a>
+        <a class="is-current" href="./estante.html">estante</a>
+        <a href="./perfil.html">conta</a>
+      </nav>
+      <div class="header-actions">
+        <a class="header-login" href="../auth/login.html" data-auth-logout>sair</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="book-main">
+    <div class="container">
+      <div class="book-state" data-book-state aria-live="polite">abrindo sua leitura guiada...</div>
+
+      <article class="book-shell" data-book-shell hidden>
+        <section class="book-hero">
+          <div class="book-hero-copy">
+            <a class="book-breadcrumb" href="./estante.html">estante</a>
+            <div class="book-meta-line">
+              <span data-book-category>curadoria</span>
+              <span data-book-level>leitura</span>
+              <span data-book-read-time>tempo editorial</span>
+            </div>
+            <h1 data-book-title>livro</h1>
+            <p class="book-author" data-book-author>autor</p>
+            <p class="book-description" data-book-description></p>
+            <div class="book-hero-actions">
+              <a class="estante-primary-action" href="#minha-nota">registrar nota de leitura</a>
+              <a class="estante-secondary-action" href="#" data-book-purchase target="_blank" rel="noopener noreferrer" hidden>ver opção de compra</a>
+              <span class="book-purchase-muted" data-book-purchase-muted hidden>opção de compra em curadoria</span>
+            </div>
+            <p class="book-purchase-note" data-book-purchase-note hidden>a compra acontece fora do Papo de Liderança, diretamente com o parceiro indicado.</p>
+          </div>
+          <div class="book-cover-panel" data-book-cover aria-hidden="true"></div>
+        </section>
+
+        <section class="book-section book-why" aria-labelledby="book-why-title">
+          <span class="estante-kicker">por que este livro está aqui</span>
+          <h2 id="book-why-title">o lugar dele na estante</h2>
+          <p data-book-why></p>
+        </section>
+
+        <section class="book-section" aria-labelledby="book-ideas-title">
+          <div class="book-section-head">
+            <span>ideias centrais</span>
+            <h2 id="book-ideas-title">três recortes para levar para a prática.</h2>
+          </div>
+          <div class="book-idea-grid" data-book-key-ideas></div>
+        </section>
+
+        <section class="book-section" aria-labelledby="book-questions-title">
+          <div class="book-section-head">
+            <span>leia com estas perguntas</span>
+            <h2 id="book-questions-title">provocações para atravessar a leitura com critério.</h2>
+          </div>
+          <ol class="book-question-list" data-book-questions></ol>
+        </section>
+
+        <section class="book-section book-practice" aria-labelledby="book-practice-title">
+          <span class="estante-kicker">aplicação prática</span>
+          <h2 id="book-practice-title">para não ficar só na marcação de página.</h2>
+          <p data-book-practical-use></p>
+        </section>
+
+        <section class="book-section" aria-labelledby="book-connections-title" data-book-connections-section>
+          <div class="book-section-head">
+            <span>conexões com o Papo de Liderança</span>
+            <h2 id="book-connections-title">continue a conversa no acervo.</h2>
+          </div>
+          <div class="book-connections" data-book-connections></div>
+        </section>
+
+        <section class="book-section" aria-labelledby="book-community-title">
+          <div class="book-section-head">
+            <span>margens da comunidade</span>
+            <h2 id="book-community-title">notas de leitura dos assinantes.</h2>
+          </div>
+          <div class="book-note-list" data-community-notes></div>
+        </section>
+
+        <section class="book-section book-my-notes" id="minha-nota" aria-labelledby="book-my-note-title">
+          <div class="book-section-head">
+            <span>minha nota</span>
+            <h2 id="book-my-note-title">registre o que merece voltar para a sua liderança.</h2>
+            <p>sua nota fica salva e pode ser revisada antes de aparecer para outros assinantes.</p>
+          </div>
+          <div class="book-note-prompts" data-my-note-prompts></div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="dashboard-footer dashboard-footer--lite estante-footer">
+    <div class="container dashboard-footer-shell dashboard-footer-shell--lite">
+      <span>Papo de Liderança é um produto editorial, feito para quem prefere clareza à distração.</span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/page-transition.js"></script>
+  <script src="../assets/js/logo-theme.js"></script>
+  <script src="../assets/js/api.js?v=premium-20260501a"></script>
+  <script src="../assets/js/session.js?v=premium-20260501a"></script>
+  <script src="../assets/js/app-shell.js?v=premium-20260501a"></script>
+  <script src="../assets/js/back-to-top.js"></script>
+  <script src="../assets/js/livro.js?v=premium-20260501a"></script>
+</body>
+</html>

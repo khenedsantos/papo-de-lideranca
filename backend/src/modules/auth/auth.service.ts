@@ -53,6 +53,7 @@ export class AuthService {
   }
 
   async createAccess({
+    name,
     email,
     password,
     confirmPassword,
@@ -73,6 +74,7 @@ export class AuthService {
     const passwordHash = await bcrypt.hash(password, 10);
 
     await this.usersService.updateCredentials(user.id, {
+      name,
       passwordHash,
       hasCompletedAccess: true,
       resetPasswordToken: null,
@@ -100,6 +102,7 @@ export class AuthService {
         id: user.id,
         name: user.name,
         email: user.email,
+        avatarUrl: user.avatarUrl,
         role: user.role,
       },
     };
@@ -108,10 +111,12 @@ export class AuthService {
   async forgotPassword({ email }: ForgotPasswordDto) {
     const normalizedEmail = this.normalizeEmail(email);
     const user = await this.usersService.findByEmail(normalizedEmail);
+    const message =
+      'Se este e-mail estiver cadastrado, enviaremos as instruções de redefinição em instantes.';
 
     if (!user) {
       return {
-        message: 'Se o e-mail existir, um token de redefinição foi gerado.',
+        message,
       };
     }
 
@@ -125,12 +130,12 @@ export class AuthService {
 
     if (process.env.NODE_ENV === 'production') {
       return {
-        message: 'Se o e-mail existir, um token de redefinição foi gerado.',
+        message,
       };
     }
 
     return {
-      message: 'Se o e-mail existir, um token de redefinição foi gerado.',
+      message,
       resetToken,
     };
   }
@@ -145,14 +150,14 @@ export class AuthService {
     const user = await this.usersService.findByResetToken(token);
 
     if (!user) {
-      throw new BadRequestException('Token inválido.');
+      throw new BadRequestException('Link de redefinição inválido.');
     }
 
     if (
       !user.resetPasswordExpiresAt ||
       user.resetPasswordExpiresAt.getTime() < Date.now()
     ) {
-      throw new BadRequestException('Token expirado.');
+      throw new BadRequestException('Link de redefinição expirado.');
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
@@ -165,7 +170,7 @@ export class AuthService {
     });
 
     return {
-      message: 'Senha redefinida com sucesso.',
+      message: 'Senha atualizada com sucesso.',
     };
   }
 }

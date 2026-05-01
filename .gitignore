@@ -16,6 +16,10 @@ env/
 Thumbs.db
 desktop.ini
 
+# Local generated files
+.codex-chrome-profile/
+backend/uploads/
+
 # Legacy archives kept only for local reference
 _legacy/
 output/_legacy-output/

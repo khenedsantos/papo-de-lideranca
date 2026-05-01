@@ -1,450 +1,680 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  const body = document.body;
-  const auth = window.PapoAuth;
+(function () {
+  const TYPE_LABEL = {
+    article: "artigo",
+    "short-edition": "edi\u00e7\u00e3o curta",
+  };
 
-  if (!body.classList.contains("biblioteca-page")) return;
-  if (!auth || !auth.hasToken()) return;
+  const STATUS_LABEL = {
+    "not-started": "novo",
+    "in-progress": "em andamento",
+    completed: "conclu\u00eddo",
+  };
 
-  await loadBibliotecaState(auth);
-  bindBibliotecaRefresh(auth);
-});
+  const state = {
+    auth: null,
+    categories: [],
+    items: [],
+    filters: {
+      query: "",
+      type: "all",
+      status: "all",
+      category: "all",
+    },
+  };
 
-let bibliotecaRefreshInFlight = null;
+  document.addEventListener("DOMContentLoaded", async () => {
+    const body = document.body;
+    const auth = window.PapoAuth;
 
-const EDITORIAL_ARTICLE_ORDER = [
-  "artigo-autoridade-sem-dureza",
-  "artigo-carreira-antes-da-promocao",
-  "artigo-feedback-que-desenvolve",
-  "artigo-liderar-sem-microgerenciar",
-  "artigo-mentalidade-que-gera-influencia",
-  "artigo-produtividade-do-lider",
-  "artigo-relevancia-sem-autopromocao",
-  "artigo-disciplina-emocional-sob-pressao",
-  "artigo-rituais-simples-para-alinhamento",
-  "artigo-proteger-tempo-de-pensamento-estrategico",
-];
+    if (!body.classList.contains("library-page")) return;
 
-const EDITION_INDEX_BY_SLUG = new Map(
-  EDITORIAL_ARTICLE_ORDER.map((slug, index) => [slug, index + 1]),
-);
+    bindLibraryEvents();
 
-async function loadBibliotecaState(auth) {
-  if (bibliotecaRefreshInFlight) {
-    return bibliotecaRefreshInFlight;
-  }
+    if (!auth || !auth.hasToken()) {
+      redirectToLogin();
+      return;
+    }
 
-  bibliotecaRefreshInFlight = Promise.all([
-    auth.getReadingProgress({ contentType: "ARTICLE" }),
-    auth.getReadingProgressSummary(),
-  ])
-    .then(([progressList, summary]) => {
-      const progressBySlug = new Map();
+    await loadLibrary(auth);
+    bindRefresh(auth);
+  });
 
-      (progressList || []).forEach((item) => {
-        if (!item || !item.content || !item.content.slug) return;
-        progressBySlug.set(item.content.slug, item);
+  let refreshInFlight = null;
+
+  async function loadLibrary(auth) {
+    if (refreshInFlight) return refreshInFlight;
+
+    state.auth = auth;
+    setStateMessage("preparando o acervo...", "");
+
+    refreshInFlight = Promise.allSettled([
+      auth.listCategories ?auth.listCategories() : Promise.resolve([]),
+      auth.listArticles(),
+      auth.listShortEditions(),
+      auth.getReadingProgress(),
+    ])
+      .then((results) => {
+        const [categoriesResult, articlesResult, editionsResult, progressResult] = results;
+
+        if (hasAuthError(results)) {
+          auth.clearSession();
+          redirectToLogin();
+          return;
+        }
+
+        if (articlesResult.status === "rejected" && editionsResult.status === "rejected") {
+          throw articlesResult.reason || editionsResult.reason;
+        }
+
+        const categories = asArray(unwrap(categoriesResult, []));
+        const articles = asArray(unwrap(articlesResult, []));
+        const editions = asArray(unwrap(editionsResult, []));
+        const progressList = asArray(unwrap(progressResult, []));
+        const progressIndex = buildProgressIndex(progressList);
+
+        state.categories = categories;
+        state.items = normalizeItems(articles, editions, progressIndex);
+
+        renderCategoryFilters();
+        renderLibrary();
+      })
+      .catch((error) => {
+        setStateMessage(
+          error instanceof TypeError
+            ?"não conseguimos conectar o acervo à API local agora."
+            : "não conseguimos carregar o acervo agora.",
+          "is-error",
+          "verifique a conexão ou tente novamente em instantes.",
+          "retry",
+        );
+        renderEmptyFeatures();
+      })
+      .finally(() => {
+        refreshInFlight = null;
       });
 
-      decorateBibliotecaCards(progressBySlug);
-      populateBibliotecaCurrentReading(summary, progressBySlug);
-      decorateBibliotecaEditionLabels();
-    })
-    .catch((error) => {
-      if (error && (error.status === 401 || error.status === 403) && auth) {
-        auth.clearSession();
-        window.location.replace("../auth/login.html");
-        return;
-      }
+    return refreshInFlight;
+  }
 
-      applyBibliotecaCurrentReadingError();
-    })
-    .finally(() => {
-      bibliotecaRefreshInFlight = null;
+  function bindRefresh(auth) {
+    window.addEventListener("pageshow", (event) => {
+      if (event.persisted) loadLibrary(auth);
     });
 
-  return bibliotecaRefreshInFlight;
-}
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") loadLibrary(auth);
+    });
 
-function bindBibliotecaRefresh(auth) {
-  window.addEventListener("pageshow", (event) => {
-    if (event.persisted) {
-      loadBibliotecaState(auth);
+    window.addEventListener("focus", () => loadLibrary(auth));
+  }
+
+  function bindLibraryEvents() {
+    const search = document.querySelector("[data-library-search]");
+
+    if (search) {
+      search.addEventListener("input", () => {
+        state.filters.query = normalizeSearch(search.value);
+        renderLibrary();
+      });
     }
-  });
 
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") {
-      loadBibliotecaState(auth);
-    }
-  });
+    document.addEventListener("click", (event) => {
+      const typeButton = event.target.closest("[data-filter-type]");
+      const statusButton = event.target.closest("[data-filter-status]");
+      const categoryButton = event.target.closest("[data-filter-category]");
+      const clearButton = event.target.closest("[data-library-clear]");
+      const retryButton = event.target.closest("[data-library-retry]");
 
-  window.addEventListener("focus", () => {
-    loadBibliotecaState(auth);
-  });
-}
+      if (typeButton) {
+        state.filters.type = typeButton.getAttribute("data-filter-type") || "all";
+        syncButtons("[data-filter-type]", state.filters.type);
+        renderLibrary();
+      }
 
-function populateBibliotecaCurrentReading(summary, progressBySlug) {
-  const currentReading = resolveBibliotecaCurrentReading(summary, progressBySlug);
+      if (statusButton) {
+        state.filters.status = statusButton.getAttribute("data-filter-status") || "all";
+        syncButtons("[data-filter-status]", state.filters.status);
+        renderLibrary();
+      }
 
-  if (!currentReading || !currentReading.content) {
-    applyBibliotecaCurrentReadingEmpty();
-    return;
+      if (categoryButton) {
+        state.filters.category = categoryButton.getAttribute("data-filter-category") || "all";
+        syncButtons("[data-filter-category]", state.filters.category);
+        renderLibrary();
+      }
+
+      if (clearButton) {
+        resetFilters();
+        renderLibrary();
+      }
+
+      if (retryButton && state.auth) {
+        loadLibrary(state.auth);
+      }
+    });
   }
 
-  applyBibliotecaCurrentReading(currentReading);
-}
-
-function applyBibliotecaCurrentReadingEmpty() {
-  setText("[data-library-current-category]", "acervo");
-  setText("[data-library-current-time]", "-- min");
-  setText("[data-library-current-title]", "nenhuma leitura em andamento");
-  setText(
-    "[data-library-current-excerpt]",
-    "quando você iniciar uma leitura, este espaço passa a mostrar o ponto certo de retomada.",
-  );
-  setLink("[data-library-current-link]", "./biblioteca.html#biblioteca-completa", "explorar biblioteca");
-  setProgressValue(
-    document.querySelector("[data-library-current-progress]"),
-    0,
-    document.querySelector("[data-library-current-progress-label]"),
-    "0%",
-  );
-  setCurrentStateLabel("sem leitura ativa");
-  setText("[data-library-current-note-label]", "próximo passo");
-  setText(
-    "[data-library-current-note-value]",
-    "escolha um texto do acervo para começar a registrar progresso real.",
-  );
-  syncCurrentFeatureState(false, false);
-}
-
-function applyBibliotecaCurrentReadingError() {
-  setText("[data-library-current-category]", "biblioteca");
-  setText("[data-library-current-time]", "-- min");
-  setText("[data-library-current-title]", "não foi possível sincronizar");
-  setText(
-    "[data-library-current-excerpt]",
-    "o progresso real não pôde ser carregado agora. verifique se a API local está ativa e tente atualizar a página.",
-  );
-  setLink("[data-library-current-link]", "./biblioteca.html", "tentar novamente");
-  setProgressValue(
-    document.querySelector("[data-library-current-progress]"),
-    0,
-    document.querySelector("[data-library-current-progress-label]"),
-    "indisponível",
-  );
-  setCurrentStateLabel("sem sincronização");
-  setText("[data-library-current-note-label]", "progresso real");
-  setText(
-    "[data-library-current-note-value]",
-    "a biblioteca evita mostrar progresso antigo quando a integração não responde.",
-  );
-  syncCurrentFeatureState(false, false);
-}
-
-function applyBibliotecaCurrentReading(currentReading) {
-  const content = currentReading.content;
-  const progressPercent = Number.parseInt(currentReading.progressPercent || 0, 10);
-  const state = resolveReadingState(currentReading);
-  const isSuggestion = state === "SUGGESTED";
-  const isCompleted = state === "COMPLETED";
-
-  setText("[data-library-current-category]", formatCategoryName(content.category && content.category.name));
-  setText("[data-library-current-time]", `${content.readTimeMinutes || 0} min`);
-  setText("[data-library-current-title]", content.title || "leitura em andamento");
-  setText(
-    "[data-library-current-excerpt]",
-    isSuggestion
-      ? "sem uma leitura em andamento agora, esta \u00e9 a pr\u00f3xima sugest\u00e3o editorial para continuar sua linha de racioc\u00ednio."
-      : isCompleted
-        ? "esta leitura j\u00e1 foi conclu\u00edda e segue dispon\u00edvel para revis\u00e3o quando fizer sentido."
-        : content.excerpt || "retome a leitura em andamento com o progresso real da sua conta.",
-  );
-  setLink(
-    "[data-library-current-link]",
-    `./artigos/${content.slug}.html`,
-    isSuggestion
-      ? "come\u00e7ar nova leitura"
-      : isCompleted
-        ? "revisitar leitura"
-        : "continuar leitura",
-  );
-  setProgressValue(
-    document.querySelector("[data-library-current-progress]"),
-    isSuggestion || isCompleted ? null : progressPercent,
-    document.querySelector("[data-library-current-progress-label]"),
-    isSuggestion ? "pronta" : isCompleted ? "conclu\u00edda" : null,
-  );
-
-  setCurrentStateLabel(
-    isSuggestion
-      ? "pr\u00f3xima leitura sugerida"
-      : isCompleted
-        ? "leitura conclu\u00edda"
-        : "leitura em andamento",
-  );
-  syncCurrentFeatureState(isSuggestion, isCompleted);
-
-  if (isSuggestion) {
-    setText("[data-library-current-note-label]", "\u00faltima leitura");
-    setText(
-      "[data-library-current-note-value]",
-      "sem uma leitura em andamento agora, esta \u00e9 a pr\u00f3xima sugest\u00e3o editorial para continuar sua linha de racioc\u00ednio.",
+  function normalizeItems(articles, editions, progressIndex) {
+    const articleItems = (Array.isArray(articles) ?articles : []).map((article, index) =>
+      normalizeItem(article, "article", "ARTICLE", index, progressIndex),
     );
-    return;
-  }
 
-  if (isCompleted) {
-    setText("[data-library-current-note-label]", "\u00faltima leitura");
-    setText(
-      "[data-library-current-note-value]",
-      "esta leitura j\u00e1 foi conclu\u00edda e segue dispon\u00edvel para revis\u00e3o quando fizer sentido.",
+    const editionItems = (Array.isArray(editions) ?editions : []).map((edition, index) =>
+      normalizeItem(edition, "short-edition", "SHORT_EDITION", articleItems.length + index, progressIndex),
     );
-    return;
+
+    return articleItems
+      .concat(editionItems)
+      .sort((left, right) => {
+        const rightTime = getDateTime(right.publishedAt);
+        const leftTime = getDateTime(left.publishedAt);
+
+        if (rightTime !== leftTime) return rightTime - leftTime;
+        return left.order - right.order;
+      });
   }
 
-  setText("[data-library-current-note-label]", "leitura em andamento");
-  setText(
-    "[data-library-current-note-value]",
-    `retomar com ${progressPercent}% j\u00e1 percorrido e seguir do ponto em que a leitura come\u00e7ou a gerar valor.`,
-  );
-}
+  function normalizeItem(raw, type, apiType, order, progressIndex) {
+    const id = raw && raw.id ?String(raw.id) : "";
+    const slug = raw && raw.slug ?String(raw.slug) : "";
+    const progress = findProgress(progressIndex, apiType, id, slug);
+    const category = resolveCategory(raw);
+    const percent = normalizePercent(progress && progress.progressPercent);
+    const status = resolveStatus(progress, percent);
 
-function resolveBibliotecaCurrentReading(summary, progressBySlug) {
-  if (
-    summary &&
-    summary.continueBlock &&
-    summary.continueBlock.item &&
-    summary.continueBlock.item.contentType === "ARTICLE"
-  ) {
     return {
-      content: summary.continueBlock.item,
-      progressPercent: summary.continueBlock.progressPercent,
-      status: summary.continueBlock.mode === "CONTINUE_READING" ? "IN_PROGRESS" : "SUGGESTED",
-      mode: summary.continueBlock.mode,
-      ctaLabel: summary.continueBlock.ctaLabel || "",
+      type,
+      apiType,
+      id,
+      slug,
+      order,
+      title: (raw && raw.title) || "leitura editorial",
+      summary: (raw && (raw.summary || raw.excerpt || raw.description || raw.ideaCentral)) || "",
+      categoryName: category.name,
+      categorySlug: category.slug,
+      readTime: Number(raw && (raw.readTimeMinutes || raw.readingTimeMinutes || raw.readTime || raw.readingTime)) || 0,
+      publishedAt: raw && (raw.publishedAt || raw.createdAt || raw.updatedAt || null),
+      progressPercent: percent,
+      status,
+      updatedAt: progress && (progress.updatedAt || progress.lastReadAt || progress.completedAt || null),
+      staticPath: raw && (raw.staticPath || raw.staticUrl || ""),
+      href: buildReadingUrl({
+        type,
+        id,
+        slug,
+        staticPath: raw && (raw.staticPath || raw.staticUrl || ""),
+      }),
+      source: raw || {},
     };
   }
 
-  if (
-    summary &&
-    summary.currentReading &&
-    summary.currentReading.contentType === "ARTICLE"
-  ) {
-    return summary.currentReading;
+  function buildProgressIndex(progressList) {
+    const index = new Map();
+
+    (Array.isArray(progressList) ?progressList : []).forEach((entry) => {
+      if (!entry) return;
+
+      const apiType = normalizeApiType(entry.contentType);
+      const content = entry.content || {};
+      const id = entry.contentId || content.id || "";
+      const slug = content.slug || "";
+
+      if (apiType && id) index.set(`${apiType}:id:${String(id)}`, entry);
+      if (apiType && slug) index.set(`${apiType}:slug:${String(slug)}`, entry);
+    });
+
+    return index;
   }
 
-  const inProgressArticles = Array.from(progressBySlug.values()).filter(
-    (item) => item.status === "IN_PROGRESS",
-  );
-
-  if (inProgressArticles.length > 0) {
-    return inProgressArticles.sort((a, b) => {
-      return new Date(b.lastReadAt).getTime() - new Date(a.lastReadAt).getTime();
-    })[0];
+  function findProgress(progressIndex, apiType, id, slug) {
+    return progressIndex.get(`${apiType}:id:${id}`) || progressIndex.get(`${apiType}:slug:${slug}`) || null;
   }
 
-  if (
-    summary &&
-    summary.lastReading &&
-    summary.lastReading.contentType === "ARTICLE"
-  ) {
-    return summary.lastReading;
-  }
+  function renderCategoryFilters() {
+    const container = document.querySelector("[data-library-category-filters]");
+    const shell = document.querySelector("[data-library-category-shell]");
+    if (!container) return;
 
-  return null;
-}
+    const categories = new Map();
 
-function decorateBibliotecaCards(progressBySlug) {
-  document.querySelectorAll('a[href*="./artigos/artigo-"]').forEach((link) => {
-    const slug = extractArticleSlug(link.getAttribute("href"));
-    if (!slug) return;
+    state.categories.forEach((category) => {
+      const slug = normalizeSlug(category.slug || category.name);
+      if (!slug) return;
+      categories.set(slug, category.name || slug);
+    });
 
-    const progress = progressBySlug.get(slug);
-    if (!progress) return;
+    state.items.forEach((item) => {
+      if (!item.categorySlug) return;
+      categories.set(item.categorySlug, item.categoryName || item.categorySlug);
+    });
 
-    const card = link.closest(
-      ".biblioteca-feature, .biblioteca-compact-card, .biblioteca-entry",
-    );
-
-    if (!card) return;
-
-    card.classList.add("is-reading-progress");
-    card.classList.remove("is-in-progress", "is-completed");
-
-    if (progress.status === "COMPLETED") {
-      card.classList.add("is-completed");
-    } else if (progress.status === "IN_PROGRESS") {
-      card.classList.add("is-in-progress");
+    if (shell) {
+      shell.hidden = categories.size === 0;
     }
 
-    const badge = ensureProgressBadge(card);
-    badge.textContent = progress.status === "COMPLETED"
-      ? "leitura conclu\u00edda"
-      : "leitura em andamento";
-  });
-}
+    if (!categories.size) {
+      state.filters.category = "all";
+      container.innerHTML = "";
+      return;
+    }
 
-function ensureProgressBadge(card) {
-  let badge = card.querySelector("[data-reading-badge]");
+    container.innerHTML = [
+      '<button class="is-active" type="button" data-filter-category="all">todas</button>',
+    ]
+      .concat(
+        Array.from(categories.entries()).map(([slug, name]) => {
+          return `<button type="button" data-filter-category="${escapeHtml(slug)}">${escapeHtml(name)}</button>`;
+        }),
+      )
+      .join("");
 
-  if (badge) return badge;
+    if (state.filters.category !== "all" && !categories.has(state.filters.category)) {
+      state.filters.category = "all";
+    }
 
-  badge = document.createElement("span");
-  badge.className = "biblioteca-reading-badge";
-  badge.setAttribute("data-reading-badge", "true");
-
-  const meta = card.querySelector(".biblioteca-meta, .biblioteca-entry-meta");
-  if (meta) {
-    meta.appendChild(badge);
-    return badge;
+    syncButtons("[data-filter-category]", state.filters.category);
   }
 
-  card.insertBefore(badge, card.firstChild);
-  return badge;
-}
+  function renderLibrary() {
+    renderStats();
+    renderFeatureCards();
+    renderGrid();
+    renderFilterState();
+    syncProgressBars();
+  }
 
-function decorateBibliotecaEditionLabels() {
-  document
-    .querySelectorAll('a[href*="./artigos/artigo-"]')
-    .forEach((link) => {
-      const slug = extractArticleSlug(link.getAttribute("href"));
-      const label = getEditionLabel(slug);
+  function renderStats() {
+    setText("[data-library-total]", state.items.length);
+    setText("[data-library-in-progress]", state.items.filter((item) => item.status === "in-progress").length);
+    setText("[data-library-completed]", state.items.filter((item) => item.status === "completed").length);
+  }
 
-      if (!label) return;
+  function renderFeatureCards() {
+    const inProgress = state.items
+      .filter((item) => item.status === "in-progress")
+      .sort(sortByRecentActivity)[0];
+    const recommended = state.items.find((item) => item.status === "not-started") || state.items[0] || null;
+    const latestEdition = state.items
+      .filter((item) => item.type === "short-edition")
+      .sort(sortByPublishedDate)[0];
+    const latest = latestEdition || state.items.slice().sort(sortByPublishedDate)[0] || null;
 
-      if (link.closest(".biblioteca-topic-links, .biblioteca-popular")) {
-        upsertInlineEditionLabel(link, label);
-        return;
-      }
+    renderFeature("[data-library-continue]", inProgress, {
+      eyebrow: "continuar lendo",
+      title: "sua pr\u00f3xima leitura est\u00e1 esperando",
+      summary: "nenhuma leitura em andamento agora. abra o acervo e escolha com calma.",
+      cta: "abrir biblioteca",
+      href: "./biblioteca.html",
+    });
 
-      const card = link.closest(
-        ".biblioteca-feature, .biblioteca-compact-card, .biblioteca-entry",
+    renderFeature("[data-library-recommended]", recommended, {
+      eyebrow: "recomendado para hoje",
+      title: "escolha uma leitura para manter o ritmo",
+      summary: "quando o acervo carregar, uma sugest\u00e3o aparece aqui.",
+      cta: "ver sugest\u00e3o",
+      href: "./biblioteca.html",
+    });
+
+    renderFeature("[data-library-latest]", latest, {
+      eyebrow: "edi\u00e7\u00e3o mais recente",
+      title: "sem novidade carregada",
+      summary: "artigos e edi\u00e7\u00f5es curtas aparecem juntos no acervo.",
+      cta: "abrir leitura",
+      href: "./biblioteca.html",
+    });
+  }
+
+  function renderFeature(selector, item, fallback) {
+    const node = document.querySelector(selector);
+    if (!node) return;
+
+    if (!item) {
+      node.innerHTML = `
+        <div class="library-feature-top">
+          <span class="library-card-eyebrow">${escapeHtml(fallback.eyebrow)}</span>
+        </div>
+        <div class="library-feature-body">
+          <h3>${escapeHtml(fallback.title)}</h3>
+          <p>${escapeHtml(fallback.summary)}</p>
+        </div>
+        <div class="library-feature-bottom">
+          <a href="${escapeHtml(fallback.href)}">${escapeHtml(fallback.cta)}</a>
+        </div>
+      `;
+      return;
+    }
+
+    node.innerHTML = `
+      <div class="library-feature-top">
+        <span class="library-card-eyebrow">${escapeHtml(fallback.eyebrow)}</span>
+        <div class="library-card-meta">
+          <span>${escapeHtml(TYPE_LABEL[item.type])}</span>
+          <span>${escapeHtml(item.categoryName || "acervo")}</span>
+          ${item.readTime ?`<span>${item.readTime} min</span>` : ""}
+        </div>
+      </div>
+      <div class="library-feature-body">
+        <h3>${escapeHtml(item.title)}</h3>
+        <p>${escapeHtml(item.summary || fallback.summary)}</p>
+      </div>
+      <div class="library-feature-bottom">
+        ${item.progressPercent > 0 ?renderProgress(item.progressPercent) : ""}
+        <a href="${escapeHtml(item.href)}">${escapeHtml(item.status === "in-progress" ?"continuar leitura" : fallback.cta)}</a>
+      </div>
+    `;
+  }
+
+  function renderGrid() {
+    const grid = document.querySelector("[data-library-grid]");
+    const filtered = getFilteredItems();
+
+    if (!grid) return;
+
+    setText(
+      "[data-library-result-count]",
+      `${filtered.length} ${filtered.length === 1 ?"leitura encontrada" : "leituras encontradas"}`,
+    );
+
+    if (!state.items.length) {
+      grid.innerHTML = "";
+      setStateMessage(
+        "o acervo ainda não retornou leituras",
+        "is-empty",
+        "tente novamente em instantes ou verifique a API local.",
+        "retry",
+      );
+      return;
+    }
+
+    if (!filtered.length) {
+      grid.innerHTML = "";
+      setText("[data-library-result-count]", "nenhuma leitura encontrada");
+      setStateMessage(
+        "nenhuma leitura encontrada",
+        "is-empty",
+        "tente remover algum filtro ou buscar por outro tema do acervo.",
+        "clear",
+      );
+      return;
+    }
+
+    setStateMessage("", "");
+    grid.innerHTML = filtered.map(renderCard).join("");
+  }
+
+  function renderCard(item) {
+    return `
+      <article class="library-card library-card--${escapeHtml(item.status)}">
+        <a class="library-card-link" href="${escapeHtml(item.href)}">
+          <div class="library-card-top">
+            <span class="library-card-type">${escapeHtml(TYPE_LABEL[item.type])}</span>
+            <span class="library-card-status">${escapeHtml(STATUS_LABEL[item.status])}</span>
+          </div>
+          <div class="library-card-copy">
+            <span class="library-card-category">${escapeHtml(item.categoryName || "acervo")}</span>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.summary || "uma leitura para aprofundar repert\u00f3rio e voltar ao que importa com clareza.")}</p>
+          </div>
+          <div class="library-card-bottom">
+            <span>${item.readTime ?`${item.readTime} min` : "tempo editorial"}</span>
+            <span>${item.publishedAt ?formatDate(item.publishedAt) : "acervo"}</span>
+          </div>
+          ${renderProgress(item.progressPercent)}
+        </a>
+      </article>
+    `;
+  }
+
+  function renderProgress(percent) {
+    const normalized = normalizePercent(percent);
+
+    return `
+      <div class="library-progress" aria-label="Progresso ${normalized}%">
+        <span><i data-progress-fill="${normalized}"></i></span>
+        <strong>${normalized}%</strong>
+      </div>
+    `;
+  }
+
+  function renderEmptyFeatures() {
+    ["[data-library-continue]", "[data-library-recommended]", "[data-library-latest]"].forEach((selector) => {
+      renderFeature(selector, null, {
+        eyebrow: "biblioteca",
+        title: "acervo indispon\u00edvel",
+        summary: "verifique a API local para sincronizar leituras reais.",
+        cta: "tentar novamente",
+        href: "./biblioteca.html",
+      });
+    });
+  }
+
+  function getFilteredItems() {
+    return state.items.filter((item) => {
+      const haystack = normalizeSearch(
+        [item.title, item.summary, item.categoryName, TYPE_LABEL[item.type]].filter(Boolean).join(" "),
       );
 
-      if (!card) return;
+      if (state.filters.query && !haystack.includes(state.filters.query)) return false;
+      if (state.filters.type !== "all" && item.type !== state.filters.type) return false;
+      if (state.filters.status !== "all" && item.status !== state.filters.status) return false;
+      if (state.filters.category !== "all" && item.categorySlug !== state.filters.category) return false;
 
-      const copy = card.querySelector(
-        ".biblioteca-feature-copy, .biblioteca-entry-copy",
-      ) || card;
-      const title = copy.querySelector("h3");
-
-      if (!title) return;
-
-      let editionNode = copy.querySelector("[data-edition-label]");
-
-      if (!editionNode) {
-        editionNode = document.createElement("span");
-        editionNode.className = "biblioteca-edition-index";
-        editionNode.setAttribute("data-edition-label", "true");
-        copy.insertBefore(editionNode, title);
-      }
-
-      editionNode.textContent = label;
+      return true;
     });
-}
-
-function upsertInlineEditionLabel(link, label) {
-  let editionNode = link.querySelector("[data-edition-inline]");
-
-  if (!editionNode) {
-    editionNode = document.createElement("span");
-    editionNode.className = "biblioteca-edition-inline";
-    editionNode.setAttribute("data-edition-inline", "true");
-    link.insertBefore(editionNode, link.firstChild);
   }
 
-  editionNode.textContent = `${label} ·`;
-}
+  function resolveCategory(raw) {
+    const category = raw && raw.category;
+    const explicitName =
+      (category && (category.name || category.title)) ||
+      (raw && (raw.categoryName || raw.categoryTitle || raw.theme)) ||
+      "";
+    const name = explicitName || "acervo";
 
-function extractArticleSlug(href) {
-  if (!href) return "";
+    return {
+      name,
+      slug: explicitName ? normalizeSlug((category && category.slug) || raw.categorySlug || explicitName) : "",
+    };
+  }
 
-  const match = href.match(/(artigo-[^.?#]+)\.html/i);
-  return match ? match[1] : "";
-}
+  function resolveStatus(progress, percent) {
+    if ((progress && progress.status === "COMPLETED") || percent >= 100) return "completed";
+    if (percent > 0) return "in-progress";
+    return "not-started";
+  }
 
-function getEditionLabel(slug) {
-  const index = EDITION_INDEX_BY_SLUG.get(slug);
+  function buildReadingUrl(item) {
+    if (window.PapoReadingRoutes && window.PapoReadingRoutes.buildReadingUrl) {
+      return window.PapoReadingRoutes.buildReadingUrl(item);
+    }
 
-  if (!index) {
+    const type = normalizeItemType(item && item.type);
+    const params = new URLSearchParams({ type });
+
+    if (item && item.slug) params.set("slug", item.slug);
+    else if (item && item.id) params.set("id", item.id);
+
+    return `./leitura.html?${params.toString()}`;
+  }
+
+  function resetFilters() {
+    state.filters.query = "";
+    state.filters.type = "all";
+    state.filters.status = "all";
+    state.filters.category = "all";
+
+    const search = document.querySelector("[data-library-search]");
+    if (search) search.value = "";
+
+    syncButtons("[data-filter-type]", "all");
+    syncButtons("[data-filter-status]", "all");
+    syncButtons("[data-filter-category]", "all");
+  }
+
+  function renderFilterState() {
+    document.querySelectorAll("[data-library-clear]").forEach((button) => {
+      button.hidden = !hasActiveFilters();
+    });
+  }
+
+  function hasActiveFilters() {
+    return Boolean(
+      state.filters.query ||
+        state.filters.type !== "all" ||
+        state.filters.status !== "all" ||
+        state.filters.category !== "all",
+    );
+  }
+
+  function syncButtons(selector, activeValue) {
+    document.querySelectorAll(selector).forEach((button) => {
+      const value =
+        button.getAttribute("data-filter-type") ||
+        button.getAttribute("data-filter-status") ||
+        button.getAttribute("data-filter-category");
+
+      button.classList.toggle("is-active", value === activeValue);
+    });
+  }
+
+  function setStateMessage(message, className, detail, action) {
+    const node = document.querySelector("[data-library-state]");
+    if (!node) return;
+
+    node.className = "library-state";
+    if (message && !className) node.classList.add("app-loading-state");
+    if (className === "is-error") node.classList.add("app-error-state");
+    if (className === "is-empty") node.classList.add("app-empty-state");
+    if (className) node.classList.add(className);
+    node.hidden = !message;
+
+    if (!message) {
+      node.textContent = "";
+      return;
+    }
+
+    if (detail || action) {
+      const actionHtml = action === "clear"
+        ?'<button type="button" data-library-clear>limpar filtros</button>'
+        : action === "retry"
+          ?'<button type="button" data-library-retry>tentar novamente</button>'
+          : "";
+
+      node.innerHTML = `
+        <strong>${escapeHtml(message)}</strong>
+        ${detail ?`<span>${escapeHtml(detail)}</span>` : ""}
+        ${actionHtml}
+      `;
+      return;
+    }
+
+    node.textContent = message;
+  }
+
+  function hasAuthError(results) {
+    return results.some((result) => {
+      const error = result && result.status === "rejected" ?result.reason : null;
+      return error && (error.status === 401 || error.status === 403);
+    });
+  }
+
+  function unwrap(result, fallback) {
+    return result && result.status === "fulfilled" ?result.value : fallback;
+  }
+
+  function asArray(value) {
+    if (Array.isArray(value)) return value;
+    if (value && Array.isArray(value.items)) return value.items;
+    if (value && Array.isArray(value.data)) return value.data;
+    return [];
+  }
+
+  function normalizeApiType(type) {
+    const value = String(type || "").toUpperCase().replace(/-/g, "_").replace(/\s+/g, "_");
+    if (value === "ARTICLE") return "ARTICLE";
+    if (value === "SHORT_EDITION" || value === "SHORTEDITION" || value === "SHORT_EDITIONS" || value === "EDITION") {
+      return "SHORT_EDITION";
+    }
     return "";
   }
 
-  return `edi\u00e7\u00e3o ${String(index).padStart(2, "0")}`;
-}
-
-function setText(selector, value) {
-  document.querySelectorAll(selector).forEach((node) => {
-    node.textContent = value;
-  });
-}
-
-function setLink(selector, href, label) {
-  document.querySelectorAll(selector).forEach((node) => {
-    node.setAttribute("href", href);
-    if (label) {
-      node.textContent = label;
+  function normalizeItemType(type) {
+    if (window.PapoReadingRoutes && window.PapoReadingRoutes.normalizeReadingType) {
+      return window.PapoReadingRoutes.normalizeReadingType(type);
     }
-  });
-}
 
-function setProgressValue(bar, progress, labelNode, forcedLabel) {
-  const normalized = Math.max(0, Math.min(Number.parseInt(progress || 0, 10), 100));
-
-  if (bar) {
-    const fill = bar.querySelector("span");
-    if (fill) {
-      fill.style.width = `${normalized}%`;
+    const value = String(type || "").toLowerCase().replace(/_/g, "-").replace(/\s+/g, "-");
+    if (value === "article") return "article";
+    if (value === "short-edition" || value === "shortedition" || value === "short-editions" || value === "edition") {
+      return "short-edition";
     }
+    return value || "article";
   }
 
-  if (labelNode) {
-    labelNode.textContent = forcedLabel || `${normalized}%`;
-  }
-}
-
-function formatCategoryName(name) {
-  return (name || "leitura").toLowerCase();
-}
-
-function resolveReadingState(currentReading) {
-  if (currentReading.mode === "START_NEXT_READING") {
-    return currentReading.ctaLabel === "revisitar leitura" ? "COMPLETED" : "SUGGESTED";
+  function normalizePercent(value) {
+    const number = Number.parseInt(value || 0, 10);
+    return Math.max(0, Math.min(Number.isFinite(number) ?number : 0, 100));
   }
 
-  if (currentReading.status === "COMPLETED") {
-    return "COMPLETED";
+  function normalizeSearch(value) {
+    return String(value || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim();
   }
 
-  return "IN_PROGRESS";
-}
-
-function setCurrentStateLabel(value) {
-  const explicit = document.querySelector("[data-library-current-state]");
-  if (explicit) {
-    explicit.textContent = value;
-    return;
+  function normalizeSlug(value) {
+    return normalizeSearch(value).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   }
 
-  const fallback = document.querySelector(".biblioteca-feature .biblioteca-progress-head span");
-  if (fallback) {
-    fallback.textContent = value;
-  }
-}
-
-function syncCurrentFeatureState(isSuggestion, isCompleted) {
-  const shell = document.querySelector("[data-library-current-shell]");
-  if (!shell) return;
-
-  shell.classList.remove("is-suggested", "is-completed");
-
-  if (isSuggestion) {
-    shell.classList.add("is-suggested");
-    return;
+  function sortByRecentActivity(left, right) {
+    return getDateTime(right.updatedAt) - getDateTime(left.updatedAt);
   }
 
-  if (isCompleted) {
-    shell.classList.add("is-completed");
+  function sortByPublishedDate(left, right) {
+    const diff = getDateTime(right.publishedAt) - getDateTime(left.publishedAt);
+    return diff || left.order - right.order;
   }
-}
+
+  function getDateTime(value) {
+    const date = value ?new Date(value) : null;
+    return date && !Number.isNaN(date.getTime()) ?date.getTime() : 0;
+  }
+
+  function formatDate(value) {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "acervo";
+
+    return new Intl.DateTimeFormat("pt-BR", {
+      day: "2-digit",
+      month: "short",
+    }).format(date);
+  }
+
+  function setText(selector, value) {
+    document.querySelectorAll(selector).forEach((node) => {
+      node.textContent = String(value);
+    });
+  }
+
+  function syncProgressBars() {
+    document.querySelectorAll("[data-progress-fill]").forEach((node) => {
+      const width = normalizePercent(node.getAttribute("data-progress-fill"));
+      node.style.width = `${width}%`;
+    });
+  }
+
+  function redirectToLogin() {
+    window.location.replace("../auth/login.html");
+  }
+
+  function escapeHtml(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+})();

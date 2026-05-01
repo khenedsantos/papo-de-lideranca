@@ -1,14 +1,10 @@
-﻿/*
+/*
   Shared page transition styles.
   Apply this file to any HTML page in the site to get:
   1. subtle fade-in on page load
   2. smooth fade-out on internal navigation
-  3. progressive enhancement for modern cross-document View Transitions
+  3. smooth behavior without depending on browser-level navigation transitions
 */
-
-@view-transition {
-  navigation: auto;
-}
 
 body {
   animation: page-enter 340ms ease-in-out both;

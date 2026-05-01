@@ -29,10 +29,23 @@ enum ReadingProgressStatus {
   COMPLETED
 }
 
+enum BookLevel {
+  ESSENTIAL
+  DEEPENING
+  PROVOCATION
+}
+
+enum BookNoteStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 model User {
   id                    String            @id @default(cuid())
   name                  String
   email                 String            @unique
+  avatarUrl             String?
   passwordHash          String
   role                  UserRole          @default(MEMBER)
   isActive              Boolean           @default(true)
@@ -40,8 +53,11 @@ model User {
   resetPasswordToken    String?
   resetPasswordExpiresAt DateTime?
   lastLoginAt           DateTime?
+  weeklyReadingTarget   Int               @default(5)
   subscriptions         Subscription[]
   readingProgress       ReadingProgress[]
+  dailyReadingActivities DailyReadingActivity[]
+  bookNotes             BookNote[]
   createdAt             DateTime          @default(now())
   updatedAt             DateTime          @updatedAt
 }
@@ -132,4 +148,70 @@ model ReadingProgress {
   @@index([userId, lastReadAt])
   @@unique([userId, articleId])
   @@unique([userId, shortEditionId])
+}
+
+model DailyReadingActivity {
+  id             String   @id @default(cuid())
+  userId         String
+  activityDate   DateTime @db.Date
+  minutesRead    Int      @default(0)
+  completedCount Int      @default(0)
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([userId, activityDate])
+  @@unique([userId, activityDate])
+}
+
+model Book {
+  id                       String     @id @default(cuid())
+  slug                     String     @unique
+  title                    String
+  subtitle                 String?
+  author                   String
+  description              String
+  coverUrl                 String?
+  coverAlt                 String?
+  category                 String
+  level                    BookLevel
+  readTime                 String?
+  whyRead                  String
+  whatYouWillLearn         Json?
+  keyIdeas                 Json?
+  guidedQuestions          Json?
+  practicalUse             String?
+  relatedArticleSlugs      Json?
+  relatedShortEditionSlugs Json?
+  purchaseUrl              String?
+  purchaseLabel            String?
+  purchaseProvider         String?
+  isFeatured               Boolean    @default(false)
+  isActive                 Boolean    @default(true)
+  displayOrder             Int        @default(0)
+  notes                    BookNote[]
+  createdAt                DateTime   @default(now())
+  updatedAt                DateTime   @updatedAt
+
+  @@index([category])
+  @@index([level])
+  @@index([isActive, displayOrder])
+}
+
+model BookNote {
+  id            String         @id @default(cuid())
+  userId        String
+  bookId        String
+  promptKey     String
+  content       String
+  status        BookNoteStatus @default(PENDING)
+  isHighlighted Boolean        @default(false)
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  book          Book           @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([bookId, status, isHighlighted])
+  @@index([userId])
+  @@unique([userId, bookId, promptKey])
 }

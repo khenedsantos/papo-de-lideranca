@@ -11,9 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!input) return;
 
         const show = input.type === "password";
-        input.type = show ? "text" : "password";
-        button.textContent = show ? "ocultar" : "mostrar";
-        button.setAttribute("aria-label", show ? "Ocultar senha" : "Mostrar senha");
+        input.type = show ?"text" : "password";
+        button.textContent = show ?"ocultar" : "mostrar";
+        button.setAttribute("aria-label", show ?"Ocultar senha" : "Mostrar senha");
       });
     });
 

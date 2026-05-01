@@ -10,7 +10,7 @@ function setupAdaptiveLogo() {
   const scrollVariant = body.dataset.scrollLogo || "";
 
   function getBaseVariant() {
-    return body.classList.contains("theme-dark") ? "light" : "dark";
+    return body.classList.contains("theme-dark") ?"light" : "dark";
   }
 
   function getScrollVariant(baseVariant) {
@@ -22,7 +22,7 @@ function setupAdaptiveLogo() {
 
   function syncLogo() {
     const variant = getScrollVariant(getBaseVariant());
-    const nextSrc = variant === "light" ? lightSrc : darkSrc;
+    const nextSrc = variant === "light" ?lightSrc : darkSrc;
     if (nextSrc && logo.getAttribute("src") !== nextSrc) {
       logo.setAttribute("src", nextSrc);
     }

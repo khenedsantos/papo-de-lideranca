@@ -13,15 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const tokenStatus = document.querySelector("[data-token-status]");
   const params = new URLSearchParams(window.location.search);
   const token = params.get("token") || "";
+  let isComplete = false;
 
   const setLoading = (loading) => {
     if (!submit) return;
 
     submit.dataset.originalLabel = submit.dataset.originalLabel || submit.textContent;
-    submit.disabled = loading;
+    submit.disabled = loading || isComplete;
     submit.classList.toggle("is-loading", loading);
     submit.textContent = loading
-      ? "redefinindo..."
+      ?"redefinindo..."
       : (submit.dataset.originalLabel || "redefinir senha");
   };
 
@@ -64,9 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!input) return;
 
       const show = input.type === "password";
-      input.type = show ? "text" : "password";
-      button.textContent = show ? "ocultar" : "mostrar";
-      button.setAttribute("aria-label", show ? "Ocultar senha" : "Mostrar senha");
+      input.type = show ?"text" : "password";
+      button.textContent = show ?"ocultar" : "mostrar";
+      button.setAttribute("aria-label", show ?"Ocultar senha" : "Mostrar senha");
     });
   });
 
@@ -83,16 +84,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (tokenStatus) {
     tokenStatus.textContent = token
-      ? "token validado para esta sessão de redefinição."
-      : "nenhum token de redefinição foi encontrado neste link.";
+      ?"link recebido para esta redefinição."
+      : "nenhum link de redefinição foi encontrado nesta página.";
   }
 
-  if (!token) {
-    setLoading(false);
+    if (!token) {
+      setLoading(false);
     if (submit) {
       submit.disabled = true;
     }
-    showFeedback("Este link de redefinição está incompleto. Solicite um novo link para continuar.", "is-error");
+    showFeedback("Este link está incompleto. Solicite uma nova redefinição para continuar.", "is-error");
     return;
   }
 
@@ -108,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setFieldInvalid(confirmField, !passwordsMatch || !confirmValue);
 
     if (!auth) {
-      showFeedback("A camada de autenticação não foi carregada corretamente.", "is-error");
+      showFeedback("Não foi possível iniciar a redefinição agora. Recarregue a página e tente novamente.", "is-error");
       return;
     }
 
@@ -132,7 +133,9 @@ document.addEventListener("DOMContentLoaded", () => {
         confirmPassword: confirmValue,
       });
 
-      showFeedback(result.message || "Senha redefinida com sucesso.", "is-success");
+      showFeedback(result.message || "Senha atualizada com sucesso.", "is-success");
+      isComplete = true;
+      setLoading(false);
       showSuccessPanel();
 
       window.setTimeout(() => {
@@ -144,9 +147,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (message.toLowerCase().includes("expirado")) {
         showFeedback("Este link expirou. Solicite uma nova redefinição para continuar.", "is-error");
       } else if (message.toLowerCase().includes("inválido") || message.toLowerCase().includes("invalido")) {
-        showFeedback("O token de redefinição não é válido. Solicite um novo link para continuar.", "is-error");
+        showFeedback("Este link não é válido. Solicite uma nova redefinição para continuar.", "is-error");
       } else if (error instanceof TypeError) {
-        showFeedback("Não foi possível falar com a API local agora. Verifique se o backend está ativo.", "is-error");
+        showFeedback("O serviço de acesso não respondeu agora. Verifique se o backend local está ativo e tente novamente.", "is-error");
       } else {
         showFeedback("Não foi possível redefinir sua senha agora. Tente novamente em instantes.", "is-error");
       }

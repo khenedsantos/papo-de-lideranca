@@ -45,34 +45,34 @@ document.addEventListener("DOMContentLoaded", () => {
     submit.dataset.originalLabel = submit.dataset.originalLabel || submit.textContent;
     submit.disabled = loading;
     submit.classList.toggle("is-loading", loading);
-    submit.setAttribute("aria-busy", loading ? "true" : "false");
+    submit.setAttribute("aria-busy", loading ?"true" : "false");
     submit.textContent = loading
-      ? "entrando..."
+      ?"entrando..."
       : (submit.dataset.originalLabel || "entrar");
   };
 
   const mapErrorMessage = (error) => {
     if (!error) {
-      return form.dataset.errorMessage || "Nao foi possivel entrar agora. Revise seus dados e tente novamente.";
+      return form.dataset.errorMessage || "Não foi possível entrar agora. Revise seus dados e tente novamente.";
     }
 
     if (error.status === 401) {
-      return "E-mail ou senha invalidos. Revise seus dados e tente novamente.";
+      return "E-mail ou senha inválidos. Revise seus dados e tente novamente.";
     }
 
     if (error.status === 403) {
-      return "Seu acesso ainda nao foi criado. Conclua a criacao de senha para entrar.";
+      return "Seu acesso ainda não foi criado. Conclua a criação de senha para entrar.";
     }
 
     if (error.status >= 500) {
-      return "Nao foi possivel validar seu acesso agora. Tente novamente em instantes.";
+      return "Não foi possível validar seu acesso agora. Tente novamente em instantes.";
     }
 
     if (error instanceof TypeError) {
-      return "Nao foi possivel falar com a API local. Verifique se o backend esta ativo em 127.0.0.1:3001.";
+      return "Não foi possível falar com a API local. Verifique se o backend está ativo em 127.0.0.1:3001.";
     }
 
-    return error.message || form.dataset.errorMessage || "Nao foi possivel entrar agora. Revise seus dados e tente novamente.";
+    return error.message || form.dataset.errorMessage || "Não foi possível entrar agora. Revise seus dados e tente novamente.";
   };
 
   if (auth && auth.hasToken()) {
@@ -86,9 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!input) return;
 
       const show = input.type === "password";
-      input.type = show ? "text" : "password";
-      button.textContent = show ? "ocultar" : "mostrar";
-      button.setAttribute("aria-label", show ? "Ocultar senha" : "Mostrar senha");
+      input.type = show ?"text" : "password";
+      button.textContent = show ?"ocultar" : "mostrar";
+      button.setAttribute("aria-label", show ?"Ocultar senha" : "Mostrar senha");
     });
   });
 
@@ -115,14 +115,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!emailField || !emailLooksValid || !passwordValue) {
       showFeedback(
-        form.dataset.errorMessage || "Nao foi possivel entrar agora. Revise seus dados e tente novamente.",
+        form.dataset.errorMessage || "Não foi possível entrar agora. Revise seus dados e tente novamente.",
         "is-error",
       );
       return;
     }
 
     if (!auth) {
-      showFeedback("A camada de autenticacao nao foi carregada corretamente.", "is-error");
+      showFeedback("A camada de autenticação não foi carregada corretamente.", "is-error");
       return;
     }
 
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       showFeedback(
-        form.dataset.successMessage || "Acesso validado. Redirecionando para a sua area.",
+        form.dataset.successMessage || "Acesso validado. Redirecionando para a sua área.",
         "is-success",
       );
 

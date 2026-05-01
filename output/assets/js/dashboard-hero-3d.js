@@ -1,4 +1,4 @@
-﻿document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("dashboard-ready");
 
   const header = document.querySelector(".dashboard-header");

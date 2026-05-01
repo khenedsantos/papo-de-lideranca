@@ -1,0 +1,11 @@
+.about-page .main-nav a.is-current,
+.authority-page .main-nav a.is-current,
+.editions-page .main-nav a.is-current {
+  color: var(--text);
+}
+
+.about-page .main-nav a.is-current::after,
+.authority-page .main-nav a.is-current::after,
+.editions-page .main-nav a.is-current::after {
+  transform: scaleX(1);
+}

@@ -1,4 +1,4 @@
-﻿/*
+/*
   Shared page transition script.
   Usage:
   - include this file before </body>

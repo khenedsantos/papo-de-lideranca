@@ -31,4 +31,3 @@ export function validateEnv(config: EnvInput): EnvInput {
     ...validated,
   };
 }
-

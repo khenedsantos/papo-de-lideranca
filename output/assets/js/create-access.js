@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!form) return;
 
   const emailField = form.querySelector('input[name="email"]');
+  const nameField = form.querySelector('input[name="name"]');
   const passwordField = form.querySelector('input[name="password"]');
   const confirmField = form.querySelector('input[name="confirm-password"]');
   const feedback = form.querySelector("[data-auth-feedback]");
@@ -12,15 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const successPanel = document.querySelector("[data-create-access-success]");
   const params = new URLSearchParams(window.location.search);
   const prefilledEmail = (params.get("email") || "").trim().toLowerCase();
+  let isComplete = false;
 
   const setLoading = (loading) => {
     if (!submit) return;
 
     submit.dataset.originalLabel = submit.dataset.originalLabel || submit.textContent;
-    submit.disabled = loading;
+    submit.disabled = loading || isComplete;
     submit.classList.toggle("is-loading", loading);
     submit.textContent = loading
-      ? "criando acesso..."
+      ?"criando acesso..."
       : (submit.dataset.originalLabel || "criar acesso");
   };
 
@@ -63,13 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!input) return;
 
       const show = input.type === "password";
-      input.type = show ? "text" : "password";
-      button.textContent = show ? "ocultar" : "mostrar";
-      button.setAttribute("aria-label", show ? "Ocultar senha" : "Mostrar senha");
+      input.type = show ?"text" : "password";
+      button.textContent = show ?"ocultar" : "mostrar";
+      button.setAttribute("aria-label", show ?"Ocultar senha" : "Mostrar senha");
     });
   });
 
-  [emailField, passwordField, confirmField].forEach((field) => {
+  [nameField, emailField, passwordField, confirmField].forEach((field) => {
     field?.addEventListener("input", () => {
       setFieldInvalid(field, false);
       clearFeedback();
@@ -83,23 +85,35 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    const nameValue = (nameField?.value || "").trim().replace(/\s+/g, " ");
     const emailValue = (emailField?.value || "").trim().toLowerCase();
     const passwordValue = (passwordField?.value || "").trim();
     const confirmValue = (confirmField?.value || "").trim();
+    const nameIsValid = nameValue.length >= 2;
     const emailLooksValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
     const passwordIsValid = passwordValue.length >= 8;
     const passwordsMatch = passwordValue === confirmValue;
+
+    if (nameField) {
+      nameField.value = nameValue;
+    }
 
     if (emailField) {
       emailField.value = emailValue;
     }
 
+    setFieldInvalid(nameField, !nameIsValid);
     setFieldInvalid(emailField, !emailLooksValid);
     setFieldInvalid(passwordField, !passwordIsValid);
     setFieldInvalid(confirmField, !passwordsMatch || !confirmValue);
 
     if (!auth) {
-      showFeedback("A camada de autenticacao nao foi carregada corretamente.", "is-error");
+      showFeedback("Não foi possível iniciar a criação de acesso agora. Recarregue a página e tente novamente.", "is-error");
+      return;
+    }
+
+    if (!nameIsValid) {
+      showFeedback("Informe seu nome completo para personalizar sua área.", "is-error");
       return;
     }
 
@@ -114,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!passwordsMatch) {
-      showFeedback("As senhas nao conferem. Revise os campos e tente novamente.", "is-error");
+      showFeedback("As senhas não conferem. Revise os campos e tente novamente.", "is-error");
       return;
     }
 
@@ -123,12 +137,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const result = await auth.createAccess({
+        name: nameValue,
         email: emailValue,
         password: passwordValue,
         confirmPassword: confirmValue,
       });
 
       showFeedback(result.message || "Acesso criado com sucesso.", "is-success");
+      isComplete = true;
+      setLoading(false);
       showSuccessPanel();
 
       window.setTimeout(() => {
@@ -136,15 +153,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 1200);
     } catch (error) {
       if (error && error.status === 404) {
-        showFeedback("Nao encontramos um convite ativo para esse e-mail.", "is-error");
+        showFeedback("Não encontramos um convite ativo para esse e-mail.", "is-error");
       } else if (error && error.status === 409) {
-        showFeedback("Esse acesso ja foi concluido. Voce ja pode entrar ou recuperar sua senha.", "is-error");
+        showFeedback("Esse acesso já foi concluído. Você já pode entrar ou recuperar sua senha.", "is-error");
       } else if (error && error.status === 400) {
-        showFeedback("Nao foi possivel validar os dados informados. Revise os campos e tente novamente.", "is-error");
+        showFeedback("Revise os dados informados e tente novamente.", "is-error");
       } else if (error instanceof TypeError) {
-        showFeedback("Nao foi possivel falar com a API local agora. Verifique se o backend esta ativo.", "is-error");
+        showFeedback("O serviço de acesso não respondeu agora. Verifique se o backend local está ativo e tente novamente.", "is-error");
       } else {
-        showFeedback("Nao foi possivel concluir seu acesso agora. Tente novamente em instantes.", "is-error");
+        showFeedback("Não foi possível concluir seu acesso agora. Tente novamente em instantes.", "is-error");
       }
     } finally {
       setLoading(false);
