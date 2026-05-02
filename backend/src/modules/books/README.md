@@ -22,6 +22,13 @@ npm run seed
 Campos de relacionamento usam slugs de artigos e edições curtas já existentes.
 Se um slug não existir no front estático, a interface mantém a página estável e não quebra a leitura guiada.
 
+As capas usadas na experiência pública ficam em `output/assets/img/books/` e são apontadas pelo campo `coverUrl`.
+Use caminhos servidos pelo front, como `/assets/img/books/gestor-eficaz.svg`.
+Capas oficiais ou imagens de parceiros podem substituir esses assets no futuro, desde que haja licença/uso permitido.
+
+`purchaseUrl` continua sendo apenas uma saída externa para parceiro.
+Não há carrinho, estoque, pedido, frete, preço ou checkout no Papo de Liderança.
+
 ## Notas de leitura
 
 - Cada usuário pode manter uma nota por `promptKey` em cada livro.

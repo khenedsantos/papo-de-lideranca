@@ -119,7 +119,7 @@
   }
 
   function renderNavLink(href, label, active) {
-    return `<a${active ?' class="is-current"' : ""} href="${href}">${label}</a>`;
+    return `<a${active ? ' class="is-current" aria-current="page"' : ""} href="${href}">${label}</a>`;
   }
 
   function resolveActiveSection() {

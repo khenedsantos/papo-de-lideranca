@@ -94,7 +94,7 @@ body.account-page {
   color: #0f2131;
   font-size: clamp(2.15rem, 4vw, 3.1rem);
   line-height: 0.96;
-  letter-spacing: -0.06em;
+  letter-spacing: 0;
   text-transform: lowercase;
 }
 
@@ -282,7 +282,7 @@ body.account-page {
   color: var(--account-page-text);
   font-size: 0.98rem;
   line-height: 1.28;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   text-transform: none;
 }
 
@@ -428,7 +428,7 @@ body.account-page {
 .account-status-copy strong {
   color: var(--account-page-text);
   font-size: 0.96rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .account-status-copy p {
@@ -503,7 +503,7 @@ body.account-page {
   color: var(--account-page-text);
   font-size: 1.45rem;
   line-height: 1.04;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   text-transform: lowercase;
 }
 
@@ -593,5 +593,86 @@ body.account-page {
 
   .account-data-edit {
     min-width: 62px;
+  }
+}
+
+/* Alinhamento visual dos componentes internos de conta */
+.account-page {
+  --account-page-radius-panel: 24px;
+  --account-page-radius-card: 16px;
+  --account-page-radius-control: 10px;
+}
+
+.account-page-card {
+  border-radius: var(--account-page-radius-panel);
+  border-color: rgba(214, 224, 230, 0.78);
+  box-shadow: 0 16px 42px rgba(15, 42, 61, 0.045);
+}
+
+.account-status-card,
+.account-plan-panel {
+  border-radius: var(--account-page-radius-card);
+  border-color: rgba(214, 224, 230, 0.78);
+}
+
+.account-local-nav {
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.account-local-nav a,
+.account-data-edit,
+.account-inline-actions button,
+.account-status-badge {
+  border-radius: var(--account-page-radius-control);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.account-data-edit,
+.account-inline-actions button {
+  min-height: 34px;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.account-inline-actions button[type="submit"],
+.account-status-badge {
+  background: rgba(35, 122, 85, 0.09);
+  color: #237a55;
+}
+
+.account-local-nav a.is-current {
+  background: rgba(18, 45, 67, 0.055);
+  color: #122d43;
+}
+
+.account-data-edit:hover,
+.account-data-edit:focus-visible,
+.account-inline-actions button:hover,
+.account-inline-actions button:focus-visible,
+.account-local-nav a:hover,
+.account-local-nav a:focus-visible {
+  border-color: rgba(18, 45, 67, 0.18);
+  background: rgba(18, 45, 67, 0.045);
+  color: #122d43;
+}
+
+.account-data-edit:focus-visible,
+.account-inline-actions button:focus-visible,
+.account-local-nav a:focus-visible,
+.account-plan-support:focus-visible {
+  outline: 2px solid rgba(18, 45, 67, 0.32);
+  outline-offset: 3px;
+}
+
+.account-plan-price strong,
+.account-page-copy h1,
+.account-status-copy strong {
+  letter-spacing: 0;
+}
+
+@media (max-width: 640px) {
+  .account-page-card {
+    border-radius: 20px;
   }
 }

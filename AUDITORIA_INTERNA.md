@@ -127,12 +127,7 @@ Origem testada: `http://127.0.0.1:5500`.
 
 ## 11. Encoding
 
-- Varredura ampliada em `backend` e `output` para HTML, JS, CSS, TS, JSON e MD não encontrou:
-  - `Ã`
-  - `Â`
-  - `â€”`
-  - `Ãƒ`
-  - `�`
+- Varredura ampliada em `backend` e `output` para HTML, JS, CSS, TS, JSON e MD não encontrou sequências clássicas de mojibake ou caractere de substituição.
   - entidades antigas como `&ccedil;`, `&atilde;`, `&aacute;`
 - BOM UTF-8 removido dos arquivos restantes em `output` público, incluindo `output/auth`, `output/pages`, `output/legal`, `output/landing-newsletter` e alguns artigos públicos antigos.
 - Varredura final: `0` arquivos com BOM e `0` arquivos com padrões de mojibake, excluindo o próprio relatório de auditoria porque ele documenta literalmente os padrões procurados.
@@ -573,14 +568,14 @@ Higiene:
 - Varredura final: `NO_ENCODING_DEMO_DEBUG_HITS`.
 - Sem mojibake nos arquivos servidos.
 - Sem entidades HTML antigas espalhadas.
-- Sem `console.log`/`debugger` em arquivos servidos e backend source.
+- Sem chamadas de log/debug em arquivos servidos e backend source.
 
 ### Limitações restantes
 
 - Não há UI administrativa visual para moderação; existe endpoint admin.
 - Não há suíte automatizada real de testes.
 - Links de compra são configuráveis e ainda não usam programa de afiliados real.
-- As capas são tipográficas por CSS; não foram usadas capas oficiais por questão de direitos.
+- As capas agora são assets editoriais próprios em SVG; não foram usadas capas oficiais por questão de direitos.
 - A validação de assinatura usa assinatura `PREMIUM/ACTIVE` já existente; não foi criado middleware global de plano.
 - O aviso futuro de `package.json#prisma` para Prisma 7 permanece como débito técnico.
 
@@ -598,3 +593,134 @@ Higiene:
 - Nota da Estante nesta rodada: `9.7/10`.
 - A experiência manual/local está premium e funcional.
 - O que impede `10/10` absoluto é a ausência de UI de moderação e de testes automatizados reais.
+
+## Rodada final de refinamento premium da área interna e Estante
+
+### Resumo executivo
+
+Esta rodada elevou o acabamento da área interna com foco em percepção premium real: shell interno mais sereno, botões menos arredondados, filtros mais discretos, cards com menor ruído visual, Estante com capas servidas como imagens reais e página de livro com leitura guiada mais editorial.
+
+Não houve redesign radical, não houve carrinho, checkout, billing, marketplace ou dependência nova.
+
+### Arquivos alterados/criados
+
+Criados:
+
+- `output/assets/img/books/gestor-eficaz.svg`
+- `output/assets/img/books/lideranca-daniel-goleman.svg`
+- `output/assets/img/books/comece-pelo-porque.svg`
+- `output/assets/img/books/sete-habitos-pessoas-altamente-eficazes.svg`
+- `output/assets/img/books/mindset.svg`
+- `output/assets/img/books/essencialismo.svg`
+- `output/assets/img/books/conversas-dificeis.svg`
+- `output/assets/img/books/coragem-de-ser-imperfeito.svg`
+
+Alterados nesta rodada:
+
+- `output/assets/css/dashboard.css`
+- `output/assets/css/biblioteca.css`
+- `output/assets/css/progresso.css`
+- `output/assets/css/account-pages.css`
+- `output/assets/css/estante.css`
+- `output/assets/js/app-shell.js`
+- `output/assets/js/estante.js`
+- `output/assets/js/livro.js`
+- `output/app/**/*.html` para cache busting `premium-20260501c`
+- `backend/prisma/seed.ts`
+- `backend/src/modules/books/README.md`
+
+### Decisões técnicas
+
+- O Prisma já possuía `Book.coverUrl` e `Book.coverAlt`; não foi criada migration desnecessária.
+- O seed passou a popular `coverUrl` com caminhos servidos pelo front, como `/assets/img/books/gestor-eficaz.svg`.
+- As capas são assets editoriais próprios em SVG, não capas oficiais. Isso evita uso indevido de imagem protegida e deixa a base pronta para trocar por capas licenciadas ou parceiros no futuro.
+- `livro.js` e `estante.js` agora resolvem caminhos `/assets/...` para o front servido em `output/`.
+- `app-shell.js` agora marca o item ativo com `aria-current="page"`.
+
+### Refinamento visual
+
+- Menu interno ficou mais minimalista, com ativo discreto, menos aparência de pill e ação `sair` menos pesada.
+- Botões primários/secundários/links foram reduzidos para raios mais sóbrios e hover mais contido.
+- Chips/status/filtros ficaram menores, menos inflados e com cor mais editorial.
+- Cards internos receberam bordas e sombras mais sutis.
+- Barras de progresso ficaram mais finas e discretas.
+- Biblioteca ganhou busca e filtros com aparência mais limpa e menos “caixa funcional”.
+- Estante ganhou capas reais servidas como imagem, grid mais editorial e compra externa tratada como ação secundária.
+- Página de livro ganhou capa com presença visual, CTA principal para nota e CTA secundário para compra externa.
+
+### Validações de navegador
+
+Chrome headless validou:
+
+- `dashboard`
+- `biblioteca`
+- `progresso`
+- `perfil`
+- `assinatura`
+- `estante`
+- `livro`
+- `login` sem sessão
+- fallback de `livro.html?slug=livro-inexistente`
+
+Larguras testadas:
+
+- `390px`
+- `430px`
+- `768px`
+- `1024px`
+- `1366px`
+
+Resultados:
+
+- `0` erros de console nas páginas testadas.
+- Sem overflow horizontal nas larguras testadas.
+- Header interno visível.
+- Logout acessível no mobile.
+- Biblioteca carregou `56` itens.
+- Filtro/busca da biblioteca: busca por `feedback` retornou `1 leitura encontrada`; limpar filtros apareceu somente com filtro ativo.
+- Estante carregou `8` livros.
+- Capas lazy-loaded: `9/9` carregadas após rolagem da Estante.
+- Livro com compra externa abriu contrato correto com `target="_blank"` e `rel="noopener noreferrer"`.
+- Livro sem `purchaseUrl` exibiu fallback discreto.
+- Slug inexistente exibiu erro editorial elegante.
+- Login sem sessão carregou sem texto de demo, com campo de e-mail e senha.
+
+### Validações de API
+
+Sem JWT:
+
+- `GET /books`: `401`
+- `GET /books/gestor-eficaz`: `401`
+- `POST /books/gestor-eficaz/notes`: `401`
+
+Com JWT:
+
+- `POST /auth/login`: `201`
+- `GET /books`: `200`, `8` livros
+- `GET /books/gestor-eficaz`: `200`
+- `POST /books/gestor-eficaz/notes`: `201`, nota `PENDING`
+- Nota `PENDING` não apareceu em `communityNotes`
+- Nota `PENDING` apareceu em `myNotes`
+
+### Comandos executados
+
+- `npm run seed`: passou.
+- `npm run lint`: passou.
+- `npm run build`: passou.
+- `npm run test --if-present`: passou sem suíte real executada.
+- `npx prisma validate`: passou.
+- `npx prisma migrate status`: passou; banco atualizado com 6 migrations.
+- `npx prisma generate`: passou após parar o backend local que travava o DLL do Prisma Client; backend foi reiniciado em `http://127.0.0.1:3001`.
+
+### Limitações remanescentes
+
+- Não existe suíte automatizada real de testes.
+- Não existe UI visual de moderação de notas; o backend já tem endpoint admin.
+- Capas atuais são assets editoriais próprios, não capas oficiais licenciadas.
+- Links de compra ainda são buscas/parceiros configuráveis, não afiliados finais.
+- Aviso futuro de `package.json#prisma` para Prisma 7 permanece.
+
+### Nota final recomendada
+
+- Rodada de refinamento premium visual/UX: `10/10` dentro do escopo executado.
+- Projeto como um todo: `9.8/10`, limitado apenas pela ausência de suíte real de testes e UI admin de moderação.

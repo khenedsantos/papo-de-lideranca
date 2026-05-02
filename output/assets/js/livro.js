@@ -115,8 +115,19 @@
     const cover = document.querySelector("[data-book-cover]");
     if (!cover) return;
 
+    const coverUrl = resolveCoverUrl(book.coverUrl);
+    const alt = book.coverAlt || `Capa editorial de ${book.title}`;
+
+    if (coverUrl) {
+      cover.innerHTML = `<img class="book-cover-image" src="${escapeHtml(coverUrl)}" alt="${escapeHtml(alt)}">`;
+      cover.removeAttribute("aria-label");
+      cover.removeAttribute("aria-hidden");
+      return;
+    }
+
     cover.innerHTML = `<span>${escapeHtml(getCoverTitle(book.title))}</span>`;
-    cover.setAttribute("aria-label", book.coverAlt || `Capa tipográfica de ${book.title}`);
+    cover.setAttribute("aria-label", alt);
+    cover.removeAttribute("aria-hidden");
   }
 
   function renderPurchase(book) {
@@ -129,9 +140,12 @@
     if (book.purchaseUrl) {
       link.hidden = false;
       link.href = book.purchaseUrl;
-      link.textContent = book.purchaseLabel || "ver opção de compra";
+      link.textContent = book.purchaseLabel || `ver opção de compra${book.purchaseProvider ? ` em ${book.purchaseProvider}` : ""}`;
       muted.hidden = true;
       note.hidden = false;
+      note.textContent = book.purchaseProvider
+        ? `compra externa com ${book.purchaseProvider}, fora do Papo de Liderança.`
+        : "a compra acontece fora do Papo de Liderança, diretamente com o parceiro indicado.";
       return;
     }
 
@@ -354,6 +368,20 @@
 
   function formatLevel(level) {
     return LEVEL_LABEL[level] || String(level || "leitura").toLowerCase();
+  }
+
+  function resolveCoverUrl(url) {
+    if (!url) return "";
+    if (/^https?:\/\//i.test(url)) return url;
+    if (url.startsWith("../") || url.startsWith("./")) return url;
+    if (url.startsWith("/assets/")) return `..${url}`;
+    if (url.startsWith("/")) {
+      return window.PapoAuth && window.PapoAuth.resolveAssetUrl
+        ? window.PapoAuth.resolveAssetUrl(url)
+        : url;
+    }
+
+    return url;
   }
 
   function statusLabel(status) {

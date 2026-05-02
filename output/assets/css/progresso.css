@@ -61,7 +61,7 @@
   color: var(--progresso-text);
   font-size: clamp(2.35rem, 4vw, 3.35rem);
   line-height: 0.96;
-  letter-spacing: -0.06em;
+  letter-spacing: 0;
   text-transform: lowercase;
 }
 
@@ -98,7 +98,7 @@
   color: var(--progresso-green);
   font-size: clamp(2.6rem, 5vw, 4rem);
   line-height: 0.92;
-  letter-spacing: -0.07em;
+  letter-spacing: 0;
 }
 
 .progresso-stat-grid {
@@ -126,7 +126,7 @@
   color: var(--progresso-text);
   font-size: clamp(2rem, 3vw, 2.7rem);
   line-height: 1;
-  letter-spacing: -0.06em;
+  letter-spacing: 0;
 }
 
 .progresso-grid {
@@ -249,7 +249,7 @@
   color: var(--progresso-text);
   font-size: clamp(1.45rem, 2.4vw, 2rem);
   line-height: 1.04;
-  letter-spacing: -0.045em;
+  letter-spacing: 0;
   text-transform: lowercase;
 }
 
@@ -297,5 +297,196 @@
 
   .progresso-week-days {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Refinamento premium do progresso editorial */
+.progresso-page {
+  --progresso-radius-panel: 24px;
+  --progresso-radius-card: 16px;
+  --progresso-radius-control: 10px;
+  --progresso-line: rgba(214, 224, 230, 0.78);
+  --progresso-surface: rgba(255, 255, 255, 0.9);
+  --progresso-soft: rgba(248, 251, 252, 0.78);
+  --progresso-green: #237a55;
+  --progresso-navy: #122d43;
+}
+
+.progresso-panel {
+  border-radius: var(--progresso-radius-panel);
+  border-color: var(--progresso-line);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(35, 122, 85, 0.045), transparent 20%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.96) 100%);
+  box-shadow: 0 16px 42px rgba(15, 42, 61, 0.045);
+}
+
+.progresso-copy h1,
+.progresso-score strong,
+.progresso-stat strong,
+.progresso-feedback h2 {
+  letter-spacing: 0;
+}
+
+.progresso-copy h1 {
+  line-height: 1;
+}
+
+.progresso-copy p,
+.progresso-stat p,
+.progresso-detail p,
+.progresso-feedback p {
+  line-height: 1.64;
+}
+
+.progresso-kicker,
+.progresso-detail-head span,
+.progresso-stat span,
+.progresso-feedback span,
+.progresso-goal-form label span {
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.progresso-score,
+.progresso-stat,
+.progresso-detail,
+.progresso-feedback {
+  border-radius: var(--progresso-radius-card);
+  border-color: var(--progresso-line);
+  background: var(--progresso-surface);
+}
+
+.progresso-score {
+  padding: 20px;
+}
+
+.progresso-score strong {
+  color: var(--progresso-navy);
+  font-size: clamp(2.35rem, 4.4vw, 3.5rem);
+}
+
+.progresso-stat {
+  gap: 9px;
+  min-height: 132px;
+  padding: 18px;
+}
+
+.progresso-stat strong {
+  font-size: clamp(1.72rem, 2.5vw, 2.28rem);
+}
+
+.progresso-detail {
+  gap: 18px;
+  padding: 20px;
+}
+
+.progresso-detail-head strong {
+  font-size: 0.94rem;
+  font-weight: 700;
+}
+
+.progresso-week-days {
+  gap: 8px;
+}
+
+.progresso-week-days span {
+  min-height: 42px;
+  border: 1px solid rgba(218, 226, 232, 0.82);
+  border-radius: 11px;
+  background: rgba(248, 251, 252, 0.82);
+  color: rgba(44, 55, 64, 0.72);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.progresso-week-days span.is-active {
+  border-color: rgba(18, 45, 67, 0.16);
+  background: var(--progresso-navy);
+  color: #fff;
+}
+
+.progresso-goal-track {
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(216, 225, 231, 0.82);
+}
+
+.progresso-goal-track i {
+  background: linear-gradient(90deg, rgba(35, 122, 85, 0.9), rgba(45, 151, 101, 0.68));
+}
+
+.progresso-goal-form {
+  gap: 9px;
+}
+
+.progresso-goal-form input,
+.progresso-goal-form button {
+  min-height: 40px;
+  border-radius: var(--progresso-radius-control);
+  font-weight: 700;
+}
+
+.progresso-goal-form input {
+  border-color: rgba(214, 224, 230, 0.9);
+  outline: none;
+}
+
+.progresso-goal-form input:focus {
+  border-color: rgba(18, 45, 67, 0.24);
+  box-shadow: 0 0 0 3px rgba(18, 45, 67, 0.08);
+}
+
+.progresso-goal-form button {
+  padding-inline: 15px;
+  background: var(--progresso-navy);
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.progresso-goal-form button:hover,
+.progresso-goal-form button:focus-visible {
+  background: #17364f;
+  transform: translateY(-1px);
+}
+
+.progresso-goal-form button:focus-visible {
+  outline: 2px solid rgba(18, 45, 67, 0.32);
+  outline-offset: 3px;
+}
+
+.progresso-feedback {
+  padding: 22px;
+  background: var(--progresso-soft);
+}
+
+.progresso-feedback.is-positive {
+  border-color: rgba(35, 122, 85, 0.14);
+  background: rgba(35, 122, 85, 0.055);
+}
+
+.progresso-feedback.is-attention {
+  border-color: rgba(184, 125, 42, 0.18);
+  background: rgba(224, 182, 80, 0.08);
+}
+
+@media (max-width: 640px) {
+  .progresso-panel {
+    border-radius: 20px;
+    padding: 20px;
+  }
+
+  .progresso-week-days {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .progresso-week-days span {
+    min-height: 36px;
+    font-size: 0.68rem;
+  }
+
+  .progresso-goal-form input {
+    width: 100%;
   }
 }

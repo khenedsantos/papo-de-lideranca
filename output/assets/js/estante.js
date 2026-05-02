@@ -128,7 +128,10 @@
         <h3>${escapeHtml(featured.title)}</h3>
         <p class="estante-author">${escapeHtml(featured.author)}</p>
         <p>${escapeHtml(featured.whyRead || featured.description)}</p>
-        <a class="estante-card-link" href="./livro.html?slug=${encodeURIComponent(featured.slug)}">abrir leitura guiada</a>
+        <div class="estante-card-actions">
+          <a class="estante-card-link" href="./livro.html?slug=${encodeURIComponent(featured.slug)}">abrir leitura guiada</a>
+          ${featured.hasPurchaseUrl ? '<span class="estante-partner-note">compra externa disponível no detalhe</span>' : ""}
+        </div>
       </div>
     `;
   }
@@ -146,19 +149,27 @@
           <p class="estante-author">${escapeHtml(book.author)}</p>
           <p>${escapeHtml(book.description)}</p>
           <p><strong>por que está na estante:</strong> ${escapeHtml(book.whyRead)}</p>
-          <a class="estante-card-link" href="./livro.html?slug=${encodeURIComponent(book.slug)}">ver leitura guiada</a>
+          <div class="estante-card-actions">
+            <a class="estante-card-link" href="./livro.html?slug=${encodeURIComponent(book.slug)}">ver leitura guiada</a>
+          </div>
         </div>
       </article>
     `;
   }
 
   function renderCover(book) {
-    if (book.coverUrl) {
-      return `<img class="estante-book-cover" src="${escapeHtml(resolveAssetUrl(book.coverUrl))}" alt="${escapeHtml(book.coverAlt || book.title)}">`;
+    const coverUrl = resolveCoverUrl(book.coverUrl);
+
+    if (coverUrl) {
+      return `
+        <figure class="estante-cover-frame">
+          <img class="estante-book-cover" src="${escapeHtml(coverUrl)}" alt="${escapeHtml(book.coverAlt || `Capa editorial de ${book.title}`)}" loading="lazy">
+        </figure>
+      `;
     }
 
     return `
-      <div class="estante-book-cover" aria-label="${escapeHtml(book.coverAlt || `Capa tipográfica de ${book.title}`)}">
+      <div class="estante-cover-frame estante-cover-frame--fallback" aria-label="${escapeHtml(book.coverAlt || `Capa editorial de ${book.title}`)}">
         <span>${escapeHtml(getCoverTitle(book.title))}</span>
       </div>
     `;
@@ -252,9 +263,15 @@
     return LEVEL_LABEL[level] || String(level || "leitura").toLowerCase();
   }
 
-  function resolveAssetUrl(url) {
-    if (window.PapoAuth && window.PapoAuth.resolveAssetUrl) {
-      return window.PapoAuth.resolveAssetUrl(url);
+  function resolveCoverUrl(url) {
+    if (!url) return "";
+    if (/^https?:\/\//i.test(url)) return url;
+    if (url.startsWith("../") || url.startsWith("./")) return url;
+    if (url.startsWith("/assets/")) return `..${url}`;
+    if (url.startsWith("/")) {
+      return window.PapoAuth && window.PapoAuth.resolveAssetUrl
+        ? window.PapoAuth.resolveAssetUrl(url)
+        : url;
     }
 
     return url;

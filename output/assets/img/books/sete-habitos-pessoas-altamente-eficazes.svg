@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1080" viewBox="0 0 720 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Capa editorial de Os 7 hábitos das pessoas altamente eficazes</title>
+  <desc id="desc">Capa local criada para a Estante do Papo de Liderança.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b4639"/>
+      <stop offset="1" stop-color="#0b171d"/>
+    </linearGradient>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.055"/></feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="720" height="1080" rx="20" fill="url(#paper)"/>
+  <rect width="720" height="1080" rx="20" filter="url(#grain)" opacity="0.7"/>
+  <rect x="42" y="42" width="636" height="996" rx="8" fill="none" stroke="#f3f1e8" stroke-opacity="0.18" stroke-width="2"/>
+  <path d="M80 164 H640" stroke="#d1b076" stroke-width="3" stroke-linecap="round" opacity="0.92"/>
+  <path d="M80 184 H460" stroke="#f3f1e8" stroke-width="1.5" stroke-linecap="round" opacity="0.28"/>
+  <circle cx="590" cy="250" r="86" fill="none" stroke="#d1b076" stroke-width="2" opacity="0.42"/>
+  <circle cx="590" cy="250" r="44" fill="#d1b076" opacity="0.1"/>
+  <path d="M56 810 C180 766 244 856 354 814 C462 774 520 708 664 750" fill="none" stroke="#d1b076" stroke-width="2" opacity="0.44"/>
+  <path d="M56 856 C176 814 254 892 364 852 C486 806 536 772 664 810" fill="none" stroke="#f3f1e8" stroke-width="1.5" opacity="0.22"/>
+  <text x="52" y="108" class="kicker">PAPO DE LIDERANÇA</text>
+  <text x="52" y="258" class="title">Os 7 hábitos das</text>
+  <text x="52" y="302" class="title">pessoas altamente</text>
+  <text x="52" y="346" class="title">eficazes</text>
+  <text x="52" y="418" class="author">Stephen Covey</text>
+  <text x="52" y="928" class="footer">estante editorial</text>
+  <text x="52" y="964" class="footer muted">leitura guiada para assinantes</text>
+  <style>
+    text { font-family: Georgia, 'Times New Roman', serif; }
+    .kicker { fill: #f3f1e8; opacity: .7; font: 700 22px Arial, sans-serif; letter-spacing: 6px; }
+    .title { fill: #f3f1e8; font-weight: 700; font-size: 58px; letter-spacing: 0; }
+    .author { fill: #d1b076; font: 700 25px Arial, sans-serif; letter-spacing: 1.8px; text-transform: uppercase; }
+    .footer { fill: #f3f1e8; opacity: .78; font: 700 24px Arial, sans-serif; letter-spacing: 4px; text-transform: uppercase; }
+    .muted { opacity: .42; font-size: 18px; letter-spacing: 3px; }
+  </style>
+</svg>
