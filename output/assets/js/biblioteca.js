@@ -110,8 +110,14 @@
 
   function bindLibraryEvents() {
     const search = document.querySelector("[data-library-search]");
+    const controls = document.querySelector(".library-controls");
+
+    if (controls) {
+      controls.setAttribute("aria-label", "Busca da biblioteca");
+    }
 
     if (search) {
+      setupSearchControl(search);
       search.addEventListener("input", () => {
         state.filters.query = normalizeSearch(search.value);
         renderLibrary();
@@ -123,6 +129,7 @@
       const statusButton = event.target.closest("[data-filter-status]");
       const categoryButton = event.target.closest("[data-filter-category]");
       const clearButton = event.target.closest("[data-library-clear]");
+      const searchClearButton = event.target.closest("[data-library-search-clear]");
       const retryButton = event.target.closest("[data-library-retry]");
 
       if (typeButton) {
@@ -143,7 +150,7 @@
         renderLibrary();
       }
 
-      if (clearButton) {
+      if (clearButton || searchClearButton) {
         resetFilters();
         renderLibrary();
       }
@@ -152,6 +159,26 @@
         loadLibrary(state.auth);
       }
     });
+  }
+
+  function setupSearchControl(search) {
+    search.setAttribute("placeholder", "buscar por t\u00edtulo, tema ou ideia");
+    search.setAttribute("aria-label", "buscar por t\u00edtulo, tema ou ideia");
+
+    const commandBar = search.closest(".library-command-bar");
+    const label = search.closest(".library-search");
+
+    if (!commandBar || !label || commandBar.querySelector("[data-library-search-clear]")) return;
+
+    const clearButton = document.createElement("button");
+    clearButton.type = "button";
+    clearButton.className = "library-search-clear";
+    clearButton.setAttribute("data-library-search-clear", "");
+    clearButton.setAttribute("aria-label", "limpar busca");
+    clearButton.hidden = true;
+    clearButton.textContent = "limpar";
+
+    label.insertAdjacentElement("afterend", clearButton);
   }
 
   function normalizeItems(articles, editions, progressIndex) {
@@ -372,7 +399,9 @@
 
     setText(
       "[data-library-result-count]",
-      `${filtered.length} ${filtered.length === 1 ?"leitura encontrada" : "leituras encontradas"}`,
+      state.filters.query
+        ?`${filtered.length} ${filtered.length === 1 ?"resultado encontrado" : "resultados encontrados"}`
+        : `${state.items.length} ${state.items.length === 1 ?"leitura" : "leituras"}`,
     );
 
     if (!state.items.length) {
@@ -388,12 +417,11 @@
 
     if (!filtered.length) {
       grid.innerHTML = "";
-      setText("[data-library-result-count]", "nenhuma leitura encontrada");
+      setText("[data-library-result-count]", "nenhum resultado encontrado");
       setStateMessage(
-        "nenhuma leitura encontrada",
+        "nenhum resultado encontrado",
         "is-empty",
-        "tente remover algum filtro ou buscar por outro tema do acervo.",
-        "clear",
+        "tente buscar por outro tema, autor ou desafio.",
       );
       return;
     }
@@ -449,12 +477,29 @@
   }
 
   function getFilteredItems() {
+    const query = state.filters.query;
+
     return state.items.filter((item) => {
       const haystack = normalizeSearch(
-        [item.title, item.summary, item.categoryName, TYPE_LABEL[item.type]].filter(Boolean).join(" "),
+        [
+          item.title,
+          item.summary,
+          item.categoryName,
+          item.categorySlug,
+          TYPE_LABEL[item.type],
+          item.type,
+          STATUS_LABEL[item.status],
+          item.status,
+          item.slug,
+          item.readTime ?`${item.readTime} min` : "",
+          item.readTime ?`${item.readTime} minutos` : "",
+          item.source && item.source.excerpt,
+          item.source && item.source.description,
+          item.source && item.source.ideaCentral,
+        ].filter(Boolean).join(" "),
       );
 
-      if (state.filters.query && !haystack.includes(state.filters.query)) return false;
+      if (query && !matchesSearch(haystack, query)) return false;
       if (state.filters.type !== "all" && item.type !== state.filters.type) return false;
       if (state.filters.status !== "all" && item.status !== state.filters.status) return false;
       if (state.filters.category !== "all" && item.categorySlug !== state.filters.category) return false;
@@ -515,6 +560,10 @@
     document.querySelectorAll("[data-library-clear]").forEach((button) => {
       button.hidden = !hasActiveFilters();
     });
+
+    document.querySelectorAll("[data-library-search-clear]").forEach((button) => {
+      button.hidden = !state.filters.query;
+    });
   }
 
   function hasActiveFilters() {
@@ -554,9 +603,7 @@
     }
 
     if (detail || action) {
-      const actionHtml = action === "clear"
-        ?'<button type="button" data-library-clear>limpar filtros</button>'
-        : action === "retry"
+      const actionHtml = action === "retry"
           ?'<button type="button" data-library-retry>tentar novamente</button>'
           : "";
 
@@ -621,7 +668,12 @@
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, " ")
       .trim();
+  }
+
+  function matchesSearch(haystack, query) {
+    return query.split(" ").filter(Boolean).every((word) => haystack.includes(word));
   }
 
   function normalizeSlug(value) {

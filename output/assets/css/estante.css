@@ -911,3 +911,128 @@ body.estante-page {
     max-width: 260px;
   }
 }
+
+/* Busca premium: mantém a curadoria limpa, sem chips ou painel de filtros. */
+.estante-controls {
+  margin: 32px 0 40px;
+}
+
+.estante-controls-shell {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.estante-filter-block,
+.estante-chip-row,
+.estante-clear {
+  display: none !important;
+}
+
+.estante-search {
+  width: 100%;
+  min-width: 0;
+}
+
+.estante-search input {
+  min-height: 50px;
+  padding: 0 18px 0 48px;
+  border-radius: 14px;
+  border-color: rgba(176, 193, 198, 0.58);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 10px 26px rgba(16, 36, 47, 0.035);
+  color: var(--estante-ink);
+  font-size: 0.95rem;
+  line-height: 1.2;
+  outline: none;
+}
+
+.estante-search input::placeholder {
+  color: rgba(70, 84, 92, 0.48);
+}
+
+.estante-search input:hover {
+  border-color: var(--estante-line-strong);
+}
+
+.estante-search input:focus,
+.estante-search input:focus-visible {
+  border-color: rgba(31, 109, 76, 0.34);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 0 0 3px rgba(31, 109, 76, 0.08), 0 12px 30px rgba(16, 36, 47, 0.045);
+  outline: none;
+}
+
+.estante-search::before {
+  left: 18px;
+  width: 13px;
+  height: 13px;
+  border-width: 1.5px;
+  border-color: rgba(70, 84, 92, 0.42);
+}
+
+.estante-search::after {
+  left: 30px;
+  top: calc(50% + 7px);
+  width: 7px;
+  height: 1.5px;
+  background: rgba(70, 84, 92, 0.42);
+}
+
+.estante-search-clear {
+  appearance: none;
+  justify-self: end;
+  min-height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(70, 84, 92, 0.62);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 680;
+  line-height: 1;
+  text-transform: lowercase;
+}
+
+.estante-search-clear:hover,
+.estante-search-clear:focus-visible {
+  color: var(--estante-green);
+  outline: none;
+}
+
+.estante-state--empty {
+  display: grid;
+  gap: 7px;
+}
+
+.estante-state--empty strong,
+.estante-state--empty span {
+  display: block;
+}
+
+.estante-state--empty span {
+  color: rgba(70, 84, 92, 0.62);
+  font-weight: 560;
+  line-height: 1.55;
+}
+
+@media (max-width: 720px) {
+  .estante-controls-shell {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 0;
+  }
+
+  .estante-search-clear {
+    justify-self: end;
+  }
+
+  .estante-search input {
+    min-height: 48px;
+  }
+}

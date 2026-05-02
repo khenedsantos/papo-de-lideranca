@@ -38,8 +38,14 @@
 
   function bindEvents() {
     const search = document.querySelector("[data-estante-search]");
+    const controls = document.querySelector(".estante-controls");
+
+    if (controls) {
+      controls.setAttribute("aria-label", "Busca da estante");
+    }
 
     if (search) {
+      setupSearchControl(search);
       search.addEventListener("input", () => {
         state.filters.q = search.value.trim();
         renderBooks();
@@ -50,6 +56,7 @@
       const categoryButton = event.target.closest("[data-category]");
       const levelButton = event.target.closest("[data-level]");
       const clearButton = event.target.closest("[data-estante-clear]");
+      const searchClearButton = event.target.closest("[data-estante-search-clear]");
 
       if (categoryButton) {
         state.filters.category = categoryButton.dataset.category || "all";
@@ -61,11 +68,31 @@
         renderBooks();
       }
 
-      if (clearButton) {
+      if (clearButton || searchClearButton) {
         resetFilters();
         renderBooks();
       }
     });
+  }
+
+  function setupSearchControl(search) {
+    search.setAttribute("placeholder", "buscar por livro, autor ou desafio");
+    search.setAttribute("aria-label", "buscar por livro, autor ou desafio");
+
+    const controlsShell = search.closest(".estante-controls-shell");
+    const label = search.closest(".estante-search");
+
+    if (!controlsShell || !label || controlsShell.querySelector("[data-estante-search-clear]")) return;
+
+    const clearButton = document.createElement("button");
+    clearButton.type = "button";
+    clearButton.className = "estante-search-clear";
+    clearButton.setAttribute("data-estante-search-clear", "");
+    clearButton.setAttribute("aria-label", "limpar busca");
+    clearButton.hidden = true;
+    clearButton.textContent = "limpar";
+
+    label.insertAdjacentElement("afterend", clearButton);
   }
 
   function renderCategoryFilters() {
@@ -91,14 +118,16 @@
     const books = getFilteredBooks();
 
     if (resultCount) {
-      resultCount.textContent = `${books.length} ${books.length === 1 ? "livro selecionado" : "livros selecionados"}`;
+      resultCount.textContent = state.filters.q
+        ? `${books.length} ${books.length === 1 ? "resultado encontrado" : "resultados encontrados"}`
+        : `${state.books.length} ${state.books.length === 1 ? "livro" : "livros"}`;
     }
 
     if (!grid) return;
 
     if (!books.length) {
       grid.innerHTML = "";
-      setState("não encontramos uma leitura para esse filtro. tente ampliar a busca ou voltar para a curadoria completa.", "empty");
+      setState("<strong>nenhum resultado encontrado</strong><span>tente buscar por outro tema, autor ou desafio.</span>", "empty");
       return;
     }
 
@@ -186,10 +215,18 @@
         book.subtitle,
         book.author,
         book.category,
+        formatLevel(book.level),
+        book.level,
+        book.slug,
+        book.readTime,
         book.description,
         book.whyRead,
+        flattenSearchValue(book.keyIdeas),
+        flattenSearchValue(book.guidedQuestions),
+        flattenSearchValue(book.whatYouWillLearn),
+        flattenSearchValue(book.practicalUse),
       ].filter(Boolean).join(" "));
-      const matchesQuery = !query || text.includes(query);
+      const matchesQuery = !query || matchesSearch(text, query);
 
       return matchesCategory && matchesLevel && matchesQuery;
     });
@@ -206,6 +243,10 @@
 
     document.querySelectorAll("[data-estante-clear]").forEach((button) => {
       button.hidden = !hasActiveFilters();
+    });
+
+    document.querySelectorAll("[data-estante-search-clear]").forEach((button) => {
+      button.hidden = !state.filters.q.trim();
     });
   }
 
@@ -286,7 +327,19 @@
     return String(value || "")
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase();
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function matchesSearch(haystack, query) {
+    return query.split(" ").filter(Boolean).every((word) => haystack.includes(word));
+  }
+
+  function flattenSearchValue(value) {
+    if (Array.isArray(value)) return value.map(flattenSearchValue).filter(Boolean).join(" ");
+    if (value && typeof value === "object") return Object.values(value).map(flattenSearchValue).filter(Boolean).join(" ");
+    return value == null ? "" : String(value);
   }
 
   function escapeHtml(value) {
