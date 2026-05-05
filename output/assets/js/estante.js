@@ -5,6 +5,59 @@
     PROVOCATION: "provocação",
   };
 
+  const DEFAULT_PURCHASE_LABEL = "comprar livro indicado";
+
+  const BOOK_ENRICHMENT = {
+    "gestor-eficaz": {
+      coverUrl: "https://books.google.com/books/content?id=fG_ADwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      coverAlt: "Capa do livro O gestor eficaz, de Peter Drucker",
+      curationNote: "Para líderes que precisam separar agenda cheia de contribuição real.",
+      impactLabel: "para decisões de prioridade",
+    },
+    "lideranca-daniel-goleman": {
+      coverUrl: "https://books.google.com/books/content?id=tZFsBgAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      coverAlt: "Capa do livro Liderança, de Daniel Goleman",
+      curationNote: "Para observar como presença emocional, clima e influência atravessam a liderança.",
+      impactLabel: "para clima e influência",
+    },
+    "comece-pelo-porque": {
+      coverUrl: "https://books.google.com/books/publisher/content?edge=curl&id=uGBwDwAAQBAJ&img=1&imgtk=AFLRE72u-dPh4Cr-pLajfw2ewZcHnN9uizSupcsBFixcC453qBJihD3n-BpTamru2_nXRF6ehcu9Gz0-F9khEx0Klaic-mRdlssrWqoKD_YLeIyFcTV8F6_ghTmofzf4gP8TPHgk4Zdl&printsec=frontcover&zoom=1",
+      coverAlt: "Capa do livro Comece pelo porquê, de Simon Sinek",
+      curationNote: "Para comunicar direção sem transformar propósito em frase decorativa.",
+      impactLabel: "para alinhamento de direção",
+    },
+    "sete-habitos-pessoas-altamente-eficazes": {
+      coverUrl: "https://books.google.com.br/books/publisher/content?edge=curl&id=A7jGCgAAQBAJ&img=1&imgtk=AFLRE724mPGt_yrtFcpNOcBOCtm1zNoIGNFqtkWsc6R1Qga4qzYZCfZBAgONMTRN2U7cj8GPaRaWldhgBN0MwJHne6Je_LQ7A2Rov5DufHd2r_Pl6bdRFPEv-FiRgYBePD0WbaonQ1Ib&printsec=frontcover&zoom=1",
+      coverAlt: "Capa do livro Os 7 hábitos das pessoas altamente eficazes, de Stephen Covey",
+      curationNote: "Para transformar intenção em consistência sem depender de picos de motivação.",
+      impactLabel: "para consistência pessoal",
+    },
+    mindset: {
+      coverUrl: "https://books.google.es/books/publisher/content?id=tDgqDwAAQBAJ&img=1&imgtk=AFLRE708G-gAiawgpZENXch_G6h3ztEVPW2oyydUlnjbTtrltKiV6m-uh6IrYoUUqjBlj_eRepxTf_hebEiQQP51eqVYal_QlrklVNCpltCYh1YFKrHYB_OpqLUrj58NHL-boaebnaoF&printsec=frontcover&zoom=1",
+      coverAlt: "Capa do livro Mindset, de Carol Dweck",
+      curationNote: "Para reduzir defesa diante de erro, feedback e aprendizado.",
+      impactLabel: "para cultura de aprendizado",
+    },
+    essencialismo: {
+      coverUrl: "https://books.google.com.br/books/publisher/content?edge=curl&id=yvR4CAAAQBAJ&img=1&imgtk=AFLRE71PqoVy7oMfQ2Z3L179VJoE0ld3KVB2diPOtMS4OqV_3YuFTnOQJM6UoqPLYAZgJzlLNQhLKvJcnMrvnwuMJ8RnqDjPKJnx_ZH_QxJYoS4aTJo3RLCD0ZZgncYBoqF4tW1aEd24&printsec=frontcover&zoom=1",
+      coverAlt: "Capa do livro Essencialismo, de Greg McKeown",
+      curationNote: "Para decidir o que merece espaço quando tudo parece importante.",
+      impactLabel: "para foco sob excesso",
+    },
+    "conversas-dificeis": {
+      coverUrl: "https://books.google.com.br/books/publisher/content?edge=curl&id=bsYpEAAAQBAJ&img=1&imgtk=AFLRE70DK-82P_PQzz-v2MmwX1wbGgh18w8Fg24JWZ_5IpYHqC_iTfSs6ntS61dm5by0DQmL6PnfhbdJpfKijTIo2cTZmLJD5atQdadjS0oOxWPZHhM5e7c6TUFN7Ygt5D1T1iXxkL0_&printsec=frontcover&zoom=1",
+      coverAlt: "Capa do livro Conversas difíceis, de Douglas Stone, Bruce Patton e Sheila Heen",
+      curationNote: "Para atravessar conversas em que clareza, vínculo e responsabilidade precisam coexistir.",
+      impactLabel: "para conversas difíceis",
+    },
+    "coragem-de-ser-imperfeito": {
+      coverUrl: "https://books.google.fr/books/publisher/content?edge=curl&id=zd-yAAAAQBAJ&img=1&imgtk=AFLRE738bC0fVUafrpkCjeNk8fT_hOGQWAi3XhO6SRkmxvCPPytFRyYE6PKEf7u7i9MWJV9c6p_s35jXwd9sjokVruhxrGw4kX6mdvenFgOgEJcoHwZeTxIZh0ITJh3hvA72-IAseZv0&printsec=frontcover&zoom=1",
+      coverAlt: "Capa do livro A coragem de ser imperfeito, de Brené Brown",
+      curationNote: "Para liderar com mais presença quando insegurança, imagem e aprovação entram na sala.",
+      impactLabel: "para presença sob exposição",
+    },
+  };
+
   const state = {
     books: [],
     filters: {
@@ -28,7 +81,8 @@
 
     try {
       const api = getApi();
-      state.books = await api.apiFetch("/books");
+      const books = await api.apiFetch("/books");
+      state.books = await enrichBooks(books, api);
       renderCategoryFilters();
       renderBooks();
     } catch (error) {
@@ -39,6 +93,9 @@
   function bindEvents() {
     const search = document.querySelector("[data-estante-search]");
     const controls = document.querySelector(".estante-controls");
+
+    document.addEventListener("error", handleCoverError, true);
+    document.addEventListener("load", handleCoverLoad, true);
 
     if (controls) {
       controls.setAttribute("aria-label", "Busca da estante");
@@ -95,6 +152,42 @@
     label.insertAdjacentElement("afterend", clearButton);
   }
 
+  async function enrichBooks(books, api) {
+    const normalizedBooks = Array.isArray(books) ? books : [];
+
+    const enriched = await Promise.all(normalizedBooks.map(async (book) => {
+      try {
+        const detail = await api.apiFetch(`/books/${encodeURIComponent(book.slug)}`);
+        return normalizeBook({ ...book, ...(detail && detail.book ? detail.book : {}) });
+      } catch (error) {
+        return normalizeBook(book);
+      }
+    }));
+
+    return enriched.sort((a, b) => {
+      if (a.isFeatured !== b.isFeatured) return a.isFeatured ? -1 : 1;
+      return (a.displayOrder || 0) - (b.displayOrder || 0);
+    });
+  }
+
+  function normalizeBook(book) {
+    const enrichment = BOOK_ENRICHMENT[book.slug] || {};
+    const title = book.title || "livro";
+    const author = book.author || "autor";
+    const purchaseUrl = book.purchaseUrl || "";
+
+    return {
+      ...book,
+      coverUrl: enrichment.coverUrl || book.coverUrl || "",
+      coverAlt: enrichment.coverAlt || book.coverAlt || `Capa do livro ${title}, de ${author}`,
+      purchaseUrl,
+      purchaseLabel: book.purchaseLabel || DEFAULT_PURCHASE_LABEL,
+      hasPurchaseUrl: Boolean(purchaseUrl || book.hasPurchaseUrl),
+      curationNote: enrichment.curationNote || book.curationNote || book.whyRead || book.description || "",
+      impactLabel: enrichment.impactLabel || book.impactLabel || book.category || "para ler com intenção",
+    };
+  }
+
   function renderCategoryFilters() {
     const container = document.querySelector("[data-estante-category-filters]");
     if (!container) return;
@@ -147,7 +240,7 @@
     }
 
     container.innerHTML = `
-      ${renderCover(featured)}
+      ${renderCover(featured, { loading: "eager" })}
       <div class="estante-featured-copy">
         <div class="estante-meta">
           <span>${escapeHtml(featured.category)}</span>
@@ -157,10 +250,15 @@
         <h3>${escapeHtml(featured.title)}</h3>
         <p class="estante-author">${escapeHtml(featured.author)}</p>
         <p>${escapeHtml(featured.whyRead || featured.description)}</p>
-        <div class="estante-card-actions">
-          <a class="estante-card-link" href="./livro.html?slug=${encodeURIComponent(featured.slug)}">abrir leitura guiada</a>
-          ${featured.hasPurchaseUrl ? '<span class="estante-partner-note">compra externa disponível no detalhe</span>' : ""}
+        <div class="estante-featured-value">
+          <span>por que vale sua atenção</span>
+          <p>${escapeHtml(featured.curationNote || featured.practicalUse || featured.description)}</p>
         </div>
+        <div class="estante-card-actions">
+          <a class="estante-primary-action" href="./livro.html?slug=${encodeURIComponent(featured.slug)}">abrir leitura guiada</a>
+          ${renderPurchaseAction(featured)}
+        </div>
+        ${featured.purchaseUrl ? '<p class="estante-partner-note">a compra acontece fora do Papo de Liderança, pelo parceiro indicado.</p>' : ""}
       </div>
     `;
   }
@@ -176,32 +274,85 @@
           </div>
           <h3>${escapeHtml(book.title)}</h3>
           <p class="estante-author">${escapeHtml(book.author)}</p>
-          <p>${escapeHtml(book.description)}</p>
-          <p><strong>por que está na estante:</strong> ${escapeHtml(book.whyRead)}</p>
+          <p>${escapeHtml(book.curationNote || book.description)}</p>
+          <p class="estante-card-impact">${escapeHtml(book.impactLabel || "para ler com intenção")}</p>
           <div class="estante-card-actions">
-            <a class="estante-card-link" href="./livro.html?slug=${encodeURIComponent(book.slug)}">ver leitura guiada</a>
+            <a class="estante-card-link" href="./livro.html?slug=${encodeURIComponent(book.slug)}">abrir leitura guiada</a>
+            ${renderPurchaseAction(book, { compact: true })}
           </div>
         </div>
       </article>
     `;
   }
 
-  function renderCover(book) {
+  function renderCover(book, options = {}) {
     const coverUrl = resolveCoverUrl(book.coverUrl);
+    const title = book.title || "livro";
+    const author = book.author || "autor";
+    const alt = book.coverAlt || `Capa do livro ${title}, de ${author}`;
+    const loading = options.loading || "lazy";
+    const fallback = `
+      <div class="estante-cover-fallback" aria-hidden="true">
+        <small>curadoria</small>
+        <strong>${escapeHtml(getCoverTitle(title))}</strong>
+        <span>${escapeHtml(author)}</span>
+      </div>
+    `;
 
     if (coverUrl) {
       return `
-        <figure class="estante-cover-frame">
-          <img class="estante-book-cover" src="${escapeHtml(coverUrl)}" alt="${escapeHtml(book.coverAlt || `Capa editorial de ${book.title}`)}" loading="lazy">
+        <figure class="estante-cover-frame" aria-label="${escapeHtml(alt)}">
+          <img class="estante-book-cover" src="${escapeHtml(coverUrl)}" alt="${escapeHtml(alt)}" loading="${escapeHtml(loading)}" decoding="async">
+          ${fallback}
         </figure>
       `;
     }
 
     return `
-      <div class="estante-cover-frame estante-cover-frame--fallback" aria-label="${escapeHtml(book.coverAlt || `Capa editorial de ${book.title}`)}">
-        <span>${escapeHtml(getCoverTitle(book.title))}</span>
+      <div class="estante-cover-frame estante-cover-frame--fallback" aria-label="${escapeHtml(alt)}">
+        ${fallback}
       </div>
     `;
+  }
+
+  function renderPurchaseAction(book, options = {}) {
+    if (!book.purchaseUrl) {
+      return '<span class="estante-purchase-muted">opção de compra em curadoria</span>';
+    }
+
+    const label = book.purchaseLabel || DEFAULT_PURCHASE_LABEL;
+    const className = options.compact
+      ? "estante-purchase-text"
+      : "estante-secondary-action estante-purchase-link";
+
+    return `
+      <a class="${className}" href="${escapeHtml(book.purchaseUrl)}" target="_blank" rel="noopener noreferrer">
+        ${escapeHtml(label === "ver opção de compra" ? DEFAULT_PURCHASE_LABEL : label)}
+      </a>
+    `;
+  }
+
+  function handleCoverError(event) {
+    const image = event.target;
+    if (!(image instanceof HTMLImageElement) || !image.classList.contains("estante-book-cover")) return;
+
+    activateCoverFallback(image);
+  }
+
+  function handleCoverLoad(event) {
+    const image = event.target;
+    if (!(image instanceof HTMLImageElement) || !image.classList.contains("estante-book-cover")) return;
+    if (image.naturalWidth > 1 && image.naturalHeight > 1) return;
+
+    activateCoverFallback(image);
+  }
+
+  function activateCoverFallback(image) {
+    const frame = image.closest(".estante-cover-frame");
+    if (!frame) return;
+
+    frame.classList.add("estante-cover-frame--fallback");
+    image.remove();
   }
 
   function getFilteredBooks() {
@@ -221,6 +372,9 @@
         book.readTime,
         book.description,
         book.whyRead,
+        book.curationNote,
+        book.impactLabel,
+        book.purchaseProvider,
         flattenSearchValue(book.keyIdeas),
         flattenSearchValue(book.guidedQuestions),
         flattenSearchValue(book.whatYouWillLearn),
