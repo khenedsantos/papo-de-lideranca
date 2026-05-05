@@ -12,7 +12,9 @@
  <link rel="stylesheet" href="../../assets/css/page-transition.css">
  <link rel="stylesheet" href="../../assets/css/logo-theme.css">
  <link rel="stylesheet" href="../../assets/css/app-articles.css?v=premium-20260501c">
-<link rel="stylesheet" href="../../assets/css/back-to-top.css"></head>
+<link rel="stylesheet" href="../../assets/css/back-to-top.css">
+ <link rel="stylesheet" href="../../assets/css/navigation.css?v=premium-menu-20260503b">
+</head>
 <body class="theme-light app-article-page" data-scroll-logo="dark">
  <header class="site-header" data-site-header>
  <div class="container header-inner">
@@ -21,12 +23,14 @@
  <span class="brand-name">Papo de Liderança</span>
  </a>
  <nav class="main-nav" aria-label="navegação interna">
- <a href="../dashboard.html">minha área</a>
- <a href="../biblioteca.html">biblioteca</a>
- <a class="is-current" href="../categorias/gestao-de-equipes.html">gestão de equipes</a>
+  <a href="../dashboard.html">minha área</a>
+  <a aria-current="page" class="is-current" href="../biblioteca.html">biblioteca</a>
+  <a href="../progresso.html">progresso</a>
+  <a href="../estante.html">estante</a>
+  <a href="../perfil.html">conta</a>
  </nav>
  <div class="header-actions">
- <a class="header-login" href="../biblioteca.html">voltar à biblioteca</a>
+  <a class="header-login" href="../../auth/login.html" data-auth-logout>sair</a>
  </div>
  </div>
  </header>
