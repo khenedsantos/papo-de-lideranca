@@ -6,52 +6,54 @@
   };
 
   const DEFAULT_PURCHASE_LABEL = "comprar livro indicado";
+  const CARD_COVER_ZOOM = "3";
+  const FEATURED_COVER_ZOOM = "4";
 
   const BOOK_ENRICHMENT = {
     "gestor-eficaz": {
-      coverUrl: "https://books.google.com/books/content?id=fG_ADwAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      coverUrl: "https://books.google.com/books/content?id=fG_ADwAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
       coverAlt: "Capa do livro O gestor eficaz, de Peter Drucker",
       curationNote: "Para líderes que precisam separar agenda cheia de contribuição real.",
       impactLabel: "para decisões de prioridade",
     },
     "lideranca-daniel-goleman": {
-      coverUrl: "https://books.google.com/books/content?id=tZFsBgAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+      coverUrl: "https://books.google.com/books/content?id=tZFsBgAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
       coverAlt: "Capa do livro Liderança, de Daniel Goleman",
       curationNote: "Para observar como presença emocional, clima e influência atravessam a liderança.",
       impactLabel: "para clima e influência",
     },
     "comece-pelo-porque": {
-      coverUrl: "https://books.google.com/books/publisher/content?edge=curl&id=uGBwDwAAQBAJ&img=1&imgtk=AFLRE72u-dPh4Cr-pLajfw2ewZcHnN9uizSupcsBFixcC453qBJihD3n-BpTamru2_nXRF6ehcu9Gz0-F9khEx0Klaic-mRdlssrWqoKD_YLeIyFcTV8F6_ghTmofzf4gP8TPHgk4Zdl&printsec=frontcover&zoom=1",
+      coverUrl: "https://books.google.com/books/publisher/content?edge=curl&id=uGBwDwAAQBAJ&img=1&imgtk=AFLRE72u-dPh4Cr-pLajfw2ewZcHnN9uizSupcsBFixcC453qBJihD3n-BpTamru2_nXRF6ehcu9Gz0-F9khEx0Klaic-mRdlssrWqoKD_YLeIyFcTV8F6_ghTmofzf4gP8TPHgk4Zdl&printsec=frontcover&zoom=3",
       coverAlt: "Capa do livro Comece pelo porquê, de Simon Sinek",
       curationNote: "Para comunicar direção sem transformar propósito em frase decorativa.",
       impactLabel: "para alinhamento de direção",
     },
     "sete-habitos-pessoas-altamente-eficazes": {
-      coverUrl: "https://books.google.com.br/books/publisher/content?edge=curl&id=A7jGCgAAQBAJ&img=1&imgtk=AFLRE724mPGt_yrtFcpNOcBOCtm1zNoIGNFqtkWsc6R1Qga4qzYZCfZBAgONMTRN2U7cj8GPaRaWldhgBN0MwJHne6Je_LQ7A2Rov5DufHd2r_Pl6bdRFPEv-FiRgYBePD0WbaonQ1Ib&printsec=frontcover&zoom=1",
+      coverUrl: "https://books.google.com.br/books/publisher/content?edge=curl&id=A7jGCgAAQBAJ&img=1&imgtk=AFLRE724mPGt_yrtFcpNOcBOCtm1zNoIGNFqtkWsc6R1Qga4qzYZCfZBAgONMTRN2U7cj8GPaRaWldhgBN0MwJHne6Je_LQ7A2Rov5DufHd2r_Pl6bdRFPEv-FiRgYBePD0WbaonQ1Ib&printsec=frontcover&zoom=3",
       coverAlt: "Capa do livro Os 7 hábitos das pessoas altamente eficazes, de Stephen Covey",
       curationNote: "Para transformar intenção em consistência sem depender de picos de motivação.",
       impactLabel: "para consistência pessoal",
     },
     mindset: {
-      coverUrl: "https://books.google.es/books/publisher/content?id=tDgqDwAAQBAJ&img=1&imgtk=AFLRE708G-gAiawgpZENXch_G6h3ztEVPW2oyydUlnjbTtrltKiV6m-uh6IrYoUUqjBlj_eRepxTf_hebEiQQP51eqVYal_QlrklVNCpltCYh1YFKrHYB_OpqLUrj58NHL-boaebnaoF&printsec=frontcover&zoom=1",
+      coverUrl: "https://books.google.es/books/publisher/content?id=tDgqDwAAQBAJ&img=1&imgtk=AFLRE708G-gAiawgpZENXch_G6h3ztEVPW2oyydUlnjbTtrltKiV6m-uh6IrYoUUqjBlj_eRepxTf_hebEiQQP51eqVYal_QlrklVNCpltCYh1YFKrHYB_OpqLUrj58NHL-boaebnaoF&printsec=frontcover&zoom=3",
       coverAlt: "Capa do livro Mindset, de Carol Dweck",
       curationNote: "Para reduzir defesa diante de erro, feedback e aprendizado.",
       impactLabel: "para cultura de aprendizado",
     },
     essencialismo: {
-      coverUrl: "https://books.google.com.br/books/publisher/content?edge=curl&id=yvR4CAAAQBAJ&img=1&imgtk=AFLRE71PqoVy7oMfQ2Z3L179VJoE0ld3KVB2diPOtMS4OqV_3YuFTnOQJM6UoqPLYAZgJzlLNQhLKvJcnMrvnwuMJ8RnqDjPKJnx_ZH_QxJYoS4aTJo3RLCD0ZZgncYBoqF4tW1aEd24&printsec=frontcover&zoom=1",
+      coverUrl: "https://books.google.com.br/books/publisher/content?edge=curl&id=yvR4CAAAQBAJ&img=1&imgtk=AFLRE71PqoVy7oMfQ2Z3L179VJoE0ld3KVB2diPOtMS4OqV_3YuFTnOQJM6UoqPLYAZgJzlLNQhLKvJcnMrvnwuMJ8RnqDjPKJnx_ZH_QxJYoS4aTJo3RLCD0ZZgncYBoqF4tW1aEd24&printsec=frontcover&zoom=3",
       coverAlt: "Capa do livro Essencialismo, de Greg McKeown",
       curationNote: "Para decidir o que merece espaço quando tudo parece importante.",
       impactLabel: "para foco sob excesso",
     },
     "conversas-dificeis": {
-      coverUrl: "https://books.google.com.br/books/publisher/content?edge=curl&id=bsYpEAAAQBAJ&img=1&imgtk=AFLRE70DK-82P_PQzz-v2MmwX1wbGgh18w8Fg24JWZ_5IpYHqC_iTfSs6ntS61dm5by0DQmL6PnfhbdJpfKijTIo2cTZmLJD5atQdadjS0oOxWPZHhM5e7c6TUFN7Ygt5D1T1iXxkL0_&printsec=frontcover&zoom=1",
+      coverUrl: "https://books.google.com.br/books/publisher/content?edge=curl&id=bsYpEAAAQBAJ&img=1&imgtk=AFLRE70DK-82P_PQzz-v2MmwX1wbGgh18w8Fg24JWZ_5IpYHqC_iTfSs6ntS61dm5by0DQmL6PnfhbdJpfKijTIo2cTZmLJD5atQdadjS0oOxWPZHhM5e7c6TUFN7Ygt5D1T1iXxkL0_&printsec=frontcover&zoom=3",
       coverAlt: "Capa do livro Conversas difíceis, de Douglas Stone, Bruce Patton e Sheila Heen",
       curationNote: "Para atravessar conversas em que clareza, vínculo e responsabilidade precisam coexistir.",
       impactLabel: "para conversas difíceis",
     },
     "coragem-de-ser-imperfeito": {
-      coverUrl: "https://books.google.fr/books/publisher/content?edge=curl&id=zd-yAAAAQBAJ&img=1&imgtk=AFLRE738bC0fVUafrpkCjeNk8fT_hOGQWAi3XhO6SRkmxvCPPytFRyYE6PKEf7u7i9MWJV9c6p_s35jXwd9sjokVruhxrGw4kX6mdvenFgOgEJcoHwZeTxIZh0ITJh3hvA72-IAseZv0&printsec=frontcover&zoom=1",
+      coverUrl: "https://books.google.fr/books/publisher/content?edge=curl&id=zd-yAAAAQBAJ&img=1&imgtk=AFLRE738bC0fVUafrpkCjeNk8fT_hOGQWAi3XhO6SRkmxvCPPytFRyYE6PKEf7u7i9MWJV9c6p_s35jXwd9sjokVruhxrGw4kX6mdvenFgOgEJcoHwZeTxIZh0ITJh3hvA72-IAseZv0&printsec=frontcover&zoom=3",
       coverAlt: "Capa do livro A coragem de ser imperfeito, de Brené Brown",
       curationNote: "Para liderar com mais presença quando insegurança, imagem e aprovação entram na sala.",
       impactLabel: "para presença sob exposição",
@@ -240,7 +242,7 @@
     }
 
     container.innerHTML = `
-      ${renderCover(featured, { loading: "eager" })}
+      ${renderCover(featured, { loading: "eager", zoom: FEATURED_COVER_ZOOM })}
       <div class="estante-featured-copy">
         <div class="estante-meta">
           <span>${escapeHtml(featured.category)}</span>
@@ -266,7 +268,7 @@
   function renderBookCard(book) {
     return `
       <article class="estante-card">
-        ${renderCover(book)}
+        ${renderCover(book, { loading: "eager" })}
         <div class="estante-card-copy">
           <div class="estante-meta">
             <span>${escapeHtml(book.category)}</span>
@@ -286,7 +288,7 @@
   }
 
   function renderCover(book, options = {}) {
-    const coverUrl = resolveCoverUrl(book.coverUrl);
+    const coverUrl = resolveCoverUrl(withGoogleCoverZoom(book.coverUrl, options.zoom || CARD_COVER_ZOOM));
     const title = book.title || "livro";
     const author = book.author || "autor";
     const alt = book.coverAlt || `Capa do livro ${title}, de ${author}`;
@@ -470,6 +472,15 @@
     }
 
     return url;
+  }
+
+  function withGoogleCoverZoom(url, zoom) {
+    if (!url || !zoom || !/books\.google/i.test(url)) return url;
+    if (/[?&]zoom=\d+/i.test(url)) {
+      return url.replace(/([?&]zoom=)\d+/i, `$1${zoom}`);
+    }
+
+    return `${url}${url.includes("?") ? "&" : "?"}zoom=${encodeURIComponent(zoom)}`;
   }
 
   function getCoverTitle(title) {
