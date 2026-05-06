@@ -22,35 +22,35 @@
 
   const BOOK_COVER_OVERRIDES = {
     "gestor-eficaz": {
-      coverUrl: "https://books.google.com/books/content?id=fG_ADwAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
+      coverUrl: "/assets/img/books/covers/gestor-eficaz.webp",
       coverAlt: "Capa do livro O gestor eficaz, de Peter Drucker",
     },
     "lideranca-daniel-goleman": {
-      coverUrl: "https://books.google.com/books/content?id=tZFsBgAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
+      coverUrl: "/assets/img/books/covers/lideranca-daniel-goleman.webp",
       coverAlt: "Capa do livro Liderança, de Daniel Goleman",
     },
     "comece-pelo-porque": {
-      coverUrl: "https://books.google.com/books/publisher/content?edge=curl&id=uGBwDwAAQBAJ&img=1&imgtk=AFLRE72u-dPh4Cr-pLajfw2ewZcHnN9uizSupcsBFixcC453qBJihD3n-BpTamru2_nXRF6ehcu9Gz0-F9khEx0Klaic-mRdlssrWqoKD_YLeIyFcTV8F6_ghTmofzf4gP8TPHgk4Zdl&printsec=frontcover&zoom=3",
+      coverUrl: "/assets/img/books/covers/comece-pelo-porque.webp",
       coverAlt: "Capa do livro Comece pelo porquê, de Simon Sinek",
     },
     "sete-habitos-pessoas-altamente-eficazes": {
-      coverUrl: "https://books.google.com.br/books/publisher/content?edge=curl&id=A7jGCgAAQBAJ&img=1&imgtk=AFLRE724mPGt_yrtFcpNOcBOCtm1zNoIGNFqtkWsc6R1Qga4qzYZCfZBAgONMTRN2U7cj8GPaRaWldhgBN0MwJHne6Je_LQ7A2Rov5DufHd2r_Pl6bdRFPEv-FiRgYBePD0WbaonQ1Ib&printsec=frontcover&zoom=3",
+      coverUrl: "/assets/img/books/covers/sete-habitos-pessoas-altamente-eficazes.webp",
       coverAlt: "Capa do livro Os 7 hábitos das pessoas altamente eficazes, de Stephen Covey",
     },
     mindset: {
-      coverUrl: "https://books.google.es/books/publisher/content?id=tDgqDwAAQBAJ&img=1&imgtk=AFLRE708G-gAiawgpZENXch_G6h3ztEVPW2oyydUlnjbTtrltKiV6m-uh6IrYoUUqjBlj_eRepxTf_hebEiQQP51eqVYal_QlrklVNCpltCYh1YFKrHYB_OpqLUrj58NHL-boaebnaoF&printsec=frontcover&zoom=3",
+      coverUrl: "/assets/img/books/covers/mindset.webp",
       coverAlt: "Capa do livro Mindset, de Carol Dweck",
     },
     essencialismo: {
-      coverUrl: "https://books.google.com.br/books/publisher/content?edge=curl&id=yvR4CAAAQBAJ&img=1&imgtk=AFLRE71PqoVy7oMfQ2Z3L179VJoE0ld3KVB2diPOtMS4OqV_3YuFTnOQJM6UoqPLYAZgJzlLNQhLKvJcnMrvnwuMJ8RnqDjPKJnx_ZH_QxJYoS4aTJo3RLCD0ZZgncYBoqF4tW1aEd24&printsec=frontcover&zoom=3",
+      coverUrl: "/assets/img/books/covers/essencialismo.webp",
       coverAlt: "Capa do livro Essencialismo, de Greg McKeown",
     },
     "conversas-dificeis": {
-      coverUrl: "https://books.google.com.br/books/publisher/content?edge=curl&id=bsYpEAAAQBAJ&img=1&imgtk=AFLRE70DK-82P_PQzz-v2MmwX1wbGgh18w8Fg24JWZ_5IpYHqC_iTfSs6ntS61dm5by0DQmL6PnfhbdJpfKijTIo2cTZmLJD5atQdadjS0oOxWPZHhM5e7c6TUFN7Ygt5D1T1iXxkL0_&printsec=frontcover&zoom=3",
+      coverUrl: "/assets/img/books/covers/conversas-dificeis.webp",
       coverAlt: "Capa do livro Conversas difíceis, de Douglas Stone, Bruce Patton e Sheila Heen",
     },
     "coragem-de-ser-imperfeito": {
-      coverUrl: "https://books.google.fr/books/publisher/content?edge=curl&id=zd-yAAAAQBAJ&img=1&imgtk=AFLRE738bC0fVUafrpkCjeNk8fT_hOGQWAi3XhO6SRkmxvCPPytFRyYE6PKEf7u7i9MWJV9c6p_s35jXwd9sjokVruhxrGw4kX6mdvenFgOgEJcoHwZeTxIZh0ITJh3hvA72-IAseZv0&printsec=frontcover&zoom=3",
+      coverUrl: "/assets/img/books/covers/coragem-de-ser-imperfeito.webp",
       coverAlt: "Capa do livro A coragem de ser imperfeito, de Brené Brown",
     },
   };
@@ -151,7 +151,7 @@
     const cover = document.querySelector("[data-book-cover]");
     if (!cover) return;
 
-    const coverUrl = resolveCoverUrl(withGoogleCoverZoom(book.coverUrl, "4"));
+    const coverUrl = resolveCoverUrl(book.coverUrl);
     const alt = book.coverAlt || `Capa editorial de ${book.title}`;
 
     if (coverUrl) {
@@ -443,15 +443,6 @@
     }
 
     return url;
-  }
-
-  function withGoogleCoverZoom(url, zoom) {
-    if (!url || !zoom || !/books\.google/i.test(url)) return url;
-    if (/[?&]zoom=\d+/i.test(url)) {
-      return url.replace(/([?&]zoom=)\d+/i, `$1${zoom}`);
-    }
-
-    return `${url}${url.includes("?") ? "&" : "?"}zoom=${encodeURIComponent(zoom)}`;
   }
 
   function statusLabel(status) {
