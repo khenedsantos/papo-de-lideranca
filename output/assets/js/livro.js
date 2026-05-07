@@ -4,6 +4,7 @@
     DEEPENING: "aprofundamento",
     PROVOCATION: "provocação",
   };
+  const RELATED_CONTENT_LIMIT = 3;
 
   const PROMPTS = [
     {
@@ -47,15 +48,17 @@
 
     try {
       const api = getApi();
-      const [detail, articles, shortEditions] = await Promise.all([
+      const [detail, related] = await Promise.all([
         api.apiFetch(`/books/${encodeURIComponent(slug)}`),
-        api.apiFetch("/articles").catch(() => []),
-        api.apiFetch("/short-editions").catch(() => []),
+        api.apiFetch(`/books/${encodeURIComponent(slug)}/related`).catch(() => ({
+          articles: [],
+          shortEditions: [],
+        })),
       ]);
 
       state.detail = detail;
-      state.related.articles = articles || [];
-      state.related.shortEditions = shortEditions || [];
+      state.related.articles = related.articles || [];
+      state.related.shortEditions = related.shortEditions || [];
 
       renderBook();
     } catch (error) {
@@ -223,24 +226,20 @@
     const section = document.querySelector("[data-book-connections-section]");
     if (!container || !section) return;
 
-    const articleLinks = (book.relatedArticleSlugs || []).map((slug) => {
-      const article = state.related.articles.find((item) => item.slug === slug);
-      return {
-        type: "artigo",
-        title: article ? article.title : humanizeSlug(slug),
-        description: article ? article.summary || article.excerpt : "leitura relacionada no acervo",
-        href: buildReadingUrl({ type: "article", slug }),
-      };
+    const articleLinks = buildConnectionLinks({
+      slugs: book.relatedArticleSlugs,
+      items: state.related.articles,
+      label: "artigo",
+      type: "article",
+      fallbackDescription: "leitura relacionada no acervo",
     });
 
-    const editionLinks = (book.relatedShortEditionSlugs || []).map((slug) => {
-      const edition = state.related.shortEditions.find((item) => item.slug === slug);
-      return {
-        type: "edição curta",
-        title: edition ? edition.title : humanizeSlug(slug),
-        description: edition ? edition.summary || edition.excerpt : "edição relacionada no acervo",
-        href: buildReadingUrl({ type: "short-edition", slug }),
-      };
+    const editionLinks = buildConnectionLinks({
+      slugs: book.relatedShortEditionSlugs,
+      items: state.related.shortEditions,
+      label: "edição curta",
+      type: "short-edition",
+      fallbackDescription: "edição relacionada no acervo",
     });
 
     const links = [...articleLinks, ...editionLinks];
@@ -258,6 +257,21 @@
         <small>${escapeHtml(item.description)}</small>
       </a>
     `).join("");
+  }
+
+  function buildConnectionLinks({ slugs, items, label, type, fallbackDescription }) {
+    const availableItems = Array.isArray(items) ? items : [];
+
+    return normalizeList(slugs).slice(0, RELATED_CONTENT_LIMIT).map((slug) => {
+      const item = availableItems.find((relatedItem) => relatedItem.slug === slug);
+
+      return {
+        type: label,
+        title: item ? item.title : humanizeSlug(slug),
+        description: item ? item.summary || item.excerpt || fallbackDescription : fallbackDescription,
+        href: buildReadingUrl({ type, slug }),
+      };
+    });
   }
 
   function renderCommunityNotes(notes) {

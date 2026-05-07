@@ -11,6 +11,7 @@ import { ListBooksQueryDto } from './dto/list-books-query.dto';
 import { ModerateBookNoteDto } from './dto/moderate-book-note.dto';
 
 const COMMUNITY_NOTES_LIMIT = 12;
+const RELATED_CONTENT_LIMIT = 3;
 
 type BookListRecord = Prisma.BookGetPayload<{
   select: typeof bookListSelect;
@@ -20,8 +21,20 @@ type BookDetailRecord = Prisma.BookGetPayload<{
   select: typeof bookDetailSelect;
 }>;
 
+type BookRelatedSourceRecord = Prisma.BookGetPayload<{
+  select: typeof bookRelatedSourceSelect;
+}>;
+
 type BookNoteRecord = Prisma.BookNoteGetPayload<{
   select: typeof bookNoteSelect;
+}>;
+
+type RelatedArticleRecord = Prisma.ArticleGetPayload<{
+  select: typeof relatedArticleSelect;
+}>;
+
+type RelatedShortEditionRecord = Prisma.ShortEditionGetPayload<{
+  select: typeof relatedShortEditionSelect;
 }>;
 
 const bookListSelect = {
@@ -58,6 +71,13 @@ const bookDetailSelect = {
   updatedAt: true,
 } satisfies Prisma.BookSelect;
 
+const bookRelatedSourceSelect = {
+  id: true,
+  slug: true,
+  relatedArticleSlugs: true,
+  relatedShortEditionSlugs: true,
+} satisfies Prisma.BookSelect;
+
 const bookNoteSelect = {
   id: true,
   promptKey: true,
@@ -67,6 +87,31 @@ const bookNoteSelect = {
   createdAt: true,
   updatedAt: true,
 } satisfies Prisma.BookNoteSelect;
+
+const relatedCategorySelect = {
+  name: true,
+  slug: true,
+} satisfies Prisma.CategorySelect;
+
+const relatedArticleSelect = {
+  slug: true,
+  title: true,
+  excerpt: true,
+  readTimeMinutes: true,
+  category: {
+    select: relatedCategorySelect,
+  },
+} satisfies Prisma.ArticleSelect;
+
+const relatedShortEditionSelect = {
+  slug: true,
+  title: true,
+  excerpt: true,
+  readTimeMinutes: true,
+  category: {
+    select: relatedCategorySelect,
+  },
+} satisfies Prisma.ShortEditionSelect;
 
 @Injectable()
 export class BooksService {
@@ -153,6 +198,40 @@ export class BooksService {
       book: this.serializeBookDetail(book),
       communityNotes: communityNotes.map((note) => this.serializeCommunityNote(note)),
       myNotes: myNotes.map((note) => this.serializeMyNote(note)),
+    };
+  }
+
+  async findRelatedBySlug(userId: string, slug: string) {
+    await this.assertActiveSubscriber(userId);
+
+    const book = await this.findActiveBookRelatedSource(slug);
+    const articleSlugs = this.stringArray(book.relatedArticleSlugs).slice(0, RELATED_CONTENT_LIMIT);
+    const shortEditionSlugs = this.stringArray(book.relatedShortEditionSlugs).slice(0, RELATED_CONTENT_LIMIT);
+
+    const [articles, shortEditions] = await Promise.all([
+      articleSlugs.length
+        ? this.prisma.article.findMany({
+            where: {
+              slug: { in: articleSlugs },
+              isPublished: true,
+            },
+            select: relatedArticleSelect,
+          })
+        : [],
+      shortEditionSlugs.length
+        ? this.prisma.shortEdition.findMany({
+            where: {
+              slug: { in: shortEditionSlugs },
+              isPublished: true,
+            },
+            select: relatedShortEditionSelect,
+          })
+        : [],
+    ]);
+
+    return {
+      articles: this.orderBySlug(articles, articleSlugs).map((article) => this.serializeRelatedArticle(article)),
+      shortEditions: this.orderBySlug(shortEditions, shortEditionSlugs).map((edition) => this.serializeRelatedShortEdition(edition)),
     };
   }
 
@@ -255,6 +334,22 @@ export class BooksService {
     return book;
   }
 
+  private async findActiveBookRelatedSource(slug: string) {
+    const book = await this.prisma.book.findFirst({
+      where: {
+        slug,
+        isActive: true,
+      },
+      select: bookRelatedSourceSelect,
+    });
+
+    if (!book) {
+      throw new NotFoundException('Livro nÃ£o encontrado na estante.');
+    }
+
+    return book;
+  }
+
   private async assertActiveSubscriber(userId: string) {
     const user = await this.prisma.user.findUnique({
       where: { id: userId },
@@ -322,6 +417,30 @@ export class BooksService {
     };
   }
 
+  private serializeRelatedArticle(article: RelatedArticleRecord) {
+    return {
+      slug: article.slug,
+      title: article.title,
+      category: article.category.name,
+      categorySlug: article.category.slug,
+      summary: article.excerpt,
+      readTime: this.formatReadTime(article.readTimeMinutes),
+      readTimeMinutes: article.readTimeMinutes,
+    };
+  }
+
+  private serializeRelatedShortEdition(edition: RelatedShortEditionRecord) {
+    return {
+      slug: edition.slug,
+      title: edition.title,
+      category: edition.category.name,
+      categorySlug: edition.category.slug,
+      summary: edition.excerpt,
+      readTime: this.formatReadTime(edition.readTimeMinutes),
+      readTimeMinutes: edition.readTimeMinutes,
+    };
+  }
+
   private serializeCommunityNote(note: BookNoteRecord) {
     return {
       id: note.id,
@@ -352,5 +471,14 @@ export class BooksService {
   private stringArray(value: Prisma.JsonValue | null | undefined) {
     if (!Array.isArray(value)) return [];
     return value.filter((item): item is string => typeof item === 'string');
+  }
+
+  private orderBySlug<T extends { slug: string }>(items: T[], slugs: string[]) {
+    const bySlug = new Map(items.map((item) => [item.slug, item]));
+    return slugs.map((slug) => bySlug.get(slug)).filter((item): item is T => Boolean(item));
+  }
+
+  private formatReadTime(minutes: number) {
+    return `${minutes} min de leitura`;
   }
 }

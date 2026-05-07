@@ -30,6 +30,14 @@ export class BooksController {
     return this.booksService.list(user.sub, query);
   }
 
+  @Get(':slug/related')
+  findRelatedBySlug(
+    @CurrentUser() user: JwtPayload,
+    @Param('slug') slug: string,
+  ) {
+    return this.booksService.findRelatedBySlug(user.sub, slug);
+  }
+
   @Get(':slug')
   findBySlug(
     @CurrentUser() user: JwtPayload,
