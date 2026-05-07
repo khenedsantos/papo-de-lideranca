@@ -31,7 +31,7 @@
     try {
       const api = getApi();
       const books = await api.apiFetch("/books");
-      state.books = await enrichBooks(books, api);
+      state.books = normalizeBooks(books);
       renderCategoryFilters();
       renderBooks();
     } catch (error) {
@@ -101,19 +101,11 @@
     label.insertAdjacentElement("afterend", clearButton);
   }
 
-  async function enrichBooks(books, api) {
+  function normalizeBooks(books) {
     const normalizedBooks = Array.isArray(books) ? books : [];
+    const normalized = normalizedBooks.map(normalizeBook);
 
-    const enriched = await Promise.all(normalizedBooks.map(async (book) => {
-      try {
-        const detail = await api.apiFetch(`/books/${encodeURIComponent(book.slug)}`);
-        return normalizeBook({ ...book, ...(detail && detail.book ? detail.book : {}) });
-      } catch (error) {
-        return normalizeBook(book);
-      }
-    }));
-
-    return enriched.sort((a, b) => {
+    return normalized.sort((a, b) => {
       if (a.isFeatured !== b.isFeatured) return a.isFeatured ? -1 : 1;
       return (a.displayOrder || 0) - (b.displayOrder || 0);
     });
