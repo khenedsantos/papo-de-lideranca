@@ -6,56 +6,6 @@
   };
 
   const DEFAULT_PURCHASE_LABEL = "comprar livro indicado";
-  const BOOK_ENRICHMENT = {
-    "gestor-eficaz": {
-      coverUrl: "/assets/img/books/covers/gestor-eficaz.webp",
-      coverAlt: "Capa do livro O gestor eficaz, de Peter Drucker",
-      curationNote: "Para líderes que precisam separar agenda cheia de contribuição real.",
-      impactLabel: "para decisões de prioridade",
-    },
-    "lideranca-daniel-goleman": {
-      coverUrl: "/assets/img/books/covers/lideranca-daniel-goleman.webp",
-      coverAlt: "Capa do livro Liderança, de Daniel Goleman",
-      curationNote: "Para observar como presença emocional, clima e influência atravessam a liderança.",
-      impactLabel: "para clima e influência",
-    },
-    "comece-pelo-porque": {
-      coverUrl: "/assets/img/books/covers/comece-pelo-porque.webp",
-      coverAlt: "Capa do livro Comece pelo porquê, de Simon Sinek",
-      curationNote: "Para comunicar direção sem transformar propósito em frase decorativa.",
-      impactLabel: "para alinhamento de direção",
-    },
-    "sete-habitos-pessoas-altamente-eficazes": {
-      coverUrl: "/assets/img/books/covers/sete-habitos-pessoas-altamente-eficazes.webp",
-      coverAlt: "Capa do livro Os 7 hábitos das pessoas altamente eficazes, de Stephen Covey",
-      curationNote: "Para transformar intenção em consistência sem depender de picos de motivação.",
-      impactLabel: "para consistência pessoal",
-    },
-    mindset: {
-      coverUrl: "/assets/img/books/covers/mindset.webp",
-      coverAlt: "Capa do livro Mindset, de Carol Dweck",
-      curationNote: "Para reduzir defesa diante de erro, feedback e aprendizado.",
-      impactLabel: "para cultura de aprendizado",
-    },
-    essencialismo: {
-      coverUrl: "/assets/img/books/covers/essencialismo.webp",
-      coverAlt: "Capa do livro Essencialismo, de Greg McKeown",
-      curationNote: "Para decidir o que merece espaço quando tudo parece importante.",
-      impactLabel: "para foco sob excesso",
-    },
-    "conversas-dificeis": {
-      coverUrl: "/assets/img/books/covers/conversas-dificeis.webp",
-      coverAlt: "Capa do livro Conversas difíceis, de Douglas Stone, Bruce Patton e Sheila Heen",
-      curationNote: "Para atravessar conversas em que clareza, vínculo e responsabilidade precisam coexistir.",
-      impactLabel: "para conversas difíceis",
-    },
-    "coragem-de-ser-imperfeito": {
-      coverUrl: "/assets/img/books/covers/coragem-de-ser-imperfeito.webp",
-      coverAlt: "Capa do livro A coragem de ser imperfeito, de Brené Brown",
-      curationNote: "Para liderar com mais presença quando insegurança, imagem e aprovação entram na sala.",
-      impactLabel: "para presença sob exposição",
-    },
-  };
 
   const state = {
     books: [],
@@ -170,20 +120,23 @@
   }
 
   function normalizeBook(book) {
-    const enrichment = BOOK_ENRICHMENT[book.slug] || {};
     const title = book.title || "livro";
     const author = book.author || "autor";
     const purchaseUrl = book.purchaseUrl || "";
+    const purchaseProvider = book.purchaseProvider || (purchaseUrl ? "parceiro indicado" : "");
+    const curationNote = book.curationNote || book.whyRead || book.description || "";
+    const impactLabel = book.impactLabel || [book.category, formatLevel(book.level)].filter(Boolean).join(" · ") || "para ler com intenção";
 
     return {
       ...book,
-      coverUrl: enrichment.coverUrl || book.coverUrl || "",
-      coverAlt: enrichment.coverAlt || book.coverAlt || `Capa do livro ${title}, de ${author}`,
+      coverUrl: book.coverUrl || "",
+      coverAlt: book.coverAlt || `Capa do livro ${title}, de ${author}`,
       purchaseUrl,
       purchaseLabel: book.purchaseLabel || DEFAULT_PURCHASE_LABEL,
+      purchaseProvider,
       hasPurchaseUrl: Boolean(purchaseUrl || book.hasPurchaseUrl),
-      curationNote: enrichment.curationNote || book.curationNote || book.whyRead || book.description || "",
-      impactLabel: enrichment.impactLabel || book.impactLabel || book.category || "para ler com intenção",
+      curationNote,
+      impactLabel,
     };
   }
 

@@ -20,41 +20,6 @@
     },
   ];
 
-  const BOOK_COVER_OVERRIDES = {
-    "gestor-eficaz": {
-      coverUrl: "/assets/img/books/covers/gestor-eficaz.webp",
-      coverAlt: "Capa do livro O gestor eficaz, de Peter Drucker",
-    },
-    "lideranca-daniel-goleman": {
-      coverUrl: "/assets/img/books/covers/lideranca-daniel-goleman.webp",
-      coverAlt: "Capa do livro Liderança, de Daniel Goleman",
-    },
-    "comece-pelo-porque": {
-      coverUrl: "/assets/img/books/covers/comece-pelo-porque.webp",
-      coverAlt: "Capa do livro Comece pelo porquê, de Simon Sinek",
-    },
-    "sete-habitos-pessoas-altamente-eficazes": {
-      coverUrl: "/assets/img/books/covers/sete-habitos-pessoas-altamente-eficazes.webp",
-      coverAlt: "Capa do livro Os 7 hábitos das pessoas altamente eficazes, de Stephen Covey",
-    },
-    mindset: {
-      coverUrl: "/assets/img/books/covers/mindset.webp",
-      coverAlt: "Capa do livro Mindset, de Carol Dweck",
-    },
-    essencialismo: {
-      coverUrl: "/assets/img/books/covers/essencialismo.webp",
-      coverAlt: "Capa do livro Essencialismo, de Greg McKeown",
-    },
-    "conversas-dificeis": {
-      coverUrl: "/assets/img/books/covers/conversas-dificeis.webp",
-      coverAlt: "Capa do livro Conversas difíceis, de Douglas Stone, Bruce Patton e Sheila Heen",
-    },
-    "coragem-de-ser-imperfeito": {
-      coverUrl: "/assets/img/books/covers/coragem-de-ser-imperfeito.webp",
-      coverAlt: "Capa do livro A coragem de ser imperfeito, de Brené Brown",
-    },
-  };
-
   const state = {
     detail: null,
     related: {
@@ -182,12 +147,20 @@
   }
 
   function normalizeBook(book) {
-    const cover = BOOK_COVER_OVERRIDES[book.slug] || {};
+    const title = book.title || "livro";
+    const author = book.author || "autor";
+    const purchaseUrl = book.purchaseUrl || "";
+    const purchaseProvider = book.purchaseProvider || (purchaseUrl ? "parceiro indicado" : "");
 
     return {
       ...book,
-      coverUrl: cover.coverUrl || book.coverUrl || "",
-      coverAlt: cover.coverAlt || book.coverAlt || `Capa do livro ${book.title || "livro"}, de ${book.author || "autor"}`,
+      coverUrl: book.coverUrl || "",
+      coverAlt: book.coverAlt || `Capa do livro ${title}, de ${author}`,
+      curationNote: book.curationNote || book.whyRead || book.description || "",
+      impactLabel: book.impactLabel || [book.category, formatLevel(book.level)].filter(Boolean).join(" · ") || "para ler com intenção",
+      purchaseUrl,
+      purchaseProvider,
+      purchaseLabel: book.purchaseLabel || "comprar livro indicado",
     };
   }
 
@@ -201,7 +174,7 @@
     if (book.purchaseUrl) {
       link.hidden = false;
       link.href = book.purchaseUrl;
-      link.textContent = book.purchaseLabel || `ver opção de compra${book.purchaseProvider ? ` em ${book.purchaseProvider}` : ""}`;
+      link.textContent = book.purchaseLabel || "comprar livro indicado";
       muted.hidden = true;
       note.hidden = false;
       note.textContent = book.purchaseProvider

@@ -33,11 +33,14 @@ const bookListSelect = {
   description: true,
   coverUrl: true,
   coverAlt: true,
+  curationNote: true,
+  impactLabel: true,
   category: true,
   level: true,
   readTime: true,
   whyRead: true,
   purchaseUrl: true,
+  purchaseLabel: true,
   purchaseProvider: true,
   isFeatured: true,
   displayOrder: true,
@@ -52,8 +55,6 @@ const bookDetailSelect = {
   practicalUse: true,
   relatedArticleSlugs: true,
   relatedShortEditionSlugs: true,
-  purchaseLabel: true,
-  purchaseUrl: true,
   updatedAt: true,
 } satisfies Prisma.BookSelect;
 
@@ -101,6 +102,8 @@ export class BooksService {
         { category: { contains: query.q, mode: 'insensitive' } },
         { description: { contains: query.q, mode: 'insensitive' } },
         { whyRead: { contains: query.q, mode: 'insensitive' } },
+        { curationNote: { contains: query.q, mode: 'insensitive' } },
+        { impactLabel: { contains: query.q, mode: 'insensitive' } },
       ];
     }
 
@@ -291,10 +294,14 @@ export class BooksService {
       description: book.description,
       coverUrl: book.coverUrl,
       coverAlt: book.coverAlt,
+      curationNote: book.curationNote,
+      impactLabel: book.impactLabel,
       category: book.category,
       level: book.level,
       readTime: book.readTime,
       whyRead: book.whyRead,
+      purchaseUrl: book.purchaseUrl,
+      purchaseLabel: book.purchaseLabel,
       purchaseProvider: book.purchaseProvider,
       isFeatured: book.isFeatured,
       displayOrder: book.displayOrder,

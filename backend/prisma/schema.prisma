@@ -173,6 +173,8 @@ model Book {
   description              String
   coverUrl                 String?
   coverAlt                 String?
+  curationNote             String?
+  impactLabel              String?
   category                 String
   level                    BookLevel
   readTime                 String?
