@@ -80,7 +80,7 @@ body.estante-page {
 .book-breadcrumb {
   color: rgba(70, 84, 92, 0.68);
   font-size: 0.73rem;
-  font-weight: 760;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: lowercase;
 }
@@ -136,7 +136,7 @@ body.estante-page {
   background: #1f6d4c;
   color: #ffffff;
   font-size: 0.87rem;
-  font-weight: 760;
+  font-weight: 600;
   line-height: 1;
   text-decoration: none;
   text-transform: lowercase;
@@ -207,7 +207,7 @@ body.estante-page {
 .estante-hero-note span {
   color: rgba(70, 84, 92, 0.65);
   font-size: 0.76rem;
-  font-weight: 760;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: lowercase;
 }
@@ -306,7 +306,7 @@ body.estante-page {
   max-width: 78%;
   color: rgba(255, 255, 255, 0.92);
   font-size: 2.6rem;
-  font-weight: 780;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: 0;
   text-align: center;
@@ -338,7 +338,7 @@ body.estante-page {
   background: var(--estante-green-soft);
   color: #236f50;
   font-size: 0.71rem;
-  font-weight: 760;
+  font-weight: 600;
   line-height: 1;
   text-transform: lowercase;
 }
@@ -363,7 +363,7 @@ body.estante-page {
   margin: 0;
   color: rgba(70, 84, 92, 0.68);
   font-size: 0.94rem;
-  font-weight: 760;
+  font-weight: 600;
   text-transform: lowercase;
 }
 
@@ -385,7 +385,7 @@ body.estante-page {
 
 .estante-card-copy strong {
   color: var(--estante-ink);
-  font-weight: 760;
+  font-weight: 600;
 }
 
 .estante-partner-note,
@@ -408,7 +408,7 @@ body.estante-page {
 .estante-state a,
 .book-state a {
   color: #1f6d4c;
-  font-weight: 760;
+  font-weight: 600;
 }
 
 .estante-controls {
@@ -480,7 +480,7 @@ body.estante-page {
 .estante-filter-block > span {
   color: rgba(70, 84, 92, 0.6);
   font-size: 0.7rem;
-  font-weight: 760;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: lowercase;
 }
@@ -500,7 +500,7 @@ body.estante-page {
   color: rgba(31, 51, 66, 0.76);
   font: inherit;
   font-size: 0.82rem;
-  font-weight: 720;
+  font-weight: 600;
   text-transform: lowercase;
   cursor: pointer;
   transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
@@ -609,7 +609,7 @@ body.estante-page {
 
 .estante-how-list span {
   color: var(--estante-gold);
-  font-weight: 820;
+  font-weight: 700;
 }
 
 .estante-how-list strong {
@@ -674,7 +674,7 @@ body.estante-page {
 
 .book-idea span {
   color: var(--estante-gold);
-  font-weight: 820;
+  font-weight: 700;
 }
 
 .book-idea p {
@@ -712,7 +712,7 @@ body.estante-page {
 .book-connections span {
   color: rgba(70, 84, 92, 0.62);
   font-size: 0.72rem;
-  font-weight: 760;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: lowercase;
 }
@@ -757,7 +757,7 @@ body.estante-page {
   display: grid;
   gap: 10px;
   color: var(--estante-ink);
-  font-weight: 760;
+  font-weight: 600;
   text-transform: lowercase;
 }
 
@@ -788,7 +788,7 @@ body.estante-page {
 .book-note-message {
   color: var(--estante-green);
   font-size: 0.9rem;
-  font-weight: 760;
+  font-weight: 600;
   text-transform: lowercase;
 }
 
@@ -994,7 +994,7 @@ body.estante-page {
   cursor: pointer;
   font: inherit;
   font-size: 0.82rem;
-  font-weight: 680;
+  font-weight: 600;
   line-height: 1;
   text-transform: lowercase;
 }
@@ -1017,7 +1017,7 @@ body.estante-page {
 
 .estante-state--empty span {
   color: rgba(70, 84, 92, 0.62);
-  font-weight: 560;
+  font-weight: 500;
   line-height: 1.55;
 }
 
@@ -1037,153 +1037,103 @@ body.estante-page {
   }
 }
 
-/* Refinamento editorial premium da Estante */
-body.estante-page:not(.livro-page) {
+/* =========================================================
+   Etapa 4 | acabamento editorial da Estante e Livro
+   ========================================================= */
+
+body.estante-page {
   background: #f8f7f2;
 }
 
-.estante-page:not(.livro-page) .estante-main {
-  padding: 30px 0 76px;
+.estante-main,
+.book-main {
+  padding-bottom: 88px;
 }
 
-.estante-page:not(.livro-page) .estante-hero-shell {
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
-  gap: 58px;
-  align-items: center;
-  padding: 64px 0 58px;
-}
-
-.estante-page:not(.livro-page) .estante-hero h1 {
-  max-width: 760px;
-  font-size: 4.7rem;
-  line-height: 0.96;
-  letter-spacing: 0;
-}
-
-.estante-page:not(.livro-page) .estante-hero p {
-  max-width: 560px;
-  color: rgba(70, 84, 92, 0.74);
-}
-
-.estante-page:not(.livro-page) .estante-hero-note {
-  padding: 26px;
-  border-color: rgba(185, 199, 199, 0.46);
-  background: rgba(255, 255, 255, 0.48);
-  box-shadow: none;
-}
-
-.estante-page:not(.livro-page) .estante-hero-note span,
-.estante-page:not(.livro-page) .estante-featured-value span,
-.estante-page:not(.livro-page) .estante-cover-fallback small {
+.estante-page .estante-kicker,
+.estante-page .estante-section-head span,
+.estante-page .book-section-head span,
+.estante-page .book-meta-line span,
+.estante-page .book-breadcrumb {
   color: rgba(70, 84, 92, 0.62);
-  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.075em;
-  line-height: 1.2;
-  text-transform: lowercase;
 }
 
-.estante-page:not(.livro-page) .estante-hero-note strong {
-  margin-top: 10px;
-  font-size: 1.38rem;
-  font-weight: 600;
-  letter-spacing: 0;
-}
-
-.estante-page:not(.livro-page) .estante-primary-action {
-  border-color: rgba(23, 50, 74, 0.24);
-  background: #17324a;
-  color: #ffffff;
-  font-weight: 600;
-  box-shadow: none;
-}
-
-.estante-page:not(.livro-page) .estante-secondary-action,
-.estante-page:not(.livro-page) .estante-purchase-link {
-  border-color: rgba(185, 199, 199, 0.62);
-  background: rgba(255, 255, 255, 0.56);
-  color: #17324a;
-  font-weight: 600;
-  box-shadow: none;
-}
-
-.estante-page:not(.livro-page) .estante-primary-action:hover {
-  border-color: rgba(23, 50, 74, 0.32);
-  background: #102a40;
-}
-
-.estante-page:not(.livro-page) .estante-secondary-action:hover,
-.estante-page:not(.livro-page) .estante-purchase-link:hover {
-  border-color: rgba(40, 124, 88, 0.28);
-  background: rgba(255, 255, 255, 0.88);
-  color: #287c58;
-}
-
-.estante-page:not(.livro-page) .estante-featured-shell {
-  gap: 26px;
-}
-
-.estante-page:not(.livro-page) .estante-featured-card {
-  grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
-  gap: 42px;
-  align-items: center;
-  padding: 34px;
-  border-color: rgba(185, 199, 199, 0.48);
-  border-radius: 16px;
-  background: rgba(255, 253, 248, 0.78);
-  box-shadow: 0 16px 42px rgba(16, 36, 47, 0.05);
-}
-
-.estante-page:not(.livro-page) .estante-featured-card .estante-cover-frame {
-  max-width: 260px;
-}
-
-.estante-page:not(.livro-page) .estante-featured-copy {
-  gap: 14px;
-}
-
-.estante-page:not(.livro-page) .estante-featured-copy h3 {
-  max-width: 680px;
-  font-size: 3rem;
-  letter-spacing: 0;
-}
-
-.estante-page:not(.livro-page) .estante-featured-value {
-  display: grid;
-  gap: 8px;
-  max-width: 640px;
-  padding-top: 4px;
-}
-
-.estante-page:not(.livro-page) .estante-featured-value p,
-.estante-page:not(.livro-page) .estante-partner-note {
-  margin: 0;
-}
-
-.estante-page:not(.livro-page) .estante-meta span {
+.estante-page .estante-meta span,
+.estante-page .book-note-status {
+  min-height: 24px;
+  padding: 0 10px;
   border-color: rgba(40, 124, 88, 0.12);
-  background: rgba(40, 124, 88, 0.07);
-  color: rgba(31, 109, 76, 0.86);
-  font-weight: 600;
-}
-
-.estante-page:not(.livro-page) .estante-author {
-  color: rgba(70, 84, 92, 0.68);
+  border-radius: 7px;
+  background: rgba(40, 124, 88, 0.068);
+  color: rgba(35, 111, 80, 0.86);
   font-weight: 500;
 }
 
-.estante-page:not(.livro-page) .estante-cover-frame {
+.estante-page .estante-primary-action,
+.estante-page .estante-secondary-action,
+.estante-page .book-note-card button {
+  min-height: 42px;
+  border-radius: 9px;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.estante-page .estante-primary-action,
+.estante-page .book-note-card button {
+  border-color: rgba(23, 50, 74, 0.22);
+  background: #17324a;
+  color: #ffffff;
+}
+
+.estante-page .estante-primary-action:hover,
+.estante-page .book-note-card button:hover {
+  border-color: rgba(23, 50, 74, 0.34);
+  background: #102a40;
+}
+
+.estante-page .estante-secondary-action,
+.estante-page .estante-purchase-link {
+  border-color: rgba(185, 199, 199, 0.62);
+  background: rgba(255, 255, 255, 0.56);
+  color: #17324a;
+}
+
+.estante-page .estante-secondary-action:hover,
+.estante-page .estante-purchase-link:hover {
+  border-color: rgba(40, 124, 88, 0.26);
+  background: rgba(255, 255, 255, 0.9);
+  color: #287c58;
+}
+
+.estante-page .estante-cover-frame,
+.estante-page .book-cover-panel {
+  aspect-ratio: 2 / 3;
   border-color: rgba(16, 36, 47, 0.12);
-  border-radius: 10px;
-  background: #10242f;
-  box-shadow: 0 18px 32px rgba(16, 36, 47, 0.11);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 18px 34px rgba(16, 36, 47, 0.095);
 }
 
-.estante-page:not(.livro-page) .estante-book-cover {
+.estante-page .estante-cover-frame::after,
+.estante-page .book-cover-panel::after {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24), inset 10px 0 18px rgba(16, 36, 47, 0.07);
+}
+
+.estante-page .estante-book-cover,
+.estante-page .book-cover-image {
+  background: rgba(255, 255, 255, 0.86);
   object-fit: cover;
+  object-position: center;
 }
 
-.estante-page:not(.livro-page) .estante-cover-fallback {
+.estante-page .estante-cover-frame--fallback,
+.estante-page .book-cover-panel:not(.has-real-cover) {
+  background: linear-gradient(145deg, #10242f, #214b48);
+  color: #f9fbf8;
+}
+
+.estante-page .estante-cover-fallback {
   position: relative;
   z-index: 1;
   display: none;
@@ -1196,21 +1146,29 @@ body.estante-page:not(.livro-page) {
   text-align: center;
 }
 
-.estante-page:not(.livro-page) .estante-cover-frame--fallback .estante-cover-fallback {
+.estante-page .estante-cover-frame--fallback .estante-cover-fallback {
   display: grid;
 }
 
-.estante-page:not(.livro-page) .estante-cover-fallback strong {
+.estante-page .estante-cover-fallback small {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.075em;
+  line-height: 1.2;
+  text-transform: lowercase;
+}
+
+.estante-page .estante-cover-fallback strong {
   max-width: 86%;
   color: #ffffff;
   font-size: 1.3rem;
   font-weight: 700;
   line-height: 1.08;
-  letter-spacing: 0;
   text-transform: lowercase;
 }
 
-.estante-page:not(.livro-page) .estante-cover-fallback span {
+.estante-page .estante-cover-fallback span {
   position: static;
   max-width: 86%;
   color: rgba(255, 255, 255, 0.72);
@@ -1221,258 +1179,167 @@ body.estante-page:not(.livro-page) {
   text-transform: lowercase;
 }
 
+.estante-page:not(.livro-page) .estante-main {
+  padding-top: 34px;
+}
+
+.estante-page:not(.livro-page) .estante-hero-shell {
+  gap: 72px;
+  padding: 74px 0 68px;
+}
+
+.estante-page:not(.livro-page) .estante-hero-copy {
+  gap: 16px;
+}
+
+.estante-page:not(.livro-page) .estante-hero h1 {
+  max-width: 730px;
+  font-size: 4.45rem;
+  line-height: 0.98;
+}
+
+.estante-page:not(.livro-page) .estante-hero p {
+  max-width: 540px;
+}
+
+.estante-page:not(.livro-page) .estante-hero-actions {
+  margin-top: 12px;
+}
+
+.estante-page:not(.livro-page) .estante-hero-note {
+  align-self: center;
+  padding: 30px;
+  border-color: rgba(185, 199, 199, 0.42);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.42);
+  box-shadow: none;
+}
+
+.estante-page:not(.livro-page) .estante-hero-note strong {
+  max-width: 270px;
+  font-weight: 600;
+  line-height: 1.16;
+}
+
+.estante-page:not(.livro-page) .estante-featured-shell,
+.estante-page:not(.livro-page) .estante-grid-shell {
+  gap: 30px;
+}
+
+.estante-page:not(.livro-page) .estante-featured-card {
+  grid-template-columns: minmax(230px, 280px) minmax(0, 1fr);
+  gap: 50px;
+  padding: 38px;
+  border-color: rgba(185, 199, 199, 0.46);
+  border-radius: 16px;
+  background: rgba(255, 253, 248, 0.76);
+  box-shadow: 0 18px 40px rgba(16, 36, 47, 0.045);
+}
+
+.estante-page:not(.livro-page) .estante-featured-card .estante-cover-frame {
+  width: min(280px, 100%);
+  max-width: 280px;
+}
+
+.estante-page:not(.livro-page) .estante-featured-copy {
+  gap: 15px;
+}
+
+.estante-page:not(.livro-page) .estante-featured-copy h3 {
+  max-width: 640px;
+  font-size: 2.8rem;
+  line-height: 1.04;
+}
+
+.estante-page:not(.livro-page) .estante-featured-value {
+  display: grid;
+  gap: 8px;
+  max-width: 620px;
+  padding-top: 8px;
+}
+
+.estante-page:not(.livro-page) .estante-featured-value span {
+  color: rgba(70, 84, 92, 0.62);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.075em;
+  line-height: 1.2;
+  text-transform: lowercase;
+}
+
+.estante-page:not(.livro-page) .estante-featured-value p {
+  margin: 0;
+}
+
+.estante-page:not(.livro-page) .estante-partner-note,
+.livro-page .book-purchase-note,
+.livro-page .book-purchase-muted {
+  color: rgba(70, 84, 92, 0.58);
+}
+
 .estante-page:not(.livro-page) .estante-controls {
-  margin: 34px 0 42px;
+  margin: 42px 0 52px;
 }
 
 .estante-page:not(.livro-page) .estante-controls-shell {
-  grid-template-columns: minmax(0, 760px) auto;
-  gap: 14px;
-  align-items: center;
+  grid-template-columns: minmax(0, 720px) auto;
 }
 
 .estante-page:not(.livro-page) .estante-search input {
-  min-height: 52px;
-  border-color: rgba(185, 199, 199, 0.56);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.64);
-  box-shadow: none;
-  font-weight: 400;
+  min-height: 50px;
+  border-color: rgba(185, 199, 199, 0.5);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.6);
 }
 
-.estante-page:not(.livro-page) .estante-search input:focus,
-.estante-page:not(.livro-page) .estante-search input:focus-visible {
-  border-color: rgba(40, 124, 88, 0.34);
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 0 0 3px rgba(40, 124, 88, 0.08);
-}
-
-.estante-page:not(.livro-page) .estante-search-clear {
-  color: rgba(70, 84, 92, 0.62);
-  font-weight: 500;
-}
-
-.estante-page:not(.livro-page) .estante-section-head--split {
-  gap: 18px;
+.estante-page:not(.livro-page) .estante-section-head h2,
+.livro-page .book-section-head h2,
+.livro-page .book-section h2 {
+  line-height: 1.04;
 }
 
 .estante-page:not(.livro-page) .estante-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
 }
 
 .estante-page:not(.livro-page) .estante-card {
-  gap: 18px;
-  padding: 18px;
-  border-color: rgba(185, 199, 199, 0.44);
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 20px;
+  min-height: 230px;
+  padding: 20px;
+  border-color: rgba(185, 199, 199, 0.42);
   border-radius: 12px;
-  background: rgba(255, 253, 248, 0.58);
+  background: rgba(255, 253, 248, 0.64);
   box-shadow: none;
 }
 
 .estante-page:not(.livro-page) .estante-card:hover {
-  border-color: rgba(40, 124, 88, 0.22);
-  box-shadow: 0 14px 30px rgba(16, 36, 47, 0.045);
+  border-color: rgba(40, 124, 88, 0.2);
+  box-shadow: 0 14px 32px rgba(16, 36, 47, 0.04);
   transform: translateY(-1px);
 }
 
 .estante-page:not(.livro-page) .estante-card .estante-cover-frame {
-  box-shadow: 0 14px 24px rgba(16, 36, 47, 0.1);
+  width: 132px;
+  max-width: 132px;
+  box-shadow: 0 12px 22px rgba(16, 36, 47, 0.085);
 }
 
 .estante-page:not(.livro-page) .estante-card-copy {
-  gap: 10px;
-}
-
-.estante-page:not(.livro-page) .estante-card-copy h3 {
-  font-size: 1.28rem;
-  letter-spacing: 0;
-}
-
-.estante-page:not(.livro-page) .estante-card-copy p {
-  color: rgba(70, 84, 92, 0.72);
-  line-height: 1.68;
-}
-
-.estante-page:not(.livro-page) .estante-card-impact {
-  width: fit-content;
-  margin-top: 2px;
-  padding-top: 9px;
-  border-top: 1px solid rgba(185, 199, 199, 0.52);
-  color: #287c58;
-  font-size: 0.88rem;
-  font-weight: 500;
-}
-
-.estante-page:not(.livro-page) .estante-card-actions {
-  gap: 12px;
-  margin-top: 4px;
-}
-
-.estante-page:not(.livro-page) .estante-card-link,
-.estante-page:not(.livro-page) .estante-purchase-text {
-  min-height: auto;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #17324a;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.estante-page:not(.livro-page) .estante-purchase-text {
-  color: rgba(70, 84, 92, 0.7);
-  font-weight: 500;
-}
-
-.estante-page:not(.livro-page) .estante-card-link:hover,
-.estante-page:not(.livro-page) .estante-purchase-text:hover {
-  color: #287c58;
-  transform: none;
-}
-
-.estante-page:not(.livro-page) .estante-purchase-muted {
-  align-self: center;
-  color: rgba(70, 84, 92, 0.62);
-  font-size: 0.86rem;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.estante-page:not(.livro-page) .estante-how {
-  margin-top: 58px;
-}
-
-.estante-page:not(.livro-page) .estante-how-shell {
-  padding: 34px 0 0;
-  border: 0;
-  border-top: 1px solid rgba(185, 199, 199, 0.54);
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-.estante-page:not(.livro-page) .estante-how-list {
-  gap: 22px;
-}
-
-.estante-page:not(.livro-page) .estante-how-list article {
-  padding-top: 16px;
-  border-top-color: rgba(185, 199, 199, 0.48);
-}
-
-.estante-page:not(.livro-page) .estante-how-list span {
-  color: #a57c3f;
-  font-weight: 700;
-}
-
-.estante-page:not(.livro-page) .estante-how-list strong {
-  font-weight: 600;
-  letter-spacing: 0;
-}
-
-@media (max-width: 1024px) {
-  .estante-page:not(.livro-page) .estante-hero-shell,
-  .estante-page:not(.livro-page) .estante-featured-card,
-  .estante-page:not(.livro-page) .estante-controls-shell {
-    grid-template-columns: 1fr;
-  }
-
-  .estante-page:not(.livro-page) .estante-featured-card .estante-cover-frame {
-    justify-self: start;
-    width: min(260px, 100%);
-  }
-}
-
-@media (max-width: 720px) {
-  .estante-page:not(.livro-page) .estante-main {
-    padding-top: 18px;
-  }
-
-  .estante-page:not(.livro-page) .estante-hero-shell {
-    gap: 26px;
-    padding: 34px 0 38px;
-  }
-
-  .estante-page:not(.livro-page) .estante-hero h1 {
-    font-size: 2.85rem;
-    line-height: 1;
-  }
-
-  .estante-page:not(.livro-page) .estante-featured-card {
-    gap: 24px;
-    padding: 20px;
-  }
-
-  .estante-page:not(.livro-page) .estante-featured-card .estante-cover-frame {
-    justify-self: center;
-    width: min(230px, 100%);
-  }
-
-  .estante-page:not(.livro-page) .estante-featured-copy h3,
-  .estante-page:not(.livro-page) .estante-section-head h2 {
-    font-size: 2rem;
-  }
-
-  .estante-page:not(.livro-page) .estante-hero-actions,
-  .estante-page:not(.livro-page) .estante-card-actions {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .estante-page:not(.livro-page) .estante-primary-action,
-  .estante-page:not(.livro-page) .estante-secondary-action {
-    width: 100%;
-  }
-
-  .estante-page:not(.livro-page) .estante-card {
-    padding: 16px;
-  }
-}
-
-@media (max-width: 430px) {
-  .estante-page:not(.livro-page) .estante-hero h1 {
-    font-size: 2.42rem;
-  }
-}
-
-/* Correção de capas e leitura dos cards */
-.estante-page:not(.livro-page) .estante-book-cover,
-.livro-page .book-cover-image {
-  background: rgba(255, 255, 255, 0.86);
-  object-fit: contain;
-}
-
-.estante-page:not(.livro-page) .estante-card {
-  grid-template-columns: 118px minmax(0, 1fr);
-  gap: 18px;
-  align-items: start;
-  min-height: 238px;
-  padding: 18px;
-}
-
-.estante-page:not(.livro-page) .estante-card .estante-cover-frame {
-  justify-self: start;
-  width: 118px;
-  max-width: 118px;
-  box-shadow: 0 10px 18px rgba(16, 36, 47, 0.08);
-}
-
-.estante-page:not(.livro-page) .estante-card-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   min-width: 0;
   height: 100%;
-  gap: 8px;
-  align-content: start;
-}
-
-.estante-page:not(.livro-page) .estante-card-copy .estante-meta {
-  gap: 6px;
+  align-content: initial;
 }
 
 .estante-page:not(.livro-page) .estante-card-copy h3 {
-  margin-top: 2px;
-  font-size: 1.12rem;
-  line-height: 1.14;
+  margin: 2px 0 0;
+  font-size: 1.18rem;
+  line-height: 1.16;
 }
 
 .estante-page:not(.livro-page) .estante-card-copy p {
@@ -1482,81 +1349,324 @@ body.estante-page:not(.livro-page) {
 
 .estante-page:not(.livro-page) .estante-card-impact {
   width: 100%;
-  margin-top: 0;
-  padding-top: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid rgba(185, 199, 199, 0.46);
+  color: rgba(40, 124, 88, 0.9);
+  font-weight: 500;
 }
 
 .estante-page:not(.livro-page) .estante-card-actions {
   flex-direction: row;
+  gap: 8px 13px;
   align-items: center;
-  gap: 8px 12px;
-  margin-top: 2px;
+  margin-top: 0;
 }
 
 .estante-page:not(.livro-page) .estante-card-link,
 .estante-page:not(.livro-page) .estante-purchase-text {
   width: auto;
+  min-height: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #17324a;
+  font-size: 0.9rem;
+  font-weight: 600;
   line-height: 1.25;
+  text-decoration: none;
+}
+
+.estante-page:not(.livro-page) .estante-purchase-text {
+  color: rgba(70, 84, 92, 0.66);
+  font-weight: 500;
+}
+
+.estante-page:not(.livro-page) .estante-card-link:hover,
+.estante-page:not(.livro-page) .estante-purchase-text:hover {
+  color: #287c58;
+  transform: none;
+}
+
+.estante-page:not(.livro-page) .estante-how {
+  margin-top: 70px;
+}
+
+.estante-page:not(.livro-page) .estante-how-shell {
+  gap: 28px;
+  padding: 36px 0 0;
+  border-top: 1px solid rgba(185, 199, 199, 0.5);
+}
+
+.estante-page:not(.livro-page) .estante-how-list {
+  gap: 28px;
+}
+
+.estante-page:not(.livro-page) .estante-how-list article {
+  padding-top: 18px;
+}
+
+.estante-page:not(.livro-page) .estante-how-list span {
+  color: #a57c3f;
+  font-weight: 700;
+}
+
+.livro-page .book-main {
+  padding-top: 42px;
+}
+
+.livro-page .book-shell {
+  gap: 34px;
+}
+
+.livro-page .book-hero {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  gap: 72px;
+  align-items: center;
+  padding: 54px 0 38px;
+}
+
+.livro-page .book-hero-copy {
+  gap: 16px;
+}
+
+.livro-page .book-hero h1 {
+  max-width: 680px;
+  font-size: 4rem;
+  line-height: 0.98;
+}
+
+.livro-page .book-description {
+  max-width: 610px;
+}
+
+.livro-page .book-author {
+  color: rgba(70, 84, 92, 0.68);
+  font-weight: 500;
+}
+
+.livro-page .book-cover-panel {
+  justify-self: end;
+  width: min(340px, 100%);
+  max-width: 340px;
 }
 
 .livro-page .book-cover-panel.has-real-cover {
   background: rgba(255, 255, 255, 0.72);
-  box-shadow: 0 18px 34px rgba(16, 36, 47, 0.1);
+  box-shadow: 0 20px 36px rgba(16, 36, 47, 0.1);
 }
 
 .livro-page .book-cover-panel.has-real-cover::before {
   display: none;
 }
 
-.livro-page .book-cover-panel.has-real-cover::after {
-  box-shadow: inset 0 0 0 1px rgba(16, 36, 47, 0.08), inset 10px 0 18px rgba(0, 0, 0, 0.08);
+.livro-page .book-hero-actions {
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.livro-page .book-cover-panel.has-real-cover .book-cover-image {
-  position: relative;
-  z-index: 1;
+.livro-page .book-section,
+.livro-page .book-state {
+  border-color: rgba(185, 199, 199, 0.44);
+  border-radius: 16px;
+  background: rgba(255, 253, 248, 0.68);
+  box-shadow: none;
+}
+
+.livro-page .book-section {
+  display: grid;
+  gap: 18px;
+  padding: 32px;
+}
+
+.livro-page .book-why p,
+.livro-page .book-practice p {
+  margin-top: 0;
+}
+
+.livro-page .book-idea-grid,
+.livro-page .book-connections {
+  gap: 14px;
+}
+
+.livro-page .book-idea,
+.livro-page .book-question-list li,
+.livro-page .book-connections a,
+.livro-page .book-note-card {
+  border-color: rgba(185, 199, 199, 0.44);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.54);
+  box-shadow: none;
+}
+
+.livro-page .book-idea span {
+  color: #a57c3f;
+  font-weight: 700;
+}
+
+.livro-page .book-connections a {
+  padding: 18px;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.livro-page .book-connections a:hover {
+  border-color: rgba(40, 124, 88, 0.2);
+  background: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+}
+
+.livro-page .book-my-notes {
+  border-color: rgba(165, 124, 63, 0.22);
+  background: rgba(255, 249, 238, 0.52);
+}
+
+.livro-page .book-note-card label {
+  font-weight: 600;
+}
+
+.livro-page .book-note-card textarea {
+  min-height: 126px;
+  border-color: rgba(185, 199, 199, 0.56);
+  background: rgba(255, 255, 255, 0.72);
 }
 
 @media (max-width: 1120px) {
+  .estante-page:not(.livro-page) .estante-grid {
+    grid-template-columns: 1fr;
+  }
+
   .estante-page:not(.livro-page) .estante-card {
-    grid-template-columns: 108px minmax(0, 1fr);
+    grid-template-columns: 128px minmax(0, 1fr);
   }
 
   .estante-page:not(.livro-page) .estante-card .estante-cover-frame {
-    width: 108px;
-    max-width: 108px;
+    width: 128px;
+    max-width: 128px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .estante-page:not(.livro-page) .estante-hero-shell,
+  .estante-page:not(.livro-page) .estante-featured-card,
+  .livro-page .book-hero {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .livro-page .book-cover-panel {
+    justify-self: start;
   }
 }
 
 @media (max-width: 720px) {
+  .estante-main,
+  .book-main,
+  .livro-page .book-main {
+    padding-top: 18px;
+    padding-bottom: 64px;
+  }
+
+  .estante-page:not(.livro-page) .estante-hero-shell {
+    gap: 28px;
+    padding: 38px 0 42px;
+  }
+
+  .estante-page:not(.livro-page) .estante-hero h1,
+  .livro-page .book-hero h1 {
+    font-size: 2.7rem;
+    line-height: 1;
+  }
+
+  .estante-page:not(.livro-page) .estante-hero-note {
+    padding: 24px;
+  }
+
+  .estante-page:not(.livro-page) .estante-featured-card {
+    gap: 26px;
+    padding: 22px;
+  }
+
+  .estante-page:not(.livro-page) .estante-featured-card .estante-cover-frame {
+    justify-self: center;
+    width: min(230px, 100%);
+  }
+
+  .estante-page:not(.livro-page) .estante-featured-copy h3,
+  .estante-page:not(.livro-page) .estante-section-head h2,
+  .livro-page .book-section-head h2,
+  .livro-page .book-section h2 {
+    font-size: 1.92rem;
+  }
+
+  .estante-page:not(.livro-page) .estante-controls {
+    margin: 34px 0 42px;
+  }
+
+  .estante-page:not(.livro-page) .estante-controls-shell {
+    grid-template-columns: 1fr;
+  }
+
   .estante-page:not(.livro-page) .estante-card {
-    grid-template-columns: 94px minmax(0, 1fr);
-    gap: 14px;
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 15px;
     min-height: 0;
+    padding: 16px;
   }
 
   .estante-page:not(.livro-page) .estante-card .estante-cover-frame {
-    width: 94px;
-    max-width: 94px;
+    width: 104px;
+    max-width: 104px;
   }
 
   .estante-page:not(.livro-page) .estante-card-copy h3 {
-    font-size: 1.05rem;
+    font-size: 1.06rem;
   }
 
   .estante-page:not(.livro-page) .estante-card-actions {
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+  }
+
+  .livro-page .book-hero {
+    gap: 26px;
+    padding: 34px 0 26px;
+  }
+
+  .livro-page .book-cover-panel {
+    order: -1;
+    justify-self: center;
+    width: min(250px, 100%);
+  }
+
+  .livro-page .book-section {
+    padding: 22px;
+  }
+
+  .livro-page .book-idea-grid,
+  .livro-page .book-connections {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 430px) {
+  .estante-page:not(.livro-page) .estante-hero h1,
+  .livro-page .book-hero h1 {
+    font-size: 2.34rem;
+  }
+
   .estante-page:not(.livro-page) .estante-card {
-    grid-template-columns: 86px minmax(0, 1fr);
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 13px;
+    padding: 14px;
   }
 
   .estante-page:not(.livro-page) .estante-card .estante-cover-frame {
-    width: 86px;
-    max-width: 86px;
+    width: 92px;
+    max-width: 92px;
+  }
+
+  .estante-page:not(.livro-page) .estante-card-copy p {
+    font-size: 0.91rem;
   }
 }
