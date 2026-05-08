@@ -3789,3 +3789,251 @@ body.dashboard-page--lite[data-page="dashboard"] {
   }
 }
 
+
+/* =========================================================
+   Premium internal menu override | artigos estáticos
+   Padroniza o menu dos artigos com a área logada
+   ========================================================= */
+
+body.app-article-page .site-header,
+body.app-article-page .dashboard-header,
+body.app-category-page .site-header,
+body.app-category-page .dashboard-header,
+body.short-edition-page .site-header,
+body.short-edition-page .dashboard-header {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  z-index: 10 !important;
+  overflow: visible;
+  background: linear-gradient(
+    180deg,
+    rgba(249, 250, 247, 0.98) 0%,
+    rgba(249, 250, 247, 0.94) 72%,
+    rgba(249, 250, 247, 0.82) 100%
+  ) !important;
+  border-bottom: 1px solid rgba(16, 36, 47, 0.025) !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+body.app-article-page .site-header::after,
+body.app-category-page .site-header::after,
+body.short-edition-page .site-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -34px;
+  height: 34px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(249, 250, 247, 0.62) 0%,
+    rgba(245, 249, 249, 0.38) 38%,
+    rgba(241, 247, 248, 0.16) 68%,
+    rgba(241, 247, 248, 0) 100%
+  );
+}
+
+body.app-article-page .header-inner,
+body.app-category-page .header-inner,
+body.short-edition-page .header-inner {
+  min-height: 92px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(24px, 4vw, 48px);
+}
+
+body.app-article-page .brand,
+body.app-category-page .brand,
+body.short-edition-page .brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: max-content;
+}
+
+body.app-article-page .brand-name,
+body.app-category-page .brand-name,
+body.short-edition-page .brand-name {
+  color: #10242f !important;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+body.app-article-page .main-nav,
+body.app-category-page .main-nav,
+body.short-edition-page .main-nav {
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-width: 0;
+}
+
+body.app-article-page .main-nav a,
+body.app-category-page .main-nav a,
+body.short-edition-page .main-nav a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: auto;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: rgba(54, 70, 80, 0.68) !important;
+  font-size: 0.9rem;
+  font-weight: 500 !important;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+body.app-article-page .main-nav a::after,
+body.app-category-page .main-nav a::after,
+body.short-edition-page .main-nav a::after {
+  content: none !important;
+  display: none !important;
+}
+
+body.app-article-page .main-nav a + a,
+body.app-category-page .main-nav a + a,
+body.short-edition-page .main-nav a + a {
+  margin-left: 26px;
+}
+
+body.app-article-page .main-nav a + a::before,
+body.app-category-page .main-nav a + a::before,
+body.short-edition-page .main-nav a + a::before {
+  content: "|";
+  display: inline-block;
+  margin-right: 24px;
+  color: rgba(54, 70, 80, 0.2);
+  font-weight: 300;
+}
+
+body.app-article-page .main-nav a:hover,
+body.app-category-page .main-nav a:hover,
+body.short-edition-page .main-nav a:hover,
+body.app-article-page .main-nav a:focus-visible,
+body.app-category-page .main-nav a:focus-visible,
+body.short-edition-page .main-nav a:focus-visible {
+  color: #10242f !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.app-article-page .main-nav a.is-current,
+body.app-category-page .main-nav a.is-current,
+body.short-edition-page .main-nav a.is-current,
+body.app-article-page .main-nav a[aria-current="page"],
+body.app-category-page .main-nav a[aria-current="page"],
+body.short-edition-page .main-nav a[aria-current="page"] {
+  color: rgba(16, 36, 47, 0.82) !important;
+  font-weight: 500 !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+body.app-article-page .header-actions,
+body.app-category-page .header-actions,
+body.short-edition-page .header-actions {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+}
+
+body.app-article-page .header-login,
+body.app-category-page .header-login,
+body.short-edition-page .header-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: rgba(54, 70, 80, 0.62) !important;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
+  text-decoration: none;
+  transition: color 180ms ease, text-decoration-color 180ms ease;
+}
+
+body.app-article-page .header-login:hover,
+body.app-category-page .header-login:hover,
+body.short-edition-page .header-login:hover,
+body.app-article-page .header-login:focus-visible,
+body.app-category-page .header-login:focus-visible,
+body.short-edition-page .header-login:focus-visible {
+  color: #10242f !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+body.app-article-page .app-article-main,
+body.app-category-page .app-category-main,
+body.short-edition-page .short-edition-main {
+  padding-top: 22px;
+}
+
+@media (max-width: 860px) {
+  body.app-article-page .header-inner,
+  body.app-category-page .header-inner,
+  body.short-edition-page .header-inner {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 18px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+
+  body.app-article-page .main-nav,
+  body.app-category-page .main-nav,
+  body.short-edition-page .main-nav {
+    justify-self: start;
+    justify-content: flex-start;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  body.app-article-page .main-nav::-webkit-scrollbar,
+  body.app-category-page .main-nav::-webkit-scrollbar,
+  body.short-edition-page .main-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  body.app-article-page .main-nav a,
+  body.app-category-page .main-nav a,
+  body.short-edition-page .main-nav a {
+    flex: 0 0 auto;
+    font-size: 0.9rem;
+  }
+
+  body.app-article-page .header-actions,
+  body.app-category-page .header-actions,
+  body.short-edition-page .header-actions {
+    justify-self: start;
+  }
+}
+
