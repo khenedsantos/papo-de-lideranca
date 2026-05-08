@@ -63,6 +63,7 @@
       const levelButton = event.target.closest("[data-level]");
       const clearButton = event.target.closest("[data-estante-clear]");
       const searchClearButton = event.target.closest("[data-estante-search-clear]");
+      const purchaseLink = event.target.closest("[data-purchase-link]");
 
       if (categoryButton) {
         state.filters.category = categoryButton.dataset.category || "all";
@@ -77,6 +78,10 @@
       if (clearButton || searchClearButton) {
         resetFilters();
         renderBooks();
+      }
+
+      if (purchaseLink) {
+        dispatchPurchaseClick(purchaseLink);
       }
     });
   }
@@ -114,7 +119,7 @@
   function normalizeBook(book) {
     const title = book.title || "livro";
     const author = book.author || "autor";
-    const purchaseUrl = book.purchaseUrl || "";
+    const purchaseUrl = sanitizePurchaseUrl(book.purchaseUrl);
     const purchaseProvider = book.purchaseProvider || (purchaseUrl ? "parceiro indicado" : "");
     const curationNote = book.curationNote || book.whyRead || book.description || "";
     const impactLabel = book.impactLabel || [book.category, formatLevel(book.level)].filter(Boolean).join(" · ") || "para ler com intenção";
@@ -126,7 +131,7 @@
       purchaseUrl,
       purchaseLabel: book.purchaseLabel || DEFAULT_PURCHASE_LABEL,
       purchaseProvider,
-      hasPurchaseUrl: Boolean(purchaseUrl || book.hasPurchaseUrl),
+      hasPurchaseUrl: Boolean(purchaseUrl),
       curationNote,
       impactLabel,
     };
@@ -200,7 +205,7 @@
         </div>
         <div class="estante-card-actions">
           <a class="estante-primary-action" href="./livro.html?slug=${encodeURIComponent(featured.slug)}">abrir leitura guiada</a>
-          ${renderPurchaseAction(featured)}
+          ${renderPurchaseAction(featured, { source: "estante-featured" })}
         </div>
         ${featured.purchaseUrl ? '<p class="estante-partner-note">a compra acontece fora do Papo de Liderança, pelo parceiro indicado.</p>' : ""}
       </div>
@@ -210,7 +215,7 @@
   function renderBookCard(book) {
     return `
       <article class="estante-card">
-        ${renderCover(book, { loading: "eager" })}
+        ${renderCover(book, { loading: "lazy" })}
         <div class="estante-card-copy">
           <div class="estante-meta">
             <span>${escapeHtml(book.category)}</span>
@@ -222,7 +227,7 @@
           <p class="estante-card-impact">${escapeHtml(book.impactLabel || "para ler com intenção")}</p>
           <div class="estante-card-actions">
             <a class="estante-card-link" href="./livro.html?slug=${encodeURIComponent(book.slug)}">abrir leitura guiada</a>
-            ${renderPurchaseAction(book, { compact: true })}
+            ${renderPurchaseAction(book, { compact: true, source: "estante-card" })}
           </div>
         </div>
       </article>
@@ -270,10 +275,22 @@
       : "estante-secondary-action estante-purchase-link";
 
     return `
-      <a class="${className}" href="${escapeHtml(book.purchaseUrl)}" target="_blank" rel="noopener noreferrer">
+      <a class="${className}" href="${escapeHtml(book.purchaseUrl)}" target="_blank" rel="noopener noreferrer" data-purchase-link data-book-slug="${escapeHtml(book.slug || "")}" data-book-title="${escapeHtml(book.title || "")}" data-purchase-provider="${escapeHtml(book.purchaseProvider || "")}" data-purchase-source="${escapeHtml(options.source || "estante-card")}">
         ${escapeHtml(label === "ver opção de compra" ? DEFAULT_PURCHASE_LABEL : label)}
       </a>
     `;
+  }
+
+  function dispatchPurchaseClick(link) {
+    window.dispatchEvent(new CustomEvent("papo:book-purchase-click", {
+      detail: {
+        slug: link.dataset.bookSlug || "",
+        title: link.dataset.bookTitle || "",
+        provider: link.dataset.purchaseProvider || "",
+        url: link.href || "",
+        source: link.dataset.purchaseSource || "estante-card",
+      },
+    }));
   }
 
   function handleCoverError(event) {
@@ -414,6 +431,18 @@
     }
 
     return url;
+  }
+
+  function sanitizePurchaseUrl(value) {
+    const url = String(value || "").trim();
+    if (!url) return "";
+
+    try {
+      const parsed = new URL(url);
+      return parsed.protocol === "http:" || parsed.protocol === "https:" ? url : "";
+    } catch (error) {
+      return "";
+    }
   }
 
   function getCoverTitle(title) {

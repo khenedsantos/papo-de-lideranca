@@ -933,3 +933,31 @@ body.app-article-page .header-login:focus-visible {
     justify-self: end;
   }
 }
+
+@media (max-width: 560px) {
+  .dashboard-page.dashboard-page--lite .dashboard-header .header-inner {
+    gap: 14px;
+  }
+
+  .dashboard-page.dashboard-page--lite .dashboard-header .main-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px clamp(12px, 4vw, 16px);
+    width: 100%;
+    max-width: 100%;
+    overflow-x: visible;
+    padding-bottom: 0;
+  }
+
+  .dashboard-page.dashboard-page--lite .dashboard-header .main-nav a {
+    flex: 0 0 auto;
+  }
+
+  .dashboard-page.dashboard-page--lite .dashboard-header .main-nav a + a {
+    margin-left: 0;
+  }
+
+  .dashboard-page.dashboard-page--lite .dashboard-header .main-nav a + a::before {
+    content: none !important;
+  }
+}

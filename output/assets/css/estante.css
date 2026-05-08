@@ -1629,14 +1629,14 @@ body.estante-page {
   }
 
   .livro-page .book-hero {
-    gap: 26px;
-    padding: 34px 0 26px;
+    gap: 22px;
+    padding: 26px 0 24px;
   }
 
   .livro-page .book-cover-panel {
-    order: -1;
-    justify-self: center;
-    width: min(250px, 100%);
+    order: 0;
+    justify-self: start;
+    width: min(190px, 52vw);
   }
 
   .livro-page .book-section {
@@ -1653,6 +1653,15 @@ body.estante-page {
   .estante-page:not(.livro-page) .estante-hero h1,
   .livro-page .book-hero h1 {
     font-size: 2.34rem;
+  }
+
+  .livro-page .book-hero {
+    gap: 18px;
+    padding-top: 22px;
+  }
+
+  .livro-page .book-cover-panel {
+    width: min(170px, 48vw);
   }
 
   .estante-page:not(.livro-page) .estante-card {

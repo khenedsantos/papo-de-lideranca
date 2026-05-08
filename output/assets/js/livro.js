@@ -26,6 +26,7 @@
     related: {
       articles: [],
       shortEditions: [],
+      isAvailable: false,
     },
   };
 
@@ -50,15 +51,13 @@
       const api = getApi();
       const [detail, related] = await Promise.all([
         api.apiFetch(`/books/${encodeURIComponent(slug)}`),
-        api.apiFetch(`/books/${encodeURIComponent(slug)}/related`).catch(() => ({
-          articles: [],
-          shortEditions: [],
-        })),
+        api.apiFetch(`/books/${encodeURIComponent(slug)}/related`).catch(() => null),
       ]);
 
       state.detail = detail;
-      state.related.articles = related.articles || [];
-      state.related.shortEditions = related.shortEditions || [];
+      state.related.isAvailable = Boolean(related);
+      state.related.articles = related && Array.isArray(related.articles) ? related.articles : [];
+      state.related.shortEditions = related && Array.isArray(related.shortEditions) ? related.shortEditions : [];
 
       renderBook();
     } catch (error) {
@@ -72,6 +71,13 @@
   }
 
   function bindEvents() {
+    document.addEventListener("click", (event) => {
+      const purchaseLink = event.target.closest("[data-purchase-link]");
+      if (purchaseLink) {
+        dispatchPurchaseClick(purchaseLink);
+      }
+    });
+
     document.addEventListener("input", (event) => {
       const textarea = event.target.closest("[data-note-textarea]");
       if (!textarea) return;
@@ -152,7 +158,7 @@
   function normalizeBook(book) {
     const title = book.title || "livro";
     const author = book.author || "autor";
-    const purchaseUrl = book.purchaseUrl || "";
+    const purchaseUrl = sanitizePurchaseUrl(book.purchaseUrl);
     const purchaseProvider = book.purchaseProvider || (purchaseUrl ? "parceiro indicado" : "");
 
     return {
@@ -178,6 +184,11 @@
       link.hidden = false;
       link.href = book.purchaseUrl;
       link.textContent = book.purchaseLabel || "comprar livro indicado";
+      link.setAttribute("data-purchase-link", "");
+      link.dataset.bookSlug = book.slug || "";
+      link.dataset.bookTitle = book.title || "";
+      link.dataset.purchaseProvider = book.purchaseProvider || "";
+      link.dataset.purchaseSource = "livro";
       muted.hidden = true;
       note.hidden = false;
       note.textContent = book.purchaseProvider
@@ -187,8 +198,26 @@
     }
 
     link.hidden = true;
+    link.removeAttribute("href");
+    link.removeAttribute("data-purchase-link");
+    delete link.dataset.bookSlug;
+    delete link.dataset.bookTitle;
+    delete link.dataset.purchaseProvider;
+    delete link.dataset.purchaseSource;
     muted.hidden = false;
     note.hidden = true;
+  }
+
+  function dispatchPurchaseClick(link) {
+    window.dispatchEvent(new CustomEvent("papo:book-purchase-click", {
+      detail: {
+        slug: link.dataset.bookSlug || "",
+        title: link.dataset.bookTitle || "",
+        provider: link.dataset.purchaseProvider || "",
+        url: link.href || "",
+        source: "livro",
+      },
+    }));
   }
 
   function renderIdeas(ideas) {
@@ -226,8 +255,13 @@
     const section = document.querySelector("[data-book-connections-section]");
     if (!container || !section) return;
 
+    if (!state.related.isAvailable) {
+      section.hidden = true;
+      container.innerHTML = "";
+      return;
+    }
+
     const articleLinks = buildConnectionLinks({
-      slugs: book.relatedArticleSlugs,
       items: state.related.articles,
       label: "artigo",
       type: "article",
@@ -235,7 +269,6 @@
     });
 
     const editionLinks = buildConnectionLinks({
-      slugs: book.relatedShortEditionSlugs,
       items: state.related.shortEditions,
       label: "edição curta",
       type: "short-edition",
@@ -259,19 +292,18 @@
     `).join("");
   }
 
-  function buildConnectionLinks({ slugs, items, label, type, fallbackDescription }) {
+  function buildConnectionLinks({ items, label, type, fallbackDescription }) {
     const availableItems = Array.isArray(items) ? items : [];
 
-    return normalizeList(slugs).slice(0, RELATED_CONTENT_LIMIT).map((slug) => {
-      const item = availableItems.find((relatedItem) => relatedItem.slug === slug);
-
-      return {
+    return availableItems
+      .filter((item) => item && item.slug && item.title)
+      .slice(0, RELATED_CONTENT_LIMIT)
+      .map((item) => ({
         type: label,
-        title: item ? item.title : humanizeSlug(slug),
-        description: item ? item.summary || item.excerpt || fallbackDescription : fallbackDescription,
-        href: buildReadingUrl({ type, slug }),
-      };
-    });
+        title: item.title,
+        description: item.summary || item.excerpt || fallbackDescription,
+        href: buildReadingUrl({ type, slug: item.slug }),
+      }));
   }
 
   function renderCommunityNotes(notes) {
@@ -430,6 +462,18 @@
     }
 
     return url;
+  }
+
+  function sanitizePurchaseUrl(value) {
+    const url = String(value || "").trim();
+    if (!url) return "";
+
+    try {
+      const parsed = new URL(url);
+      return parsed.protocol === "http:" || parsed.protocol === "https:" ? url : "";
+    } catch (error) {
+      return "";
+    }
   }
 
   function statusLabel(status) {
