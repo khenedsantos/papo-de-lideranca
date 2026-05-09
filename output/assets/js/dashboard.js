@@ -28,15 +28,17 @@
     setFeedback("organizando sua área...", "");
 
     refreshInFlight = Promise.all([
-      auth.getCurrentUser(),
       auth.getAccountSummary(),
       auth.getReadingProgressSummary(),
-      auth.getReadingProgress(),
     ])
-      .then(([user, accountSummary, summary, progressList]) => {
-        renderUser(user || {}, accountSummary || {});
+      .then(([accountSummary, summary]) => {
+        const safeAccountSummary = accountSummary || {};
+        const storedUser = auth && auth.getStoredUser ?auth.getStoredUser() : {};
+        const user = safeAccountSummary.user || storedUser || {};
+
+        renderUser(user, safeAccountSummary);
         renderRoutine(summary || {});
-        renderContinueReading(findCurrentReading(progressList || [], summary || {}));
+        renderContinueReading(findCurrentReading(summary || {}));
         renderFeedback(summary && summary.feedback ?summary.feedback : null);
         setFeedback("", "");
       })
@@ -160,19 +162,7 @@
     );
   }
 
-  function findCurrentReading(progressList, summary) {
-    const candidates = (progressList || [])
-      .filter((item) => {
-        const percent = Number.parseInt(item.progressPercent || 0, 10);
-        return percent > 0 && percent < 100;
-      })
-      .sort((left, right) => {
-        const rightTime = new Date(right.updatedAt || right.lastReadAt || 0).getTime();
-        const leftTime = new Date(left.updatedAt || left.lastReadAt || 0).getTime();
-        return rightTime - leftTime;
-      });
-
-    if (candidates.length) return candidates[0];
+  function findCurrentReading(summary) {
     if (summary.currentReading) return summary.currentReading;
 
     return null;
