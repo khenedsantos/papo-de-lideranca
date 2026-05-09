@@ -83,6 +83,10 @@ type ReadingProgressRecord = Awaited<
   ReturnType<ReadingProgressService['findProgressRecords']>
 >[number];
 
+type ReadingProgressIndexRecord = Awaited<
+  ReturnType<ReadingProgressService['findProgressIndexRecords']>
+>[number];
+
 type DailyActivityPayload = {
   activityDate: Date;
   minutesRead: number;
@@ -96,6 +100,14 @@ export class ReadingProgressService {
   async listProgress(input: ListReadingProgressInput) {
     const progress = await this.findProgressRecords(input);
     return progress.map((item) => this.mapProgress(item));
+  }
+
+  async listProgressIndex(input: ListReadingProgressInput) {
+    const progress = await this.findProgressIndexRecords(input);
+
+    return progress
+      .map((item) => this.mapProgressIndex(item))
+      .filter((item): item is NonNullable<typeof item> => Boolean(item));
   }
 
   async getSummary(userId: string) {
@@ -838,6 +850,52 @@ export class ReadingProgressService {
     });
   }
 
+  private async findProgressIndexRecords(input: ListReadingProgressInput) {
+    return this.prisma.readingProgress.findMany({
+      where: {
+        userId: input.userId,
+        status: input.status,
+        articleId:
+          input.contentType === 'ARTICLE'
+            ?{
+                not: null,
+              }
+            : undefined,
+        shortEditionId:
+          input.contentType === 'SHORT_EDITION'
+            ?{
+                not: null,
+              }
+            : undefined,
+      },
+      orderBy: [
+        {
+          lastReadAt: 'desc',
+        },
+        {
+          updatedAt: 'desc',
+        },
+      ],
+      select: {
+        progressPercent: true,
+        status: true,
+        lastReadAt: true,
+        article: {
+          select: {
+            id: true,
+            slug: true,
+          },
+        },
+        shortEdition: {
+          select: {
+            id: true,
+            slug: true,
+          },
+        },
+      },
+    });
+  }
+
   private async resolveContent(input: {
     contentType: ReadingProgressContentType;
     contentId?: string;
@@ -982,6 +1040,30 @@ export class ReadingProgressService {
         publishedAt: content.publishedAt,
         category: content.category,
       },
+    };
+  }
+
+  private mapProgressIndex(progress: ReadingProgressIndexRecord) {
+    const article = progress.article;
+    const shortEdition = progress.shortEdition;
+    const contentType = article
+      ?'ARTICLE'
+      : shortEdition
+        ?'SHORT_EDITION'
+        : null;
+    const content = article ?? shortEdition;
+
+    if (!contentType || !content) {
+      return null;
+    }
+
+    return {
+      contentType,
+      contentId: content.id,
+      slug: content.slug,
+      progressPercent: progress.progressPercent,
+      status: progress.status,
+      lastReadAt: progress.lastReadAt,
     };
   }
 

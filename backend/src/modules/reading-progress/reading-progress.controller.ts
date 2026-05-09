@@ -25,6 +25,14 @@ export class ReadingProgressController {
     @CurrentUser() user: JwtPayload,
     @Query() query: ListReadingProgressQueryDto,
   ) {
+    if (query.projection === 'index') {
+      return this.readingProgressService.listProgressIndex({
+        userId: user.sub,
+        contentType: query.contentType,
+        status: query.status as ReadingProgressStatus | undefined,
+      });
+    }
+
     return this.readingProgressService.listProgress({
       userId: user.sub,
       contentType: query.contentType,

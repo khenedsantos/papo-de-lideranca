@@ -53,7 +53,7 @@
       auth.listCategories ?auth.listCategories() : Promise.resolve([]),
       auth.listArticles(),
       auth.listShortEditions(),
-      auth.getReadingProgress(),
+      getReadingProgressIndex(auth),
     ])
       .then((results) => {
         const [categoriesResult, articlesResult, editionsResult, progressResult] = results;
@@ -117,6 +117,14 @@
     if (lastLibraryLoadAt && Date.now() - lastLibraryLoadAt < LIBRARY_REFRESH_TTL_MS) return null;
 
     return loadLibrary(auth);
+  }
+
+  function getReadingProgressIndex(auth) {
+    if (auth && auth.apiFetch) {
+      return auth.apiFetch("/reading-progress?projection=index");
+    }
+
+    return auth.getReadingProgress();
   }
 
   function bindLibraryEvents() {
@@ -255,7 +263,7 @@
       const apiType = normalizeApiType(entry.contentType);
       const content = entry.content || {};
       const id = entry.contentId || content.id || "";
-      const slug = content.slug || "";
+      const slug = entry.slug || content.slug || "";
 
       if (apiType && id) index.set(`${apiType}:id:${String(id)}`, entry);
       if (apiType && slug) index.set(`${apiType}:slug:${String(slug)}`, entry);

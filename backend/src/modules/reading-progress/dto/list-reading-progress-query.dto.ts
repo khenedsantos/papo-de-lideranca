@@ -9,6 +9,10 @@ import {
 
 export class ListReadingProgressQueryDto {
   @IsOptional()
+  @IsIn(['index'])
+  projection?: 'index';
+
+  @IsOptional()
   @Transform(({ value }) => normalizeReadingProgressContentType(value))
   @IsIn(READING_PROGRESS_CONTENT_TYPES)
   contentType?: ReadingProgressContentType;
