@@ -39,7 +39,9 @@
     bindRefresh(auth);
   });
 
+  const LIBRARY_REFRESH_TTL_MS = 60 * 1000;
   let refreshInFlight = null;
+  let lastLibraryLoadAt = 0;
 
   async function loadLibrary(auth) {
     if (refreshInFlight) return refreshInFlight;
@@ -77,6 +79,7 @@
 
         renderCategoryFilters();
         renderLibrary();
+        lastLibraryLoadAt = Date.now();
       })
       .catch((error) => {
         setStateMessage(
@@ -102,10 +105,18 @@
     });
 
     document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "visible") loadLibrary(auth);
+      if (document.visibilityState === "visible") refreshLibraryIfStale(auth);
     });
 
-    window.addEventListener("focus", () => loadLibrary(auth));
+    window.addEventListener("focus", () => refreshLibraryIfStale(auth));
+  }
+
+  function refreshLibraryIfStale(auth) {
+    if (refreshInFlight) return refreshInFlight;
+    if (document.visibilityState && document.visibilityState !== "visible") return null;
+    if (lastLibraryLoadAt && Date.now() - lastLibraryLoadAt < LIBRARY_REFRESH_TTL_MS) return null;
+
+    return loadLibrary(auth);
   }
 
   function bindLibraryEvents() {
