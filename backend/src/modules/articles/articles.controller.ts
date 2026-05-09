@@ -1,6 +1,8 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { ArticlesService } from './articles.service';
 
+@UseGuards(JwtAuthGuard)
 @Controller('articles')
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
@@ -15,4 +17,3 @@ export class ArticlesController {
     return this.articlesService.findBySlug(slug);
   }
 }
-
