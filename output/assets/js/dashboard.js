@@ -20,7 +20,9 @@
     bindDashboardRefresh(auth);
   });
 
+  const DASHBOARD_REFRESH_TTL_MS = 60 * 1000;
   let refreshInFlight = null;
+  let lastDashboardLoadAt = 0;
 
   async function loadDashboard(auth) {
     if (refreshInFlight) return refreshInFlight;
@@ -41,6 +43,7 @@
         renderContinueReading(findCurrentReading(summary || {}));
         renderFeedback(summary && summary.feedback ?summary.feedback : null);
         setFeedback("", "");
+        lastDashboardLoadAt = Date.now();
       })
       .catch((error) => {
         if (error && (error.status === 401 || error.status === 403)) {
@@ -69,10 +72,17 @@
     });
 
     document.addEventListener("visibilitychange", () => {
-      if (document.visibilityState === "visible") loadDashboard(auth);
+      if (document.visibilityState === "visible") refreshDashboardIfStale(auth);
     });
 
-    window.addEventListener("focus", () => loadDashboard(auth));
+    window.addEventListener("focus", () => refreshDashboardIfStale(auth));
+  }
+
+  function refreshDashboardIfStale(auth) {
+    if (refreshInFlight) return refreshInFlight;
+    if (lastDashboardLoadAt && Date.now() - lastDashboardLoadAt < DASHBOARD_REFRESH_TTL_MS) return null;
+
+    return loadDashboard(auth);
   }
 
   function bindLogout(auth) {
