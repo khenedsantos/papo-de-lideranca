@@ -74,7 +74,7 @@
       </div>
     </section>
 
-    <section class="library-controls library-controls--premium" aria-label="Filtros da biblioteca">
+    <section class="library-controls library-controls--premium" aria-label="Busca da biblioteca">
       <div class="container library-controls-shell">
         <div class="library-command-bar">
           <label class="library-search library-search--premium">
@@ -82,35 +82,8 @@
             <input type="search" placeholder="buscar por título, tema ou resumo" data-library-search autocomplete="off" aria-label="buscar no acervo">
           </label>
 
-          <div class="library-primary-filters" aria-label="Tipo de conteúdo">
-            <div class="library-chip-row" data-library-type-filters>
-              <button class="is-active" type="button" data-filter-type="all">todos</button>
-              <button type="button" data-filter-type="article">artigos</button>
-              <button type="button" data-filter-type="short-edition">edições curtas</button>
-            </div>
-          </div>
         </div>
 
-        <div class="library-secondary-filters">
-          <div class="library-filter-group" aria-label="Status da leitura">
-            <span>status</span>
-            <div class="library-chip-row" data-library-status-filters>
-              <button class="is-active" type="button" data-filter-status="all">todos</button>
-              <button type="button" data-filter-status="in-progress">em andamento</button>
-              <button type="button" data-filter-status="completed">concluídos</button>
-              <button type="button" data-filter-status="not-started">não iniciados</button>
-            </div>
-          </div>
-
-          <div class="library-filter-group library-filter-group--category" aria-label="Categorias" data-library-category-shell hidden>
-            <span>categoria</span>
-            <div class="library-chip-row" data-library-category-filters>
-              <button class="is-active" type="button" data-filter-category="all">todas</button>
-            </div>
-          </div>
-
-          <button class="library-clear-filters" type="button" data-library-clear hidden>limpar filtros</button>
-        </div>
       </div>
     </section>
 
@@ -192,4 +165,3 @@
   <script src="../assets/js/biblioteca.js?v=premium-20260501c"></script>
 </body>
 </html>
-

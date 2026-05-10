@@ -16,14 +16,10 @@
 
   const state = {
     auth: null,
-    categories: [],
     items: [],
     visibleItems: LIBRARY_INITIAL_VISIBLE_ITEMS,
     filters: {
       query: "",
-      type: "all",
-      status: "all",
-      category: "all",
     },
   };
 
@@ -60,7 +56,7 @@
       getReadingProgressIndex(auth),
     ])
       .then((results) => {
-        const [categoriesResult, articlesResult, editionsResult, progressResult] = results;
+        const [, articlesResult, editionsResult, progressResult] = results;
 
         if (hasAuthError(results)) {
           auth.clearSession();
@@ -72,16 +68,13 @@
           throw articlesResult.reason || editionsResult.reason;
         }
 
-        const categories = asArray(unwrap(categoriesResult, []));
         const articles = asArray(unwrap(articlesResult, []));
         const editions = asArray(unwrap(editionsResult, []));
         const progressList = asArray(unwrap(progressResult, []));
         const progressIndex = buildProgressIndex(progressList);
 
-        state.categories = categories;
         state.items = normalizeItems(articles, editions, progressIndex);
 
-        renderCategoryFilters();
         renderLibrary();
         lastLibraryLoadAt = Date.now();
       })
@@ -149,37 +142,12 @@
     }
 
     document.addEventListener("click", (event) => {
-      const typeButton = event.target.closest("[data-filter-type]");
-      const statusButton = event.target.closest("[data-filter-status]");
-      const categoryButton = event.target.closest("[data-filter-category]");
-      const clearButton = event.target.closest("[data-library-clear]");
       const searchClearButton = event.target.closest("[data-library-search-clear]");
       const retryButton = event.target.closest("[data-library-retry]");
       const loadMoreButton = event.target.closest("[data-library-load-more]");
 
-      if (typeButton) {
-        state.filters.type = typeButton.getAttribute("data-filter-type") || "all";
-        resetVisibleItems();
-        syncButtons("[data-filter-type]", state.filters.type);
-        renderLibrary();
-      }
-
-      if (statusButton) {
-        state.filters.status = statusButton.getAttribute("data-filter-status") || "all";
-        resetVisibleItems();
-        syncButtons("[data-filter-status]", state.filters.status);
-        renderLibrary();
-      }
-
-      if (categoryButton) {
-        state.filters.category = categoryButton.getAttribute("data-filter-category") || "all";
-        resetVisibleItems();
-        syncButtons("[data-filter-category]", state.filters.category);
-        renderLibrary();
-      }
-
-      if (clearButton || searchClearButton) {
-        resetFilters();
+      if (searchClearButton) {
+        clearSearch();
         renderLibrary();
       }
 
@@ -291,56 +259,11 @@
     return progressIndex.get(`${apiType}:id:${id}`) || progressIndex.get(`${apiType}:slug:${slug}`) || null;
   }
 
-  function renderCategoryFilters() {
-    const container = document.querySelector("[data-library-category-filters]");
-    const shell = document.querySelector("[data-library-category-shell]");
-    if (!container) return;
-
-    const categories = new Map();
-
-    state.categories.forEach((category) => {
-      const slug = normalizeSlug(category.slug || category.name);
-      if (!slug) return;
-      categories.set(slug, category.name || slug);
-    });
-
-    state.items.forEach((item) => {
-      if (!item.categorySlug) return;
-      categories.set(item.categorySlug, item.categoryName || item.categorySlug);
-    });
-
-    if (shell) {
-      shell.hidden = categories.size === 0;
-    }
-
-    if (!categories.size) {
-      state.filters.category = "all";
-      container.innerHTML = "";
-      return;
-    }
-
-    container.innerHTML = [
-      '<button class="is-active" type="button" data-filter-category="all">todas</button>',
-    ]
-      .concat(
-        Array.from(categories.entries()).map(([slug, name]) => {
-          return `<button type="button" data-filter-category="${escapeHtml(slug)}">${escapeHtml(name)}</button>`;
-        }),
-      )
-      .join("");
-
-    if (state.filters.category !== "all" && !categories.has(state.filters.category)) {
-      state.filters.category = "all";
-    }
-
-    syncButtons("[data-filter-category]", state.filters.category);
-  }
-
   function renderLibrary() {
     renderStats();
     renderFeatureCards();
     renderGrid();
-    renderFilterState();
+    renderSearchState();
     syncProgressBars();
   }
 
@@ -566,9 +489,6 @@
       );
 
       if (query && !matchesSearch(haystack, query)) return false;
-      if (state.filters.type !== "all" && item.type !== state.filters.type) return false;
-      if (state.filters.status !== "all" && item.status !== state.filters.status) return false;
-      if (state.filters.category !== "all" && item.categorySlug !== state.filters.category) return false;
 
       return true;
     });
@@ -608,52 +528,21 @@
     return `./leitura.html?${params.toString()}`;
   }
 
-  function resetFilters() {
+  function clearSearch() {
     state.filters.query = "";
-    state.filters.type = "all";
-    state.filters.status = "all";
-    state.filters.category = "all";
     resetVisibleItems();
 
     const search = document.querySelector("[data-library-search]");
     if (search) search.value = "";
-
-    syncButtons("[data-filter-type]", "all");
-    syncButtons("[data-filter-status]", "all");
-    syncButtons("[data-filter-category]", "all");
   }
 
   function resetVisibleItems() {
     state.visibleItems = LIBRARY_INITIAL_VISIBLE_ITEMS;
   }
 
-  function renderFilterState() {
-    document.querySelectorAll("[data-library-clear]").forEach((button) => {
-      button.hidden = !hasActiveFilters();
-    });
-
+  function renderSearchState() {
     document.querySelectorAll("[data-library-search-clear]").forEach((button) => {
       button.hidden = !state.filters.query;
-    });
-  }
-
-  function hasActiveFilters() {
-    return Boolean(
-      state.filters.query ||
-        state.filters.type !== "all" ||
-        state.filters.status !== "all" ||
-        state.filters.category !== "all",
-    );
-  }
-
-  function syncButtons(selector, activeValue) {
-    document.querySelectorAll(selector).forEach((button) => {
-      const value =
-        button.getAttribute("data-filter-type") ||
-        button.getAttribute("data-filter-status") ||
-        button.getAttribute("data-filter-category");
-
-      button.classList.toggle("is-active", value === activeValue);
     });
   }
 
