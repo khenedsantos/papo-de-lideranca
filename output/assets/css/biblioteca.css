@@ -1981,6 +1981,41 @@ body.library-page {
   line-height: 1.55;
 }
 
+.library-load-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.library-load-more button {
+  appearance: none;
+  min-height: 38px;
+  padding: 0 16px;
+  border: 1px solid rgba(176, 193, 198, 0.56);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.66);
+  color: rgba(54, 70, 80, 0.72);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 720;
+  line-height: 1;
+  text-transform: lowercase;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.library-load-more button:hover,
+.library-load-more button:focus-visible {
+  border-color: rgba(137, 162, 169, 0.74);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--library-final-action);
+}
+
+.library-load-more button:focus-visible {
+  outline: 2px solid rgba(18, 45, 67, 0.32);
+  outline-offset: 3px;
+}
+
 @media (max-width: 640px) {
   .library-controls-shell {
     padding: 0;
@@ -1997,5 +2032,13 @@ body.library-page {
 
   .library-search input {
     min-height: 48px;
+  }
+
+  .library-load-more {
+    margin-top: 14px;
+  }
+
+  .library-load-more button {
+    width: min(100%, 220px);
   }
 }

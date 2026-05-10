@@ -10,10 +10,15 @@
     completed: "conclu\u00eddo",
   };
 
+  const LIBRARY_INITIAL_VISIBLE_ITEMS = 18;
+  const LIBRARY_LOAD_MORE_STEP = 12;
+  const LIBRARY_REFRESH_TTL_MS = 60 * 1000;
+
   const state = {
     auth: null,
     categories: [],
     items: [],
+    visibleItems: LIBRARY_INITIAL_VISIBLE_ITEMS,
     filters: {
       query: "",
       type: "all",
@@ -39,7 +44,6 @@
     bindRefresh(auth);
   });
 
-  const LIBRARY_REFRESH_TTL_MS = 60 * 1000;
   let refreshInFlight = null;
   let lastLibraryLoadAt = 0;
 
@@ -139,6 +143,7 @@
       setupSearchControl(search);
       search.addEventListener("input", () => {
         state.filters.query = normalizeSearch(search.value);
+        resetVisibleItems();
         renderLibrary();
       });
     }
@@ -150,21 +155,25 @@
       const clearButton = event.target.closest("[data-library-clear]");
       const searchClearButton = event.target.closest("[data-library-search-clear]");
       const retryButton = event.target.closest("[data-library-retry]");
+      const loadMoreButton = event.target.closest("[data-library-load-more]");
 
       if (typeButton) {
         state.filters.type = typeButton.getAttribute("data-filter-type") || "all";
+        resetVisibleItems();
         syncButtons("[data-filter-type]", state.filters.type);
         renderLibrary();
       }
 
       if (statusButton) {
         state.filters.status = statusButton.getAttribute("data-filter-status") || "all";
+        resetVisibleItems();
         syncButtons("[data-filter-status]", state.filters.status);
         renderLibrary();
       }
 
       if (categoryButton) {
         state.filters.category = categoryButton.getAttribute("data-filter-category") || "all";
+        resetVisibleItems();
         syncButtons("[data-filter-category]", state.filters.category);
         renderLibrary();
       }
@@ -176,6 +185,12 @@
 
       if (retryButton && state.auth) {
         loadLibrary(state.auth);
+      }
+
+      if (loadMoreButton) {
+        state.visibleItems += LIBRARY_LOAD_MORE_STEP;
+        renderGrid();
+        syncProgressBars();
       }
     });
   }
@@ -413,6 +428,7 @@
   function renderGrid() {
     const grid = document.querySelector("[data-library-grid]");
     const filtered = getFilteredItems();
+    const visible = filtered.slice(0, state.visibleItems);
 
     if (!grid) return;
 
@@ -425,6 +441,7 @@
 
     if (!state.items.length) {
       grid.innerHTML = "";
+      renderLoadMore(0);
       setStateMessage(
         "o acervo ainda não retornou leituras",
         "is-empty",
@@ -436,6 +453,7 @@
 
     if (!filtered.length) {
       grid.innerHTML = "";
+      renderLoadMore(0);
       setText("[data-library-result-count]", "nenhum resultado encontrado");
       setStateMessage(
         "nenhum resultado encontrado",
@@ -446,7 +464,36 @@
     }
 
     setStateMessage("", "");
-    grid.innerHTML = filtered.map(renderCard).join("");
+    grid.innerHTML = visible.map(renderCard).join("");
+    renderLoadMore(filtered.length);
+  }
+
+  function renderLoadMore(totalItems) {
+    const grid = document.querySelector("[data-library-grid]");
+    if (!grid) return;
+
+    let shell = document.querySelector("[data-library-load-more-shell]");
+    const hasMore = state.visibleItems < totalItems;
+
+    if (!hasMore) {
+      if (shell) shell.remove();
+      return;
+    }
+
+    if (!shell) {
+      shell = document.createElement("div");
+      shell.className = "library-load-more";
+      shell.setAttribute("data-library-load-more-shell", "");
+      grid.insertAdjacentElement("afterend", shell);
+    }
+
+    const remaining = Math.min(LIBRARY_LOAD_MORE_STEP, totalItems - state.visibleItems);
+
+    shell.innerHTML = `
+      <button type="button" data-library-load-more aria-label="carregar mais ${remaining} leituras">
+        carregar mais
+      </button>
+    `;
   }
 
   function renderCard(item) {
@@ -566,6 +613,7 @@
     state.filters.type = "all";
     state.filters.status = "all";
     state.filters.category = "all";
+    resetVisibleItems();
 
     const search = document.querySelector("[data-library-search]");
     if (search) search.value = "";
@@ -573,6 +621,10 @@
     syncButtons("[data-filter-type]", "all");
     syncButtons("[data-filter-status]", "all");
     syncButtons("[data-filter-category]", "all");
+  }
+
+  function resetVisibleItems() {
+    state.visibleItems = LIBRARY_INITIAL_VISIBLE_ITEMS;
   }
 
   function renderFilterState() {
