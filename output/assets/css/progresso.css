@@ -313,12 +313,22 @@
 }
 
 .progresso-panel {
+  padding: clamp(26px, 3.2vw, 34px);
   border-radius: var(--progresso-radius-panel);
   border-color: var(--progresso-line);
   background:
     radial-gradient(circle at 100% 0%, rgba(35, 122, 85, 0.045), transparent 20%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.96) 100%);
   box-shadow: 0 16px 42px rgba(15, 42, 61, 0.045);
+}
+
+.progresso-head {
+  gap: 28px;
+  align-items: end;
+}
+
+.progresso-copy {
+  gap: 10px;
 }
 
 .progresso-copy h1,
@@ -329,7 +339,8 @@
 }
 
 .progresso-copy h1 {
-  line-height: 1;
+  font-size: clamp(2.18rem, 3.35vw, 3.05rem);
+  line-height: 1.03;
 }
 
 .progresso-copy p,
@@ -358,27 +369,77 @@
 }
 
 .progresso-score {
-  padding: 20px;
+  align-self: end;
+  gap: 6px;
+  padding: 16px 0 16px 22px;
+  border-width: 0 0 0 1px;
+  border-radius: 0;
+  background: transparent;
+}
+
+.progresso-score span {
+  font-size: 0.8rem;
+  font-weight: 650;
 }
 
 .progresso-score strong {
   color: var(--progresso-navy);
-  font-size: clamp(2.35rem, 4.4vw, 3.5rem);
+  font-size: clamp(1.85rem, 3vw, 2.42rem);
+  font-weight: 600;
+}
+
+.progresso-stat-grid {
+  gap: 0;
+  margin-top: 2px;
+  border-top: 1px solid rgba(214, 224, 230, 0.74);
+  border-bottom: 1px solid rgba(214, 224, 230, 0.74);
 }
 
 .progresso-stat {
-  gap: 9px;
-  min-height: 132px;
-  padding: 18px;
+  gap: 8px;
+  min-height: 0;
+  padding: 16px 18px 18px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.progresso-stat + .progresso-stat {
+  border-left: 1px solid rgba(214, 224, 230, 0.7);
+}
+
+.progresso-stat span {
+  color: rgba(77, 95, 108, 0.62);
+  font-size: 0.72rem;
 }
 
 .progresso-stat strong {
-  font-size: clamp(1.72rem, 2.5vw, 2.28rem);
+  color: rgba(16, 33, 49, 0.92);
+  font-size: clamp(1.34rem, 1.8vw, 1.78rem);
+  font-weight: 600;
+}
+
+.progresso-stat p {
+  max-width: 24ch;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.progresso-grid {
+  gap: 18px;
 }
 
 .progresso-detail {
   gap: 18px;
-  padding: 20px;
+  padding: 22px 24px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: none;
+}
+
+.progresso-detail-head {
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(214, 224, 230, 0.64);
 }
 
 .progresso-detail-head strong {
@@ -391,7 +452,7 @@
 }
 
 .progresso-week-days span {
-  min-height: 42px;
+  min-height: 38px;
   border: 1px solid rgba(218, 226, 232, 0.82);
   border-radius: 11px;
   background: rgba(248, 251, 252, 0.82);
@@ -456,8 +517,10 @@
 }
 
 .progresso-feedback {
-  padding: 22px;
-  background: var(--progresso-soft);
+  padding: 22px 24px;
+  border-left-width: 2px;
+  background: rgba(255, 255, 255, 0.64);
+  box-shadow: none;
 }
 
 .progresso-feedback.is-positive {
@@ -470,10 +533,101 @@
   background: rgba(224, 182, 80, 0.08);
 }
 
+@media (min-width: 641px) and (max-width: 980px) {
+  .progresso-main {
+    padding: 28px 0 48px;
+  }
+
+  .progresso-panel {
+    padding: 30px;
+  }
+
+  .progresso-head {
+    grid-template-columns: minmax(0, 1fr) minmax(150px, 190px);
+    gap: 22px;
+  }
+
+  .progresso-copy h1 {
+    font-size: clamp(2.06rem, 5.4vw, 2.72rem);
+  }
+
+  .progresso-score {
+    padding: 14px 0 14px 18px;
+  }
+
+  .progresso-score strong {
+    font-size: clamp(1.65rem, 4.4vw, 2.18rem);
+  }
+
+  .progresso-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .progresso-stat:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .progresso-stat:nth-child(n + 3) {
+    border-top: 1px solid rgba(214, 224, 230, 0.7);
+  }
+}
+
 @media (max-width: 640px) {
+  .progresso-main {
+    padding: 20px 0 38px;
+  }
+
+  .progresso-shell,
+  .progresso-panel {
+    gap: 18px;
+  }
+
   .progresso-panel {
     border-radius: 20px;
     padding: 20px;
+  }
+
+  .progresso-head {
+    gap: 16px;
+  }
+
+  .progresso-copy h1 {
+    font-size: clamp(2rem, 11vw, 2.42rem);
+  }
+
+  .progresso-score {
+    padding: 14px 0 0;
+    border-width: 1px 0 0;
+  }
+
+  .progresso-score strong {
+    font-size: 2rem;
+  }
+
+  .progresso-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .progresso-stat {
+    padding: 14px 0;
+  }
+
+  .progresso-stat + .progresso-stat {
+    border-top: 1px solid rgba(214, 224, 230, 0.7);
+    border-left: 0;
+  }
+
+  .progresso-stat p {
+    max-width: none;
+  }
+
+  .progresso-grid {
+    gap: 14px;
+  }
+
+  .progresso-detail,
+  .progresso-feedback {
+    padding: 18px;
   }
 
   .progresso-week-days {
