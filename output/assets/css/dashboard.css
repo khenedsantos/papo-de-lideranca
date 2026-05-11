@@ -3790,6 +3790,164 @@ body.dashboard-page--lite[data-page="dashboard"] {
 }
 
 
+/* Mesa editorial da Minha Area: desktop e tablet primeiro. */
+@media (min-width: 701px) {
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-main--lite {
+    padding-top: 24px;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-hero-shell {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+    align-items: center;
+    gap: clamp(18px, 2.6vw, 34px);
+    min-height: 0;
+    padding: clamp(22px, 2.9vw, 34px);
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-hero-copy {
+    align-content: center;
+    gap: 12px;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-hero-copy h1 {
+    max-width: 15.5ch;
+    font-size: clamp(3.25rem, 4.35vw, 4.7rem);
+    line-height: 0.98;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-hero-copy p {
+    max-width: 56ch;
+    font-size: 0.98rem;
+    line-height: 1.58;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-hero-meta--lite {
+    gap: 8px;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-meta-chip--lite {
+    min-height: 28px;
+    padding-inline: 9px;
+    border-color: rgba(214, 224, 230, 0.64);
+    background: rgba(255, 255, 255, 0.42);
+    color: rgba(62, 80, 93, 0.72);
+    font-weight: 650;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-hero-card {
+    align-self: center;
+    min-height: 0;
+    padding: 2px 0 2px 20px;
+    border-width: 0 0 0 1px;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-hero-card strong {
+    font-size: 1.22rem;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-hero-card p {
+    font-size: 0.9rem;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-account-line {
+    gap: 8px;
+    padding-top: 12px;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-account-line span,
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-card-head strong {
+    min-height: 28px;
+    padding-inline: 9px;
+    background: rgba(255, 255, 255, 0.48);
+    font-weight: 650;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-content {
+    margin-top: 18px;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-grid {
+    gap: 18px;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-card {
+    gap: 16px;
+    padding: clamp(20px, 2.4vw, 28px);
+    box-shadow: 0 8px 22px rgba(18, 40, 57, 0.028);
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-card--primary {
+    min-height: 440px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(249, 251, 252, 0.84));
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-reading {
+    align-self: center;
+    gap: 13px;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-reading h2 {
+    max-width: 14ch;
+    font-size: clamp(2.05rem, 3.2vw, 2.55rem);
+    line-height: 1.04;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-reading p,
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-card p {
+    line-height: 1.62;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-card--idea,
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-card--library {
+    min-height: 0;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-mini-stats span {
+    min-height: 58px;
+    padding: 10px;
+    background: rgba(249, 251, 252, 0.64);
+  }
+}
+
+@media (min-width: 981px) {
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-grid {
+    grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
+  }
+}
+
+@media (min-width: 701px) and (max-width: 980px) {
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-main--lite {
+    padding-top: 22px;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-hero-shell {
+    gap: 18px;
+    padding: 26px;
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-hero-copy h1 {
+    max-width: 13ch;
+    font-size: clamp(3.15rem, 6.3vw, 3.95rem);
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-hero-card {
+    align-self: center;
+    min-height: 0;
+    padding: 16px;
+    border: 1px solid rgba(214, 224, 230, 0.72);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.58);
+  }
+
+  .dashboard-page--lite[data-page="dashboard"] .dashboard-home-card--primary {
+    min-height: 0;
+  }
+}
+
 /* =========================================================
    Premium internal menu override | artigos estáticos
    Padroniza o menu dos artigos com a área logada
@@ -4036,4 +4194,3 @@ body.short-edition-page .short-edition-main {
     justify-self: start;
   }
 }
-
