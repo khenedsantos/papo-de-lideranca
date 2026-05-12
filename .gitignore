@@ -19,6 +19,11 @@ desktop.ini
 # Local generated files
 .codex-chrome-profile/
 backend/uploads/
+*.log
+backend-server.err.log
+backend-server.out.log
+output/__qa_session.html
+**/__qa_session.html
 
 # Legacy archives kept only for local reference
 _legacy/
