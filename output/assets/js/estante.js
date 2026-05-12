@@ -439,7 +439,7 @@
 
     try {
       const parsed = new URL(url);
-      return parsed.protocol === "http:" || parsed.protocol === "https:" ? url : "";
+      return parsed.protocol === "http:" || parsed.protocol === "https:" ? parsed.href : "";
     } catch (error) {
       return "";
     }

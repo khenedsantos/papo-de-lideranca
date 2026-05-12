@@ -396,6 +396,10 @@ body.estante-page {
   line-height: 1.58;
 }
 
+.livro-page [data-book-purchase][hidden] {
+  display: none !important;
+}
+
 .estante-loading-card,
 .estante-state,
 .book-state {
@@ -1629,14 +1633,30 @@ body.estante-page {
   }
 
   .livro-page .book-hero {
+    grid-template-areas:
+      "copy"
+      "cover";
     gap: 22px;
     padding: 26px 0 24px;
   }
 
+  .livro-page .book-hero-copy {
+    grid-area: copy;
+  }
+
   .livro-page .book-cover-panel {
+    grid-area: cover;
     order: 0;
     justify-self: start;
-    width: min(190px, 52vw);
+    width: min(176px, 48vw);
+  }
+
+  .livro-page .book-description {
+    line-height: 1.68;
+  }
+
+  .livro-page .book-hero-actions {
+    margin-top: 6px;
   }
 
   .livro-page .book-section {
@@ -1661,7 +1681,7 @@ body.estante-page {
   }
 
   .livro-page .book-cover-panel {
-    width: min(170px, 48vw);
+    width: min(156px, 42vw);
   }
 
   .estante-page:not(.livro-page) .estante-card {

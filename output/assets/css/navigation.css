@@ -942,7 +942,7 @@ body.app-article-page .header-login:focus-visible {
   .dashboard-page.dashboard-page--lite .dashboard-header .main-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px clamp(12px, 4vw, 16px);
+    gap: 10px clamp(11px, 3.4vw, 14px);
     width: 100%;
     max-width: 100%;
     overflow-x: visible;
@@ -951,6 +951,9 @@ body.app-article-page .header-login:focus-visible {
 
   .dashboard-page.dashboard-page--lite .dashboard-header .main-nav a {
     flex: 0 0 auto;
+    max-width: 100%;
+    line-height: 1.35;
+    font-size: clamp(0.84rem, 3.45vw, 0.9rem);
   }
 
   .dashboard-page.dashboard-page--lite .dashboard-header .main-nav a + a {
