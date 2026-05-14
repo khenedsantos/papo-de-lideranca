@@ -88,10 +88,10 @@
     const copy = document.createElement("p");
 
     note.className = "app-reading-note app-reading-card";
-    note.setAttribute("aria-label", `leia quando: ${title}`);
+    note.setAttribute("aria-label", `apoio de leitura: ${title}`);
 
     label.className = "app-reading-eyebrow";
-    label.textContent = "leia quando";
+    label.textContent = "para ler quando";
 
     meta.className = "app-reading-note-meta";
     meta.textContent = [category, time].filter(Boolean).join(" | ");
@@ -270,10 +270,10 @@
     const title = data.title ? `\"${data.title}\"` : "esta leitura";
 
     if (data.subtitle) {
-      return `${time} para voltar a ${title} com calma e mais crit\u00e9rio.`;
+      return `use ${title} como uma pausa curta para transformar leitura em crit\u00e9rio antes de decidir, conversar ou priorizar.`;
     }
 
-    return `${time} para olhar ${theme} com calma antes de uma decis\u00e3o, conversa ou prioridade importante.`;
+    return `use esta pausa curta para olhar ${theme} com calma antes de uma decis\u00e3o, conversa ou prioridade importante.`;
   }
 
   function buildReflectionQuestion(category) {
