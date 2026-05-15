@@ -266,7 +266,7 @@
 
   function renderPurchaseAction(book, options = {}) {
     if (!book.purchaseUrl) {
-      return '<span class="estante-purchase-muted">opção de compra em curadoria</span>';
+      return `<span class="estante-purchase-text estante-purchase-muted" aria-disabled="true">${DEFAULT_PURCHASE_LABEL}</span>`;
     }
 
     const label = book.purchaseLabel || DEFAULT_PURCHASE_LABEL;

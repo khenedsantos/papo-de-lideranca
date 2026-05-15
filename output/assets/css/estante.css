@@ -1398,7 +1398,7 @@ body.estante-page {
 
 .estante-page:not(.livro-page) .estante-how-shell {
   gap: 28px;
-  padding: 36px 0 0;
+  padding: clamp(28px, 3.2vw, 42px);
   border-top: 1px solid rgba(185, 199, 199, 0.5);
 }
 
